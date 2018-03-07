@@ -17,11 +17,15 @@
 		<mapping class="forms.AracTalep" />
 
 		<!--KIRSAL KALKINMA BAŞLANGIÇ -->
-		<mapping class="forms.kirsalkalkinma.EkonomikYatirim" />
-		<mapping class="forms.kirsalkalkinma.EkonomikYatirim_Kategori" />
+		<mapping class="forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirim" />
+		<mapping
+			class="forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirim_Kategori" />
+			<mapping
+			class="forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirimDurumu" />
 		<mapping class="forms.kirsalkalkinma.gencciftci.GencCiftciKategori" />
 		<mapping class="forms.kirsalkalkinma.kooperatif.Kooperatif" />
 		<mapping class="forms.kirsalkalkinma.kooperatif.KooperatifTuru" />
+
 		<!--KIRSAL KALKINMA SON -->
 
 	</session-factory>

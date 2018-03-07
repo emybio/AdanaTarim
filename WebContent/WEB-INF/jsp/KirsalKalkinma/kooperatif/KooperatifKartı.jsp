@@ -22,7 +22,6 @@
 	width: 67%;
 	margin-left: 3%;
 	float: left;
-	
 }
 
 .btn_inr {
@@ -52,7 +51,7 @@
 				<hr>
 				<c:forEach items="${kooperatif}" var="kooperatif">
 					<div class="alert alert-warning "
-						style="border-top-left-radius:10em; border-bottom-right-radius: 10em;">
+						style="border-top-left-radius: 10em; border-bottom-right-radius: 10em;">
 
 						<div class="panel-body">
 							<h2>${kooperatif.kooperatifAdi }</h2>
@@ -192,12 +191,15 @@
 							</div>
 						</div>
 						<a href="#" onclick="window.history.back();"
-							class="btn btn-default btn-xs btn_inr btn_inl_padl" style="margin-right: 75px;">Geri</a><a
-							href="./kooperatifDuzenle/${kooperatif.id}"
-							class="btn btn-warning btn-xs btn_inr ">Düzenle</a> <a
+							class="btn btn-default btn-xs btn_inr btn_inl_padl"
+							style="margin-right: 75px;"><span class="fa fa-reply">
+								Geri </span> </a><a href="./kooperatifDuzenle/${kooperatif.id}"
+							class="btn btn-warning btn-xs btn_inr "><span class="fa fa-edit">
+								Düzenle </span> </a> <a
 							onclick="return confirm('Silmek İstediğinize Emin misiniz?');"
 							href="./kooperatifSil?id=${kooperatif.id}"
-							class="btn btn-danger btn-xs btn_inr btn_inl_padl">Sil</a>
+							class="btn btn-danger btn-xs btn_inr btn_inl_padl"><span
+							class="fa fa-times"> Sil </span> </a>
 
 
 

@@ -126,7 +126,7 @@
 								<form:option value="kw/h">kw/h</form:option>
 							</form:select></td>
 						<td><form:input path="istihdam" /></td>
-						<td><form:select path="ended">
+						<td><form:select path="duru">
 
 								<form:option value="false">Devam Ediyor</form:option>
 								<form:option value="true">Tamamlandı</form:option>
@@ -196,7 +196,7 @@
 										var="projeBedeli"></fmt:formatNumber>${projeBedeli }</td>
 								<td align="center">${yatirim.kapasite}&nbsp;${yatirim.kapasiteBirim}</td>
 								<td align="center">${yatirim.istihdam}</td>
-								<td align="center">${yatirim.ended}</td>
+								<td align="center">${yatirim.durum}</td>
 								<td><a
 									href="${pageContext.request.contextPath }/kirsal-kalkinma/ekonomikYatirimSil?id=${yatirim.id}"
 									onclick="javascript:return confirm('${yatirim.etapNo}. etap ${yatirim.yatirimciAdi} isimli kaydı : \n Silmek İstediğinize Emin misiniz?');"

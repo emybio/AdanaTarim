@@ -19,6 +19,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTFonts;
 
+import forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirimDurumu;
+
 /**
  * @author Emrah Denizer
  *
@@ -28,71 +30,22 @@ public class Deneme {
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
 
-		// UserRoles userRole = new UserRoles("SUPER_ADMIN");
-		// Kullanici islemyapan = new Kullanici("emrah.denizer", "1234", "Emrah
-		// Denizer", "Mühendis", "Arazi Edindirme",
-		// userRole, "2013-152", 5312650065l, "emrah.denizer@tarim.gov.tr", '1', 20);
-		//
-		// Kullanici personel1 = new Kullanici("harun.dogru", "1234", "Harun Doğru",
-		// "Mühendis", "Arazi Edindirme",
-		// userRole, "2013-152", 5312650065l, "emrah.denizer@tarim.gov.tr", '1', 20);
-		//
-		// Kullanici personel2 = new Kullanici("muharrem.cerit", "1234", "Muharrem
-		// Cerit", "Mühendis", "tarazi edindrme",
-		// userRole, "2013-152", 5312650065l, "emrah.denizer@tarim.gov.tr", '1', 20);
-		//
-		// Kullanici personel3 = new Kullanici("mehmet.ogultekin", "1234", "Mehmet
-		// Oğultekin", "Mühendis",
-		// "tarazi edindrme", userRole, "2013-152", 5312650065l,
-		// "emrah.denizer@tarim.gov.tr", '1', 20);
-		// Kullanici personel4 = new Kullanici("mehmet", "1234", "Mehmet Oğultekin",
-		// "Mühendis", "Arazi Edindirme",
-		// userRole, "2013-152", 5312650065l, "emrah.denizer@tarim.gov.tr", '1', 20);
-		//
-		// Yerler ulke = new Yerler();
-		// ulke.setIsim("Tükiye");
-		// ulke.setDurum(true);
-		// ulke.setEklemezamani(new Date());
-		// ulke.setTip(null);
-		// Yerler il = new Yerler();
-		// il.setIsim("Adana");
-		// il.setTip(ulke);
-		// il.setDurum(true);
-		// il.setEklemezamani(new Date());
-		// Yerler ilce = new Yerler();
-		// ilce.setIsim("Seyhan");
-		// ilce.setTip(il);
-		// ilce.setDurum(true);
-		// ilce.setEklemezamani(new Date());
-		// Yerler mahalle = new Yerler();
-		// mahalle.setIsim("YeÅŸiloba");
-		// mahalle.setTip(ilce);
-		// mahalle.setDurum(true);
-		// mahalle.setEklemezamani(new Date());
-		// List<Kullanici> kullaniciList = new ArrayList<>();
-		// kullaniciList.add(islemyapan);
-		// kullaniciList.add(personel1);
-		// kullaniciList.add(personel2);
-		// kullaniciList.add(personel3);
-		// Arac arac1 = new Arac(islemyapan, "2017-05-05", "01R1963", null, ilce,
-		// mahalle, "09:30", "15:30", "1 deneme ",
-		// new Date(), kullaniciList);
-		//
-		// Arac arac2 = new Arac(islemyapan, "2017-05-05", "01R1963", null, ilce,
-		// mahalle, "09:30", "15:30", "2 deneme ",
-		// new Date(), kullaniciList);
-		//
-		// Arac arac3 = new Arac(islemyapan, "2017-05-05", "01R1963", null, ilce,
-		// mahalle, "09:30", "15:30", "3 deneme ",
-		// new Date(), kullaniciList);
-		//
-		// Arac arac4 = new Arac(islemyapan, "2017-05-05", "01R1963", null, ilce,
-		// mahalle, "09:30", "15:30", "4 deneme ",
-		// new Date(), kullaniciList);
+	
+		EkonomikYatirimDurumu durum = new EkonomikYatirimDurumu("Başvuru Yapıldı");
+		EkonomikYatirimDurumu durum1 = new EkonomikYatirimDurumu("Değerlendirme Aşamasında");
+		EkonomikYatirimDurumu durum2 = new EkonomikYatirimDurumu("Kabul Edildi");
+		EkonomikYatirimDurumu durum3 = new EkonomikYatirimDurumu("Sözleşme İmzalandı");
+		EkonomikYatirimDurumu durum4 = new EkonomikYatirimDurumu("Proje Tamamlandı");
 
 		SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg2.xml").buildSessionFactory();
 
 		Session session = sessionFactory.openSession();
+
+		session.save(durum);
+		session.save(durum1);
+		session.save(durum2);
+		session.save(durum3);
+		session.save(durum4);
 
 		session.beginTransaction();
 		System.out.println();

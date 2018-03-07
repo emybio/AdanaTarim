@@ -43,17 +43,15 @@ td a:hover {
 								<td>
 									<div class="col-lg-10">
 										<div class="col-lg-8">
-											<a class="btn btn-info btn-md"
+											<a class="btn btn-info btn-xs"
 												href="./kooperatifKarti?id=${kooperatif.id}">${kooperatif.kooperatifAdi}</a>
 										</div>
-										<div class="col-lg-2">
-											<a class="btn btn-danger btn-md pull-right  disabled"
+										<div class="btn-group btn-group-xs col-sm-offset-2 pull-right">
+											<a class="btn btn-warning btn-md  disabled"
+												href="./kooperatifDuzenle/${kooperatif.id}">Düzenle</a> <a
+												class="btn btn-danger btn-md  disabled"
 												onclick="return confirm('Silmek İstediğinize Emin misiniz?');"
 												href="./kooperatifSil?id=${kooperatif.id}">Sil</a>
-										</div>
-										<div class="col-lg-2">
-											<a class="btn btn-warning btn-md pull-right disabled"
-												href="./kooperatifDuzenle/${kooperatif.id}">Düzenle</a>
 										</div>
 									</div>
 								</td>

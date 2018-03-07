@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dao.kirsalkalkinma.ekonomikyatirim.EkonomikYatirimDAO;
-import forms.kirsalkalkinma.EkonomikYatirim;
+import forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirim;
 
 @Service
 public class EkonomikYatirimServiceImpl implements EkonomikYatirimService {

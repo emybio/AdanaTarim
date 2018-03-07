@@ -68,7 +68,7 @@
 
 				<li class="active"><a
 					href="${pageContext.request.contextPath}/anasayfa"> <span
-						class="fa fa-home" aria-hidden="true"> </span>&nbsp;Anasayfa
+						class="fa fa-home fa-fw" aria-hidden="true"> </span>&nbsp;Anasayfa
 				</a></li>
 				<li id="chart-types"
 					class="dropdown sub-menu collapse ${fn:contains(pageContext.request.requestURI,'satis-cesitleri') ? 'in' : ''} "><a
@@ -82,7 +82,7 @@
 
 						<li><a
 							href="${pageContext.request.contextPath}/raporlar/satisrapor">
-								<span class="fa fa-file-pdf-o" aria-hidden="true"> </span>&nbsp;
+								<span class="fa fa-file-pdf-o fa-fw" aria-hidden="true"> </span>&nbsp;
 								Rapor Görüntüle
 						</a></li>
 					</ul></li>

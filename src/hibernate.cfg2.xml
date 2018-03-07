@@ -6,29 +6,34 @@
 
 	<session-factory>
 		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-		<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/arazi_edindirme_2?charSet=UTF-8</property>
+		<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/arazi_edindirme?charSet=UTF-8</property>
 		<property name="hibernate.connection.username">postgres</property>
 		<property name="hibernate.connection.password">1234</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-		<property name="hibernate.hbm2ddl.auto">create</property>
+		<property name="hibernate.hbm2ddl.auto">validate</property>
 		<property name="hibernate.show_sql">false</property>
 		<property name="hibernate.format_sql">false</property>
 
 
+		<mapping class="forms.Kullanici" />
+		<mapping class="forms.AraziIslemHareketleri" />
+		<mapping class="forms.OpenLayer" />
+		<mapping class="forms.IzinIslemleri" />
+		<mapping class="forms.IzinHareketleri" />
+		<mapping class="forms.Yerler" />
+		<mapping class="forms.Arac" />
+		<mapping class="forms.UserRoles" />
+		<mapping class="forms.AracTalep" />
 
-		<!-- <mapping class="forms.Kullanici" /> <mapping class="forms.AraziIslemHareketleri" 
-			/> <mapping class="forms.OpenLayer" /> <mapping class="forms.IzinIslemleri" 
-			/> <mapping class="forms.IzinHareketleri" /> <mapping class="forms.Yerler" 
-			/> <mapping class="forms.Arac" /> <mapping class="forms.UserRoles" /> <mapping 
-			class="forms.AracTalep" /> -->
 
 		<!--KIRSAL KALKINMA BAŞLANGIÇ -->
-		<!-- <mapping class="forms.kirsalkalkinma.EkonomikYatirim" />
-		<mapping class="forms.kirsalkalkinma.EkonomikYatirim_Kategori" />
-		<mapping class="forms.kirsalkalkinma.GencCiftci" /> -->
-		<mapping class="forms.kirsalkalkinma.GencCiftciUstKategori" />
-		<mapping class="forms.kirsalkalkinma.GencCiftciOrtaKategori" />
-		<mapping class="forms.kirsalkalkinma.GencCiftciAltKategori" />
+		<mapping class="forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirim" />
+		<mapping
+			class="forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirim_Kategori" />
+		<mapping class="forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirimDurumu" />
+		<mapping class="forms.kirsalkalkinma.gencciftci.GencCiftciKategori" />
+		<mapping class="forms.kirsalkalkinma.kooperatif.Kooperatif" />
+		<mapping class="forms.kirsalkalkinma.kooperatif.KooperatifTuru" />
 		<!--KIRSAL KALKINMA SON -->
 	</session-factory>
 

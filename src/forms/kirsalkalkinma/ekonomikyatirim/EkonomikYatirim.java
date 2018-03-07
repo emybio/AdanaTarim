@@ -1,4 +1,4 @@
-package forms.kirsalkalkinma;
+package forms.kirsalkalkinma.ekonomikyatirim;
 
 import java.util.Date;
 
@@ -62,16 +62,9 @@ public class EkonomikYatirim implements java.io.Serializable {
 	@Column(name = "kapasite_birim")
 	private String kapasiteBirim;
 
-	@Column(name = "ended")
-	private boolean ended;
-
-	public String getKapasiteBirim() {
-		return kapasiteBirim;
-	}
-
-	public void setKapasiteBirim(String kapasiteBirim) {
-		this.kapasiteBirim = kapasiteBirim;
-	}
+	@ManyToOne
+	@JoinColumn(name = "durum")
+	private EkonomikYatirimDurumu durum;
 
 	@ManyToOne()
 	@JoinColumn(name = "islemyapan_id")
@@ -205,12 +198,22 @@ public class EkonomikYatirim implements java.io.Serializable {
 		this.projeAdi = projeAdi;
 	}
 
-	public boolean isEnded() {
-		return ended;
+	public String getKapasiteBirim() {
+		return kapasiteBirim;
 	}
 
-	public void setEnded(boolean ended) {
-		this.ended = ended;
+	public void setKapasiteBirim(String kapasiteBirim) {
+		this.kapasiteBirim = kapasiteBirim;
+	}
+
+	public EkonomikYatirimDurumu getDurum() {
+		return durum;
+	}
+
+	public void setDurum(EkonomikYatirimDurumu durum) {
+		if (durum == null)
+			durum = new EkonomikYatirimDurumu();
+		this.durum = durum;
 	}
 
 }

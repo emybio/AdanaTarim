@@ -2,7 +2,7 @@ package dao.kirsalkalkinma.ekonomikyatirim;
 
 import java.util.List;
 
-import forms.kirsalkalkinma.EkonomikYatirim_Kategori;
+import forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirim_Kategori;
 
 public interface EkonomikYatirimKategoriDAO {
 

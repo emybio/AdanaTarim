@@ -1,4 +1,4 @@
-package forms.kirsalkalkinma;
+package forms.kirsalkalkinma.ekonomikyatirim;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

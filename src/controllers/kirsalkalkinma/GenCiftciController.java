@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import forms.Kullanici;
 import forms.Yerler;
-import forms.kirsalkalkinma.EkonomikYatirim;
+import forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirim;
 import forms.kirsalkalkinma.gencciftci.GencCiftci;
 import forms.kirsalkalkinma.gencciftci.GencCiftciKategori;
 import service.kirsalkalkinma.GencCiftciKategoriService;
