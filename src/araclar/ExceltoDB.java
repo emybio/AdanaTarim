@@ -14,10 +14,6 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-/**
- * @author EMRAH
- *
- */
 public class ExceltoDB {
 	@SuppressWarnings("rawtypes")
 	public static void main(String[] args) {
