@@ -1,0 +1,11 @@
+eclipse.preferences.version=1
+encoding//WebContent/WEB-INF/jsp/KirsalKalkinma/EkonomikYatirimlar.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/KirsalKalkinma/kooperatif/KooperatifIlceListesi.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/KirsalKalkinma/kooperatif/KooperatifKart\u0131.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/giris.jsp=UTF-8
+encoding//src/araclar/Deneme.java=UTF-8
+encoding//src/araclar/Genel.java=UTF-8
+encoding//src/controllers/AracController.java=UTF-8
+encoding//src/controllers/AracTalepController.java=UTF-8
+encoding//src/controllers/RaporlarController.java=UTF-8
+encoding//src/dao/AraziDAOImpl.java=UTF-8
