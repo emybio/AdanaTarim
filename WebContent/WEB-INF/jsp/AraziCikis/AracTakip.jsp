@@ -69,6 +69,7 @@ select {
 	var dd = today.getDate();
 	var mm = today.getMonth() + 1; //January is 0!
 	var yyyy = today.getFullYear();
+	
 	jq(document).ready(function() {
 		if (dd < 10) {
 			dd = '0' + dd
@@ -218,8 +219,6 @@ select {
 		);
 	});
 </script>
-
-
 <div class="container">
 	<c:if test="${empty errors}">
 		<button type="button" class="btn btn-info btn-sm"
@@ -376,7 +375,7 @@ select {
 										<form:option value="01ASL29">01 ASL 29</form:option>
 									</form:select></td>
 								<td><form:input path="ozelPlaka" type="text" id="ozelPlaka"
-										onkeyup="buyukHarf();" /></td>
+										style="text-transform: uppercase;" onkeyup="buyukHarf();" /></td>
 								<!--ilce-->
 								<td>
 

@@ -67,7 +67,9 @@
 				<li><a href="#">Help</a></li> -->
 
 				<li class="active"><a
-					href="${pageContext.request.contextPath}/anasayfa">Anasayfa</a></li>
+					href="${pageContext.request.contextPath}/anasayfa"> <span
+						class="fa fa-home" aria-hidden="true"> </span>&nbsp;Anasayfa
+				</a></li>
 				<li id="chart-types"
 					class="dropdown sub-menu collapse ${fn:contains(pageContext.request.requestURI,'satis-cesitleri') ? 'in' : ''} "><a
 					class="dropdown-toggle" data-toggle="dropdown" href="#"><i
@@ -80,8 +82,8 @@
 
 						<li><a
 							href="${pageContext.request.contextPath}/raporlar/satisrapor">
-								<span class="fa fa-file" aria-hidden="true"> </span>&nbsp; Rapor
-								Görüntüle
+								<span class="fa fa-file-pdf-o" aria-hidden="true"> </span>&nbsp;
+								Rapor Görüntüle
 						</a></li>
 					</ul></li>
 
@@ -91,24 +93,27 @@
 				<li id="chart-types"
 					class="dropdown sub-menu collapse ${fn:contains(pageContext.request.requestURI,'satis-cesitleri') ? 'in' : ''} "><a
 					class="dropdown-toggle" data-toggle="dropdown" href="#"><i
-						class="fa fa-area-chart" aria-hidden="true"></i>&nbsp;<span>Kırsal
+						class="fa fa-industry" aria-hidden="true"></i>&nbsp;<span>Kırsal
 							Kalkınma</span> <span class="caret"></span></a>
 					<ul class="dropdown-menu ">
 						<li><a
-							href="${pageContext.request.contextPath}/kirsal-kalkinma/ekonomik-yatirimlar">Ekonomik
-								Yatırımlar</a></li>
+							href="${pageContext.request.contextPath}/kirsal-kalkinma/ekonomik-yatirimlar"><span
+								class="fa fa-try"></span> Ekonomik Yatırımlar</a></li>
 
 						<li><a
-							href="${pageContext.request.contextPath}/kirsal-kalkinma/genc-ciftci">Genç
-								Çiftçi</a></li>
+							href="${pageContext.request.contextPath}/kirsal-kalkinma/genc-ciftci">
+								<span class="fa fa-female"></span> Genç Çiftçi <span
+								class="fa fa-male"></span>
+						</a></li>
 						<li><a
-							href="${pageContext.request.contextPath}/kirsal-kalkinma/ilce-listesi">Kooperatif
-								/ Birlik</a></li>
+							href="${pageContext.request.contextPath}/kirsal-kalkinma/ilce-listesi"><span
+								class="fa fa-th" aria-hidden="true"> </span>&nbsp;Kooperatif /
+								Birlik</a></li>
 
 						<li><a
 							href="${pageContext.request.contextPath}/kirsal-kalkinma/ekonomikYatirimRapor">
-								<span class="fa fa-file" aria-hidden="true"> </span>&nbsp; Rapor
-								Görüntüle
+								<span class="fa fa-file-pdf-o" aria-hidden="true"> </span>&nbsp;
+								Rapor Görüntüle
 						</a></li>
 					</ul></li>
 

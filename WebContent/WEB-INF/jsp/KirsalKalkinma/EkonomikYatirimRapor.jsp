@@ -55,6 +55,7 @@
 						<td align="center">HİBE TUTARI (TL)</td>
 						<td align="center">KAPASİTE</td>
 						<td align="center">İSTİHDAM</td>
+						
 					</tr>
 					<tbody class="govde">
 

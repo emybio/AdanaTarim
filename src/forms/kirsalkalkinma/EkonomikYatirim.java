@@ -62,6 +62,9 @@ public class EkonomikYatirim implements java.io.Serializable {
 	@Column(name = "kapasite_birim")
 	private String kapasiteBirim;
 
+	@Column(name = "ended")
+	private boolean ended;
+
 	public String getKapasiteBirim() {
 		return kapasiteBirim;
 	}
@@ -200,6 +203,14 @@ public class EkonomikYatirim implements java.io.Serializable {
 
 	public void setProjeAdi(String projeAdi) {
 		this.projeAdi = projeAdi;
+	}
+
+	public boolean isEnded() {
+		return ended;
+	}
+
+	public void setEnded(boolean ended) {
+		this.ended = ended;
 	}
 
 }

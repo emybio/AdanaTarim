@@ -268,11 +268,18 @@
 								</div>
 								<div class="col-sm-6">
 
-									<input type="button" value="Bir Önceki Sayfa"
-										class="btn btn-danger pull-left"
-										onclick="javascript:history.back()" /> <a type="button"
-										href="./ilce-listesi" class="btn btn-primary pull-left ">İlce
-										Listesine Git </a>
+									<button type="button" value="" class="btn btn-danger pull-left"
+										onclick="javascript:history.back()">
+										<span class="fa fa-reply"> Bir Önceki Sayfa </span>
+									</button>
+
+
+
+
+
+
+									<a type="button" href="./ilce-listesi"
+										class="btn btn-primary pull-left ">İlce Listesine Git </a>
 								</div>
 							</div>
 						</form:form>

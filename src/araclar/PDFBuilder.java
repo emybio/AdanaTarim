@@ -40,11 +40,6 @@ public class PDFBuilder extends AbstractITextPdfView {
 		//
 		BaseFont bf = BaseFont.createFont(BaseFont.TIMES_ROMAN, "Cp1257", !BaseFont.EMBEDDED);
 		BaseFont bf1 = BaseFont.createFont(FONT, BaseFont.WINANSI, BaseFont.EMBEDDED);
-		Font french = new Font(bf1, 12);
-		BaseFont bf2 = BaseFont.createFont(FONT, BaseFont.CP1250, BaseFont.EMBEDDED);
-		Font czech = new Font(bf2, 12);
-		BaseFont bf3 = BaseFont.createFont(FONT, "Cp1251", BaseFont.EMBEDDED);
-		Font russian = new Font(bf3, 12);
 
 		Font font1 = new Font(bf, 10, Font.BOLD, BaseColor.WHITE);
 		// define font for table header row
@@ -90,7 +85,7 @@ public class PDFBuilder extends AbstractITextPdfView {
 
 		System.out.println("text: " + text);
 
-		// write table row data   
+		// write table row data
 
 		for (Arac aBook : listBooks) {
 			System.out.println(" PDF Ýslem Yapan : " + aBook.getIslemyapan().getAdi());
