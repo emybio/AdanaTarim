@@ -12,5 +12,7 @@ public interface EkonomikYatirimDAO {
 	public EkonomikYatirim ekonomikYatirimGetir(Long id);
 
 	public List<EkonomikYatirim> tumYatirimListesi();
+	
+	public List<EkonomikYatirim> etapNoyaGoreListe(Integer etapNo);
 
 }

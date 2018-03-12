@@ -88,6 +88,8 @@
 
 
 
+	
+
 	<mvc:resources mapping="/assets/**" location="/WEB-INF/assets/" />
 	<mvc:resources mapping="/messages/**" location="/WEB-INF/messages/" />
 	<mvc:annotation-driven />

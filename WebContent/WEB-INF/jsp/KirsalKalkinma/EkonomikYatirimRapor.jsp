@@ -40,22 +40,25 @@
 
 					<thead>
 						<tr>
-							<td colspan="6"><h3>KIRSAL KALKINMA EKONOMİK YATIRIMLAR</h3></td>
+							<td colspan="7"><h3>KIRSAL KALKINMA EKONOMİK YATIRIMLAR</h3></td>
 						</tr>
 					</thead>
 
 					<tr>
-						<td colspan="6" align="left"><b>${listSize}&nbsp;adet&nbsp;kayıt</b></td>
+						<td colspan="7" align="left"><b>${listSize}&nbsp;adet&nbsp;kayıt</b></td>
 					</tr>
 
 					<tr class="baslik">
+						<td><img alt="Excel Report" class="rounded" width="25px"
+							src="<c:url value='/assets/images/xlsx-3.png'></c:url>">
+							Excel Rapor</td>
 						<td align="center">ETAP NO</td>
 						<td align="center">ADET</td>
 						<td align="center">PROJE BEDELİ (TL)</td>
 						<td align="center">HİBE TUTARI (TL)</td>
 						<td align="center">KAPASİTE</td>
 						<td align="center">İSTİHDAM</td>
-						
+
 					</tr>
 					<tbody class="govde">
 
@@ -85,6 +88,8 @@
 
 
 						<tr>
+							<td><a href=" ./xlsxExport?etapNo=2"
+								class="btn btn-primary btn-xs">2. Etap Excel'e Aktar</a></td>
 							<td>2</td>
 							<td>${etapAdedi}</td>
 
@@ -124,6 +129,8 @@
 
 
 						<tr>
+							<td><a href=" ./xlsxExport?etapNo=3"
+								class="btn btn-primary btn-xs">3. Etap Excel'e Aktar</a></td>
 							<td>3</td>
 							<td>${etapAdedi2}</td>
 
@@ -162,6 +169,8 @@
 
 
 						<tr>
+							<td><a href=" ./xlsxExport?etapNo=4"
+								class="btn btn-primary btn-xs">4. Etap Excel'e Aktar</a></td>
 							<td>4</td>
 							<td>${etapAdedi3}</td>
 
@@ -202,6 +211,8 @@
 
 
 						<tr>
+							<td><a href=" ./xlsxExport?etapNo=5"
+								class="btn btn-primary btn-xs">5. Etap Excel'e Aktar</a></td>
 							<td>5</td>
 							<td>${etapAdedi4}</td>
 
@@ -237,6 +248,8 @@
 						</c:forEach>
 
 						<tr>
+							<td><a href=" ./xlsxExport?etapNo=6"
+								class="btn btn-primary btn-xs">6. Etap Excel'e Aktar</a></td>
 							<td>6</td>
 							<td>${etapAdedi5}</td>
 
@@ -274,6 +287,8 @@
 						</c:forEach>
 
 						<tr>
+							<td><a href=" ./xlsxExport?etapNo=7"
+								class="btn btn-primary btn-xs">7. Etap Excel'e Aktar</a></td>
 							<td>7</td>
 							<td>${etapAdedi6}</td>
 
@@ -311,6 +326,8 @@
 						</c:forEach>
 
 						<tr>
+							<td><a href=" ./xlsxExport?etapNo=8"
+								class="btn btn-primary btn-xs">8. Etap Excel'e Aktar</a></td>
 							<td>8</td>
 							<td>${etapAdedi7}</td>
 
@@ -347,6 +364,8 @@
 						</c:forEach>
 
 						<tr>
+							<td><a href=" ./xlsxExport?etapNo=9"
+								class="btn btn-primary btn-xs">9. Etap Excel'e Aktar</a></td>
 							<td>9</td>
 							<td>${etapAdedi8}</td>
 
@@ -383,6 +402,8 @@
 						</c:forEach>
 
 						<tr>
+							<td><a href=" ./xlsxExport?etapNo=10"
+								class="btn btn-primary btn-xs">10. Etap Excel'e Aktar</a></td>
 							<td>10</td>
 							<td>${etapAdedi9}</td>
 
@@ -419,6 +440,8 @@
 						</c:forEach>
 
 						<tr>
+							<td><a href=" ./xlsxExport?etapNo=11"
+								class="btn btn-primary btn-xs">11. Etap Excel'e Aktar</a></td>
 							<td>${etapNo11 }</td>
 							<td>${etapAdedi10}</td>
 
@@ -519,6 +542,8 @@
 
 
 						<tr id="sonSatir">
+							<td><a href=" ./xlsxExport" class="btn btn-primary btn-xs">Tüm
+									Listeyi Excel'e Aktar</a></td>
 							<td>GENEL TOPLAM:</td>
 							<td>${listSize }</td>
 

@@ -119,11 +119,11 @@ table tbody tr td {
 									<td>${cikis.ilce.isim}-${cikis.mahalle.isim}</td>
 									<td>${cikis.cikisSaati}</td>
 									<td>${cikis.girisSaati}</td>
-									<c:if test="${cikis.ozelPlaka ne ''}">
+									<c:if test="${empty cikis.resmiPlaka}">
 										<td>${cikis.ozelPlaka}</td>
 									</c:if>
 
-									<c:if test="${cikis.resmiPlaka ne ''}"> 
+									<c:if test="${!empty cikis.resmiPlaka }">
 										<td>${cikis.resmiPlaka}</td>
 									</c:if>
 									<td>${cikis.aciklama}</td>

@@ -12,7 +12,7 @@
 	<div align="center">
 		<h1>Spring MVC PDF View Demo (using iText library)</h1>
 		<h3>
-			<a href="./downloadPDF">Download PDF Document</a>
+			<a href="./downloadPDF" target="blank">Download PDF Document</a>
 		</h3>
 		<form id="myForm" action="./pdfExport" method="POST">
 			<input type="submit" value="PDF export">

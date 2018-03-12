@@ -28,8 +28,8 @@ import forms.Arac;
  *
  */
 public class PDFBuilder extends AbstractITextPdfView {
-	public static final String FONT = "d:/workspace/Arazi_Edindirme/araziedindirme/WebContent/WEB-INF/assets/fonts/times.ttf";
-
+	public static final String FONT = "C:/Users/EMRAHH/workspace/AdanaTarim/WebContent/WEB-INF/assets/fonts/times.ttf";
+ 
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void buildPdfDocument(Map<String, Object> model, Document doc, PdfWriter writer,

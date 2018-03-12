@@ -29,7 +29,7 @@ public class JstlView extends InternalResourceView {
 		// set original view being asked for as a request parameter
 		request.setAttribute("partial", dispatcherPath);
 		request.setAttribute("title", model.get("title"));
-
+		request.setAttribute("durumListesi", model.get("durumListesi"));
 		request.setAttribute("islemListesi", model.get("islemListesi"));
 		request.setAttribute("ilceListesi", model.get("ilceListesi"));
 		request.setAttribute("araziIslem", model.get("araziIslem"));

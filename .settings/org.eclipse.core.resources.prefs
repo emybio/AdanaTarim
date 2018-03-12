@@ -2,6 +2,7 @@ eclipse.preferences.version=1
 encoding//WebContent/WEB-INF/jsp/KirsalKalkinma/EkonomikYatirimlar.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/KirsalKalkinma/kooperatif/KooperatifIlceListesi.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/KirsalKalkinma/kooperatif/KooperatifKart\u0131.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/error.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/giris.jsp=UTF-8
 encoding//src/araclar/Deneme.java=UTF-8
 encoding//src/araclar/Genel.java=UTF-8

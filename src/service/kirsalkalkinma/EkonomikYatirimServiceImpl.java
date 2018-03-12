@@ -34,4 +34,10 @@ public class EkonomikYatirimServiceImpl implements EkonomikYatirimService {
 		return ekonomikYatirimDAO.tumYatirimListesi();
 	}
 
+	@Override
+	public List<EkonomikYatirim> etapNoyaGoreListe(Integer etapNo) {
+		// TODO Auto-generated method stub
+		return ekonomikYatirimDAO.etapNoyaGoreListe(etapNo);
+	}
+
 }

@@ -1,9 +1,12 @@
 package controllers.kirsalkalkinma;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -11,12 +14,16 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.ModelAndView;
 
+import forms.Arac;
 import forms.Kullanici;
+import forms.Yerler;
 import forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirim;
 import service.YerEklemeService;
+import service.kirsalkalkinma.EkonomikYatirimDurumuService;
 import service.kirsalkalkinma.EkonomikYatirimKategoriService;
 import service.kirsalkalkinma.EkonomikYatirimService;
 
@@ -24,13 +31,10 @@ import service.kirsalkalkinma.EkonomikYatirimService;
 @RequestMapping(value = "/kirsal-kalkinma")
 public class EkonomikYatirimController {
 
-	@ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "No such Order") // 404
-	public class OrderNotFoundException extends RuntimeException {
-		// ...
-	}
-
 	@Autowired
 	private EkonomikYatirimService ekonomikYatirimService;
+	@Autowired
+	private EkonomikYatirimDurumuService ekonomikDurumService;
 	@Autowired
 	private EkonomikYatirimKategoriService ekonomikYatirimKategoriService;
 	@Autowired
@@ -63,6 +67,7 @@ public class EkonomikYatirimController {
 		model.put("tumEkonomikYatirimListesi", ekonomikYatirimService.tumYatirimListesi());
 		model.put("ilceListesi", yerEklemeService.altTipGetir(2l, true));
 		model.put("kategoriListesi", ekonomikYatirimKategoriService.tumEkonomikYatirimKategoriListesi());
+		model.put("durumListesi", ekonomikDurumService.tumDurumListesi());
 		model.put("tusYazisi", tusYazisi);
 		tusYazisi = "Kaydet";
 		yatirim = null;
@@ -73,7 +78,7 @@ public class EkonomikYatirimController {
 
 	@RequestMapping(value = "/ekle")
 	public String ekonomikYatirimKaydet(@CookieValue(value = "id", required = true) Long id,
-			@ModelAttribute() EkonomikYatirim ekonomikYatirim, BindingResult result, ModelMap model) {
+			@ModelAttribute("ekonomikYatirim") EkonomikYatirim ekonomikYatirim, BindingResult result, ModelMap model) {
 
 		if (result.hasErrors()) {
 
@@ -86,10 +91,11 @@ public class EkonomikYatirimController {
 		ekonomikYatirim.setIslemZamani(new Date());
 		try {
 			ekonomikYatirimService.save(ekonomikYatirim);
+
 		} catch (Exception e) {
 
 			model.put("errors", e.getMessage());
-
+			System.out.println("girilen deðerler : " + ekonomikYatirim.toString());
 			return "error";
 		}
 
@@ -100,8 +106,7 @@ public class EkonomikYatirimController {
 	public String ekonomikYatirimGuncelle(@PathVariable("id") Long id) {
 
 		yatirim = ekonomikYatirimService.ekonomikYatirimGetir(id);
-		if (yatirim == null)
-			throw new OrderNotFoundException();
+
 		tusYazisi = "Guncelle";
 		return "redirect:/kirsal-kalkinma/ekonomik-yatirimlar";
 	}
@@ -129,4 +134,32 @@ public class EkonomikYatirimController {
 		return "KirsalKalkinma/EkonomikYatirimRapor";
 	}
 
+	@RequestMapping(value = "/xlsxExport", method = { RequestMethod.GET })
+	public ModelAndView xlsxViewExport(HttpServletResponse response,
+			@RequestParam(value = "etapNo", required = false) Integer a) {
+		// response.setContentType("application/vnd.ms-excel");
+		if (null == a) {
+			response.setHeader("Content-disposition",
+					"attachment; filename=" + "Ekonomik_Yatirimlar_Listesi" + ".xlsx");
+		} else {
+
+			response.setHeader("Content-disposition",
+					"attachment; filename=" + a + ".Etap_" + "Yatirimlar_Listesi" + ".xlsx");
+		}
+		return new ModelAndView("xlsxView", "yatirimlar", yatirimListeleri(a));
+	}
+
+	// public List<EkonomikYatirim> tumYatirimlar() {
+	//
+	// }
+
+	public List<EkonomikYatirim> yatirimListeleri(@RequestParam(value = "etapNo", required = false) Integer etapNo) {
+
+		if (etapNo != null)
+			return ekonomikYatirimService.etapNoyaGoreListe(etapNo);
+		else {
+
+			return ekonomikYatirimService.tumYatirimListesi();
+		}
+	}
 }

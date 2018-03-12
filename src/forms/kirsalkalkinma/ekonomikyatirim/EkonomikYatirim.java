@@ -64,11 +64,11 @@ public class EkonomikYatirim implements java.io.Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "durum")
-	private EkonomikYatirimDurumu durum;
+	public EkonomikYatirimDurumu durum;
 
 	@ManyToOne()
 	@JoinColumn(name = "islemyapan_id")
-	private Kullanici islemYapan;
+	public Kullanici islemYapan;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "islem_zamani")
@@ -207,13 +207,23 @@ public class EkonomikYatirim implements java.io.Serializable {
 	}
 
 	public EkonomikYatirimDurumu getDurum() {
+		if (durum == null)
+			durum = new EkonomikYatirimDurumu();
 		return durum;
 	}
 
 	public void setDurum(EkonomikYatirimDurumu durum) {
-		if (durum == null)
-			durum = new EkonomikYatirimDurumu();
+
 		this.durum = durum;
+	}
+
+	@Override
+	public String toString() {
+		return "EkonomikYatirim [id=" + id + ", ilce=" + ilce + ", kategori=" + kategori + ", yatirimciSayisi="
+				+ yatirimciSayisi + ", projeBedeli=" + projeBedeli + ", hibeTutari=" + hibeTutari + ", kapasite="
+				+ kapasite + ", istihdam=" + istihdam + ", etapNo=" + etapNo + ", yatirimciAdi=" + yatirimciAdi
+				+ ", projeAdi=" + projeAdi + ", kapasiteBirim=" + kapasiteBirim + ", durum=" + durum + ", islemYapan="
+				+ islemYapan + ", islemZamani=" + islemZamani + "]";
 	}
 
 }

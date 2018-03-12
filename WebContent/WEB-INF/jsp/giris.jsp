@@ -47,6 +47,9 @@
 <br>
 <br>
 <body>
+
+	
+	
 	<c:if test="${empty cookie.id.value }">
 		<div class="text-center">
 			<div class="container">
@@ -71,7 +74,7 @@
 			</div> -->
 					<button class="btn btn-lg btn-primary btn-block" type="submit">Giriş</button>
 				</form>
-				<hr width="500px;" >
+				<hr width="500px;">
 			</div>
 		</div>
 		<!-- /container -->

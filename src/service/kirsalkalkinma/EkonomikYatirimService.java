@@ -10,7 +10,9 @@ public interface EkonomikYatirimService {
 	public void delete(Long id);
 
 	public EkonomikYatirim ekonomikYatirimGetir(Long id);
-	
+
 	public List<EkonomikYatirim> tumYatirimListesi();
+
+	public List<EkonomikYatirim> etapNoyaGoreListe(Integer etapNo);
 
 }

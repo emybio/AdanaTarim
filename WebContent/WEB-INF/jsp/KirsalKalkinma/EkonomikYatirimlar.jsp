@@ -40,7 +40,6 @@
 </script>
 </head>
 <body>
-
 	<div class="container-fluid">
 		<div id="container" class="col-sm-6">
 			<h3>Ekonomik Yatırımlar</h3>
@@ -48,7 +47,7 @@
 			<form:form action="ekle" method="post" commandName="ekonomikYatirim">
 				<form:hidden path="id" />
 				<table
-					class="table table-sm table-striped bg-danger  table-responsive "
+					class="table table-xs table-striped bg-danger  table-responsive "
 					style="text-align: center; width: 50%;">
 					<tr align="center" style="text-align: center">
 						<td colspan="11">EKONOMİK YATIRIMLAR</td>
@@ -119,18 +118,15 @@
 								<form:option value="0">Seçiniz</form:option>
 								<form:option value="lt">Litre</form:option>
 								<form:option value="da">Dekar</form:option>
-								<form:option value="burukbas">Büyük Baş</form:option>
+								<form:option value="buyukbas">Büyük Baş</form:option>
 								<form:option value="kucukbas">Küçük Baş</form:option>
 								<form:option value="ton">Ton</form:option>
 								<form:option value="adet/yıl">Adet/Yıl</form:option>
 								<form:option value="kw/h">kw/h</form:option>
 							</form:select></td>
 						<td><form:input path="istihdam" /></td>
-						<td><form:select path="duru">
-
-								<form:option value="false">Devam Ediyor</form:option>
-								<form:option value="true">Tamamlandı</form:option>
-
+						<td><form:select path="durum.id" items="${durumListesi }"
+								itemLabel="durumAdi" itemValue="id">
 							</form:select></td>
 					</tr>
 					<tr>
@@ -148,6 +144,7 @@
 						</c:if>
 					</tr>
 				</table>
+
 				<table class="table table-sm table-striped bg-info table-fixed "
 					style="text-align: center; width: 100%;">
 					<c:set var="list" value="${tumEkonomikYatirimListesi}" />
@@ -156,8 +153,9 @@
 				<tr align="center" style="text-align: center; font: bold">
 					<td colspan="12"><H5>YATIRIM BİLGİLERİ</H5></td>
 				</tr> -->
+					
 					<tr>
-						<td colspan="11" align="left"><b>${listSize}&nbsp;adet&nbsp;kayıt</b></td>
+						<td colspan="12" align="left"><b>${listSize}&nbsp;adet&nbsp;kayıt</b></td>
 					</tr>
 
 					<tr class="baslik">
@@ -196,7 +194,7 @@
 										var="projeBedeli"></fmt:formatNumber>${projeBedeli }</td>
 								<td align="center">${yatirim.kapasite}&nbsp;${yatirim.kapasiteBirim}</td>
 								<td align="center">${yatirim.istihdam}</td>
-								<td align="center">${yatirim.durum}</td>
+								<td align="center">${yatirim.durum.durumAdi}</td>
 								<td><a
 									href="${pageContext.request.contextPath }/kirsal-kalkinma/ekonomikYatirimSil?id=${yatirim.id}"
 									onclick="javascript:return confirm('${yatirim.etapNo}. etap ${yatirim.yatirimciAdi} isimli kaydı : \n Silmek İstediğinize Emin misiniz?');"
