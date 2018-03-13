@@ -20,6 +20,8 @@ import org.hibernate.cfg.Configuration;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTFonts;
 
 import forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirimDurumu;
+import forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirim_Kategori;
+import forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirim_Ust_Kategori;
 
 /**
  * @author Emrah Denizer
@@ -30,23 +32,43 @@ public class Deneme {
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
 
-	
 		EkonomikYatirimDurumu durum = new EkonomikYatirimDurumu("Başvuru Yapıldı");
 		EkonomikYatirimDurumu durum1 = new EkonomikYatirimDurumu("Değerlendirme Aşamasında");
 		EkonomikYatirimDurumu durum2 = new EkonomikYatirimDurumu("Kabul Edildi");
 		EkonomikYatirimDurumu durum3 = new EkonomikYatirimDurumu("Sözleşme İmzalandı");
 		EkonomikYatirimDurumu durum4 = new EkonomikYatirimDurumu("Proje Tamamlandı");
 
+		EkonomikYatirim_Ust_Kategori ustK = new EkonomikYatirim_Ust_Kategori("Ekonomik Yatırımlar");
+		EkonomikYatirim_Ust_Kategori ustK1 = new EkonomikYatirim_Ust_Kategori("Altyapı Yatırımları");
+
+		EkonomikYatirim_Kategori kat = new EkonomikYatirim_Kategori("Yeni Tesis", ustK);
+		EkonomikYatirim_Kategori kat1 = new EkonomikYatirim_Kategori("Tamamlama", ustK);
+		EkonomikYatirim_Kategori kat2 = new EkonomikYatirim_Kategori("Kapasite Artırımı ve Teknoloji Yenileme", ustK);
+
+		EkonomikYatirim_Kategori kat3 = new EkonomikYatirim_Kategori("Çiftlik Faaliyetlerini Geliştirme", ustK1);
+		EkonomikYatirim_Kategori kat4 = new EkonomikYatirim_Kategori("Kırsal Turizm", ustK1);
+		EkonomikYatirim_Kategori kat5 = new EkonomikYatirim_Kategori("El Sanatları", ustK1);
+		EkonomikYatirim_Kategori kat6 = new EkonomikYatirim_Kategori("Bilişim Sistemleri", ustK1);
+
 		SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg2.xml").buildSessionFactory();
 
 		Session session = sessionFactory.openSession();
+		// EKONOMİK YATIRIM DURUM INSERT
+		// session.save(durum);
+		// session.save(durum1);
+		// session.save(durum2);
+		// session.save(durum3);
+		// session.save(durum4);
 
-		session.save(durum);
-		session.save(durum1);
-		session.save(durum2);
-		session.save(durum3);
-		session.save(durum4);
-
+		session.save(ustK);
+		session.save(ustK1);
+		session.save(kat);
+		session.save(kat1);
+		session.save(kat2);
+		session.save(kat3);
+		session.save(kat4);
+		session.save(kat5);
+		session.save(kat6);
 		session.beginTransaction();
 		System.out.println();
 		session.getTransaction().commit();

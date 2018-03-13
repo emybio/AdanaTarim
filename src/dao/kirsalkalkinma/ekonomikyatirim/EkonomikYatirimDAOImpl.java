@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,6 +16,7 @@ import forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirim;
 
 @Transactional
 @Repository
+@SuppressWarnings("unchecked")
 public class EkonomikYatirimDAOImpl implements EkonomikYatirimDAO {
 
 	@Autowired
@@ -43,7 +45,6 @@ public class EkonomikYatirimDAOImpl implements EkonomikYatirimDAO {
 		return yatirim;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<EkonomikYatirim> tumYatirimListesi() {
 
@@ -53,11 +54,29 @@ public class EkonomikYatirimDAOImpl implements EkonomikYatirimDAO {
 		return ekonomikYatirimList.list();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<EkonomikYatirim> etapNoyaGoreListe(Integer etapNo) {
 		Criteria ekonomikYatirimList = sessionFactory.getCurrentSession().createCriteria(EkonomikYatirim.class);
 		ekonomikYatirimList.add(Restrictions.eq("etapNo", etapNo));
+		return ekonomikYatirimList.list();
+	}
+
+	@Override
+	public List<EkonomikYatirim> ilceyeGoreListe(String ilce) {
+		Criteria ekonomikYatirimList = sessionFactory.getCurrentSession().createCriteria(EkonomikYatirim.class);
+		ekonomikYatirimList.createAlias("ilce", "ilce");
+		ekonomikYatirimList.add(Restrictions.eq("ilce.isim", ilce));
+		ekonomikYatirimList.addOrder(Order.asc("etapNo"));
+		return ekonomikYatirimList.list();
+	}
+
+	
+	@Override
+	public List<EkonomikYatirim> ilceListesi() {
+		Criteria ekonomikYatirimList = sessionFactory.getCurrentSession().createCriteria(EkonomikYatirim.class);
+		ekonomikYatirimList.createAlias("ilce", "ilce");
+		ekonomikYatirimList.setProjection(Projections.distinct(Projections.property("ilce.isim")));
+		ekonomikYatirimList.addOrder(Order.asc("ilce.isim"));
 		return ekonomikYatirimList.list();
 	}
 

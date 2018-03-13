@@ -40,4 +40,16 @@ public class EkonomikYatirimServiceImpl implements EkonomikYatirimService {
 		return ekonomikYatirimDAO.etapNoyaGoreListe(etapNo);
 	}
 
+	@Override
+	public List<EkonomikYatirim> ilceyeGoreListe(String ilce) {
+		// TODO Auto-generated method stub
+		return ekonomikYatirimDAO.ilceyeGoreListe(ilce);
+	}
+
+	@Override
+	public List<EkonomikYatirim> ilceListesi() {
+		// TODO Auto-generated method stub
+		return ekonomikYatirimDAO.ilceListesi();
+	}
+
 }

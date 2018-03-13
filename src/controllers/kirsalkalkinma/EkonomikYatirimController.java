@@ -1,6 +1,7 @@
 package controllers.kirsalkalkinma;
 
-import java.util.ArrayList;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.List;
 
@@ -18,9 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import forms.Arac;
 import forms.Kullanici;
-import forms.Yerler;
 import forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirim;
 import service.YerEklemeService;
 import service.kirsalkalkinma.EkonomikYatirimDurumuService;
@@ -130,33 +129,44 @@ public class EkonomikYatirimController {
 
 		model.addAttribute("title", "Ekonomik Rapor");
 		model.put("tumEkonomikYatirimListesi", ekonomikYatirimService.tumYatirimListesi());
+		model.put("ilceler", ekonomikYatirimService.ilceListesi());
 
 		return "KirsalKalkinma/EkonomikYatirimRapor";
 	}
 
 	@RequestMapping(value = "/xlsxExport", method = { RequestMethod.GET })
 	public ModelAndView xlsxViewExport(HttpServletResponse response,
-			@RequestParam(value = "etapNo", required = false) Integer a) {
+			@RequestParam(value = "etapNo", required = false) Integer a,
+			@RequestParam(value = "ilce", required = false) String ilce) throws UnsupportedEncodingException {
 		// response.setContentType("application/vnd.ms-excel");
-		if (null == a) {
+		if (null != a) {
 			response.setHeader("Content-disposition",
 					"attachment; filename=" + "Ekonomik_Yatirimlar_Listesi" + ".xlsx");
-		} else {
+		} else if (null != ilce) {
+			String fileName = URLEncoder.encode(ilce + "_Ýlcesi_" + "Yatirimlar_Listesi", "UTF-8");
+			response.setHeader("Content-disposition", "attachment; filename=" + fileName + ".xlsx");
+		}
+
+		else {
 
 			response.setHeader("Content-disposition",
 					"attachment; filename=" + a + ".Etap_" + "Yatirimlar_Listesi" + ".xlsx");
 		}
-		return new ModelAndView("xlsxView", "yatirimlar", yatirimListeleri(a));
+		return new ModelAndView("xlsxView", "yatirimlar", yatirimListeleri(a, ilce));
 	}
 
-	// public List<EkonomikYatirim> tumYatirimlar() {
-	//
-	// }
+	public List<EkonomikYatirim> yatirimListeleri(@RequestParam(value = "etapNo", required = false) Integer etapNo,
+			@RequestParam(value = "ilce", required = false) String ilce) {
 
-	public List<EkonomikYatirim> yatirimListeleri(@RequestParam(value = "etapNo", required = false) Integer etapNo) {
+		if (etapNo != null) {
 
-		if (etapNo != null)
 			return ekonomikYatirimService.etapNoyaGoreListe(etapNo);
+
+		} else if (ilce != null) {
+
+			return ekonomikYatirimService.ilceyeGoreListe(ilce);
+		}
+
 		else {
 
 			return ekonomikYatirimService.tumYatirimListesi();

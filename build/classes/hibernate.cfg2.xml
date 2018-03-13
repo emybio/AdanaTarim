@@ -30,6 +30,8 @@
 		<mapping class="forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirim" />
 		<mapping
 			class="forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirim_Kategori" />
+		<mapping
+			class="forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirim_Ust_Kategori" />
 		<mapping class="forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirimDurumu" />
 		<mapping class="forms.kirsalkalkinma.gencciftci.GencCiftciKategori" />
 		<mapping class="forms.kirsalkalkinma.kooperatif.Kooperatif" />

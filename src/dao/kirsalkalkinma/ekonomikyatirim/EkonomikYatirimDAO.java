@@ -14,5 +14,10 @@ public interface EkonomikYatirimDAO {
 	public List<EkonomikYatirim> tumYatirimListesi();
 	
 	public List<EkonomikYatirim> etapNoyaGoreListe(Integer etapNo);
+	
+	public List<EkonomikYatirim> ilceyeGoreListe(String ilce);
+	
+	public List<EkonomikYatirim> ilceListesi();
+
 
 }

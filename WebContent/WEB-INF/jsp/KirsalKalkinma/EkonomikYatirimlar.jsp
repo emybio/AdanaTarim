@@ -70,10 +70,17 @@
 								<form:options items="${ ilceListesi}" itemLabel="isim"
 									itemValue="id" />
 							</form:select></td>
+
 						<td><form:select path="kategori.id">
-								<form:options items="${ kategoriListesi}"
-									itemLabel="kategoriAdi" itemValue="id" />
+								<c:forEach items="${kategoriListesi}" var="kat">
+									<optgroup label="${kat.ustKategori.adi}" dir="ltr">
+										<c:if test="${kat.ustKategori.adi eq 'Ekonomik Yatırımlar'}">
+											<option value="${kat.id }">${kat.kategoriAdi }</option>
+										</c:if>
+									</optgroup>
+								</c:forEach>
 							</form:select></td>
+
 						<td><form:select path="etapNo">
 								<form:option value="2">2. Etap</form:option>
 								<form:option value="3">3. Etap</form:option>
@@ -153,7 +160,7 @@
 				<tr align="center" style="text-align: center; font: bold">
 					<td colspan="12"><H5>YATIRIM BİLGİLERİ</H5></td>
 				</tr> -->
-					
+
 					<tr>
 						<td colspan="12" align="left"><b>${listSize}&nbsp;adet&nbsp;kayıt</b></td>
 					</tr>
