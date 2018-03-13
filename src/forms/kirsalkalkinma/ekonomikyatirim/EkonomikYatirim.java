@@ -64,7 +64,7 @@ public class EkonomikYatirim implements java.io.Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "durum")
-	public EkonomikYatirimDurumu durum;
+	private EkonomikYatirimDurumu durum;
 
 	@ManyToOne()
 	@JoinColumn(name = "islemyapan_id")

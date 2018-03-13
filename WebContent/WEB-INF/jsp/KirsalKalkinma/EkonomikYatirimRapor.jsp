@@ -23,82 +23,163 @@
 	border: 1 solid black;
 }
 </style>
-
-
-
-
 </head>
 <body>
 	<div class="container-fluid" id="yazdir">
 		<div class="container col-sm-5">
-
 			<button type="button" class="btn btn-info" data-toggle="collapse"
 				data-target="#ilce">İLÇEYE GÖRE RAPOR</button>
 			<hr />
 			<div id="ilce" class="collapse">
+				<script type="text/javascript">
+					var jq = jQuery.noConflict();
 
-				<br>
+					function xxx() {
+
+						//jq("#payment").change(function() {
+
+						var value = jq("#payment option:selected").val();
+						var theDiv = jq("#" + value);
+						//	alert(value);
+
+						theDiv.slideDown();
+						theDiv.siblings('[class^= Ceyhan ]').slideUp();
+						//	theDiv.siblings('[class^=${ilce}]').slideUp();
+						//	});
+
+					}
+				</script>
+				<select id="payment" onchange="xxx();">
+					<c:forEach items="${ilceler}" var="ilce">
+						<option value="${ilce }">${ilce }</option>
+					</c:forEach>
+				</select>
 				<c:forEach items="${ilceler}" var="ilce">
+					<script type="text/javascript">
+						//alert('${ilce}');
+						var jq = jQuery.noConflict();
 
-					<div class="alert alert-success">
-						<div class="container-fluid ">
-							<div class="col-sm-2">
-								<button type="button" class="btn btn-info"
-									data-toggle="collapse" data-target="#${ilce}">${ilce}</button>
+						jq
+								.ajax({
+									type : "GET",
+									url : '${pageContext.request.contextPath}/kirsal-kalkinma/ilcelereGoreListele.json',
+									contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+									data : {
+										ilce : '${ilce}',
+									},
+									success : function(data) {
+
+										var tblRow;
+										var array = [];
+										for (var i = 0; i < data.length; i++) {
+
+											/* tblRow =  data[i].durum ;
+											console.log(tblRow);
+											array.push(tblRow); */
+
+											tblRow = "<tr><td style ='word-break:break-all;'>"
+													+ data[i].kategori
+													+ "</td><td style ='word-break:break-all;'>"
+													+ data[i].etapNo
+													+ "</td><td style ='word-break:break-all;'>"
+													+ data[i].yatirimciAdi
+													+ "</td><td style ='word-break:break-all;'>"
+													+ data[i].projeAdi
+													+ "</td><td style ='word-break:break-all;'>"
+													+ data[i].projeBedeli
+													+ "</td><td style ='word-break:break-all;'>"
+													+ data[i].hibeTutari
+													+ "</td><td style ='word-break:break-all;'>"
+													+ data[i].kapasite
+													+ " "
+													+ data[i].kapasiteBirim
+													+ "</td><td style ='word-break:break-all;'>"
+													+ data[i].istihdam
+													+ "</td><td style ='word-break:break-all;'>"
+													+ data[i].durum
+													+ "</td></tr>";
+											jq(tblRow).appendTo("#tr${ilce}");
+										}
+
+									},
+									complete : function(data) {
+
+									},
+									error : function(xhr, textStatus,
+											errorThrown) {
+
+										console.log(textStatus + "***" + xhr
+												+ "***" + errorThrown);
+									}
+
+								});
+					</script>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<div class="container-fluid ">
+								<div class="col-sm-10">
+
+									<button type="button"
+										class="btn btn-info btn-sm float-left pull-left"
+										data-toggle="collapse" data-target="#${ilce}">${ilce}
+									</button>
+								</div>
+								<div class="col-sm-2">
+									<a href=" ./xlsxExport?ilce=${ilce}" class="float-left"><img
+										alt="Excel Report" class="rounded" width="35px"
+										src="<c:url value='/assets/images/xlsx-3.png'/>"></a>
+								</div>
 							</div>
 						</div>
-						<div id="${ilce}" class="container-fluid collapse ">
-							<a href=" ./xlsxExport?ilce=${ilce}"
-								class="btn btn-primary btn-xs">${ilce}</a>
-							<table>
-								<tr>
-									<td>lkjljkjlkjlkj</td>
-								</tr>
-								<tr>
-									<td>lkjljkjlkjlkj</td>
-								</tr>
-								<tr>
-									<td>lkjljkjlkjlkj</td>
-								</tr>
-								<tr>
-									<td>lkjljkjlkjlkj</td>
-								</tr>
-							</table>
+						<div class="panel-body">
+
+							<div id="${ilce}"
+								class="collapse  table-responsive text-centered  ${ilce}">
+
+								<table
+									class="table table-sm table-bordered table-hover bg-default "
+									id="tr${ilce }">
+									<tr class="baslik">
+										<%-- <td align="center"></td> --%>
+										<th align="center">YATIRIM KONUSU</th>
+										<th align="center">ETAP NO</th>
+										<th align="center">YATIRIMCI ADI</th>
+										<th align="center">PROJE ADI</th>
+										<th align="center">PROJE BEDELİ</th>
+										<th align="center">HİBE TUTARI</th>
+										<th align="center">KAPASİTE</th>
+										<th align="center">İSTİHDAM</th>
+										<th align="center">DURUM</th>
+									</tr>
+
+
+								</table>
+
+							</div>
 						</div>
-
-
 					</div>
 				</c:forEach>
-
 			</div>
 		</div>
-
 		<div class="container-fluid">
 			<div class="container col-md-5">
-
-
 				<button type="button" class="btn btn-info" data-toggle="collapse"
 					data-target="#etapNo">ETAP NO'YA GÖRE RAPOR</button>
 				<hr />
 				<div id="etapNo" class="collapse">
-
-					<br>
 					<table class="table table-sm table-striped bg-info table-fixed "
 						style="text-align: center; width: 100%;">
 						<c:set var="list" value="${tumEkonomikYatirimListesi}" />
 						<c:set var="listSize" value="${fn:length(list)}" />
-
 						<thead>
 							<tr>
 								<td colspan="7"><h3>KIRSAL KALKINMA EKONOMİK
 										YATIRIMLAR</h3></td>
 							</tr>
 						</thead>
-
 						<tr>
 							<td colspan="7" align="left"><b>${listSize}&nbsp;adet&nbsp;kayıt</b></td>
 						</tr>
-
 						<tr class="baslik">
 							<td><img alt="Excel Report" class="rounded" width="25px"
 								src="<c:url value='/assets/images/xlsx-3.png'></c:url>">
@@ -109,17 +190,14 @@
 							<td align="center">HİBE TUTARI (TL)</td>
 							<td align="center">KAPASİTE</td>
 							<td align="center">İSTİHDAM</td>
-
 						</tr>
 						<tbody class="govde">
-
 							<!------------------------ETAP NO 2---------------------------------------------->
 							<c:set var="projeBedeli" value="0" />
 							<c:set var="hibeTutari" value="0" />
 							<c:set var="kapasite" value="0" />
 							<c:set var="istihdam" value="0" />
 							<c:set var="etapAdeti" value="0" />
-
 							<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim"
 								varStatus="sira">
 								<c:if test="${yatirim.etapNo == 2 }">
@@ -130,7 +208,6 @@
 									<c:set var="kapasite" value="${kapasite + yatirim.kapasite}" />
 									<c:set var="istihdam" value="${istihdam + yatirim.istihdam}" />
 									<c:set var="etapAdedi" value="${etapAdedi+1}" />
-
 								</c:if>
 							</c:forEach>
 							<tr>
@@ -138,7 +215,6 @@
 									class="btn btn-primary btn-xs">2. Etap Excel'e Aktar</a></td>
 								<td>2</td>
 								<td>${etapAdedi}</td>
-
 								<td><fmt:formatNumber pattern="#,##0.00" type="currency"
 										value="${projeBedeli}" var="projeBedeli"></fmt:formatNumber>${projeBedeli}</td>
 								<td><fmt:formatNumber pattern="#,##0.00 TL" type="currency"
@@ -155,7 +231,6 @@
 							<c:set var="kapasite2" value="0" />
 							<c:set var="istihdam2" value="0" />
 							<c:set var="etapAdeti2" value="0" />
-
 							<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim"
 								varStatus="sira">
 								<c:if test="${yatirim.etapNo == 3 }">
@@ -166,20 +241,13 @@
 									<c:set var="kapasite2" value="${kapasite2 + yatirim.kapasite}" />
 									<c:set var="istihdam2" value="${istihdam2 + yatirim.istihdam}" />
 									<c:set var="etapAdedi2" value="${etapAdedi2+1}" />
-
 								</c:if>
 							</c:forEach>
-
-
-
-
-
 							<tr>
 								<td><a href=" ./xlsxExport?etapNo=3"
 									class="btn btn-primary btn-xs">3. Etap Excel'e Aktar</a></td>
 								<td>3</td>
 								<td>${etapAdedi2}</td>
-
 								<td><fmt:formatNumber pattern="#,##0.00" type="currency"
 										value="${projeBedeli2}" var="projeBedeli2"></fmt:formatNumber>${projeBedeli2}</td>
 								<td><fmt:formatNumber pattern="#,##0.00 TL" type="currency"
@@ -195,7 +263,6 @@
 							<c:set var="kapasite3" value="0" />
 							<c:set var="istihdam3" value="0" />
 							<c:set var="etapAdeti3" value="0" />
-
 							<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim"
 								varStatus="sira">
 								<c:if test="${yatirim.etapNo == 4 }">
@@ -206,20 +273,13 @@
 									<c:set var="kapasite3" value="${kapasite3 + yatirim.kapasite}" />
 									<c:set var="istihdam3" value="${istihdam3 + yatirim.istihdam}" />
 									<c:set var="etapAdedi3" value="${etapAdedi3+1}" />
-
 								</c:if>
 							</c:forEach>
-
-
-
-
-
 							<tr>
 								<td><a href=" ./xlsxExport?etapNo=4"
 									class="btn btn-primary btn-xs">4. Etap Excel'e Aktar</a></td>
 								<td>4</td>
 								<td>${etapAdedi3}</td>
-
 								<td><fmt:formatNumber pattern="#,##0.00" type="currency"
 										value="${projeBedeli3}" var="projeBedeli3"></fmt:formatNumber>${projeBedeli3}</td>
 								<td><fmt:formatNumber pattern="#,##0.00 TL" type="currency"
@@ -229,15 +289,12 @@
 								<td><fmt:formatNumber pattern="#,##0" type="number"
 										value="${istihdam3}" var="istihdam3"></fmt:formatNumber>${istihdam3}</td>
 							</tr>
-
-
 							<!---------------ETAP NO 5--------------------  -->
 							<c:set var="projeBedeli4" value="0" />
 							<c:set var="hibeTutari4" value="0" />
 							<c:set var="kapasite4" value="0" />
 							<c:set var="istihdam4" value="0" />
 							<c:set var="etapAdeti4" value="0" />
-
 							<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim"
 								varStatus="sira">
 								<c:if test="${yatirim.etapNo == 5 }">
@@ -248,14 +305,8 @@
 									<c:set var="kapasite4" value="${kapasite4 + yatirim.kapasite}" />
 									<c:set var="istihdam4" value="${istihdam4 + yatirim.istihdam}" />
 									<c:set var="etapAdedi4" value="${etapAdedi4+1}" />
-
 								</c:if>
 							</c:forEach>
-
-
-
-
-
 							<tr>
 								<td><a href=" ./xlsxExport?etapNo=5"
 									class="btn btn-primary btn-xs">5. Etap Excel'e Aktar</a></td>
@@ -278,7 +329,6 @@
 							<c:set var="kapasite5" value="0" />
 							<c:set var="istihdam5" value="0" />
 							<c:set var="etapAdeti5" value="0" />
-
 							<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim"
 								varStatus="sira">
 								<c:if test="${yatirim.etapNo == 6 }">
@@ -289,16 +339,13 @@
 									<c:set var="kapasite5" value="${kapasite5 + yatirim.kapasite}" />
 									<c:set var="istihdam5" value="${istihdam5 + yatirim.istihdam}" />
 									<c:set var="etapAdedi5" value="${etapAdedi5+1}" />
-
 								</c:if>
 							</c:forEach>
-
 							<tr>
 								<td><a href=" ./xlsxExport?etapNo=6"
 									class="btn btn-primary btn-xs">6. Etap Excel'e Aktar</a></td>
 								<td>6</td>
 								<td>${etapAdedi5}</td>
-
 								<td><fmt:formatNumber pattern="#,##0.00" type="currency"
 										value="${projeBedeli5}" var="projeBedeli5"></fmt:formatNumber>${projeBedeli5}</td>
 								<td><fmt:formatNumber pattern="#,##0.00 TL" type="currency"
@@ -317,7 +364,6 @@
 							<c:set var="kapasite6" value="0" />
 							<c:set var="istihdam6" value="0" />
 							<c:set var="etapAdeti6" value="0" />
-
 							<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim"
 								varStatus="sira">
 								<c:if test="${yatirim.etapNo == 7 }">
@@ -328,10 +374,8 @@
 									<c:set var="kapasite6" value="${kapasite6 + yatirim.kapasite}" />
 									<c:set var="istihdam6" value="${istihdam6 + yatirim.istihdam}" />
 									<c:set var="etapAdedi6" value="${etapAdedi6+1}" />
-
 								</c:if>
 							</c:forEach>
-
 							<tr>
 								<td><a href=" ./xlsxExport?etapNo=7"
 									class="btn btn-primary btn-xs">7. Etap Excel'e Aktar</a></td>
@@ -347,8 +391,6 @@
 								<td><fmt:formatNumber pattern="#,##0" type="number"
 										value="${istihdam6}" var="istihdam6"></fmt:formatNumber>${istihdam6}</td>
 							</tr>
-
-
 
 							<!--------------ETAP NO 8---------------------  -->
 							<c:set var="projeBedeli7" value="0" />

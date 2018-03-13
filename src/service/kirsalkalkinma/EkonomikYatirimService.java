@@ -2,6 +2,8 @@ package service.kirsalkalkinma;
 
 import java.util.List;
 
+import org.json.simple.JSONArray;
+
 import forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirim;
 
 public interface EkonomikYatirimService {
@@ -18,4 +20,6 @@ public interface EkonomikYatirimService {
 	public List<EkonomikYatirim> ilceyeGoreListe(String ilce);
 
 	public List<EkonomikYatirim> ilceListesi();
+	
+	public JSONArray ilceyeGoreJSON(String ilce);
 }

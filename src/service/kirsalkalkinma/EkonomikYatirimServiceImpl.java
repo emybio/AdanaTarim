@@ -2,6 +2,7 @@ package service.kirsalkalkinma;
 
 import java.util.List;
 
+import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,4 +53,9 @@ public class EkonomikYatirimServiceImpl implements EkonomikYatirimService {
 		return ekonomikYatirimDAO.ilceListesi();
 	}
 
+	@Override
+	public JSONArray ilceyeGoreJSON(String ilce) {
+		// TODO Auto-generated method stub
+		return ekonomikYatirimDAO.ilceyeGoreJSON(ilce);
+	}
 }

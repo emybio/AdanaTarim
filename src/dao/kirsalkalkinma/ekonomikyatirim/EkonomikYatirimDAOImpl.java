@@ -1,5 +1,7 @@
 package dao.kirsalkalkinma.ekonomikyatirim;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -9,6 +11,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -79,5 +83,39 @@ public class EkonomikYatirimDAOImpl implements EkonomikYatirimDAO {
 		ekonomikYatirimList.addOrder(Order.asc("ilce.isim"));
 		return ekonomikYatirimList.list();
 	}
+	@Override
+	public JSONArray ilceyeGoreJSON(String ilce) {
+		Criteria ekonomikYatirim = sessionFactory.getCurrentSession().createCriteria(EkonomikYatirim.class);
+		ekonomikYatirim.createAlias("ilce", "ilce");
+		ekonomikYatirim.add(Restrictions.eq("ilce.isim", ilce));
+		ekonomikYatirim.addOrder(Order.asc("etapNo"));
 
+		
+		JSONArray donecek = new JSONArray();
+		List<EkonomikYatirim> IslemListesi = new ArrayList<EkonomikYatirim>();
+		IslemListesi = ekonomikYatirim.list();
+		Iterator<EkonomikYatirim> iterator = IslemListesi.iterator();
+		while (iterator.hasNext()) {
+			JSONObject jsonObject = new JSONObject();
+			EkonomikYatirim tip = iterator.next();
+			jsonObject.put("id", tip.getId());
+			jsonObject.put("durum", tip.getDurum().getDurumAdi());
+			jsonObject.put("etapNo", tip.getEtapNo());
+			jsonObject.put("hibeTutari", tip.getHibeTutari());
+			jsonObject.put("ilce", tip.getIlce().getIsim());
+			jsonObject.put("islamYapan", tip.getIslemYapan().getAdi());
+			jsonObject.put("islamZamani", tip.getIslemZamani());
+			jsonObject.put("istihdam", tip.getIstihdam());
+			jsonObject.put("kapasite", tip.getKapasite());
+			jsonObject.put("kapasiteBirim", tip.getKapasiteBirim());
+			jsonObject.put("kategori", tip.getKategori().getKategoriAdi());
+			jsonObject.put("projeAdi", tip.getProjeAdi());
+			jsonObject.put("projeBedeli", tip.getProjeBedeli());
+			jsonObject.put("yatirimciAdi", tip.getYatirimciAdi());
+
+			donecek.add(jsonObject);
+		}
+
+		return (donecek);
+	}
 }

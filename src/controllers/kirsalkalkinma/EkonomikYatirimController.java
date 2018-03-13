@@ -1,10 +1,15 @@
 package controllers.kirsalkalkinma;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +22,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
 
 import forms.Kullanici;
 import forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirim;
@@ -140,8 +148,9 @@ public class EkonomikYatirimController {
 			@RequestParam(value = "ilce", required = false) String ilce) throws UnsupportedEncodingException {
 		// response.setContentType("application/vnd.ms-excel");
 		if (null != a) {
+
 			response.setHeader("Content-disposition",
-					"attachment; filename=" + "Ekonomik_Yatirimlar_Listesi" + ".xlsx");
+					"attachment; filename=" + a + ".Etap_" + "Yatirimlar_Listesi" + ".xlsx");
 		} else if (null != ilce) {
 			String fileName = URLEncoder.encode(ilce + "_Ýlcesi_" + "Yatirimlar_Listesi", "UTF-8");
 			response.setHeader("Content-disposition", "attachment; filename=" + fileName + ".xlsx");
@@ -150,7 +159,8 @@ public class EkonomikYatirimController {
 		else {
 
 			response.setHeader("Content-disposition",
-					"attachment; filename=" + a + ".Etap_" + "Yatirimlar_Listesi" + ".xlsx");
+					"attachment; filename=" + "Ekonomik_Yatirimlar_Listesi" + ".xlsx");
+
 		}
 		return new ModelAndView("xlsxView", "yatirimlar", yatirimListeleri(a, ilce));
 	}
@@ -171,5 +181,18 @@ public class EkonomikYatirimController {
 
 			return ekonomikYatirimService.tumYatirimListesi();
 		}
+	}
+
+	@RequestMapping(value = "/ilcelereGoreListele", method = RequestMethod.GET)
+
+	public @ResponseBody String doView(ModelMap model, Map<String, Object> map,
+			@RequestParam(value = "ilce", required = true) String ilce, HttpServletRequest request,
+			HttpServletResponse response) {
+		System.out.println("inside doView");
+
+		Gson gson = new Gson();
+
+		return gson.toJson(ekonomikYatirimService.ilceyeGoreJSON(ilce));
+
 	}
 }
