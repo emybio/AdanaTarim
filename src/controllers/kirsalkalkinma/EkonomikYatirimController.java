@@ -1,14 +1,11 @@
 package controllers.kirsalkalkinma;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -48,6 +45,8 @@ public class EkonomikYatirimController {
 	private YerEklemeService yerEklemeService;
 	private EkonomikYatirim yatirim;
 	private String tusYazisi = "Kaydet";
+	
+	private List<EkonomikYatirim> etapNoListesi;
 
 	@RequestMapping(value = "/ekonomik-yatirimlar")
 	public String ekonomikYatirimlar(@CookieValue(value = "id", required = false) Long id, ModelMap model,
@@ -83,10 +82,10 @@ public class EkonomikYatirimController {
 
 	}
 
-	@RequestMapping(value = "/ekle")
+	@RequestMapping(value = "/ekle", method = RequestMethod.GET)
 	public String ekonomikYatirimKaydet(@CookieValue(value = "id", required = true) Long id,
 			@ModelAttribute("ekonomikYatirim") EkonomikYatirim ekonomikYatirim, BindingResult result, ModelMap model) {
-
+		System.out.println("ekonomik yatýrým ekle : " + ekonomikYatirim);
 		if (result.hasErrors()) {
 
 			System.out.println("Hatalar : " + result.getAllErrors());
@@ -194,5 +193,32 @@ public class EkonomikYatirimController {
 
 		return gson.toJson(ekonomikYatirimService.ilceyeGoreJSON(ilce));
 
+	}
+	
+	@RequestMapping(value="/etapNoyaGoreGetir")
+	public String etapNoyaGoreListesle(@RequestParam(value="etapNo") Integer etapNo,ModelMap model) {
+		if (yatirim == null) {
+
+			yatirim = new EkonomikYatirim();
+		}
+
+		try {
+			model.put("ekonomikYatirim", yatirim);
+		} catch (Exception e) {
+
+			model.put("errors", e.getMessage());
+			return "error";
+		}
+		
+		model.put("title", "Kýrsal Kalkýnma");
+		model.put("tumEkonomikYatirimListesi", ekonomikYatirimService.etapNoyaGoreGetir(etapNo));
+		model.put("ilceListesi", yerEklemeService.altTipGetir(2l, true));
+		model.put("kategoriListesi", ekonomikYatirimKategoriService.tumEkonomikYatirimKategoriListesi());
+		model.put("durumListesi", ekonomikDurumService.tumDurumListesi());
+		model.put("tusYazisi", tusYazisi);
+		tusYazisi = "Kaydet";
+		yatirim = null;
+
+		return "KirsalKalkinma/EkonomikYatirimlar";
 	}
 }

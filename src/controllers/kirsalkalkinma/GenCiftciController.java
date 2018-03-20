@@ -15,6 +15,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -107,7 +108,7 @@ public class GenCiftciController {
 		return "KirsalKalkinma/GencCiftci";
 	}
 
-	@RequestMapping(value = "/gencCiftciEkle", method = RequestMethod.GET)
+	@RequestMapping(value = "/gencCiftciEkle", method = RequestMethod.POST)
 	public String gencCiftciEkle(ModelMap model, @ModelAttribute("ekonomikYatirim") EkonomikYatirim ekonomikYatirim) {
 		if (gencCiftci == null) {
 
@@ -176,7 +177,7 @@ public class GenCiftciController {
 		return "KirsalKalkinma/sabitler";
 	}
 
-	@RequestMapping(value = "/sabitonay", method = RequestMethod.GET)
+	@RequestMapping(value = "/sabitonay", method = RequestMethod.POST)
 	public String ekleme(HttpSession session, HttpServletResponse response,
 			@ModelAttribute("tips") GencCiftciKategori yer, @ModelAttribute("kullanici") Kullanici kullanici,
 			@CookieValue(value = "id", required = true) Long id) {
@@ -267,7 +268,7 @@ public class GenCiftciController {
 	@ResponseBody
 	public byte[] altTipleriGetir(@RequestParam(value = "katid", required = true) Long katid,
 			HttpServletResponse response) throws Exception {
-		// System.out.println(ustId+"****");
+		System.out.println(katid + "****");
 		JSONObject jsonObject = new JSONObject();
 		List<GencCiftciKategori> altTipListesi = new ArrayList<GencCiftciKategori>();
 		altTipListesi = yerEklemeService.altTipGetir(katid, true);

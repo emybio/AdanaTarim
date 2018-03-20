@@ -25,18 +25,25 @@
 	width: 100%;
 }
  */
-.balik td {
+#collapse1 {
+	overflow-y: scroll;
+	height: 500px;
+	width: 120%;
+}
+
+.baslik td {
 	text-decoration: bold;
 }
 </style>
 <script type="text/javascript">
-	jq(document).ready(function() {
+	var jq = jQuery.noConflict();
 
-		/* 		jq('.money').mask("##0.00", {
-			 reverse : true
-			 }); */
+	function etapNoDegistir(etapNo) {
+		console.log("etapNO: " + etapNo)
 
-	});
+		window.location.href = "./etapNoyaGoreGetir?etapNo="
+				+ etapNo;
+	};
 </script>
 </head>
 <body>
@@ -72,15 +79,37 @@
 							</form:select></td>
 
 						<td><form:select path="kategori.id">
-								<c:forEach items="${kategoriListesi}" var="kat">
+								<form:option value="">-Seçiniz------</form:option>
+								<c:forEach items="${kategoriListesi}" var="kat" begin="0"
+									end="0">
+
 									<optgroup label="${kat.ustKategori.adi}" dir="ltr">
-										<c:if test="${kat.ustKategori.adi eq 'Ekonomik Yatırımlar'}">
-											<option value="${kat.id }">${kat.kategoriAdi }</option>
-										</c:if>
+
+										<c:forEach items="${kategoriListesi}" var="kat">
+											<c:if test="${kat.ustKategori.adi eq 'Ekonomik Yatırımlar'}">
+
+												<form:option value="${kat.id }">${kat.kategoriAdi }</form:option>
+											</c:if>
+										</c:forEach>
+
+
+									</optgroup>
+
+								</c:forEach>
+								<c:forEach items="${kategoriListesi}" var="kat" begin="3"
+									end="3">
+
+									<optgroup label="${kat.ustKategori.adi}" dir="ltr">
+
+										<c:forEach items="${kategoriListesi}" var="kat">
+											<c:if test="${kat.ustKategori.adi eq 'Altyapı Yatırımları'}">
+
+												<form:option value="${kat.id }">${kat.kategoriAdi }</form:option>
+											</c:if>
+										</c:forEach>
 									</optgroup>
 								</c:forEach>
 							</form:select></td>
-
 						<td><form:select path="etapNo">
 								<form:option value="2">2. Etap</form:option>
 								<form:option value="3">3. Etap</form:option>
@@ -121,7 +150,6 @@
 						<td><form:input path="hibeTutari" class="money" /></td>
 						<td><form:input path="kapasite" /></td>
 						<td><form:select path="kapasiteBirim">
-
 								<form:option value="0">Seçiniz</form:option>
 								<form:option value="lt">Litre</form:option>
 								<form:option value="da">Dekar</form:option>
@@ -152,89 +180,143 @@
 					</tr>
 				</table>
 
-				<table class="table table-sm table-striped bg-info table-fixed "
-					style="text-align: center; width: 100%;">
-					<c:set var="list" value="${tumEkonomikYatirimListesi}" />
-					<c:set var="listSize" value="${fn:length(list)}" />
-					<!-- 
-				<tr align="center" style="text-align: center; font: bold">
-					<td colspan="12"><H5>YATIRIM BİLGİLERİ</H5></td>
-				</tr> -->
+				<div>
+					<select name="etapNo" onchange="etapNoDegistir(this.value);">
+						<option value="">Seç</option>
+						<option value="2">2. Etap</option>
+						<option value="3">3. Etap</option>
+						<option value="4">4. Etap</option>
+						<option value="5">5. Etap</option>
+						<option value="6">6. Etap</option>
+						<option value="7">7. Etap</option>
+						<option value="8">8. Etap</option>
+						<option value="9">9. Etap</option>
+						<option value="10">10. Etap</option>
+						<option value="11">11. Etap</option>
+						<option value="12">12. Etap</option>
 
-					<tr>
-						<td colspan="12" align="left"><b>${listSize}&nbsp;adet&nbsp;kayıt</b></td>
-					</tr>
+					</select>
 
-					<tr class="baslik">
-
-						<td align="center">İLÇE</td>
-						<td align="center">YATIRIM KONUSU</td>
-						<td align="center">ETAP NO</td>
-						<td align="center">YATIRIMCI ADI</td>
-						<td align="center">PROJE ADI</td>
-						<td align="center">PROJE BEDELİ</td>
-						<td align="center">HİBE TUTARI</td>
-						<td align="center">KAPASİTE</td>
-						<td align="center">İSTİHDAM</td>
-						<td align="center">DURUM</td>
-					</tr>
-					<tbody class="govde">
-
-						<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim"
-							varStatus="sira">
-
-
-							<tr id="siraNo${sira.count }">
-								<td align="center">${yatirim.ilce.isim}</td>
-								<td align="center">${yatirim.kategori.kategoriAdi}</td>
-								<td align="center">${yatirim.etapNo}</td>
-								<td align="center">${yatirim.yatirimciAdi}</td>
-								<td align="center">${yatirim.projeAdi}</td>
-								<td align="center"><fmt:formatNumber pattern="#,##0.00"
-										type="currency" value="${yatirim.projeBedeli}"
-										var="projeBedeli"></fmt:formatNumber>${projeBedeli }</td>
-
-
-
-								<td align="center"><fmt:formatNumber pattern="#,##0.00"
-										type="currency" value="${yatirim.hibeTutari}"
-										var="projeBedeli"></fmt:formatNumber>${projeBedeli }</td>
-								<td align="center">${yatirim.kapasite}&nbsp;${yatirim.kapasiteBirim}</td>
-								<td align="center">${yatirim.istihdam}</td>
-								<td align="center">${yatirim.durum.durumAdi}</td>
-								<td><a
-									href="${pageContext.request.contextPath }/kirsal-kalkinma/ekonomikYatirimSil?id=${yatirim.id}"
-									onclick="javascript:return confirm('${yatirim.etapNo}. etap ${yatirim.yatirimciAdi} isimli kaydı : \n Silmek İstediğinize Emin misiniz?');"
-									class="btn btn-danger btn-sm">Sil</a></td>
-								<td><a
-									href="${pageContext.request.contextPath }/kirsal-kalkinma/ekonomikYatirimGuncelle/${yatirim.id}"
-									class="btn btn-primary btn-sm">Güncelle</a></td>
-							</tr>
-
-
-						</c:forEach>
-
-
+				</div>
+				<div id="collapse1" class="panel-collapse ">
+					<table class="table table-sm table-striped bg-info table-fixed "
+						style="text-align: center; width: 100%;">
+						<c:set var="list" value="${tumEkonomikYatirimListesi}" />
+						<c:set var="listSize" value="${fn:length(list)}" />
 
 						<tr>
-							<td colspan="5" align="right">GENEL TOPLAM:</td>
-
-							<td><fmt:formatNumber pattern="#,##0.00" type="currency"
-									value="${tumEkonomikYatirimListesi.stream().map(yatirim -> yatirim.projeBedeli).sum()}"
-									var="projeBedeli"></fmt:formatNumber>${projeBedeli }</td>
-							<td><fmt:formatNumber pattern="#,##0.00 TL" type="currency"
-									value="${tumEkonomikYatirimListesi.stream().map(yatirim -> yatirim.hibeTutari).sum()}"
-									var="hibeTutari"></fmt:formatNumber>${hibeTutari }</td>
-							<td><fmt:formatNumber pattern="#,##0" type="number"
-									value="${tumEkonomikYatirimListesi.stream().map(yatirim -> yatirim.kapasite).sum()}"
-									var="kapasite"></fmt:formatNumber>${kapasite }</td>
-							<td><fmt:formatNumber pattern="#,##0" type="number"
-									value="${tumEkonomikYatirimListesi.stream().map(yatirim -> yatirim.istihdam).sum()}"
-									var="istihdam"></fmt:formatNumber>${istihdam }</td>
+							<td colspan="12" align="left"><b>${listSize}&nbsp;adet&nbsp;kayıt</b></td>
 						</tr>
 
-					</tbody>
-				</table>
+						<tr class="baslik">
+
+							<td align="center">İLÇE</td>
+							<td align="center" style='word-break: break-all;'>YATIRIM
+								KONUSU</td>
+							<td align="center">ETAP NO</td>
+							<td align="center">YATIRIMCI ADI</td>
+							<td align="center">PROJE ADI</td>
+							<td align="center">PROJE BEDELİ</td>
+							<td align="center">HİBE TUTARI</td>
+							<td align="center">KAPASİTE</td>
+							<td align="center">İSTİHDAM</td>
+							<td align="center">DURUM</td>
+						</tr>
+						<tbody class="govde">
+
+							<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim"
+								varStatus="sira">
+								<script type="text/javascript">
+									jq(document)
+											.ready(
+													function() {
+
+														var lengthText = 20;
+														var text = jq(
+																'#${yatirim.id}')
+																.text();
+														var shortText = jq
+																.trim(text)
+																.substring(0,
+																		lengthText)
+																.split(" ")
+																.slice(0, -1)
+																.join(" ")
+																+ "...";
+														jq('#${yatirim.id}')
+																.text(shortText);
+
+														jq('#${yatirim.id}')
+																.hover(
+																		function() {
+
+																			jq(
+																					this)
+																					.text(
+																							text);
+																		},
+																		function() {
+																			jq(
+																					this)
+																					.text(
+																							shortText);
+																		});
+
+													});
+								</script>
+
+
+								<tr id="siraNo${sira.count }">
+									<td align="center">${yatirim.ilce.isim}</td>
+									<td align="center" style='word-break: break-all; width: 11em;'>${yatirim.kategori.kategoriAdi}</td>
+									<td align="center">${yatirim.etapNo}</td>
+									<td align="center" id="${yatirim.id }">${yatirim.yatirimciAdi}</td>
+									<td align="center" style='word-break: break-all; width: 11em;'>${yatirim.projeAdi}</td>
+									<td align="center"><fmt:formatNumber pattern="#,##0.00"
+											type="currency" value="${yatirim.projeBedeli}"
+											var="projeBedeli"></fmt:formatNumber>${projeBedeli }</td>
+									<td align="center"><fmt:formatNumber pattern="#,##0.00"
+											type="currency" value="${yatirim.hibeTutari}"
+											var="projeBedeli"></fmt:formatNumber>${projeBedeli }</td>
+									<td align="center">${yatirim.kapasite}&nbsp;${yatirim.kapasiteBirim}</td>
+									<td align="center">${yatirim.istihdam}</td>
+									<td align="center">${yatirim.durum.durumAdi}</td>
+									<td><a
+										href="${pageContext.request.contextPath }/kirsal-kalkinma/ekonomikYatirimSil?id=${yatirim.id}"
+										onclick="javascript:return confirm('${yatirim.etapNo}. etap ${yatirim.yatirimciAdi} isimli kaydı : \n Silmek İstediğinize Emin misiniz?');"
+										class="btn btn-danger btn-sm">Sil</a></td>
+									<td><a
+										href="${pageContext.request.contextPath }/kirsal-kalkinma/ekonomikYatirimGuncelle/${yatirim.id}"
+										class="btn btn-primary btn-sm">Güncelle</a></td>
+								</tr>
+
+
+							</c:forEach>
+
+
+
+							<tr>
+								<td colspan="5" align="right">GENEL TOPLAM:</td>
+
+								<td><fmt:formatNumber pattern="#,##0.00" type="currency"
+										value="${tumEkonomikYatirimListesi.stream().map(yatirim -> yatirim.projeBedeli).sum()}"
+										var="projeBedeli"></fmt:formatNumber>${projeBedeli }</td>
+								<td><fmt:formatNumber pattern="#,##0.00 TL" type="currency"
+										value="${tumEkonomikYatirimListesi.stream().map(yatirim -> yatirim.hibeTutari).sum()}"
+										var="hibeTutari"></fmt:formatNumber>${hibeTutari }</td>
+								<td><fmt:formatNumber pattern="#,##0" type="number"
+										value="${tumEkonomikYatirimListesi.stream().map(yatirim -> yatirim.kapasite).sum()}"
+										var="kapasite"></fmt:formatNumber>${kapasite }</td>
+								<td><fmt:formatNumber pattern="#,##0" type="number"
+										value="${tumEkonomikYatirimListesi.stream().map(yatirim -> yatirim.istihdam).sum()}"
+										var="istihdam"></fmt:formatNumber>${istihdam }</td>
+
+								<td colspan="3"></td>
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
 			</form:form>
 		</div>
 	</div>

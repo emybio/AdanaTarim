@@ -78,23 +78,7 @@ table tbody tr td {
 							<tr>
 								<td align="right" colspan="4"></td>
 								<td align="right"></td>
-								<td align="right">Dönem:${aylar}<!--  <select
-					style="border: none; -webkit-appearance: none;" name="birinciAy"
-					id="birinciAy" onchange="ucAylikToplam()">
-						<option value="" label="--- Seçiniz ---" />
-						<option value="01" label="Ocak"></option>
-						<option value="02" label="Şubat"></option>
-						<option value="03" label="Mart"></option>
-						<option value="04" label="Nisan"></option>
-						<option value="05" label="Mayıs"></option>
-						<option value="06" label="Haziran"></option>
-						<option value="07" label="Temmuz"></option>
-						<option value="08" label="Ağustos"></option>
-						<option value="09" label="Eylül"></option>
-						<option value="10" label="Ekim"></option>
-						<option value="11" label="Kasım"></option>
-						<option value="12" label="Aralık"></option>
-				</select> --></td>
+								<td align="right">Dönem:${aylar}</td>
 							</tr>
 
 							<tr>
@@ -200,7 +184,7 @@ table tbody tr td {
 
 
 
-								<c:if test="${kullanici.birim eq 'KırsalKalkınmaveÖrgütlenme'}">
+								<c:if test="${kullanici.birim eq 'KırsalKalkinmaveÖrgütlenme'}">
 									<td align="center"><b>Nilay Artok</b></td>
 								</c:if>
 

@@ -23,4 +23,6 @@ public interface EkonomikYatirimDAO {
 
 	public JSONArray ilceyeGoreJSON(String ilce);
 
+	public List<EkonomikYatirim> etapNoyaGoreGetir(Integer etapNo);
+
 }

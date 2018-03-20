@@ -29,7 +29,7 @@ public class GencCiftciKategori implements java.io.Serializable {
 	@Column(name = "id", nullable = false)
 	@SequenceGenerator(name = "tabloSequnce", sequenceName = "genc_ciftci_kategori_id_seq")
 	@GeneratedValue(generator = "tabloSequnce")
-	private Long id;
+	private long id;
 
 	@Column(name = "isim")
 	private String isim;

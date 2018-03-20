@@ -95,4 +95,10 @@ public class AracServiceImpl implements AracService {
 		// TODO Auto-generated method stub
 		return aracDao.idCikisListesi(cikisID);
 	}
+
+	@Override
+	public List<Arac> kullaniciyaGorevBul(String plaka, String tarih, Long kullaniciId) {
+		// TODO Auto-generated method stub
+		return aracDao.kullaniciyaGorevBul(plaka, tarih, kullaniciId);
+	}
 }

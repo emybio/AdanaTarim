@@ -74,7 +74,6 @@ public class EkonomikYatirimDAOImpl implements EkonomikYatirimDAO {
 		return ekonomikYatirimList.list();
 	}
 
-	
 	@Override
 	public List<EkonomikYatirim> ilceListesi() {
 		Criteria ekonomikYatirimList = sessionFactory.getCurrentSession().createCriteria(EkonomikYatirim.class);
@@ -83,6 +82,7 @@ public class EkonomikYatirimDAOImpl implements EkonomikYatirimDAO {
 		ekonomikYatirimList.addOrder(Order.asc("ilce.isim"));
 		return ekonomikYatirimList.list();
 	}
+
 	@Override
 	public JSONArray ilceyeGoreJSON(String ilce) {
 		Criteria ekonomikYatirim = sessionFactory.getCurrentSession().createCriteria(EkonomikYatirim.class);
@@ -90,7 +90,6 @@ public class EkonomikYatirimDAOImpl implements EkonomikYatirimDAO {
 		ekonomikYatirim.add(Restrictions.eq("ilce.isim", ilce));
 		ekonomikYatirim.addOrder(Order.asc("etapNo"));
 
-		
 		JSONArray donecek = new JSONArray();
 		List<EkonomikYatirim> IslemListesi = new ArrayList<EkonomikYatirim>();
 		IslemListesi = ekonomikYatirim.list();
@@ -117,5 +116,14 @@ public class EkonomikYatirimDAOImpl implements EkonomikYatirimDAO {
 		}
 
 		return (donecek);
+	}
+
+	@Override
+	public List<EkonomikYatirim> etapNoyaGoreGetir(Integer etapNo) {
+		Criteria ekonomikYatirimList = sessionFactory.getCurrentSession().createCriteria(EkonomikYatirim.class);
+		ekonomikYatirimList.createAlias("ilce", "ilce");
+		ekonomikYatirimList.add(Restrictions.eq("etapNo", etapNo));
+		ekonomikYatirimList.addOrder(Order.asc("ilce.isim"));
+		return ekonomikYatirimList.list();
 	}
 }

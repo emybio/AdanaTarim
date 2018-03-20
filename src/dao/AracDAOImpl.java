@@ -24,6 +24,7 @@ import forms.Arac;
  *
  */
 @Repository
+@SuppressWarnings("unchecked")
 public class AracDAOImpl implements AracDAO {
 
 	@Autowired
@@ -52,7 +53,6 @@ public class AracDAOImpl implements AracDAO {
 		return arac;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public List<Arac> tumAracCikislari() {
@@ -65,7 +65,6 @@ public class AracDAOImpl implements AracDAO {
 		return aracCikisListesi;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public List<Arac> kullaniciyaGoreCikisListesi(Long kullaniciID, Integer donemAy, Integer donemYil) {
@@ -80,7 +79,6 @@ public class AracDAOImpl implements AracDAO {
 		return aracCikisListesi;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public List<Arac> kullaniciyaGoreCikisListesi(Long kullaniciID) {
@@ -95,7 +93,6 @@ public class AracDAOImpl implements AracDAO {
 		return aracCikisListesi;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public List<Arac> idCikisListesi(Long cikisID) {
@@ -109,7 +106,6 @@ public class AracDAOImpl implements AracDAO {
 		return aracCikisListesi;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public List<Arac> resmiPlakayaGoreCikisListesi(String plaka) {
@@ -120,7 +116,6 @@ public class AracDAOImpl implements AracDAO {
 		return aracCikisListesi;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public List<Arac> ozelPlakayaGoreCikisListesi(String plaka) {
@@ -131,7 +126,6 @@ public class AracDAOImpl implements AracDAO {
 		return aracCikisListesi;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public List<Arac> donemAyGetir() {
@@ -142,7 +136,6 @@ public class AracDAOImpl implements AracDAO {
 		return criteriaAy.list();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Transactional
 	@Override
 	public List<Arac> donemYilGetir() {
@@ -151,7 +144,6 @@ public class AracDAOImpl implements AracDAO {
 		return criteriaYil.list();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public List<Arac> cikisYapanPersonelListesi() {
@@ -183,7 +175,6 @@ public class AracDAOImpl implements AracDAO {
 		return (sonucList != null && sonucList.size() > 0);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public List<Arac> gorevBul(String plaka, String tarih) {
@@ -191,10 +182,44 @@ public class AracDAOImpl implements AracDAO {
 
 		if (plaka.isEmpty()) {
 			criteriaGorevBul.add(Restrictions.eq("tarih", tarih));
+			System.out.println("aracDao gorevBUL Tarih: " + tarih);
 		}
 
 		else if (tarih.isEmpty()) {
+			System.out.println("aracDao gorevBUL Tarih: " + plaka);
+
+			criteriaGorevBul.add(
+					(Restrictions.disjunction().add(Restrictions.or(Restrictions.ilike("resmiPlaka", "%" + plaka + "%"))
+							.add(Restrictions.ilike("ozelPlaka", "%" + plaka + "%"))
+
+					)));
+		} else {
+			System.out.println("tarih ve plaka dolu");
+			criteriaGorevBul.add(
+					(Restrictions.disjunction().add(Restrictions.or(Restrictions.ilike("resmiPlaka", "%" + plaka + "%"))
+							.add(Restrictions.ilike("ozelPlaka", "%" + plaka + "%"))
+
+					)));
+			criteriaGorevBul.add(Restrictions.eq("tarih", tarih));
+		}
+		return criteriaGorevBul.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY).list();
+
+	}
+
+	@Override
+	@Transactional
+	public List<Arac> kullaniciyaGorevBul(String plaka, String tarih, Long kullaniciId) {
+		Criteria criteriaGorevBul = sessionFactory.getCurrentSession().createCriteria(Arac.class);
+		criteriaGorevBul.createAlias("kullaniciList", "kullanici");
+		criteriaGorevBul.add(Restrictions.eq("kullanici.id", kullaniciId));
+
+		if (plaka.isEmpty()) {
+			criteriaGorevBul.add(Restrictions.eq("tarih", tarih));
 			System.out.println("aracDao gorevBUL Tarih: " + tarih);
+		}
+
+		else if (tarih.isEmpty()) {
+			System.out.println("aracDao gorevBUL Tarih: " + plaka);
 
 			criteriaGorevBul.add(
 					(Restrictions.disjunction().add(Restrictions.or(Restrictions.ilike("resmiPlaka", "%" + plaka + "%"))

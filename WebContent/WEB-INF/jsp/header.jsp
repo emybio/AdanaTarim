@@ -82,8 +82,8 @@
 
 						<li><a
 							href="${pageContext.request.contextPath}/raporlar/satisrapor">
-								<span class="fa fa-file-pdf-o fa-fw" aria-hidden="true"> </span>&nbsp;
-								Rapor Görüntüle
+								<span class="fa fa-file-pdf-o fa-fw" aria-hidden="true">
+							</span>&nbsp; Rapor Görüntüle
 						</a></li>
 					</ul></li>
 
@@ -140,6 +140,10 @@
 							<li><a
 								href="${pageContext.request.contextPath}/yonetim/sabitler">Köy/Mahalle/İlçe/İl
 									Ekleme</a></li>
+
+							<li><a
+								href="${pageContext.request.contextPath}/kirsal-kalkinma/sabitler">Genç
+									Çiftçi Kategori Ekleme</a></li>
 							<li><a
 								class="${fn:contains(pageContext.request.requestURI,'roller') ? 'in' : ''}"
 								href="${pageContext.request.contextPath}/yonetim/rol-yonetimi">Kullanici

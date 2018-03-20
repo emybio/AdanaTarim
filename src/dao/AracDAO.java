@@ -38,5 +38,7 @@ public interface AracDAO {
 
 	public List<Arac> gorevBul(String plaka, String tarih);
 
+	public List<Arac> kullaniciyaGorevBul(String plaka, String tarih, Long kullaniciId);
+
 	public List<Arac> idCikisListesi(Long cikisID);
 }

@@ -8,15 +8,13 @@
 
 
 <div class="container">
-	<form:form method="get" action="sabitonay" commandName="tips"
+	<form:form method="post" action="sabitonay" commandName="tips"
 		class="form-inline">
 		<form:hidden path="id" />
 		<div class="col-sm-10">
 			<table class="table">
-
 				<tr>
 					<td><label> ÜLKE</label></td>
-
 					<td><form:select path="tip.tip.tip.id" class="form-control"
 							onChange="ikisibirada(this.value)" id="slctTipler">
 							<form:option value="0">Seçiniz</form:option>
@@ -24,7 +22,6 @@
 								itemLabel="isim" />
 						</form:select></td>
 				</tr>
-
 				<tr>
 					<td><form:label path="id">Şehir</form:label></td>
 					<td><form:select path="tip.tip.id" id="slctAltTip"
@@ -83,7 +80,6 @@
 					<th>durum</th>
 					<!-- <th>kaydeden</th> -->
 				</tr>
-
 				<c:forEach items="${modelListesi}" var="sabitTips" varStatus="no">
 					<tr id="satirno${sabitTips.id}">
 						<td><input type="image"

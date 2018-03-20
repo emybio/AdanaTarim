@@ -49,11 +49,11 @@
 
 					}
 				</script>
-				<select id="payment" onchange="xxx();">
+			<%-- 	<select id="payment" onchange="xxx();">
 					<c:forEach items="${ilceler}" var="ilce">
 						<option value="${ilce }">${ilce }</option>
 					</c:forEach>
-				</select>
+				</select> --%>
 				<c:forEach items="${ilceler}" var="ilce">
 					<script type="text/javascript">
 						//alert('${ilce}');

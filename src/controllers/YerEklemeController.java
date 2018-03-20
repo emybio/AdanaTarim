@@ -187,7 +187,7 @@ public class YerEklemeController {
 	@ResponseBody
 	public byte[] altTipleriGetir(@RequestParam(value = "katid", required = true) Long katid,
 			HttpServletResponse response) throws Exception {
-		// System.out.println(ustId+"****");
+		System.out.println(katid + "****");
 		JSONObject jsonObject = new JSONObject();
 		List<Yerler> altTipListesi = new ArrayList<Yerler>();
 		altTipListesi = yerEklemeService.altTipGetir(katid, true);

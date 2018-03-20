@@ -231,7 +231,7 @@ select {
 				<h3 class="sub-header">
 					Görev Bulma <span class="fa fa-search-plus"></span>
 				</h3>
-				<div class="table-responsive">
+				<div class="table">
 					<table class="table table-striped bg-info">
 						<form:form action="gorevBul" method="get" class="form">
 							<thead>
@@ -260,7 +260,7 @@ select {
 				<h3 class="sub-header">
 					Rapor Alma &nbsp; <span class="fa fa-file-o"></span>
 				</h3>
-				<div class="table-responsive">
+				<div class="table">
 					<table class="table table-striped bg-info">
 
 						<form:form action="donemeGoreGetir" method="get">

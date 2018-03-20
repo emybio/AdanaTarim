@@ -1,5 +1,6 @@
 var jq = jQuery.noConflict();
 function altTipleriGetir(ustTipId) {
+
 	jq.ajax({
 		type : "POST",
 		url : "./alttiplerigetir",
@@ -31,6 +32,7 @@ function altTipleriGetir(ustTipId) {
 }
 
 function ikisibirada(id) {
+
 	altTipleriGetir(id);
 	modelGetir(id);
 }
@@ -59,7 +61,7 @@ function ikisibiradamarkala(id) {
 }
 
 function modelGetir(altTipId) {
-	// alert(altTipId);
+
 	if (altTipId == 0 && jq("#slctTipler").val() > 0) {
 		ikisibiradamarkalar(jq("#slctAltTip").val())
 	} else {
@@ -85,7 +87,7 @@ function modelGetir(altTipId) {
 }
 
 function modelleriListele(gelen) {
-	// alert("modellerilistele");
+
 	var trHTML = '<tr><th>Sil</th><th>Düzenle</th><th>Sıra No</th><th>İsim</th><th>Ekleme Tarihi</th><th>Durum</th><th>Kaydeden</th></tr>';
 	jq
 			.each(
@@ -137,7 +139,6 @@ function tipsil(id) {
 	}
 }
 
-
 function talepsil(id) {
 	if (confirm("Sileyim mi " + id)) {
 		// jq('#satirno'+id).remove();
@@ -159,7 +160,6 @@ function talepsil(id) {
 		});
 	}
 }
-
 
 function demirbassil(id) {
 	if (confirm("Sileyim mi " + id)) {
@@ -231,7 +231,7 @@ function markaGeti(altTipId) {
 				select.addClass("chosen-select");
 			}
 			jq('option', select).remove();
-		//	options[options.length] = new Option("Seçiniz", 0);
+			// options[options.length] = new Option("Seçiniz", 0);
 			jq.each(gelen, function(id, adi) {
 				options[options.length] = new Option(adi, id);
 

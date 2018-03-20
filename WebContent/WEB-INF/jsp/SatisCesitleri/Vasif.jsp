@@ -18,7 +18,7 @@ input {
 <div id='chartContainer'
 	style="width: 500px; border: 1px; border-color: red;">
 
-	<form:form action="#" method="post">
+	<form:form action="#" method="get">
 		<table border="1" class="table"
 			style="width: 235px; text-align: center;">
 			<thead>

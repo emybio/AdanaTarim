@@ -45,6 +45,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import araclar.RolesEnum;
 import forms.Arac;
 import forms.Kullanici;
 import forms.Yerler;
@@ -83,8 +84,7 @@ public class AracController {
 	@RequestMapping(value = "/arac-islemleri", method = RequestMethod.GET)
 	public String aracTakip(ModelMap model, @CookieValue(value = "id", required = false) Long id,
 			HttpServletRequest request, @ModelAttribute("arac") Arac arac1, BindingResult result) {
-		// String url = request.getRequestURI();
-		// System.out.println("adres satÄ±rÄ± :" + url);
+		
 		Kullanici kullanici = null;
 		if (id != null) {
 			kullanici = kullaniciService.kullaniciGetirr(id);
@@ -654,25 +654,18 @@ public class AracController {
 
 	@RequestMapping(value = "/gorevBul")
 	public String gorevBul(ModelMap model, @RequestParam(value = "tarih") String tarih,
-			@RequestParam(value = "plaka") String plaka) {
-		// if (arac2 == null) {
-		//
-		// arac2 = new Arac();
-		//
-		// }
+			@RequestParam(value = "plaka") String plaka, @CookieValue(value = "id", required = true) Long kullaniciId) {
 
-		// model.put("arac", arac2);
+		Kullanici kullanici = kullaniciService.kullaniciGetirr(kullaniciId);
 
-		gorevBulCikisListesi = aracService.gorevBul(plaka, tarih);
+		if (kullanici.getRoles().getRollAdi().equals(RolesEnum.ROLE_SUPER_ADMIN)) {
 
-		// for (Arac a : gorevBulCikisListesi) {
-		//
-		// System.out.println("personel : " +
-		// a.getKullaniciList().get(0).getAdi());
-		// }
-		// model.put("aracCikisListesi", aracService.gorevBul(plaka, tarih));
+			gorevBulCikisListesi = aracService.gorevBul(plaka, tarih);
 
-		// return "AraziCikis/AracTakip";
+		} else {
+
+			gorevBulCikisListesi = aracService.kullaniciyaGorevBul(plaka, tarih, kullaniciId);
+		}
 
 		return "redirect:/arazi-cikislari/arac-islemleri";
 	}

@@ -58,4 +58,10 @@ public class EkonomikYatirimServiceImpl implements EkonomikYatirimService {
 		// TODO Auto-generated method stub
 		return ekonomikYatirimDAO.ilceyeGoreJSON(ilce);
 	}
+
+	@Override
+	public List<EkonomikYatirim> etapNoyaGoreGetir(Integer etapNo) {
+		// TODO Auto-generated method stub
+		return ekonomikYatirimDAO.etapNoyaGoreGetir(etapNo);
+	}
 }

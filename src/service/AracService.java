@@ -37,4 +37,6 @@ public interface AracService {
 	public List<Arac> gorevBul(String plaka, String  tarih);
 	
 	public List<Arac> idCikisListesi(Long cikisID);
+	
+	public List<Arac> kullaniciyaGorevBul(String plaka, String tarih, Long kullaniciId);
 }

@@ -20,6 +20,8 @@ public interface EkonomikYatirimService {
 	public List<EkonomikYatirim> ilceyeGoreListe(String ilce);
 
 	public List<EkonomikYatirim> ilceListesi();
-	
+
 	public JSONArray ilceyeGoreJSON(String ilce);
+
+	public List<EkonomikYatirim> etapNoyaGoreGetir(Integer etapNo);
 }

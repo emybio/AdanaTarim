@@ -76,15 +76,70 @@
  --%>
 
 
-
 						<form:form id="signupForm1" method="post" class="form-horizontal"
-							action="" role="form" commandName="gencCiftci">
+							action="#" role="form" commandName="gencCiftci">
 
 							<div class="form-group">
-								<label class="col-sm-4 control-label" for="kategori">Ketagori</label>
+								<label class="col-sm-4 control-label" for="kategori">Kategori</label>
+								<div class="col-sm-5">
+
+
+									<select class="form-control" onChange="ikisibirada(this.value)"
+										id="slctTipler">
+										<option value="0">Seçiniz</option>
+										<c:forEach items="${tipListesi}" var="tip">
+
+											<option value="${tip.id}">${tip.isim }</option>
+
+										</c:forEach>
+
+									</select>
+
+
+
+								</div>
+							</div>
+
+
+							<div class="form-group">
+								<label class="col-sm-4 control-label" for="kategori">Kategori</label>
+								<div class="col-sm-5">
+
+
+									<select id="slctAltTip" class="form-control"
+										onChange="ikisibiradamarkalar(this.value)">
+										<%-- <option value="0">Seçiniz</option>
+										<options items="${altTipListesi}" itemValue="id"
+											itemLabel="isim" /> --%>
+									</select>
+
+
+
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-4 control-label" for="kategori">Kategori</label>
+								<div class="col-sm-5">
+
+
+									<select id="slctMarka" class="form-control"
+										onChange="modelGetir(this.value)">
+										<%-- <option value="0">Seçiniz</option>
+										<options items="${markaListesi}" itemValue="id"
+											itemLabel="isim" /> --%>
+									</select>
+
+
+
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-4 control-label" for="kategori">Kategori</label>
 								<div class="col-sm-5">
 									<form:input class="form-control " id="kategori"
-										path="kategori" name="kategori" />
+										path="kategori.id" name="kategori" />
 								</div>
 							</div>
 
@@ -167,16 +222,15 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		$.validator.setDefaults({
+		/* $.validator.setDefaults({
 			submitHandler : function() {
 				alert("submitted!");
 			}
-		});
-
-		$(document)
+		}); */
+var jq= jQuery.noConflict();
+		jq(document)
 				.ready(
 						function() {
-
 							//Chosen Select aktif olduğunda validate etkin olmuyor!
 							/* 	jq(".chosen-select").chosen({
 									max_selected_options : 5,
@@ -184,7 +238,7 @@
 									width : "200px"
 								}); */
 
-							$("#signupForm1")
+							jq("#signupForm1")
 									.validate(
 											{
 												rules : {
@@ -260,7 +314,7 @@
 
 													// Add the span element, if doesn't exists, and apply the icon classes to it.
 													if (!element.next("span")[0]) {
-														$(
+														jq(
 																"<span class='glyphicon glyphicon-remove form-control-feedback'></span>")
 																.insertAfter(
 																		element);
@@ -269,24 +323,24 @@
 												success : function(label,
 														element) {
 													// Add the span element, if doesn't exists, and apply the icon classes to it.
-													if (!$(element)
-															.next("span")[0]) {
-														$(
+													if (!jq(element).next(
+															"span")[0]) {
+														jq(
 																"<span class='glyphicon glyphicon-ok form-control-feedback'></span>")
 																.insertAfter(
-																		$(element));
+																		jq(element));
 													}
 												},
 												highlight : function(element,
 														errorClass, validClass) {
-													$(element)
+													jq(element)
 															.parents(
 																	".col-sm-5")
 															.addClass(
 																	"has-error")
 															.removeClass(
 																	"has-success");
-													$(element)
+													jq(element)
 															.next("span")
 															.addClass(
 
@@ -296,14 +350,14 @@
 												},
 												unhighlight : function(element,
 														errorClass, validClass) {
-													$(element)
+													jq(element)
 															.parents(
 																	".col-sm-5")
 															.addClass(
 																	"has-success")
 															.removeClass(
 																	"has-error");
-													$(element)
+													jq(element)
 															.next("span")
 															.addClass(
 																	"glyphicon-ok")

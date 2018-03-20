@@ -70,8 +70,8 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">${jdbc.dialect}</prop>
-				<prop key="hibernate.show_sql">false</prop>
-				<!-- <prop key="hibernate.hbm2ddl.auto">update</prop> -->
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
 			</props>
 		</property>
 	</bean>
@@ -88,7 +88,7 @@
 
 
 
-	
+
 
 	<mvc:resources mapping="/assets/**" location="/WEB-INF/assets/" />
 	<mvc:resources mapping="/messages/**" location="/WEB-INF/messages/" />

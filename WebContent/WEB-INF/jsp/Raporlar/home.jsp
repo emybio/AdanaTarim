@@ -14,7 +14,7 @@
 		<h3>
 			<a href="./downloadPDF" target="blank">Download PDF Document</a>
 		</h3>
-		<form id="myForm" action="./pdfExport" method="POST">
+		<form id="myForm" action="./pdfExport" method="get">
 			<input type="submit" value="PDF export">
 		</form>
 	</div>

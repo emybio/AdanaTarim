@@ -44,8 +44,10 @@
 	type="text/css">
 
 <!-- scripts -->
-<script src="<c:url value="/assets/script/jquery-3.1.0.min.js" />"
+<script src="<c:url value= "/assets/script/lib/jquery-1.11.1.js"/>"
 	type="text/javascript"></script>
+<%-- <script src="<c:url value="/assets/script/jquery-3.1.0.min.js" />"
+type="text/javascript"></script> --%>
 <script src="<c:url value="/assets/script/bootstrap.min.js" />"
 	type="text/javascript"></script>
 <script src='<c:url value="/assets/script/canvasjs.min.js"   ></c:url>'

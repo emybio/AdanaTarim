@@ -111,7 +111,7 @@ Gıda ve Yem
 								</c:if> <c:if test="${kullanici[0].birim eq 'İdariveMaliİşler'}">
 İdari ve Mali İşler								
 								</c:if> <c:if
-									test="${kullanici[0].birim eq 'KırsalKalkınmaveÖrgütlenme'}">
+									test="${kullanici[0].birim eq 'KırsalKakinmaveÖrgütlenme'}">
 Kırsal Kalkınma ve Örgütlenme									
 								</c:if> <c:if
 									test="${kullanici[0].birim eq 'KoordinasyonveTarımsalVeriler'}">
@@ -139,7 +139,7 @@ Koordinasyon ve Tarımsal Veriler
 									${kullanici[1].adi }<br> ${kullanici[1].unvan }
 								</td>
 								<td align="center"
-									"
+									
 									style="padding-top: 40px; font-family: Times New Roman; font-size: 15px;">
 
 									${kullanici[2].adi }<br> ${kullanici[2].unvan }
@@ -219,12 +219,13 @@ Koordinasyon ve Tarımsal Veriler
 							<!--Çıkış Listesinde 2 Kişi Varsa  -->
 							<c:if test="${listSize ==2 }">
 								<c:set var="kullanici" value="${cikis.kullaniciList}" />
-								<td colspan="2" align="center" width="20%"
-									style="padding-top: 40px; font-family: Times New Roman; font-size: 20px; padding-left: 100px">
+								<td></td>
+								<td colspan="2" align="left" width="20%"
+									style="padding-top: 40px; font-family: Times New Roman; font-size: 20px; ">
 
 									${kullanici[0].adi }<br> ${kullanici[0].unvan }
 								</td>
-								<td></td>
+								
 								<td colspan="2" align="center" width="20%"
 									style="padding-top: 40px; font-family: Times New Roman; font-size: 20px; padding-right: 100px">
 
@@ -298,7 +299,7 @@ Koordinasyon ve Tarımsal Veriler
 									Manga</td>
 							</c:if>
 							<c:if
-								test="${kullanici[0].birim eq 'KırsalKalkınmaveÖrgütlenme'}">
+								test="${kullanici[0].birim eq 'KırsalKakinmaveÖrgütlenme'}">
 								<td colspan="5"
 									style="text-align: CENTER; font-family: Times New Roman; font-size: 20px; padding-top: 10px;">Nilay
 									Artok</td>
