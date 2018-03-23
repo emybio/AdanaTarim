@@ -15,6 +15,8 @@
 		<mapping class="forms.Arac" />
 		<mapping class="forms.UserRoles" />
 		<mapping class="forms.AracTalep" />
+		<mapping class="forms.TumTablolar" />
+
 
 		<!--KIRSAL KALKINMA BAŞLANGIÇ -->
 		<mapping class="forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirim" />
@@ -23,6 +25,7 @@
 		<mapping
 			class="forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirim_Ust_Kategori" />
 		<mapping class="forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirimDurumu" />
+		<mapping class="forms.kirsalkalkinma.gencciftci.GencCiftci" />
 		<mapping class="forms.kirsalkalkinma.gencciftci.GencCiftciKategori" />
 		<mapping class="forms.kirsalkalkinma.kooperatif.Kooperatif" />
 		<mapping class="forms.kirsalkalkinma.kooperatif.KooperatifTuru" />

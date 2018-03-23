@@ -25,194 +25,77 @@ select {
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
-				<h3>
-					<a href="./genc-ciftci-liste" class="btn btn-default pull-right">Genç
-						Çiftçi Listesi <span class="glyphicon glyphicon-list"></span>
-					</a>
-				</h3>
+				<div class="pull-right">
+					<h3>
+						<a href="./genc-ciftci" class="btn btn-success btn-md"> <span
+							class="glyphicon glyphicon-plus"></span> YENİ KAYIT
+						</a>
+					</h3>
+				</div>
 				<div class="page-header">&nbsp;</div>
 				<div class="panel panel-default">
 					<div class="panel-heading">
-
-						<h3 class="panel-title">Genç Çiftçi</h3>
-
+						<h3 class="panel-title">Genç Çiftçi Listesi</h3>
 					</div>
 					<div class="panel-body">
+						<table
+							class="table table-sm table-bordered table-hover bg-default "
+							id="tr${ilce }">
+							<tr class="baslik">
+								<%-- <td align="center"></td> --%>
+								<th align="center">Yararlanıcı</th>
+								<th align="center">Proje Konusu</th>
+								<th align="center">Uygulama Yeri</th>
+								<th align="center">Kapasite</th>
+								<th align="center">Hibe Tutarı</th>
+								<th align="center">Yıl</th>
+								<th align="center">Durum</th>
+								<th align="center" colspan="2">Sil / Güncelle</th>
+							</tr>
+							<c:forEach items="${gencCiftci}" var="genc">
+								<tr>
+									<td>${genc.yararlaniciAdi }&nbsp;${genc.yararlaniciSoyadi }</td>
 
-						<form:form id="signupForm1" method="post" class="form-horizontal"
-							action="gencCiftciEkle" role="form" commandName="gencCiftci">
+									<c:if test="${empty genc.kategori.tip.tip.isim }">
 
-							<div class="form-group">
-								<label class="col-sm-4 control-label" for="slctTipler">Kategori
-									1</label>
-								<div class="col-sm-5">
-									<select class="form-control" onChange="ikisibirada(this.value)"
-										id="slctTipler" name="slctTipler">
-										<option value="0">Seçiniz</option>
-										<c:forEach items="${tipListesi}" var="tip">
-											<option value="${tip.id}">${tip.isim }</option>
-										</c:forEach>
-									</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-4 control-label" for="slctAltTip">Kategori
-									2 (Eğer varsa)</label>
-								<div class="col-sm-5">
-									<select id="slctAltTip" class="form-control"
-										onChange="ikisibiradamarkalar(this.value)" name="slctAltTip">
-										<%-- <option value="0">Seçiniz</option>
-										<options items="${altTipListesi}" itemValue="id"
-											itemLabel="isim" /> --%>
-									</select>
-								</div>
-							</div>
+										<td>${genc.kategori.isim}</td>
 
-							<div class="form-group">
-								<label class="col-sm-4 control-label" for="slctMarka">Kategori
-									3 (Eğer varsa)</label>
-								<div class="col-sm-5">
-									<form:select id="slctMarka" class="form-control"
-										path="kategori.id" name="kategori"
-										onChange="modelGetir(this.value)">
-										<%-- <option value="0">Seçiniz</option>
-										<options items="${markaListesi}" itemValue="id"
-											itemLabel="isim" /> --%>
-									</form:select>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-4 control-label" for="yararlaniciAdi">İsim</label>
-								<div class="col-sm-5">
-									<form:input class="form-control " id="yararlaniciAdi"
-										path="yararlaniciAdi" name="yararlaniciAdi" />
-								</div>
-							</div>
+									</c:if>
+									<c:if test="${!empty genc.kategori.tip.tip.isim }">
 
-							<div class="form-group">
-								<label class="col-sm-4 control-label" for="yararlaniciSoyadi">Soyisim</label>
-								<div class="col-sm-5">
-									<form:input class="form-control " id="yararlaniciSoyadi"
-										path="yararlaniciSoyadi" name="yararlaniciSoyadi" />
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-4 control-label" for="yil">Yıl</label>
-								<div class="col-sm-5">
-									<form:input class="form-control " id="yil" path="yil"
-										name="yil" />
-								</div>
-							</div>
+										<td>${genc.kategori.tip.tip.isim}-${genc.kategori.tip.isim}-${genc.kategori.isim}</td>
+
+									</c:if>
+									<td>${genc.mahalle.tip.tip.isim}-${genc.mahalle.tip.isim}-${genc.mahalle.isim}</td>
+									<td>${genc.kapasite}-${genc.kapasiteBirim}</td>
+									<td>${genc.hibeTutari}</td>
+									<td>${genc.yil}</td>
+									<td>Devam</td>
+									<td><a
+										href="${pageContext.request.contextPath }/kirsal-kalkinma/ekonomikYatirimSil?id=${yatirim.id}"
+										onclick="javascript:return confirm('${yatirim.etapNo}. etap ${yatirim.yatirimciAdi} isimli kaydı : \n Silmek İstediğinize Emin misiniz?');"
+										class="btn btn-danger btn-sm">Sil</a></td>
+									<td><a
+										href="${pageContext.request.contextPath }/kirsal-kalkinma/ekonomikYatirimGuncelle/${yatirim.id}"
+										class="btn btn-primary btn-sm">Güncelle</a></td>
+							</c:forEach>
+
+						</table>
 
 
-							<div class="form-group">
-								<label class="col-sm-4 control-label" for="hibeTutari">Hibe
-									Tutari</label>
-								<div class="col-sm-5">
-									<form:input class="form-control " id="hibeTutari"
-										path="hibeTutari" name="hibeTutari" />
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-sm-4 control-label" for="ilce">Kapasite</label>
-								<div class="col-sm-5">
-									<form:input path="kapasite" class="form-control " id="kapasite"
-										name="kapasite" />
-								</div>
-							</div>
-
-
-							<div class="form-group">
-								<label class="col-sm-4 control-label" for="ilce">Kapasite
-									Birim</label>
-								<div class="col-sm-5">
-									<form:select path="kapasiteBirim" class="form-control "
-										id="kapasiteBirim" name="kapasiteBirim">
-										<form:option value="0">Seçiniz</form:option>
-										<form:option value="kovan">Kovan</form:option>
-										<form:option value="lt">Litre</form:option>
-										<form:option value="da">Dekar</form:option>
-										<form:option value="buyukbas">Büyük Baş</form:option>
-										<form:option value="kucukbas">Küçük Baş</form:option>
-										<form:option value="ton">Ton</form:option>
-										<form:option value="adet/yıl">Adet/Yıl</form:option>
-										<form:option value="kw/h">kw/h</form:option>
-										<form:option value="kg">kg</form:option>
-										<form:option value="kg/Yıl">kg/Yıl</form:option>
-										<form:option value="Ton/Yıl">Ton/Yıl</form:option>
-										<form:option value="m">m<sub>2</sub>
-										</form:option>
-									</form:select>
-								</div>
-							</div>
-
-
-							<div class="form-group">
-								<label class="col-sm-4 control-label" for="ilce">İlçe</label>
-								<div class="col-sm-5">
-									<select class="form-control " id="ilce" name="ilce"
-										onChange="gencCiftciIlce(this.value)">
-										<option value="0">Seçiniz</option>
-										<c:forEach items="${ilceListesi}" var="tip">
-											<option value="${tip.id}">${tip.isim }</option>
-										</c:forEach>
-
-									</select>
-								</div>
-							</div>
-
-
-							<div class="form-group">
-								<label class="col-xs-4 control-label" for="mahalle">Mahalle</label>
-								<div class="col-sm-5">
-									<select name="mahalle" id="mahalle" class="form-control">
-										<c:forEach items="${markaListesi}" var="tip">
-											<option value="${tip.id}">${tip.isim }</option>
-										</c:forEach>
-									</select>
-								</div>
-							</div>
-
-							<!-- 
-							<div class="form-group">
-								<label class="col-sm-4 control-label kategori"
-									for="confirm_password1">Kategori</label>
-								<div class="col-sm-5 col-sm-offset-4">
-									<div class="radio">
-										<label> <input type="radio" id="aricilik"
-											name="agree1" value="agree" />Arıcılık
-										</label> <label> <input type="radio" id="hayvansal"
-											name="agree1" value="agree" />Bitkisel Üretim
-										</label> <label> <input type="radio" id="bitkisel"
-											name="agree1" value="agree" />Hayvancılık
-										</label>
-									</div>
-
-
-								</div>
-							</div> -->
-
-
-							<div class="form-group">
-								<div class="col-sm-8 col-sm-offset-2">
-									<button type="submit" class="btn btn-primary pull-right btn-md"
-										name="signup1" value="Sign up">Ekle</button>
-								</div>
-							</div>
-						</form:form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<script type="text/javascript">
-		var jq = jQuery.noConflict();
-		jq.validator.setDefaults({
+		/* $.validator.setDefaults({
 			submitHandler : function() {
 				alert("submitted!");
 			}
-		});
+		}); */
+		var jq = jQuery.noConflict();
+
 		jq(document)
 				.ready(
 						function() {
@@ -253,23 +136,15 @@ select {
 													yararlaniciAdi : "required",
 													yararlaniciSoyadi : "required",
 													hibeTutari : {
-														required : true,
-														min : {
-															param : 1,
-														},
-														max : {
-															param : 30000,
-														},
-
-													},
-
-													kapasite : {
 
 														required : true,
 														min : {
 															param : 1,
-														},
+														}
+
 													},
+
+													kapasite : "required",
 													username1 : {
 														required : true,
 														minlength : 3
@@ -297,12 +172,8 @@ select {
 													hibeTutari : {
 														required : "Lütfen hibe tutarını giriniz",
 														min : "Lütfen {0} 'dan büyük bir değer giriniz.",
-														max : "En fazla 30.000,00 TL girebilirsiniz. "
 													},
-													kapasite : {
-														required : "Lütfen kapasite giriniz.",
-														min : "{0} veya {0}'den büyük değer giriniz. "
-													},
+													kapasite : "Lütfen kapasite giriniz.",
 													yil : {
 														required : "Lütfen tarih giriniz",
 														min : "Girilen tarih {0} yılından sonra olmalıdır.",

@@ -10,6 +10,9 @@ function altTipleriGetir(ustTipId) {
 			katid : ustTipId
 		},
 		success : function(gelen) {
+			console.log(gelen === " ");
+			console.log(gelen === null);
+			console.log(gelen[0]);
 			// modelleriListele(gelen);
 			var select = jq('#slctAltTip');
 			if (select.prop) {
@@ -18,7 +21,10 @@ function altTipleriGetir(ustTipId) {
 				var options = select.attr('options');
 			}
 			jq('option', select).remove();
-			options[options.length] = new Option("Seçiniz", 0);
+			
+			options[options.length] = new Option("Seçiniz", 0)
+			
+			;
 			jq.each(gelen, function(id, adi) {
 
 				options[options.length] = new Option(adi, id);
@@ -32,7 +38,6 @@ function altTipleriGetir(ustTipId) {
 }
 
 function ikisibirada(id) {
-
 	altTipleriGetir(id);
 	modelGetir(id);
 }
@@ -216,7 +221,7 @@ function markaGeti(altTipId) {
 	// alert("merkaGeti çalıştı..");
 	jq.ajax({
 		type : "POST",
-		url : "./markageti",
+		url : "../arazi-cikislari/markageti",
 		dataType : "JSON",
 		contentType : "application/x-www-form-urlencoded;charset=UTF-8",
 		data : {
@@ -386,4 +391,44 @@ function sayfadakiKayitlariGetir(sayfa) { // kayıt arama için yazıldı
 	jq('#sayfaNo').val(sayfa);
 	jq('#' + jq('#formId').val()).submit();
 
+}
+function gencCiftciIlce(id) {
+	if (id == 0) {
+		ikisibirada(jq("#slctTipler").val());
+	} else {
+		// markaGetir(id);
+		gencCiftciMahalleGetir(id);
+		// modelGetir(id);
+	}
+}
+
+function gencCiftciMahalleGetir(altTipId) {
+
+	// alert("merkaGeti çalıştı..");
+	jq.ajax({
+		type : "POST",
+		url : "./gencCiftciMahalleGetir",
+		dataType : "JSON",
+		contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+		data : {
+			altTipId : altTipId
+		},
+		success : function(gelen) {
+			var select = jq('#mahalle');
+			if (select.prop) {
+				var options = select.prop('options');
+			} else {
+				var options = select.attr('options');
+				select.addClass("chosen-select");
+			}
+			jq('option', select).remove();
+			// options[options.length] = new Option("Seçiniz", 0);
+			jq.each(gelen, function(id, adi) {
+				options[options.length] = new Option(adi, id);
+
+			});
+		},
+		error : function(xhr, textStatus, errorThrown) {
+		}
+	});
 }

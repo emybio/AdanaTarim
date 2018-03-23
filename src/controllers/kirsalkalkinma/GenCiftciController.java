@@ -29,7 +29,9 @@ import forms.Yerler;
 import forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirim;
 import forms.kirsalkalkinma.gencciftci.GencCiftci;
 import forms.kirsalkalkinma.gencciftci.GencCiftciKategori;
+import service.YerEklemeService;
 import service.kirsalkalkinma.GencCiftciKategoriService;
+import service.kirsalkalkinma.GencCiftciService;
 
 @Controller
 @RequestMapping(value = "/kirsal-kalkinma")
@@ -37,6 +39,11 @@ public class GenCiftciController {
 
 	@Autowired
 	GencCiftciKategoriService yerEklemeService;
+	@Autowired
+	YerEklemeService ilceler;
+
+	@Autowired
+	GencCiftciService gencCiftciService;
 	private GencCiftciKategori tips;
 
 	private GencCiftci gencCiftci;
@@ -99,7 +106,7 @@ public class GenCiftciController {
 
 		model.put("tipListesi", yerEklemeService.tipGetir());// MOBï¿½LYA VEYA
 																// Bï¿½LGï¿½SAYAR
-
+		model.put("ilceListesi", ilceler.altTipGetir(2l, true));
 		model.put("gencCiftci", gencCiftci);
 		// model.put("gencCiftci", gencCiftciKategori);
 		model.put("title", "Genç Çiftçi");
@@ -109,17 +116,41 @@ public class GenCiftciController {
 	}
 
 	@RequestMapping(value = "/gencCiftciEkle", method = RequestMethod.POST)
-	public String gencCiftciEkle(ModelMap model, @ModelAttribute("ekonomikYatirim") EkonomikYatirim ekonomikYatirim) {
-		if (gencCiftci == null) {
+	public String gencCiftciEkle(@RequestParam("mahalle") Long mahalle, @RequestParam("slctTipler") Long slctTipler,
+			@RequestParam("slctAltTip") Long slctAltTip, ModelMap model,
+			@ModelAttribute("gencCiftci") GencCiftci gencCiftci1, BindingResult result) {
+		System.out.println("slctTipler : " + slctTipler + "\n" + "slctAltTip : " + slctAltTip + "\n" + "kategori : "
+				+ gencCiftci1.getKategori().getId());
+		if (result.hasErrors()) {
 
-			gencCiftci = new GencCiftci();
+			System.err.println("genc ciftci : " + result.getFieldError());
+		}
+		Yerler yer = new Yerler();
+		yer.setId(mahalle);
+		gencCiftci1.setMahalle(yer);
+
+		if (gencCiftci1.getKategori().getId() == null || gencCiftci1.getKategori().getId() == 0l) {
+
+			if (slctAltTip == null || slctAltTip == 0) {
+				System.out.println("kategori boþ 2");
+				GencCiftciKategori kat = new GencCiftciKategori();
+
+				kat.setId(slctTipler);
+
+				gencCiftci1.setKategori(kat);
+			} else {
+
+				GencCiftciKategori kat = new GencCiftciKategori();
+				kat.setId(slctAltTip);
+				gencCiftci1.setKategori(kat);
+				System.out.println("kategori boþ");
+			}
 		}
 
-		model.put("gencCiftci", gencCiftci);
-		model.put("title", "Genç Çiftçi");
-		model.put("tusYazisi", tusYazisi);
+		gencCiftciService.save(gencCiftci1);
+
 		tusYazisi = "Kaydet";
-		return "KirsalKalkinma/GencCiftci";
+		return "redirect:/kirsal-kalkinma/genc-ciftci";
 	}
 
 	@RequestMapping(value = "/sabitler")
@@ -316,4 +347,26 @@ public class GenCiftciController {
 		return donecek;
 	}
 
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/gencCiftciMahalleGetir", method = RequestMethod.POST)
+	@ResponseBody
+	public byte[] gencCiftciMahalleGetir(@RequestParam(value = "altTipId", required = true) Long altTipId,
+			HttpServletResponse response, @CookieValue(value = "id", required = true) Long id) throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		List<Yerler> altTipListesi = new ArrayList<Yerler>();
+		altTipListesi = ilceler.altTipGetir(altTipId, true);
+		Iterator<Yerler> iterator = altTipListesi.iterator();
+		while (iterator.hasNext()) {
+			Yerler tip = iterator.next();
+			jsonObject.put(tip.getId(), tip.getIsim());
+		}
+		return jsonObject.toJSONString().getBytes("UTF-8");
+	}
+
+	@RequestMapping(value = "/genc-ciftci-liste")
+	public String gencCiftciListesi(ModelMap model) {
+
+		model.put("gencCiftci", gencCiftciService.tumGencCiftciler());
+		return "KirsalKalkinma/GencCiftciListe";
+	}
 }

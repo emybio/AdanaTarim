@@ -25,12 +25,11 @@
 	width: 100%;
 }
  */
-#collapse1 {
+ #collapse1 {
 	overflow-y: scroll;
 	height: 500px;
-	width: 120%;
-}
-
+	 width: 190%; 
+} 
 .baslik td {
 	text-decoration: bold;
 }
@@ -41,8 +40,7 @@
 	function etapNoDegistir(etapNo) {
 		console.log("etapNO: " + etapNo)
 
-		window.location.href = "./etapNoyaGoreGetir?etapNo="
-				+ etapNo;
+		window.location.href = "./etapNoyaGoreGetir?etapNo=" + etapNo;
 	};
 </script>
 </head>
@@ -158,6 +156,7 @@
 								<form:option value="ton">Ton</form:option>
 								<form:option value="adet/yıl">Adet/Yıl</form:option>
 								<form:option value="kw/h">kw/h</form:option>
+
 							</form:select></td>
 						<td><form:input path="istihdam" /></td>
 						<td><form:select path="durum.id" items="${durumListesi }"
@@ -211,8 +210,7 @@
 						<tr class="baslik">
 
 							<td align="center">İLÇE</td>
-							<td align="center" style='word-break: break-all;'>YATIRIM
-								KONUSU</td>
+							<td align="center">YATIRIM KONUSU</td>
 							<td align="center">ETAP NO</td>
 							<td align="center">YATIRIMCI ADI</td>
 							<td align="center">PROJE ADI</td>
@@ -223,10 +221,9 @@
 							<td align="center">DURUM</td>
 						</tr>
 						<tbody class="govde">
-
 							<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim"
 								varStatus="sira">
-								<script type="text/javascript">
+								<!-- 	<script type="text/javascript">
 									jq(document)
 											.ready(
 													function() {
@@ -263,15 +260,15 @@
 																		});
 
 													});
-								</script>
+								</script> -->
 
-
+								<!--style='word-break: break-all; width: 20em;'  -->
 								<tr id="siraNo${sira.count }">
 									<td align="center">${yatirim.ilce.isim}</td>
-									<td align="center" style='word-break: break-all; width: 11em;'>${yatirim.kategori.kategoriAdi}</td>
+									<td align="center">${yatirim.kategori.kategoriAdi}</td>
 									<td align="center">${yatirim.etapNo}</td>
 									<td align="center" id="${yatirim.id }">${yatirim.yatirimciAdi}</td>
-									<td align="center" style='word-break: break-all; width: 11em;'>${yatirim.projeAdi}</td>
+									<td align="center">${yatirim.projeAdi}</td>
 									<td align="center"><fmt:formatNumber pattern="#,##0.00"
 											type="currency" value="${yatirim.projeBedeli}"
 											var="projeBedeli"></fmt:formatNumber>${projeBedeli }</td>

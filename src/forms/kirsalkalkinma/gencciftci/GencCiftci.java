@@ -23,14 +23,14 @@ public class GencCiftci implements java.io.Serializable {
 
 	@ManyToOne()
 	@JoinColumn(name = "ilce_id")
-	public Yerler ilce;
+	public Yerler mahalle;
 
 	@ManyToOne()
 	@JoinColumn(name = "kategori_id")
 	public GencCiftciKategori kategori;
 
 	@Column(name = "yil")
-	public int yil;
+	public Integer yil;
 
 	@Column(name = "proje_sayisi")
 	public int projeSayisi;
@@ -42,10 +42,18 @@ public class GencCiftci implements java.io.Serializable {
 	public Float hibeTutari;
 
 	@Column(name = "kapasite")
-	public int kapasite;
+	public Integer kapasite;
 
 	@Column(name = "kapasite_birim")
 	public String kapasiteBirim;
+
+	public String getKapasiteBirim() {
+		return kapasiteBirim;
+	}
+
+	public void setKapasiteBirim(String kapasiteBirim) {
+		this.kapasiteBirim = kapasiteBirim;
+	}
 
 	@Column(name = "yararlanici_adi")
 	public String yararlaniciAdi;
@@ -61,18 +69,18 @@ public class GencCiftci implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Yerler getIlce() {
+	public Yerler getMahalle() {
 
-		if (ilce == null) {
+		if (mahalle == null) {
 
-			ilce = new Yerler();
+			mahalle = new Yerler();
 
 		}
-		return ilce;
+		return mahalle;
 	}
 
-	public void setIlce(Yerler ilce) {
-		this.ilce = ilce;
+	public void setMahalle(Yerler mahalle) {
+		this.mahalle = mahalle;
 	}
 
 	public GencCiftciKategori getKategori() {
@@ -92,7 +100,7 @@ public class GencCiftci implements java.io.Serializable {
 		return yil;
 	}
 
-	public void setYil(int yil) {
+	public void setYil(Integer yil) {
 		this.yil = yil;
 	}
 
@@ -120,11 +128,11 @@ public class GencCiftci implements java.io.Serializable {
 		this.hibeTutari = hibeTutari;
 	}
 
-	public int getKapasite() {
+	public Integer getKapasite() {
 		return kapasite;
 	}
 
-	public void setKapasite(int kapasite) {
+	public void setKapasite(Integer kapasite) {
 		this.kapasite = kapasite;
 	}
 
@@ -146,8 +154,9 @@ public class GencCiftci implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "GencCiftci [ilce=" + ilce + ", kategori=" + kategori + ", yil=" + yil + ", projeSayisi=" + projeSayisi
-				+ ", projeBedeli=" + projeBedeli + ", hibeTutari=" + hibeTutari + ", kapasite=" + kapasite + "]";
+		return "GencCiftci [ilce=" + mahalle + ", kategori=" + kategori + ", yil=" + yil + ", projeSayisi="
+				+ projeSayisi + ", projeBedeli=" + projeBedeli + ", hibeTutari=" + hibeTutari + ", kapasite=" + kapasite
+				+ "]";
 	}
 
 	@Override
@@ -156,7 +165,7 @@ public class GencCiftci implements java.io.Serializable {
 		int result = 1;
 		result = prime * result + ((hibeTutari == null) ? 0 : hibeTutari.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + ((ilce == null) ? 0 : ilce.hashCode());
+		result = prime * result + ((mahalle == null) ? 0 : mahalle.hashCode());
 		result = prime * result + kapasite;
 		result = prime * result + ((kategori == null) ? 0 : kategori.hashCode());
 		result = prime * result + (int) (projeBedeli ^ (projeBedeli >>> 32));
@@ -183,10 +192,10 @@ public class GencCiftci implements java.io.Serializable {
 			return false;
 		if (id != other.id)
 			return false;
-		if (ilce == null) {
-			if (other.ilce != null)
+		if (mahalle == null) {
+			if (other.mahalle != null)
 				return false;
-		} else if (!ilce.equals(other.ilce))
+		} else if (!mahalle.equals(other.mahalle))
 			return false;
 		if (kapasite != other.kapasite)
 			return false;

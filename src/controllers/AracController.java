@@ -84,7 +84,7 @@ public class AracController {
 	@RequestMapping(value = "/arac-islemleri", method = RequestMethod.GET)
 	public String aracTakip(ModelMap model, @CookieValue(value = "id", required = false) Long id,
 			HttpServletRequest request, @ModelAttribute("arac") Arac arac1, BindingResult result) {
-		
+
 		Kullanici kullanici = null;
 		if (id != null) {
 			kullanici = kullaniciService.kullaniciGetirr(id);
@@ -141,6 +141,7 @@ public class AracController {
 
 			} else {
 				model.put("kullaniciListesi2", kullaniciService.kullanGetir(id));
+				System.out.println("harun doğru");
 				if (donem != "bos") {
 
 					model.put("aracCikisListesi", cikisListesi1);

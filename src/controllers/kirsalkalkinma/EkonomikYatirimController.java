@@ -82,7 +82,7 @@ public class EkonomikYatirimController {
 
 	}
 
-	@RequestMapping(value = "/ekle", method = RequestMethod.GET)
+	@RequestMapping(value = "/ekle", method = RequestMethod.POST)
 	public String ekonomikYatirimKaydet(@CookieValue(value = "id", required = true) Long id,
 			@ModelAttribute("ekonomikYatirim") EkonomikYatirim ekonomikYatirim, BindingResult result, ModelMap model) {
 		System.out.println("ekonomik yatýrým ekle : " + ekonomikYatirim);
