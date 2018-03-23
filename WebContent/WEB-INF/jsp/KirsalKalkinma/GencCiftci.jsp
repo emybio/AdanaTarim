@@ -141,7 +141,7 @@ select {
 										<form:option value="kg">kg</form:option>
 										<form:option value="kg/Yıl">kg/Yıl</form:option>
 										<form:option value="Ton/Yıl">Ton/Yıl</form:option>
-										<form:option value="m">m<sub>2</sub>
+										<form:option value="m&sup2;">m&sup2;
 										</form:option>
 									</form:select>
 								</div>
