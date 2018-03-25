@@ -34,7 +34,14 @@
 		<filter-name>Set Character Encoding</filter-name>
 		<servlet-name>*</servlet-name>
 	</filter-mapping>
-
+	<listener>
+	
+		<listener-class>
+			org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener> 
+	<!-- <listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener> -->
 	<servlet>
 		<servlet-name>spring</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -44,10 +51,7 @@
 		<servlet-name>spring</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	<listener>
-		<listener-class>
-			org.springframework.web.context.request.RequestContextListener</listener-class>
-	</listener>
+
 
 
 
@@ -67,4 +71,22 @@
 		<location>/WEB-INF/jsp/error.jsp</location> </error-page> <error-page> <error-code>400</error-code> 
 		<location>/WEB-INF/jsp/error.jsp</location> </error-page> <error-page> <exception-type>org.apache.jasper.servlet.JspServletWrapper.handleJspException</exception-type> 
 		<location>/WEB-INF/jsp/IllegalState.jsp</location> </error-page> -->
+
+	<!-- <context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>  
+                /WEB-INF/spring-servlet.xml  
+                /WEB-INF/spring-security.xml  
+            </param-value>
+	</context-param>
+
+
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping> -->
 </web-app>

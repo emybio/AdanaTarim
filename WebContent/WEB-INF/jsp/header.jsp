@@ -43,20 +43,15 @@
 					class="icon-bar" style="background-color: black;"></span>
 			</button>
 			<div class="navbar-collapse collapse">
-				<a class="navbar-brand" href="#"
-					style="background-color: rgba(255, 255, 2550.5)"> <img
+				<a class="navbar-brand"
+					href="${pageContext.request.contextPath}/anasayfa"
+					style="background-color: rgba(255, 255, 255, 0.0)"> <img
 					src="<c:url value='/assets/gthbLogo.png'/>" class="user-image"
-					width="30" height="25" />
-
-
-
-
-
+					width="20" height="20" />
 				</a>
 			</div>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
-
 
 			<ul class="nav navbar-nav navbar-right">
 
@@ -66,57 +61,60 @@
 				<li><a href="#">Profile</a></li>
 				<li><a href="#">Help</a></li> -->
 
-				<li class="active"><a
+				<%-- <li class="active">
+				<a
 					href="${pageContext.request.contextPath}/anasayfa"> <span
 						class="fa fa-home fa-fw" aria-hidden="true"> </span>&nbsp;Anasayfa
-				</a></li>
-				<li id="chart-types"
-					class="dropdown sub-menu collapse ${fn:contains(pageContext.request.requestURI,'satis-cesitleri') ? 'in' : ''} "><a
-					class="dropdown-toggle" data-toggle="dropdown" href="#"><i
-						class="fa fa-area-chart" aria-hidden="true"></i>&nbsp;<span>Arazi
-							Toplulaştırma</span> <span class="caret"></span></a>
-					<ul class="dropdown-menu ">
-						<li><a
-							href="${pageContext.request.contextPath}/satis-cesitleri/satis">Satış
-								Ekle</a></li>
+				</a></li> --%>
+				<c:if
+					test="${birim eq 'Arazi Toplulaştırma ve Tarımsal Altyapı' or cookie.id.value eq 1}">
+					<li id="chart-types"
+						class="dropdown sub-menu collapse ${fn:contains(pageContext.request.requestURI,'satis-cesitleri') ? 'in' : ''} "><a
+						class="dropdown-toggle" data-toggle="dropdown" href="#"><i
+							class="fa fa-area-chart" aria-hidden="true"></i>&nbsp;<span>Arazi
+								Toplulaştırma</span> <span class="caret"></span></a>
+						<ul class="dropdown-menu ">
+							<li><a
+								href="${pageContext.request.contextPath}/satis-cesitleri/satis">Satış
+									Ekle</a></li>
 
-						<li><a
-							href="${pageContext.request.contextPath}/raporlar/satisrapor">
-								<span class="fa fa-file-pdf-o fa-fw" aria-hidden="true">
-							</span>&nbsp; Rapor Görüntüle
-						</a></li>
-					</ul></li>
+							<li><a
+								href="${pageContext.request.contextPath}/raporlar/satisrapor">
+									<span class="fa fa-file-pdf-o fa-fw" aria-hidden="true">
+								</span>&nbsp; Rapor Görüntüle
+							</a></li>
+						</ul></li>
+				</c:if>
 
+				<c:if
+					test="${birim eq 'Kırsal Kalkınma ve Örgütlenme' or cookie.id.value eq 1}">
+					<li id="chart-types"
+						class="dropdown sub-menu collapse ${fn:contains(pageContext.request.requestURI,'satis-cesitleri') ? 'in' : ''} "><a
+						class="dropdown-toggle" data-toggle="dropdown" href="#"><i
+							class="fa fa-industry" aria-hidden="true"></i>&nbsp;<span>Kırsal
+								Kalkınma</span> <span class="caret"></span></a>
+						<ul class="dropdown-menu ">
+							<li><a
+								href="${pageContext.request.contextPath}/kirsal-kalkinma/ekonomik-yatirimlar"><span
+									class="fa fa-try"></span> Ekonomik Yatırımlar</a></li>
 
+							<li><a
+								href="${pageContext.request.contextPath}/kirsal-kalkinma/genc-ciftci">
+									<span class="fa fa-female"></span> Genç Çiftçi <span
+									class="fa fa-male"></span>
+							</a></li>
+							<li><a
+								href="${pageContext.request.contextPath}/kirsal-kalkinma/ilce-listesi"><span
+									class="fa fa-th" aria-hidden="true"> </span>&nbsp;Kooperatif /
+									Birlik</a></li>
 
-
-				<li id="chart-types"
-					class="dropdown sub-menu collapse ${fn:contains(pageContext.request.requestURI,'satis-cesitleri') ? 'in' : ''} "><a
-					class="dropdown-toggle" data-toggle="dropdown" href="#"><i
-						class="fa fa-industry" aria-hidden="true"></i>&nbsp;<span>Kırsal
-							Kalkınma</span> <span class="caret"></span></a>
-					<ul class="dropdown-menu ">
-						<li><a
-							href="${pageContext.request.contextPath}/kirsal-kalkinma/ekonomik-yatirimlar"><span
-								class="fa fa-try"></span> Ekonomik Yatırımlar</a></li>
-
-						<li><a
-							href="${pageContext.request.contextPath}/kirsal-kalkinma/genc-ciftci">
-								<span class="fa fa-female"></span> Genç Çiftçi <span
-								class="fa fa-male"></span>
-						</a></li>
-						<li><a
-							href="${pageContext.request.contextPath}/kirsal-kalkinma/ilce-listesi"><span
-								class="fa fa-th" aria-hidden="true"> </span>&nbsp;Kooperatif /
-								Birlik</a></li>
-
-						<li><a
-							href="${pageContext.request.contextPath}/kirsal-kalkinma/ekonomikYatirimRapor">
-								<span class="fa fa-file-pdf-o" aria-hidden="true"> </span>&nbsp;
-								Rapor Görüntüle
-						</a></li>
-					</ul></li>
-
+							<li><a
+								href="${pageContext.request.contextPath}/kirsal-kalkinma/ekonomikYatirimRapor">
+									<span class="fa fa-file-pdf-o" aria-hidden="true"> </span>&nbsp;
+									Rapor Görüntüle
+							</a></li>
+						</ul></li>
+				</c:if>
 
 				<li class="dropdown"><a href="#" data-toggle="dropdown"
 					class="dropdown-toggle"> <i class="fa fa-car"
@@ -131,25 +129,7 @@
 							href="${pageContext.request.contextPath}/arazi-cikislari/arac-talep">Araç
 								Talepler</a></li>
 					</ul></li>
-				<c:if test="${cookie.id.value eq 1  }">
-					<li class="dropdown"><a href="#" data-toggle="dropdown"
-						class="dropdown-toggle"> <i class="fa fa-dashboard"
-							aria-hidden="true"></i>&nbsp;<span>Dashboard</span><span
-							class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a
-								href="${pageContext.request.contextPath}/yonetim/sabitler">Köy/Mahalle/İlçe/İl
-									Ekleme</a></li>
 
-							<li><a
-								href="${pageContext.request.contextPath}/kirsal-kalkinma/sabitler">Genç
-									Çiftçi Kategori Ekleme</a></li>
-							<li><a
-								class="${fn:contains(pageContext.request.requestURI,'roller') ? 'in' : ''}"
-								href="${pageContext.request.contextPath}/yonetim/rol-yonetimi">Kullanici
-									Yetki Belirleme</a></li>
-						</ul></li>
-				</c:if>
 				<c:if test="${empty cookie.id.value }">
 					<li><a
 						href="${pageContext.request.contextPath}/kullanici-islemleri/kullanici"><span
@@ -164,6 +144,11 @@
 							aria-hidden="true"></i>&nbsp;<span>${cookie.isim.value }</span><span
 							class="caret"></span></a> <c:if test="${cookie.id.value eq 1 }">
 							<ul class="dropdown-menu">
+
+
+
+
+
 								<li><a
 									href="${pageContext.request.contextPath}/kullanici-islemleri/kullanici">Kullanıcı
 										Bilgileri</a></li>
@@ -171,6 +156,27 @@
 									class="${fn:contains(pageContext.request.requestURI,'roller') ? 'in' : ''}"
 									href="${pageContext.request.contextPath}/kullanici-islemleri/kullanici-profile"><span
 										class="fa fa-xs fa-gear">Ayarlar</span></a></li>
+
+								<li class="dropdown"><a href="#" data-toggle="dropdown"
+									class="dropdown-toggle"> <i class="fa fa-dashboard"
+										aria-hidden="true"></i>&nbsp;<span>Dashboard</span><span
+										class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li><a
+											href="${pageContext.request.contextPath}/yonetim/sabitler">Köy/Mahalle/İlçe/İl
+												Ekleme</a></li>
+
+										<li><a
+											href="${pageContext.request.contextPath}/kirsal-kalkinma/sabitler">Genç
+												Çiftçi Kategori Ekleme</a></li>
+										<li><a
+											class="${fn:contains(pageContext.request.requestURI,'roller') ? 'in' : ''}"
+											href="${pageContext.request.contextPath}/yonetim/rol-yonetimi">Kullanici
+												Yetki Belirleme</a></li>
+									</ul></li>
+
+
+
 							</ul>
 						</c:if></li>
 					<li><a href="${pageContext.request.contextPath}/cikis"><span
