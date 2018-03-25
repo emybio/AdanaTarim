@@ -18,7 +18,7 @@ select {
 	text-indent: 1px;
 	text-overflow: '';
 }
-}
+
 </style>
 </head>
 <body>
@@ -38,49 +38,53 @@ select {
 						<h3 class="panel-title">Genç Çiftçi Listesi</h3>
 					</div>
 					<div class="panel-body">
-						<table
-							class="table table-sm table-bordered table-hover bg-default "
-							id="tr${ilce }">
-							<tr class="baslik">
-								<%-- <td align="center"></td> --%>
-								<th align="center">Yararlanıcı</th>
-								<th align="center">Proje Konusu</th>
-								<th align="center">Uygulama Yeri</th>
-								<th align="center">Kapasite</th>
-								<th align="center">Hibe Tutarı</th>
-								<th align="center">Yıl</th>
-								<th align="center">Durum</th>
-								<th align="center" colspan="2">Sil / Güncelle</th>
-							</tr>
-							<c:forEach items="${gencCiftci}" var="genc">
-								<tr>
-									<td>${genc.yararlaniciAdi }&nbsp;${genc.yararlaniciSoyadi }</td>
+						<div style="overflow-x: auto;">
+							<table
+								class="table table-sm table-bordered table-hover bg-default "
+								id="tr${ilce }">
+								<tr class="baslik">
+									<%-- <td align="center"></td> --%>
+									<th align="center">Yararlanıcı</th>
+									<th align="center">Proje Konusu</th>
+									<th align="center">Uygulama Yeri</th>
+									<th align="center">Kapasite</th>
+									<th align="center">Hibe Tutarı</th>
+									<th align="center">Yıl</th>
+									<th align="center">Durum</th>
+									<th align="center" colspan="2">Sil / Güncelle</th>
+								</tr>
+								<c:forEach items="${gencCiftci}" var="genc">
+									<tr>
+										<td>${genc.yararlaniciAdi }&nbsp;${genc.yararlaniciSoyadi }</td>
 
-									<c:if test="${empty genc.kategori.tip.tip.isim }">
+										<c:if test="${empty genc.kategori.tip.tip.isim }">
 
-										<td>${genc.kategori.isim}</td>
+											<td>${genc.kategori.isim}</td>
 
-									</c:if>
-									<c:if test="${!empty genc.kategori.tip.tip.isim }">
+										</c:if>
+										<c:if test="${!empty genc.kategori.tip.tip.isim }">
 
-										<td>${genc.kategori.tip.tip.isim}-${genc.kategori.tip.isim}-${genc.kategori.isim}</td>
+											<td>${genc.kategori.tip.tip.isim}-${genc.kategori.tip.isim}-${genc.kategori.isim}</td>
 
-									</c:if>
-									<td>${genc.mahalle.tip.tip.isim}-${genc.mahalle.tip.isim}-${genc.mahalle.isim}</td>
-									<td>${genc.kapasite}-${genc.kapasiteBirim}</td>
-									<td>${genc.hibeTutari}</td>
-									<td>${genc.yil}</td>
-									<td>Devam</td>
-									<td><a
-										href="${pageContext.request.contextPath }/kirsal-kalkinma/ekonomikYatirimSil?id=${yatirim.id}"
-										onclick="javascript:return confirm('${yatirim.etapNo}. etap ${yatirim.yatirimciAdi} isimli kaydı : \n Silmek İstediğinize Emin misiniz?');"
-										class="btn btn-danger btn-sm">Sil</a></td>
-									<td><a
-										href="${pageContext.request.contextPath }/kirsal-kalkinma/ekonomikYatirimGuncelle/${yatirim.id}"
-										class="btn btn-primary btn-sm">Güncelle</a></td>
-							</c:forEach>
+										</c:if>
+										<td>${genc.mahalle.tip.tip.isim}-${genc.mahalle.tip.isim}-${genc.mahalle.isim}</td>
+										<td>${genc.kapasite}-<span class="text-capitalize">${genc.kapasiteBirim}</span>
+										</td>
+										<td>${genc.hibeTutari}</td>
+										<td>${genc.yil}</td>
+										<td>Devam</td>
+										<td><a
+											href="${pageContext.request.contextPath }/kirsal-kalkinma/ekonomikYatirimSil?id=${yatirim.id}"
+											onclick="javascript:return confirm('${yatirim.etapNo}. etap ${yatirim.yatirimciAdi} isimli kaydı : \n Silmek İstediğinize Emin misiniz?');"
+											class="btn btn-danger btn-sm">Sil</a></td>
+										<td><a
+											href="${pageContext.request.contextPath }/kirsal-kalkinma/ekonomikYatirimGuncelle/${yatirim.id}"
+											class="btn btn-primary btn-sm">Güncelle</a></td>
+								</c:forEach>
 
-						</table>
+							</table>
+
+						</div>
 
 
 					</div>

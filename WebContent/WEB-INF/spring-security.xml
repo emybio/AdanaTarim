@@ -18,4 +18,20 @@
 			</user-service>
 		</authentication-provider>
 	</authentication-manager> -->
+	
+	<authentication-manager>
+		<authentication-provider>
+			<user-service>
+				<user name="emrah.denizer" password="1234" authorities="hasRole(ROLE_ADMIN)" />
+			</user-service>
+		</authentication-provider>
+	</authentication-manager>
+	 <http auto-config="true" >
+        <intercept-url pattern="/" access="permitAll" />
+	  <intercept-url pattern="/home" access="permitAll" />
+        <intercept-url pattern="/admin**" access="hasRole('ADMIN')" />
+        <intercept-url pattern="/dba**" access="hasRole('ADMIN') and hasRole('DBA')" />
+	 <form-login login-page="/giris.jsp" authentication-failure-url="/giris.jsp?login_error=1"/>
+    <logout logout-success-url="/giris.jsp"/>
+	</http>
 </beans:beans>  

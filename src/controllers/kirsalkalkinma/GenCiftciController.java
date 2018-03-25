@@ -62,7 +62,8 @@ public class GenCiftciController {
 			tips = new GencCiftciKategori();
 		} else {
 			if (tips.getTip() != null)
-				if (tips.getTip().getTip() == null) // hiï¿½ bir ï¿½ey seï¿½ili deï¿½il
+				if (tips.getTip().getTip() == null) // hiï¿½ bir ï¿½ey seï¿½ili
+													// deï¿½il
 													// misal : bilgisayar
 				{
 					// System.out.println("bilgisayar seï¿½ili");
@@ -160,7 +161,8 @@ public class GenCiftciController {
 			tips = new GencCiftciKategori();
 		} else {
 			if (tips.getTip() != null)
-				if (tips.getTip().getTip() == null) // hiï¿½ bir ï¿½ey seï¿½ili deï¿½il
+				if (tips.getTip().getTip() == null) // hiï¿½ bir ï¿½ey seï¿½ili
+													// deï¿½il
 													// misal : bilgisayar
 				{
 					// System.out.println("bilgisayar seï¿½ili");
@@ -365,7 +367,7 @@ public class GenCiftciController {
 
 	@RequestMapping(value = "/genc-ciftci-liste")
 	public String gencCiftciListesi(ModelMap model) {
-
+		model.put("title", "Genç Çiftçi Listesi");
 		model.put("gencCiftci", gencCiftciService.tumGencCiftciler());
 		return "KirsalKalkinma/GencCiftciListe";
 	}

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.Date;
 
 import javax.servlet.http.Cookie;
@@ -42,12 +43,14 @@ public class HomeController {
 
 		Cookie cookie1 = new Cookie("id", "");
 		Cookie cookie2 = new Cookie("isim", "");
+		Cookie cookie3 = new Cookie("birim", "");
 		// cookie1.setValue(null);
 		// cookie2.setValue(null);
 		cookie1.setMaxAge(0);
 		cookie2.setMaxAge(0);
 		response.addCookie(cookie1);
 		response.addCookie(cookie2);
+		response.addCookie(cookie3);
 		request.setCharacterEncoding("utf-8");
 		ModelAndView modelAndView = new ModelAndView("giris");
 		modelAndView.addObject("girisBasarili", giris);
@@ -147,7 +150,8 @@ public class HomeController {
 		if (kayitliKullanici == null) {
 			response.setCharacterEncoding("UTF-8");
 			// JOptionPane panel = new JOptionPane();
-			// JOptionPane.showMessageDialog(panel, "Yanlış Bilgi Girdiniz....",
+			// JOptionPane.showMessageDialog(panel, "Yanlış Bilgi
+			// Girdiniz....",
 			// "Hatalı Giriş",
 			// JOptionPane.ERROR_MESSAGE);
 			System.out.println("Giris Yapilamadi" + " " + new Date());
@@ -156,21 +160,28 @@ public class HomeController {
 			Genel.kullaniciLoginInfo = kayitliKullanici;
 			Genel.kullaniciLoginInfo.setId(kayitliKullanici.getId());
 			Genel.kullaniciLoginInfo.setIsimSoyisim(kayitliKullanici.getIsimSoyisim());
-
+			Genel.kullaniciLoginInfo.setBirim(kayitliKullanici.getBirim());
+session.setAttribute("birim", Genel.kullaniciLoginInfo.getBirim());
+			
 			Cookie cookieId = new Cookie("id", Long.toString(kayitliKullanici.getId()));
 			Cookie cookieIsim = new Cookie("isim", kayitliKullanici.getIsimSoyisim());
+			Cookie cookieBirim = new Cookie("birim", URLEncoder.encode(kayitliKullanici.getBirim(), "UTF-8"));
+
 			// response.setCharacterEncoding("UTF-8");
 			String valueId = URLDecoder.decode(cookieId.getValue(), "UTF-8");
 			String valueIsim = URLDecoder.decode(cookieIsim.getValue(), "UTF-8");
+			String valueBirim = URLDecoder.decode(cookieBirim.getValue(), "UTF-8");
 			System.out.println("cookie isim / " + cookieIsim.getValue());
 			System.out.println("cookie id / " + cookieId.getValue());
 			System.out.println("value isim / " + valueIsim);
 			System.out.println("value id / " + valueId);
-
+			System.out.println("value birim/ " + valueBirim);
+			System.out.println("value birim cookie/ " + cookieBirim);
+			System.out.println("value birim cookie getvalue/ " + URLDecoder.decode(cookieBirim.getValue(), "UTF-8"));
 			response.addCookie(cookieIsim);
 			response.addCookie(new Cookie("isim", valueIsim));
 			response.addCookie(new Cookie("id", valueId));
-			// response.addCookie(new Cookie("birim", valueBirim));
+			response.addCookie(new Cookie("birim", URLEncoder.encode(valueBirim, "UTF-8")));
 
 			System.out.println("Giris Basarili.." + " " + new Date());
 			return new ModelAndView("redirect:/anasayfa");

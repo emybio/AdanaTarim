@@ -18,12 +18,12 @@ select {
 	text-indent: 1px;
 	text-overflow: '';
 }
-}
 </style>
 </head>
 <body>
 	<div class="container">
 		<div class="row">
+
 			<div class="col-sm-8 col-sm-offset-2">
 				<h3>
 					<a href="./genc-ciftci-liste" class="btn btn-default pull-right">Genç
@@ -129,7 +129,7 @@ select {
 								<div class="col-sm-5">
 									<form:select path="kapasiteBirim" class="form-control "
 										id="kapasiteBirim" name="kapasiteBirim">
-										<form:option value="0">Seçiniz</form:option>
+										<form:option value="">Seçiniz</form:option>
 										<form:option value="kovan">Kovan</form:option>
 										<form:option value="lt">Litre</form:option>
 										<form:option value="da">Dekar</form:option>
@@ -157,7 +157,6 @@ select {
 										<c:forEach items="${ilceListesi}" var="tip">
 											<option value="${tip.id}">${tip.isim }</option>
 										</c:forEach>
-
 									</select>
 								</div>
 							</div>
@@ -173,7 +172,18 @@ select {
 									</select>
 								</div>
 							</div>
-
+							<!-- 	<div class="form-group">
+								<label class="col-xs-4 control-label" for="cars">DATA </label>
+								<div class="col-sm-5">
+									<input type="text" list="cars" class="form-control" />
+									<datalist id="cars" class="form-control">
+										<option>Volvo</option>
+										<option>Saab</option>
+										<option>Mercedes</option>
+										<option>Audi</option>
+									</datalist>
+								</div>
+							</div> -->
 							<!-- 
 							<div class="form-group">
 								<label class="col-sm-4 control-label kategori"
@@ -227,6 +237,10 @@ select {
 									.validate(
 											{
 												rules : {
+													kapasiteBirim : {
+														required : true,
+
+													},
 													ilce : {
 														required : true,
 														min : {
@@ -290,6 +304,7 @@ select {
 													agree1 : "required"
 												},
 												messages : {
+													kapasiteBirim : "Lütfen birim seçiniz.",
 													slctTipler : "Lütfen Kategori seçiniz",
 													yararlaniciAdi : "Lütfen yararlanici adını giriniz",
 													yararlaniciSoyadi : "Lütfen yararlanici soyadını giriniz",

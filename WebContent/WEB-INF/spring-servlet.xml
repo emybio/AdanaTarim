@@ -30,11 +30,11 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
-	<bean id="viewResolver1"
+	<!-- <bean id="viewResolver1"
 		class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
 		<property name="order" value="1" />
 		<property name="basename" value="views" />
-	</bean>
+	</bean> -->
 
 
 	<bean id="multipartResolver"

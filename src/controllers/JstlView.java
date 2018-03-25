@@ -88,8 +88,9 @@ public class JstlView extends InternalResourceView {
 		request.setAttribute("roller", model.get("roller"));
 		request.setAttribute("dataPoints", model.get("dataPoints"));
 		request.setAttribute("dataPoints1", model.get("dataPoints1"));
-		request.setAttribute("dataPoints2", model.get("dataPoints2"));
-		request.setCharacterEncoding("UTF-8");
+		request.setAttribute("birim", model.get("birim"));
+
+		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 
 		// force everything to be template.jsp
@@ -104,7 +105,6 @@ public class JstlView extends InternalResourceView {
 			session.setAttribute("userDetails", Genel.kullaniciLoginInfo.getAdi());
 			session.setAttribute("userUnvan", Genel.kullaniciLoginInfo.getUnvan());
 			session.setAttribute("userSicilNo", Genel.kullaniciLoginInfo.getSicilNo());
-
 		}
 
 		String url = request.getRequestURI();

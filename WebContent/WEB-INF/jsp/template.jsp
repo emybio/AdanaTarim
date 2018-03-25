@@ -136,7 +136,7 @@ body {
 		/* url(http://www.digiphotohub.com/wp-content/uploads/2015/09/bigstock-Abstract-Blurred-Background-Of-92820527.jpg); */
 		url("<c:url value='/assets/images/featured-pic.jpg'/>");
 	background-size: auto;
-	background-repeat: no-repeat;
+	background-repeat: repeat;
 }
 </style>
 
@@ -145,33 +145,32 @@ body {
 
 <body bgcolor="#e3f2fd">
 
+		<!-- header -->
+		<c:if test="${!empty cookie.id.value}">
 
-	<!-- header -->
-	<c:if test="${!empty cookie.id.value}">
+			<jsp:include page="header.jsp" />
+		</c:if>
 
-		<jsp:include page="header.jsp" />
-	</c:if>
+		<!-- /header -->
+		<!-- sidebar -->
+		<%-- <jsp:include page="sidebar.jsp" /> --%>
+		<!-- /sidebar -->
 
-	<!-- /header -->
-	<!-- sidebar -->
-	<%-- <jsp:include page="sidebar.jsp" /> --%>
-	<!-- /sidebar -->
+		<!-- <div id="page-content-wrapper" class="page-content-toggle"> -->
 
-	<!-- <div id="page-content-wrapper" class="page-content-toggle"> -->
-
-	<%-- <h3>${title}</h3> --%>
-	<%-- <p>
+		<%-- <h3>${title}</h3> --%>
+		<%-- <p>
 				<a href="${url }"><h4>${url}</h4></a>
 			</p> --%>
 
 
-	<jsp:include page="${partial}" />
+		<jsp:include page="${partial}" />
 
-	<!-- /row -->
+		<!-- /row -->
 
-	<!-- footer -->
-	<%-- <jsp:include page="footer.jsp" /> --%>
-	<!-- /footer -->
-	<!-- </div> -->
+		<!-- footer -->
+		<jsp:include page="footer.jsp" />
+		<!-- /footer -->
+		<!-- </div> -->
 </body>
 </html>

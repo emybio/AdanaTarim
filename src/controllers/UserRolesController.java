@@ -36,7 +36,7 @@ public class UserRolesController {
 		}
 		model.put("kullaniciListesi", kullaniciService.kullanici());
 		model.put("roll", roll);
-		model.put("title", "Rol YÃ¶netimi");
+		model.put("title", "Rol Yönetimi");
 		model.put("roller", RolesEnum.values());
 		return "KullaniciRolleri/Rol";
 
