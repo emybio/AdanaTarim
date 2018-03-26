@@ -54,7 +54,11 @@
 		<div id="navbar" class="navbar-collapse collapse">
 
 			<ul class="nav navbar-nav navbar-right">
-
+				<li>
+					<form class="navbar-form navbar-right" action="./getir">
+						<input type="text" class="form-control" placeholder="Search...">
+					</form>
+				</li>
 				<!--GEREKLİ GÖRÜLDÜĞÜNDE EKLEMEK İÇİN REMLENDİ  -->
 				<!-- <li><a href="#">Dashboard</a></li>
 				<li><a href="#">Settings</a></li>
@@ -182,11 +186,9 @@
 					<li><a href="${pageContext.request.contextPath}/cikis"><span
 							class="fa fa-sign-out"></span> Logout</a></li>
 				</c:if>
+
 			</ul>
-			<form class="navbar-form navbar-right"
-				action="${pageContext.request.contextPath}/./getir">
-				<input type="text" class="form-control" placeholder="Search...">
-			</form>
+
 			<!---------------------------------------------------------------------------------------------------------->
 			<%-- <ul class="nav navbar-nav navbar-right">
 				<li><a href="${pageContext.request.contextPath}/anasayfa">

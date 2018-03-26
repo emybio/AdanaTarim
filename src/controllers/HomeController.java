@@ -60,41 +60,10 @@ public class HomeController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/cikis")
-	public ModelAndView cikis(ModelMap model, HttpServletResponse response, HttpServletRequest request,
-			HttpSession session) throws UnsupportedEncodingException {
-		if (kullanici == null) {
-			kullanici = new Kullanici();
-
-		}
-
-		session = request.getSession();
-		session.invalidate();
-		Genel.kullaniciLoginInfo = null;
-		Cookie cookie1 = new Cookie("id", "");
-		Cookie cookie2 = new Cookie("isim", "");
-		Cookie cookie3 = new Cookie("birim", "");
-		// cookie.setValue("");
-		// cookie1.setValue("");
-		// cookie2.setValue("");
-		cookie1.setMaxAge(0);
-		cookie2.setMaxAge(0);
-		cookie3.setMaxAge(0);
-		response.addCookie(cookie1);
-		response.addCookie(cookie2);
-		response.addCookie(cookie3);
-		request.setCharacterEncoding("utf-8");
-		ModelAndView modelAndView = new ModelAndView("redirect://");
-		modelAndView.addObject("girisBasarili", giris);
-		modelAndView.addObject("title", "GÝRÝÞ ");
-		modelAndView.addObject("kullanici", kullanici);
-		return new ModelAndView("redirect:/anasayfa");
-	}
-
 	@RequestMapping(value = "/anasayfa")
-	public ModelAndView giris(ModelMap model, HttpServletResponse response, HttpServletRequest request)
-			throws UnsupportedEncodingException {
-
+	public ModelAndView giris(ModelMap model, HttpServletResponse response, HttpServletRequest request,
+			HttpSession session) {
+	
 		if (kullanici == null) {
 			kullanici = new Kullanici();
 
@@ -131,7 +100,7 @@ public class HomeController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView kullaniciOnay(@ModelAttribute("kullanici") Kullanici kullanici,
 			@RequestParam(value = "isimSoyisim") String isim, @RequestParam(value = "sifre") String sifre,
-			HttpServletRequest request, HttpServletResponse response, ModelMap model, HttpSession session)
+			HttpServletRequest request, HttpServletResponse response, ModelMap model)
 			throws UnsupportedEncodingException {
 		// kullanici.toString();
 		response.setCharacterEncoding("UTF-8");
@@ -140,9 +109,7 @@ public class HomeController {
 		kullanici.setePosta(null);
 		kullanici.setSicilNo(null);
 		kullanici.setUnvan(null);
-		session = request.getSession();
-
-		session.setMaxInactiveInterval(15);
+		HttpSession session = request.getSession();
 
 		Kullanici kayitliKullanici = kullaniciService.kullaniciGiris(isim, sifre);
 		System.out.println(kullanici.getIsimSoyisim());
@@ -161,8 +128,8 @@ public class HomeController {
 			Genel.kullaniciLoginInfo.setId(kayitliKullanici.getId());
 			Genel.kullaniciLoginInfo.setIsimSoyisim(kayitliKullanici.getIsimSoyisim());
 			Genel.kullaniciLoginInfo.setBirim(kayitliKullanici.getBirim());
-session.setAttribute("birim", Genel.kullaniciLoginInfo.getBirim());
-			
+			session.setAttribute("birim", Genel.kullaniciLoginInfo.getBirim());
+
 			Cookie cookieId = new Cookie("id", Long.toString(kayitliKullanici.getId()));
 			Cookie cookieIsim = new Cookie("isim", kayitliKullanici.getIsimSoyisim());
 			Cookie cookieBirim = new Cookie("birim", URLEncoder.encode(kayitliKullanici.getBirim(), "UTF-8"));
@@ -184,8 +151,39 @@ session.setAttribute("birim", Genel.kullaniciLoginInfo.getBirim());
 			response.addCookie(new Cookie("birim", URLEncoder.encode(valueBirim, "UTF-8")));
 
 			System.out.println("Giris Basarili.." + " " + new Date());
+			System.out.println("session ne durumda: " + session);
 			return new ModelAndView("redirect:/anasayfa");
 		}
+	}
+
+	@RequestMapping(value = "/cikis")
+	public ModelAndView cikis(ModelMap model, HttpServletResponse response, HttpServletRequest request,
+			HttpSession session) throws UnsupportedEncodingException {
+		if (kullanici == null) {
+			kullanici = new Kullanici();
+
+		}
+		session = request.getSession();
+		session.invalidate();
+		Genel.kullaniciLoginInfo = null;
+		Cookie cookie1 = new Cookie("id", "");
+		Cookie cookie2 = new Cookie("isim", "");
+		Cookie cookie3 = new Cookie("birim", "");
+		// cookie.setValue("");
+		// cookie1.setValue("");
+		// cookie2.setValue("");
+		cookie1.setMaxAge(0);
+		cookie2.setMaxAge(0);
+		cookie3.setMaxAge(0);
+		response.addCookie(cookie1);
+		response.addCookie(cookie2);
+		response.addCookie(cookie3);
+		request.setCharacterEncoding("utf-8");
+		ModelAndView modelAndView = new ModelAndView("redirect://");
+		modelAndView.addObject("girisBasarili", giris);
+		modelAndView.addObject("title", "GÝRÝÞ ");
+		modelAndView.addObject("kullanici", kullanici);
+		return new ModelAndView("redirect:/anasayfa");
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)

@@ -16,8 +16,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.view.InternalResourceView;
 
-import araclar.Genel;
-
 public class JstlView extends InternalResourceView {
 	@Override
 	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
@@ -95,20 +93,20 @@ public class JstlView extends InternalResourceView {
 
 		// force everything to be template.jsp
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/jsp/template.jsp");
-		requestDispatcher.include(request, response);
 
-		if (Genel.kullaniciLoginInfo != null) {
-			HttpSession session = request.getSession(true); // create a new
-															// session
-			session.setMaxInactiveInterval(30);
-			// put the UserDetails object here.
-			session.setAttribute("userDetails", Genel.kullaniciLoginInfo.getAdi());
-			session.setAttribute("userUnvan", Genel.kullaniciLoginInfo.getUnvan());
-			session.setAttribute("userSicilNo", Genel.kullaniciLoginInfo.getSicilNo());
+		HttpSession session = request.getSession();
+
+		if (!session.isNew()) {
+
+			System.out.println("jstlview session iptal mi? : " + session.isNew());
+
+			//response.sendRedirect("./anasayfa");
 		}
 
-		String url = request.getRequestURI();
-		System.out.println("JSTLView Adres Satýrý :" + url);
+			requestDispatcher.include(request, response);
+		
+	//	String url = request.getRequestURI();
+		// System.out.println("JSTLView Adres Satýrý :" + url);
 
 	}
 
