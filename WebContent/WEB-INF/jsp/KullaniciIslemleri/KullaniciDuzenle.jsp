@@ -121,15 +121,15 @@
 									class="fa fa-building fa-lg" aria-hidden="true"></i></span>
 								<form:select path="birim" class="form-control input-xs">
 									<form:option value="0">---Seçiniz------------</form:option>
-									<form:option value="AraziToplulaştırmaveTarımsalAltyapı">Arazi Toplulaştırma ve Tarımsal Altyapı</form:option>
-									<form:option value="BitkiselÜretimveBitkiSağlığı">Bitkisel Üretim ve Bitki Sağlığı</form:option>
-									<form:option value="BalıkçılıkveSuÜrünleri">Balıkçılık ve Su Ürünleri</form:option>
-									<form:option value="ÇayırMeraveYemBitkileri">Çayır Mera ve Yem Bitkileri</form:option>
-									<form:option value="GıdaveYem">Gıda ve Yem</form:option>
-									<form:option value="HayvanSağlığıveYetiştiriciliği">Hayvan Sağlığı ve Yetiştiriciliği</form:option>
-									<form:option value="İdariveMaliİşler">İdari ve Mali İşler</form:option>
-									<form:option value="KırsalKalkınmaveÖrgütlenme">Kırsal Kalkınma ve Örgütlenme</form:option>
-									<form:option value="KoordinasyonveTarımsalVeriler">Koordinasyon ve Tarımsal Veriler</form:option>
+									<form:option value="Arazi Toplulaştırma ve Tarımsal Altyapı">Arazi Toplulaştırma ve Tarımsal Altyapı</form:option>
+									<form:option value="Bitkisel Üretim ve Bitki Sağlığı">Bitkisel Üretim ve Bitki Sağlığı</form:option>
+									<form:option value="Balıkçılık ve Su Ürünleri">Balıkçılık ve Su Ürünleri</form:option>
+									<form:option value="Çayır Mera ve Yem Bitkileri">Çayır Mera ve Yem Bitkileri</form:option>
+									<form:option value="Gıda ve Yem">Gıda ve Yem</form:option>
+									<form:option value="Hayvan Sağlığı ve Yetiştiriciliği">Hayvan Sağlığı ve Yetiştiriciliği</form:option>
+									<form:option value="İdari ve Mali İşler">İdari ve Mali İşler</form:option>
+									<form:option value="Kırsal Kalkınma ve Örgütlenme">Kırsal Kalkınma ve Örgütlenme</form:option>
+									<form:option value="Koordinasyon ve Tarımsal Veriler">Koordinasyon ve Tarımsal Veriler</form:option>
 								</form:select>
 							</div>
 						</div>

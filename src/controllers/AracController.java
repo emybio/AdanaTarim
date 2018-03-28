@@ -542,6 +542,7 @@ public class AracController {
 
 			break;
 		}
+		model.put("title", "Arazi Çıkışları");
 		model.put("aracCikisListesi", cikisListesi1);
 		model.put("kullanici", raporAlinanPersonelBilgileri);
 		return "Raporlar/AraziCikis";

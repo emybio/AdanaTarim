@@ -29,6 +29,7 @@ textarea {
 table {
 	border-collapse: collapse;
 	background-color: rgba(255, 255, 255, 0.6);
+	z-index: 2;
 }
 
 thead tr td {
@@ -93,28 +94,30 @@ br {
 								&nbsp;&nbsp;&nbsp;&nbsp;Görev tamamlanarak Saat
 								${cikis.girisSaati} 'da <c:set var="kullanici"
 									value="${cikis.kullaniciList}" /> <c:if
-									test="${kullanici[0].birim eq 'HayvanSağlığıveYetiştiriciliği' }">
+									test="${kullanici[0].birim eq 'Hayvan Sağlığı ve Yetiştiriciliği' }">
 Hayvan Sağlığı ve Yetiştiriciliği
 								</c:if> <c:if
-									test="${kullanici[0].birim eq 'AraziToplulaştırmaveTarımsalAltyapı' }">
+									test="${kullanici[0].birim eq 'Arazi Toplulaştırma ve Tarımsal Altyapı' }">
 
 Arazi Toplulaştırma ve Tarımsal Altyapı
 								</c:if> <c:if
-									test="${kullanici[0].birim eq 'BitkiselÜretimveBitkiSağlığı'}">
+									test="${kullanici[0].birim eq 'Bitkisel Üretim v eBitki Sağlığı'}">
 Bitkisel Üretim ve Bitki Sağlığı
-								</c:if> <c:if test="${kullanici[0].birim eq 'BalıkçılıkveSuÜrünleri'}">
+								</c:if> <c:if
+									test="${kullanici[0].birim eq 'Balıkçılık ve Su Ürünleri'}">
 Balıkçılık ve Su Ürünleri			
-								</c:if> <c:if test="${kullanici[0].birim eq 'ÇayırMeraveYemBitkileri'}">
+								</c:if> <c:if
+									test="${kullanici[0].birim eq 'Çayır Mera v eYem Bitkileri'}">
 Çayır Mera ve Yem Bitkileri							
-								</c:if> <c:if test="${kullanici[0].birim eq 'GıdaveYem'}">
+								</c:if> <c:if test="${kullanici[0].birim eq 'Gıda ve Yem'}">
 Gıda ve Yem								
-								</c:if> <c:if test="${kullanici[0].birim eq 'İdariveMaliİşler'}">
+								</c:if> <c:if test="${kullanici[0].birim eq 'İdari ve Mali İşler'}">
 İdari ve Mali İşler								
 								</c:if> <c:if
-									test="${kullanici[0].birim eq 'KırsalKakinmaveÖrgütlenme'}">
+									test="${kullanici[0].birim eq 'Kırsal Kalkınma ve Örgütlenme'}">
 Kırsal Kalkınma ve Örgütlenme									
 								</c:if> <c:if
-									test="${kullanici[0].birim eq 'KoordinasyonveTarımsalVeriler'}">
+									test="${kullanici[0].birim eq 'Koordinasyon ve Tarımsal Veriler'}">
 Koordinasyon ve Tarımsal Veriler									
 								</c:if> Şube Müdürlüğü'ne dönülmüştür. <br> <br> <br>&nbsp;&nbsp;&nbsp;&nbsp;Bilgilerinize
 								arz ederim. <!--  </textarea> --> <br> <br> <br>
@@ -139,7 +142,6 @@ Koordinasyon ve Tarımsal Veriler
 									${kullanici[1].adi }<br> ${kullanici[1].unvan }
 								</td>
 								<td align="center"
-									
 									style="padding-top: 40px; font-family: Times New Roman; font-size: 15px;">
 
 									${kullanici[2].adi }<br> ${kullanici[2].unvan }
@@ -221,11 +223,11 @@ Koordinasyon ve Tarımsal Veriler
 								<c:set var="kullanici" value="${cikis.kullaniciList}" />
 								<td></td>
 								<td colspan="2" align="left" width="20%"
-									style="padding-top: 40px; font-family: Times New Roman; font-size: 20px; ">
+									style="padding-top: 40px; font-family: Times New Roman; font-size: 20px;">
 
 									${kullanici[0].adi }<br> ${kullanici[0].unvan }
 								</td>
-								
+
 								<td colspan="2" align="center" width="20%"
 									style="padding-top: 40px; font-family: Times New Roman; font-size: 20px; padding-right: 100px">
 
@@ -255,57 +257,59 @@ Koordinasyon ve Tarımsal Veriler
 						</tr>
 						<tr>
 							<c:set var="kullanici" value="${cikis.kullaniciList}" />
+			
 							<c:if
-								test="${kullanici[0].birim eq 'HayvanSağlığıveYetiştiriciliği' }">
+								test="${kullanici[0].birim eq 'Hayvan Sağlığı ve Yetiştiriciliği' }">
 								<td colspan="5"
 									style="text-align: CENTER; font-family: Times New Roman; font-size: 20px; padding-top: 10px;">
 									Sonay ASLAN</td>
 							</c:if>
 							<c:if
-								test="${kullanici[0].birim eq 'AraziToplulaştırmaveTarımsalAltyapı' }">
+								test="${kullanici[0].birim eq 'Arazi Toplulaştırma ve Tarımsal Altyapı' }">
 								<td colspan="5"
 									style="text-align: CENTER; font-family: Times New Roman; font-size: 20px; padding-top: 10px;">
 									Metin TOPRAK</td>
 							</c:if>
 							<c:if
-								test="${kullanici[0].birim eq 'BitkiselÜretimveBitkiSağlığı'}">
+								test="${kullanici[0].birim eq 'Bitkisel Üretim ve Bitki Sağlığı'}">
 								<td colspan="5"
 									style="text-align: CENTER; font-family: Times New Roman; font-size: 20px; padding-top: 10px;">Yusuf
 									İzzet Işık</td>
 							</c:if>
-							<c:if test="${kullanici[0].birim eq 'BalıkçılıkveSuÜrünleri'}">
+							<c:if test="${kullanici[0].birim eq 'Balıkçılık ve Su Ürünleri'}">
 								<td colspan="5"
 									style="text-align: CENTER; font-family: Times New Roman; font-size: 20px; padding-top: 10px;">Gürdal
 									Ersoy</td>
 							</c:if>
 
-							<c:if test="${kullanici[0].birim eq 'ÇayırMeraveYemBitkileri'}">
+							<c:if
+								test="${kullanici[0].birim eq 'Çayır Mera ve Yem Bitkileri'}">
 								<td colspan="5"
 									style="text-align: CENTER; font-family: Times New Roman; font-size: 20px; padding-top: 10px;">Mehmet
 									Türker</td>
 							</c:if>
 
 
-							<c:if test="${kullanici[0].birim eq 'GıdaveYem'}">
+							<c:if test="${kullanici[0].birim eq 'Gıda ve Yem'}">
 								<td colspan="5"
 									style="text-align: CENTER; font-family: Times New Roman; font-size: 20px; padding-top: 10px;">Semahattin
 									Toktaş</td>
 							</c:if>
 
 
-							<c:if test="${kullanici[0].birim eq 'İdariveMaliİşler'}">
+							<c:if test="${kullanici[0].birim eq 'İdari ve Mali İşler'}">
 								<td colspan="5"
 									style="text-align: CENTER; font-family: Times New Roman; font-size: 20px; padding-top: 10px;">Kemalettin
 									Manga</td>
 							</c:if>
 							<c:if
-								test="${kullanici[0].birim eq 'KırsalKakinmaveÖrgütlenme'}">
+								test="${kullanici[0].birim eq 'Kırsal Kalkınma ve Örgütlenme'}">
 								<td colspan="5"
 									style="text-align: CENTER; font-family: Times New Roman; font-size: 20px; padding-top: 10px;">Nilay
 									Artok</td>
 							</c:if>
 							<c:if
-								test="${kullanici[0].birim eq 'KoordinasyonveTarımsalVeriler'}">
+								test="${kullanici[0].birim eq 'Koordinasyon ve Tarımsal Veriler'}">
 								<td colspan="5"
 									style="text-align: CENTER; font-family: Times New Roman; font-size: 20px; padding-top: 10px;">Birsen
 									Ergün</td>

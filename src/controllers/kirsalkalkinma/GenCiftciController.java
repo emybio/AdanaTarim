@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import araclar.Birimler;
 import forms.Kullanici;
 import forms.Yerler;
 import forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirim;
@@ -35,6 +36,7 @@ import service.kirsalkalkinma.GencCiftciService;
 
 @Controller
 @RequestMapping(value = "/kirsal-kalkinma")
+@SuppressWarnings("unlikely-arg-type")
 public class GenCiftciController {
 
 	@Autowired
@@ -48,11 +50,20 @@ public class GenCiftciController {
 
 	private GencCiftci gencCiftci;
 
-	private String tusYazisi = "Kaydet";
+	private String tusYazisi = "Ekle";
 
 	@RequestMapping(value = "/genc-ciftci", method = RequestMethod.GET)
-	public String ekonomikYatirimlar(ModelMap model,
-			@ModelAttribute("ekonomikYatirim") EkonomikYatirim ekonomikYatirim) {
+	public String ekonomikYatirimlar(ModelMap model, @ModelAttribute("ekonomikYatirim") EkonomikYatirim ekonomikYatirim,
+			HttpSession session, HttpServletResponse response) {
+		System.out.println("genc ciftci session durumu : " + session.getAttribute("birim"));
+		String birim = session.getAttribute("birim").toString();
+
+		if (birim == null || !birim.equals(Birimler.KIRSAL_KALKINMA)) {
+
+			return "redirect:/";
+
+		}
+
 		if (gencCiftci == null) {
 
 			gencCiftci = new GencCiftci();
@@ -112,16 +123,25 @@ public class GenCiftciController {
 		// model.put("gencCiftci", gencCiftciKategori);
 		model.put("title", "Genç Çiftçi");
 		model.put("tusYazisi", tusYazisi);
-		tusYazisi = "Kaydet";
+		tusYazisi = "Ekle";
+
 		return "KirsalKalkinma/GencCiftci";
 	}
 
 	@RequestMapping(value = "/gencCiftciEkle", method = RequestMethod.POST)
 	public String gencCiftciEkle(@RequestParam("mahalle") Long mahalle, @RequestParam("slctTipler") Long slctTipler,
 			@RequestParam("slctAltTip") Long slctAltTip, ModelMap model,
-			@ModelAttribute("gencCiftci") GencCiftci gencCiftci1, BindingResult result) {
+			@ModelAttribute("gencCiftci") GencCiftci gencCiftci1, BindingResult result, HttpSession session) {
 		System.out.println("slctTipler : " + slctTipler + "\n" + "slctAltTip : " + slctAltTip + "\n" + "kategori : "
 				+ gencCiftci1.getKategori().getId());
+
+		String birim = session.getAttribute("birim").toString();
+
+		if (birim == null || !birim.equals(Birimler.KIRSAL_KALKINMA)) {
+
+			return "redirect:/";
+
+		}
 		if (result.hasErrors()) {
 
 			System.err.println("genc ciftci : " + result.getFieldError());
@@ -149,8 +169,8 @@ public class GenCiftciController {
 		}
 
 		gencCiftciService.save(gencCiftci1);
-
-		tusYazisi = "Kaydet";
+		gencCiftci = null;
+		tusYazisi = "Ekle";
 		return "redirect:/kirsal-kalkinma/genc-ciftci";
 	}
 
@@ -248,7 +268,7 @@ public class GenCiftciController {
 		tips.setTip(null);
 		tips.setDurum(null);
 		// tips=new Sabittips(); //boï¿½altï¿½r
-		tusYazisi = "Kaydet";
+		tusYazisi = "Ekle";
 		return "redirect:/kirsal-kalkinma/sabitler";
 	}
 
@@ -365,10 +385,43 @@ public class GenCiftciController {
 		return jsonObject.toJSONString().getBytes("UTF-8");
 	}
 
+	@RequestMapping(value = "/gencCiftciGuncelle/{id}")
+	public String ekonomikYatirimGuncelle(@PathVariable("id") Long id) {
+
+		gencCiftci = gencCiftciService.gencCiftciGetir(id);
+
+		tusYazisi = "Guncelle";
+		return "redirect:/kirsal-kalkinma/genc-ciftci";
+	}
+
+	@RequestMapping(value = "/gencCiftciSil")
+	public String ekonomikYatirimSil(@RequestParam("id") Long id) {
+
+		gencCiftciService.delete(id);
+
+		return "redirect:/kirsal-kalkinma/genc-ciftci-liste";
+	}
+
+	@RequestMapping(value = "/gencCiftciVazgec")
+	public String ekonomikYatirimVazgec() {
+		gencCiftci = null;
+		return "redirect:/kirsal-kalkinma/genc-ciftci-liste";
+	}
+
 	@RequestMapping(value = "/genc-ciftci-liste")
 	public String gencCiftciListesi(ModelMap model) {
 		model.put("title", "Genç Çiftçi Listesi");
 		model.put("gencCiftci", gencCiftciService.tumGencCiftciler());
 		return "KirsalKalkinma/GencCiftciListe";
 	}
+
+	@RequestMapping(value = "/gencCiftciRapor")
+	public String gencCiftciRapor(ModelMap model) {
+		model.put("title", "Genç Çiftçi Raporlar");
+		
+		model.put("gencCiftci", gencCiftciService.tumGencCiftciler());
+		
+		return "KirsalKalkinma/GencCiftciRapor";
+	}
+
 }

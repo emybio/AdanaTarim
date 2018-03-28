@@ -11,6 +11,7 @@
 	text-align: center;
 	height: 50px;
 	line-height: 50px;
+	z-index: 1;
 }
 </style>
 

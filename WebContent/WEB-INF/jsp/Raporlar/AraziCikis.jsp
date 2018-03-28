@@ -149,47 +149,48 @@ table tbody tr td {
 								<td></td>
 								<td></td>
 								<c:if
-									test="${kullanici.birim eq 'AraziToplulaştırmaveTarımsalAltyapı'}">
+									test="${kullanici.birim eq 'Arazi Toplulaştırma ve Tarımsal Altyapı'}">
 									<td align="center"><b>Metin Toprak</b></td>
 								</c:if>
 
 								<c:if
-									test="${kullanici.birim eq 'BitkiselÜretimveBitkiSağlığı'}">
+									test="${kullanici.birim eq 'Bitkisel Üretim ve Bitki Sağlığı'}">
 									<td align="center"><b>Yusuf İzzet Işık</b></td>
 								</c:if>
-								<c:if test="${kullanici.birim eq 'BalıkçılıkveSuÜrünleri'}">
+								<c:if test="${kullanici.birim eq 'Balıkçılık ve Su Ürünleri'}">
 									<td align="center"><b>Gürdal Ersoy</b></td>
 								</c:if>
 
-								<c:if test="${kullanici.birim eq 'ÇayırMeraveYemBitkileri'}">
+								<c:if test="${kullanici.birim eq 'Çayır Mera ve Yem Bitkileri'}">
 									<td align="center"><b>Mehmet Türker</b></td>
 								</c:if>
 
 
-								<c:if test="${kullanici.birim eq 'GıdaveYem'}">
+								<c:if test="${kullanici.birim eq 'Gıda ve Yem'}">
 									<td align="center"><b>Semahattin Toktaş</b></td>
 								</c:if>
 
 
 								<c:if
-									test="${kullanici.birim eq 'HayvanSağlığıveYetiştiriciliği'}">
+									test="${kullanici.birim eq 'Hayvan Sağlığı ve Yetiştiriciliği'}">
 									<td align="center"><b>Sonay Aslan</b></td>
 								</c:if>
 
 
 
-								<c:if test="${kullanici.birim eq 'İdariveMaliİşler'}">
+								<c:if test="${kullanici.birim eq 'İdari ve Mali İşler'}">
 									<td align="center"><b>Kemalettin Manga</b></td>
 								</c:if>
 
 
 
-								<c:if test="${kullanici.birim eq 'KırsalKalkinmaveÖrgütlenme'}">
+								<c:if
+									test="${kullanici.birim eq 'Kırsal Kalkınma ve Örgütlenme'}">
 									<td align="center"><b>Nilay Artok</b></td>
 								</c:if>
 
 								<c:if
-									test="${kullanici.birim eq 'KoordinasyonveTarımsalVeriler'}">
+									test="${kullanici.birim eq 'Koordinasyon ve Tarımsal Veriler'}">
 									<td align="center"><b>Birsen Ergün</b></td>
 								</c:if>
 							</tr>

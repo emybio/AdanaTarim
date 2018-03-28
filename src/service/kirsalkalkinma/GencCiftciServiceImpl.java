@@ -36,4 +36,28 @@ public class GencCiftciServiceImpl implements GencCiftciService {
 		return gencCiftciDAO.tumGencCiftciler();
 	}
 
+	@Override
+	public List<GencCiftci> ilceyeGoreListe(String ilce) {
+
+		return gencCiftciDAO.ilceyeGoreListe(ilce);
+	}
+
+	@Override
+	public List<GencCiftci> kategoriyeGoreListe(String kategori) {
+
+		return gencCiftciDAO.kategoriyeGoreListe(kategori);
+	}
+
+	@Override
+	public List<GencCiftci> ilceListesi() {
+		// TODO Auto-generated method stub
+		return gencCiftciDAO.ilceListesi();
+	}
+
+	@Override
+	public List<GencCiftci> kategoriListesi() {
+		// TODO Auto-generated method stub
+		return gencCiftciDAO.kategoriListesi();
+	}
+
 }

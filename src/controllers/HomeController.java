@@ -63,7 +63,7 @@ public class HomeController {
 	@RequestMapping(value = "/anasayfa")
 	public ModelAndView giris(ModelMap model, HttpServletResponse response, HttpServletRequest request,
 			HttpSession session) {
-	
+
 		if (kullanici == null) {
 			kullanici = new Kullanici();
 
@@ -109,11 +109,10 @@ public class HomeController {
 		kullanici.setePosta(null);
 		kullanici.setSicilNo(null);
 		kullanici.setUnvan(null);
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(true);
 
 		Kullanici kayitliKullanici = kullaniciService.kullaniciGiris(isim, sifre);
-		System.out.println(kullanici.getIsimSoyisim());
-		System.out.println("logine basildi" + " " + new Date());
+		System.out.println(kullanici.getIsimSoyisim() + new Date());
 		if (kayitliKullanici == null) {
 			response.setCharacterEncoding("UTF-8");
 			// JOptionPane panel = new JOptionPane();
@@ -121,7 +120,7 @@ public class HomeController {
 			// Girdiniz....",
 			// "Hatalı Giriş",
 			// JOptionPane.ERROR_MESSAGE);
-			System.out.println("Giris Yapilamadi" + " " + new Date());
+			System.err.println("Giris Basarisiz..." + " " + new Date());
 			return new ModelAndView("redirect:/");
 		} else {
 			Genel.kullaniciLoginInfo = kayitliKullanici;
@@ -138,20 +137,21 @@ public class HomeController {
 			String valueId = URLDecoder.decode(cookieId.getValue(), "UTF-8");
 			String valueIsim = URLDecoder.decode(cookieIsim.getValue(), "UTF-8");
 			String valueBirim = URLDecoder.decode(cookieBirim.getValue(), "UTF-8");
-			System.out.println("cookie isim / " + cookieIsim.getValue());
-			System.out.println("cookie id / " + cookieId.getValue());
-			System.out.println("value isim / " + valueIsim);
-			System.out.println("value id / " + valueId);
-			System.out.println("value birim/ " + valueBirim);
-			System.out.println("value birim cookie/ " + cookieBirim);
-			System.out.println("value birim cookie getvalue/ " + URLDecoder.decode(cookieBirim.getValue(), "UTF-8"));
+			// System.out.println("cookie isim / " + cookieIsim.getValue());
+			// System.out.println("cookie id / " + cookieId.getValue());
+			// System.out.println("value isim / " + valueIsim);
+			// System.out.println("value id / " + valueId);
+			// System.out.println("value birim/ " + valueBirim);
+			// System.out.println("value birim cookie/ " + cookieBirim);
+			// System.out.println("value birim cookie getvalue/ " +
+			// URLDecoder.decode(cookieBirim.getValue(), "UTF-8"));
 			response.addCookie(cookieIsim);
 			response.addCookie(new Cookie("isim", valueIsim));
 			response.addCookie(new Cookie("id", valueId));
 			response.addCookie(new Cookie("birim", URLEncoder.encode(valueBirim, "UTF-8")));
 
 			System.out.println("Giris Basarili.." + " " + new Date());
-			System.out.println("session ne durumda: " + session);
+			System.out.println("session ne durumda: " + session.getAttribute("birim"));
 			return new ModelAndView("redirect:/anasayfa");
 		}
 	}
@@ -169,9 +169,7 @@ public class HomeController {
 		Cookie cookie1 = new Cookie("id", "");
 		Cookie cookie2 = new Cookie("isim", "");
 		Cookie cookie3 = new Cookie("birim", "");
-		// cookie.setValue("");
-		// cookie1.setValue("");
-		// cookie2.setValue("");
+		
 		cookie1.setMaxAge(0);
 		cookie2.setMaxAge(0);
 		cookie3.setMaxAge(0);

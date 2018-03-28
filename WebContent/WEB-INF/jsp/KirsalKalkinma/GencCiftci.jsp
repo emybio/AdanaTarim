@@ -82,20 +82,21 @@ select {
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-4 control-label" for="yararlaniciAdi">İsim</label>
+								<label class="col-sm-4 control-label" for="yararlaniciAdi">İsim
+									Soyisim</label>
 								<div class="col-sm-5">
 									<form:input class="form-control " id="yararlaniciAdi"
 										path="yararlaniciAdi" name="yararlaniciAdi" />
 								</div>
 							</div>
-
+							<%-- 
 							<div class="form-group">
 								<label class="col-sm-4 control-label" for="yararlaniciSoyadi">Soyisim</label>
 								<div class="col-sm-5">
 									<form:input class="form-control " id="yararlaniciSoyadi"
 										path="yararlaniciSoyadi" name="yararlaniciSoyadi" />
 								</div>
-							</div>
+							</div> --%>
 							<div class="form-group">
 								<label class="col-sm-4 control-label" for="yil">Yıl</label>
 								<div class="col-sm-5">
@@ -207,7 +208,17 @@ select {
 							<div class="form-group">
 								<div class="col-sm-8 col-sm-offset-2">
 									<button type="submit" class="btn btn-primary pull-right btn-md"
-										name="signup1" value="Sign up">Ekle</button>
+										name="signup1" value="Sign up">${tusYazisi}</button>
+
+									<c:if test="${tusYazisi eq 'Guncelle' }">
+
+										<button type="button" class="btn btn-danger btn-md pull-right"
+											name="vazgec" value="Vazgeç"
+											onclick="javascript:location.href='./gencCiftciVazgec'">Vazgeç
+										</button>
+
+
+									</c:if>
 								</div>
 							</div>
 						</form:form>
@@ -218,11 +229,11 @@ select {
 	</div>
 	<script type="text/javascript">
 		var jq = jQuery.noConflict();
-		jq.validator.setDefaults({
+		/* 	jq.validator.setDefaults({
 			submitHandler : function() {
 				alert("submitted!");
 			}
-		});
+		}); */
 		jq(document)
 				.ready(
 						function() {

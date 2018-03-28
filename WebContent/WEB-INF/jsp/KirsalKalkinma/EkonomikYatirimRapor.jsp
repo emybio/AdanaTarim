@@ -49,7 +49,7 @@
 
 					}
 				</script>
-			<%-- 	<select id="payment" onchange="xxx();">
+				<%-- 	<select id="payment" onchange="xxx();">
 					<c:forEach items="${ilceler}" var="ilce">
 						<option value="${ilce }">${ilce }</option>
 					</c:forEach>
@@ -132,10 +132,8 @@
 							</div>
 						</div>
 						<div class="panel-body">
-
 							<div id="${ilce}"
 								class="collapse  table-responsive text-centered  ${ilce}">
-
 								<table
 									class="table table-sm table-bordered table-hover bg-default "
 									id="tr${ilce }">
@@ -151,10 +149,7 @@
 										<th align="center">İSTİHDAM</th>
 										<th align="center">DURUM</th>
 									</tr>
-
-
 								</table>
-
 							</div>
 						</div>
 					</div>

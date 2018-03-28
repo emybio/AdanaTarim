@@ -12,7 +12,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.view.InternalResourceView;
 
@@ -94,19 +93,17 @@ public class JstlView extends InternalResourceView {
 		// force everything to be template.jsp
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/jsp/template.jsp");
 
-		HttpSession session = request.getSession();
-
-		if (!session.isNew()) {
-
-			System.out.println("jstlview session iptal mi? : " + session.isNew());
-
-			//response.sendRedirect("./anasayfa");
-		}
-
-			requestDispatcher.include(request, response);
-		
-	//	String url = request.getRequestURI();
-		// System.out.println("JSTLView Adres Satýrý :" + url);
+		requestDispatcher.include(request, response);
+		/*
+		 * HttpSession session = request.getSession(false); if (!session.isNew() &&
+		 * session != null) {
+		 * 
+		 * requestDispatcher.include(request, response);
+		 * System.out.println("jstlview session iptal mi? : " + session.isNew()); }
+		 * 
+		 * 
+		 * request.getRequestDispatcher("redirect:./anasayfa");
+		 */
 
 	}
 

@@ -112,11 +112,18 @@
 									class="fa fa-th" aria-hidden="true"> </span>&nbsp;Kooperatif /
 									Birlik</a></li>
 
-							<li><a
-								href="${pageContext.request.contextPath}/kirsal-kalkinma/ekonomikYatirimRapor">
-									<span class="fa fa-file-pdf-o" aria-hidden="true"> </span>&nbsp;
-									Rapor Görüntüle
-							</a></li>
+							<li class="dropdown"><a href="#" data-toggle="dropdown"
+								class="dropdown-toggle"> <i class="fa fa-file-pdf-o"
+									aria-hidden="true"></i>&nbsp;<span>Raporlar</span><span
+									class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li><a
+										href="${pageContext.request.contextPath}/kirsal-kalkinma/ekonomikYatirimRapor">Ekonomik
+											Yatırım Rapor </a></li>
+									<li><a
+										href="${pageContext.request.contextPath}/kirsal-kalkinma/gencCiftciRapor">
+											Genç Çiftçi Rapor </a></li>
+								</ul></li>
 						</ul></li>
 				</c:if>
 
