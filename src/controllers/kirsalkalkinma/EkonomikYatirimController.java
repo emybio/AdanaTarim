@@ -54,7 +54,7 @@ public class EkonomikYatirimController {
 
 		if (id == null) {
 
-			System.out.println("ID boþ");
+			System.out.println("ekonomikYatirim ID boþ");
 			return "redirect:/anasayfa";
 		}
 		if (yatirim == null) {
@@ -145,7 +145,7 @@ public class EkonomikYatirimController {
 	public ModelAndView xlsxViewExport(HttpServletResponse response,
 			@RequestParam(value = "etapNo", required = false) Integer a,
 			@RequestParam(value = "ilce", required = false) String ilce) throws UnsupportedEncodingException {
-		// response.setContentType("application/vnd.ms-excel");
+		 response.setContentType("application/vnd.ms-excel");
 		if (null != a) {
 
 			response.setHeader("Content-disposition",
@@ -187,7 +187,6 @@ public class EkonomikYatirimController {
 	public @ResponseBody String doView(ModelMap model, Map<String, Object> map,
 			@RequestParam(value = "ilce", required = true) String ilce, HttpServletRequest request,
 			HttpServletResponse response) {
-		System.out.println("inside doView");
 
 		Gson gson = new Gson();
 

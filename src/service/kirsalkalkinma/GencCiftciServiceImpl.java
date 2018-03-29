@@ -2,6 +2,7 @@ package service.kirsalkalkinma;
 
 import java.util.List;
 
+import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +44,7 @@ public class GencCiftciServiceImpl implements GencCiftciService {
 	}
 
 	@Override
-	public List<GencCiftci> kategoriyeGoreListe(String kategori) {
+	public List<GencCiftci> kategoriyeGoreListe(Integer kategori) {
 
 		return gencCiftciDAO.kategoriyeGoreListe(kategori);
 	}
@@ -58,6 +59,12 @@ public class GencCiftciServiceImpl implements GencCiftciService {
 	public List<GencCiftci> kategoriListesi() {
 		// TODO Auto-generated method stub
 		return gencCiftciDAO.kategoriListesi();
+	}
+
+	@Override
+	public JSONArray ilceyeGoreJSON(String ilce) {
+		// TODO Auto-generated method stub
+		return gencCiftciDAO.ilceyeGoreJSON(ilce);
 	}
 
 }

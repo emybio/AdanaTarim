@@ -1,12 +1,16 @@
 package controllers.kirsalkalkinma;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -23,8 +27,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
 
 import araclar.Birimler;
+import araclar.Genel;
+import araclar.RolesEnum;
 import forms.Kullanici;
 import forms.Yerler;
 import forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirim;
@@ -53,17 +62,9 @@ public class GenCiftciController {
 	private String tusYazisi = "Ekle";
 
 	@RequestMapping(value = "/genc-ciftci", method = RequestMethod.GET)
-	public String ekonomikYatirimlar(ModelMap model, @ModelAttribute("ekonomikYatirim") EkonomikYatirim ekonomikYatirim,
-			HttpSession session, HttpServletResponse response) {
-		System.out.println("genc ciftci session durumu : " + session.getAttribute("birim"));
-		String birim = session.getAttribute("birim").toString();
-
-		if (birim == null || !birim.equals(Birimler.KIRSAL_KALKINMA)) {
-
-			return "redirect:/";
-
-		}
-
+	public String gencCiftci(@CookieValue(value = "id", required = false) Long id, ModelMap model,
+			@ModelAttribute("gencCiftci") GencCiftci gencCiftci1, HttpSession session, HttpServletResponse response,
+			HttpServletRequest request) {
 		if (gencCiftci == null) {
 
 			gencCiftci = new GencCiftci();
@@ -411,17 +412,71 @@ public class GenCiftciController {
 	@RequestMapping(value = "/genc-ciftci-liste")
 	public String gencCiftciListesi(ModelMap model) {
 		model.put("title", "Genç Çiftçi Listesi");
+
 		model.put("gencCiftci", gencCiftciService.tumGencCiftciler());
+
 		return "KirsalKalkinma/GencCiftciListe";
 	}
 
 	@RequestMapping(value = "/gencCiftciRapor")
 	public String gencCiftciRapor(ModelMap model) {
 		model.put("title", "Genç Çiftçi Raporlar");
-		
-		model.put("gencCiftci", gencCiftciService.tumGencCiftciler());
-		
+
+		model.put("ilceler", gencCiftciService.ilceListesi());
+
 		return "KirsalKalkinma/GencCiftciRapor";
 	}
 
+	@RequestMapping(value = "/ilcelereGoreGencCiftciListele", method = RequestMethod.GET)
+
+	public @ResponseBody String doView(ModelMap model, Map<String, Object> map,
+			@RequestParam(value = "ilce", required = true) String ilce, HttpServletRequest request,
+			HttpServletResponse response) {
+
+		Gson gson = new Gson();
+
+		return gson.toJson(gencCiftciService.ilceyeGoreJSON(ilce));
+
+	}
+
+	@RequestMapping(value = "/gencCiftciXlsxExport", method = { RequestMethod.GET })
+	public ModelAndView xlsxViewExport(HttpServletResponse response,
+			@RequestParam(value = "kategori", required = false) Integer a,
+			@RequestParam(value = "ilce", required = false) String ilce) throws UnsupportedEncodingException {
+		response.setContentType("application/vnd.ms-excel");
+		if (null != a) {
+
+			response.setHeader("Content-disposition",
+					"attachment; filename=" + a + "_Kategorisinde_" + "Yatirimlar_Listesi" + ".xlsx");
+		} else if (null != ilce) {
+			String fileName = URLEncoder.encode(ilce + "_Ýlcesi_" + "Yatirimlar_Listesi", "UTF-8");
+			response.setHeader("Content-disposition", "attachment; filename=" + fileName + ".xlsx");
+		}
+
+		else {
+
+			response.setHeader("Content-disposition",
+					"attachment; filename=" + "Genc_Ciftci_Yatirimlar_Listesi" + ".xlsx");
+
+		}
+		return new ModelAndView("xlsxView", "gencciftci", yatirimListeleri(a, ilce));
+	}
+
+	public List<GencCiftci> yatirimListeleri(@RequestParam(value = "kategori", required = false) Integer etapNo,
+			@RequestParam(value = "ilce", required = false) String ilce) {
+
+		if (etapNo != null) {
+
+			return gencCiftciService.kategoriyeGoreListe(etapNo);
+
+		} else if (ilce != null) {
+
+			return gencCiftciService.ilceyeGoreListe(ilce);
+		}
+
+		else {
+
+			return gencCiftciService.tumGencCiftciler();
+		}
+	}
 }

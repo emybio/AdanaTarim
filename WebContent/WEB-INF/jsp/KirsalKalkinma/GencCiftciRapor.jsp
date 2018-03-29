@@ -24,13 +24,7 @@ select {
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
-				<div class="pull-right">
-					<h3>
-						<a href="./genc-ciftci" class="btn btn-success btn-md"> <span
-							class="glyphicon glyphicon-plus"></span> YENİ KAYIT
-						</a>
-					</h3>
-				</div>
+
 				<div class="page-header">&nbsp;</div>
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -38,51 +32,151 @@ select {
 					</div>
 					<div class="panel-body">
 						<div style="overflow-x: auto;">
-							<table
-								class="table table-sm table-bordered table-hover bg-default "
-								id="tr${ilce }">
-								<tr class="baslik">
-									<%-- <td align="center"></td> --%>
-									<th align="center">Yararlanıcı</th>
-									<th align="center">Proje Konusu</th>
-									<th align="center">Uygulama Yeri</th>
-									<th align="center">Kapasite</th>
-									<th align="center">Hibe Tutarı</th>
-									<th align="center">Yıl</th>
-									<th align="center">Durum</th>
-									<th align="center" colspan="2">Sil / Güncelle</th>
-								</tr>
-								<c:forEach items="${gencCiftci}" var="genc">
-									<tr>
-										<td>${genc.yararlaniciAdi }&nbsp;${genc.yararlaniciSoyadi }</td>
+							<c:forEach items="${ilceler}" var="ilce">
+								<script type="text/javascript">
+									//alert('${ilce}');
+									var jq = jQuery.noConflict();
 
-										<c:if test="${empty genc.kategori.tip.tip.isim }">
+									jq
+											.ajax({
+												type : "GET",
+												url : '${pageContext.request.contextPath}/kirsal-kalkinma/ilcelereGoreGencCiftciListele.json',
+												contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+												data : {
+													ilce : '${ilce.isim}',
+												},
+												success : function(data) {
 
-											<td>${genc.kategori.isim}</td>
+													var tblRow;
+													var array = [];
+													var soyisim = "";
+													var kategori;
+													for (var i = 0; i < data.length; i++) {
 
-										</c:if>
-										<c:if test="${!empty genc.kategori.tip.tip.isim }">
+														/* tblRow =  data[i].durum ;
+														console.log(tblRow);
+														array.push(tblRow); */
+														if (data[i].soyadi != null) {
+															soyisim = data[i].soyadi;
+														}
 
-											<td>${genc.kategori.tip.tip.isim}-${genc.kategori.tip.isim}-${genc.kategori.isim}</td>
+														/* if (typeof data[i].kategori.tip.tip.isim !== "undefined") {
 
-										</c:if>
+															kategori = data[i].kategori.tip.tip.isim
+																	+ " "
+																	+ data[i].kategori.tip.isim
+																	+ " "
+																	+ data[i].kategori.isim
+															console
+																	.log(kategori);
 
-										<td>${genc.mahalle.tip.tip.isim}-${genc.mahalle.tip.isim}-${genc.mahalle.isim}</td>
-										<td>${genc.kapasite}-<span class="text-capitalize">${genc.kapasiteBirim}</span>
-										</td>
-										<td>${genc.hibeTutari}</td>
-										<td>${genc.yil}</td>
-										<td>Devam</td>
-										<td><a
-											href="${pageContext.request.contextPath }/kirsal-kalkinma/gencCiftciSil?id=${genc.id}"
-											onclick="javascript:return confirm('${genc.yararlaniciAdi} ${ genc.yararlaniciSoyadi } isimli kaydı : \n Silmek İstediğinize Emin misiniz?');"
-											class="btn btn-danger btn-sm">Sil</a></td>
-										<td><a
-											href="${pageContext.request.contextPath }/kirsal-kalkinma/gencCiftciGuncelle/${genc.id}"
-											class="btn btn-primary btn-sm">Güncelle</a></td>
-								</c:forEach>
+														} else */
 
-							</table>
+														if (typeof data[i].kategori.tip == "undefined") {
+															kategori = data[i].kategori.isim
+															console
+																	.log("tek kategori");
+															console
+																	.log(kategori);
+
+														} else if (typeof data[i].kategori.tip.tip.isim != "undefined") {
+
+															kategori = data[i].kategori.tip.tip.isim
+																	+ "->"
+																	+ data[i].kategori.tip.isim
+																	+ "->"
+																	+ data[i].kategori.isim
+															console
+																	.log("çift kategori"
+																			+ data[i].mahalle);
+															console
+																	.log(kategori);
+
+														}
+															//kategori = data[i].kategori.isim
+														tblRow = "<tr><td style ='word-break:break-all;'>"
+																+ i
+																+ "</td><td style ='word-break:break-all;'>"
+																+ kategori
+																+ "</td><td style ='word-break:break-all;'>"
+																+ data[i].adi
+																+ " "
+																+ soyisim
+																+ "</td><td style ='word-break:break-all;'>"
+																+ data[i].projeAdi
+																+ "</td><td style ='word-break:break-all;'>"
+																+ data[i].projeBedeli
+																+ "</td><td style ='word-break:break-all;'>"
+																+ data[i].hibeTutari
+																+ "</td><td style ='word-break:break-all;'>"
+																+ data[i].kapasite
+																+ " "
+																+ data[i].kapasiteBirim
+																+ "</td><td style ='word-break:break-all;'>"
+																+ data[i].istihdam
+																+ "</td><td style ='word-break:break-all;'>"
+																+ data[i].durum
+																+ "</td></tr>";
+														jq(tblRow)
+																.appendTo(
+																		"#tr${ilce.isim}");
+													}
+
+												},
+												complete : function(data) {
+
+												},
+												error : function(xhr,
+														textStatus, errorThrown) {
+
+													console.log(textStatus
+															+ "***" + xhr
+															+ "***"
+															+ errorThrown);
+												}
+
+											});
+								</script>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<div class="container-fluid ">
+											<div class="col-sm-10">
+
+												<button type="button"
+													class="btn btn-info btn-sm float-left pull-left"
+													data-toggle="collapse" data-target="#${ilce.isim}">${ilce.isim}
+												</button>
+											</div>
+											<div class="col-sm-2">
+												<a href=" ./gencCiftciXlsxExport?ilce=${ilce.isim}" class="float-left"><img
+													alt="Excel Report" class="rounded" width="35px"
+													src="<c:url value='/assets/images/xlsx-3.png'/>"></a>
+											</div>
+										</div>
+									</div>
+									<div class="panel-body">
+										<div id="${ilce.isim}"
+											class="collapse  table-responsive text-centered  ${ilce.isim}">
+											<table
+												class="table table-sm table-bordered table-hover bg-default "
+												id="tr${ilce.isim }">
+												<tr class="baslik">
+													<%-- <td align="center"></td> --%>
+													<th align="center">MAHALLE</th>
+													<th align="center">YATIRIM KONUSU</th>
+													<th align="center">YATIRIMCI ADI</th>
+													<th align="center">PROJE ADI</th>
+													<th align="center">PROJE BEDELİ</th>
+													<th align="center">HİBE TUTARI</th>
+													<th align="center">KAPASİTE</th>
+													<th align="center">İSTİHDAM</th>
+													<th align="center">DURUM</th>
+												</tr>
+											</table>
+										</div>
+									</div>
+								</div>
+							</c:forEach>
 
 						</div>
 

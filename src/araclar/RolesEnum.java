@@ -9,6 +9,16 @@ package araclar;
  */
 public enum RolesEnum {
 
-	ROLE_STANDART_USER,ROLE_AUTHORIZED_USER, ROLE_ADMIN, ROLE_SUPER_ADMIN
+	ROLE_STANDART_USER("ROLE_STANDART_USER"), ROLE_AUTHORIZED_USER("ROLE_AUTHORIZED_USER"), ROLE_ADMIN(
+			"ROLE_ADMIN"), ROLE_SUPER_ADMIN("ROLE_SUPER_ADMIN");
 
+	private final String role;
+
+	private RolesEnum(String role) {
+		this.role = role;
+	}
+
+	public String getRole() {
+		return role;
+	}
 }

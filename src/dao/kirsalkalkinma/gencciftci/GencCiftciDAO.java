@@ -2,6 +2,8 @@ package dao.kirsalkalkinma.gencciftci;
 
 import java.util.List;
 
+import org.json.simple.JSONArray;
+
 import forms.kirsalkalkinma.gencciftci.GencCiftci;
 
 public interface GencCiftciDAO {
@@ -15,10 +17,13 @@ public interface GencCiftciDAO {
 
 	public List<GencCiftci> ilceyeGoreListe(String ilce);
 
-	public List<GencCiftci> kategoriyeGoreListe(String kategori);
+	public List<GencCiftci> kategoriyeGoreListe(Integer kategori);
+
+	public List<GencCiftci> ilceVeKategoriyeGoreListe(Integer kategori, String ilce);
 
 	public List<GencCiftci> ilceListesi();
-	
+
 	public List<GencCiftci> kategoriListesi();
 
+	public JSONArray ilceyeGoreJSON(String ilce);
 }

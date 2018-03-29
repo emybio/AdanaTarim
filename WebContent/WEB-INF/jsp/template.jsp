@@ -44,10 +44,10 @@
 	type="text/css">
 
 <!-- scripts -->
-<script src="<c:url value= "/assets/script/lib/jquery-1.11.1.js"/>"
+<%-- <script src="<c:url value= "/assets/script/lib/jquery-1.11.1.js"/>"
+	type="text/javascript"></script> --%>
+<script src="<c:url value="/assets/script/jquery-3.1.0.min.js" />"
 	type="text/javascript"></script>
-<%-- <script src="<c:url value="/assets/script/jquery-3.1.0.min.js" />"
-type="text/javascript"></script> --%>
 <script src="<c:url value="/assets/script/bootstrap.min.js" />"
 	type="text/javascript"></script>
 <script src='<c:url value="/assets/script/canvasjs.min.js"   ></c:url>'
@@ -145,32 +145,32 @@ body {
 
 <body bgcolor="#e3f2fd">
 
-		<!-- header -->
-		<c:if test="${!empty cookie.id.value}">
+	<!-- header -->
+	<c:if test="${!empty cookie.id.value}">
 
-			<jsp:include page="header.jsp" />
-		</c:if>
+		<jsp:include page="header.jsp" />
+	</c:if>
 
-		<!-- /header -->
-		<!-- sidebar -->
-		<%-- <jsp:include page="sidebar.jsp" /> --%>
-		<!-- /sidebar -->
+	<!-- /header -->
+	<!-- sidebar -->
+	<%-- <jsp:include page="sidebar.jsp" /> --%>
+	<!-- /sidebar -->
 
-		<!-- <div id="page-content-wrapper" class="page-content-toggle"> -->
+	<!-- <div id="page-content-wrapper" class="page-content-toggle"> -->
 
-		<%-- <h3>${title}</h3> --%>
-		<%-- <p>
+	<%-- <h3>${title}</h3> --%>
+	<%-- <p>
 				<a href="${url }"><h4>${url}</h4></a>
 			</p> --%>
 
 
-		<jsp:include page="${partial}" />
+	<jsp:include page="${partial}" />
 
-		<!-- /row -->
+	<!-- /row -->
 
-		<!-- footer -->
-		<jsp:include page="footer.jsp" />
-		<!-- /footer -->
-		<!-- </div> -->
+	<!-- footer -->
+	<jsp:include page="footer.jsp" />
+	<!-- /footer -->
+	<!-- </div> -->
 </body>
 </html>

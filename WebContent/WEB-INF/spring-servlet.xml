@@ -22,7 +22,15 @@
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
 
-	<bean
+
+
+	<bean id="viewResolver1"
+		class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
+		<property name="order" value="1" />
+		<property name="basename" value="views" />
+	</bean>
+
+	<bean id="viewResolver2"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="order" value="2" />
 		<property name="viewClass" value="controllers.JstlView" />
@@ -30,13 +38,13 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
-	<!-- <bean id="viewResolver1"
-		class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
-		<property name="order" value="1" />
-		<property name="basename" value="views" />
-	</bean> -->
 
-
+	<bean id="viewResolver3"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="order" value="3" />
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 
@@ -70,7 +78,7 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">${jdbc.dialect}</prop>
-				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.show_sql">false</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 			</props>
 		</property>

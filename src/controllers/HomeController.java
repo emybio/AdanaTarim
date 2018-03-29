@@ -151,7 +151,6 @@ public class HomeController {
 			response.addCookie(new Cookie("birim", URLEncoder.encode(valueBirim, "UTF-8")));
 
 			System.out.println("Giris Basarili.." + " " + new Date());
-			System.out.println("session ne durumda: " + session.getAttribute("birim"));
 			return new ModelAndView("redirect:/anasayfa");
 		}
 	}
