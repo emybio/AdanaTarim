@@ -85,7 +85,6 @@ public class HomeController {
 		int some = 0;
 		for (int i = 0; i <= 20; i++) {
 			some += i;
-			System.out.println(some);
 
 			PrintWriter out = new PrintWriter(new FileWriter(giris3 + ".docx", true), true);
 			out.write((Integer.toString(i) + " " + Integer.toString(some)));
@@ -112,7 +111,6 @@ public class HomeController {
 		HttpSession session = request.getSession(true);
 
 		Kullanici kayitliKullanici = kullaniciService.kullaniciGiris(isim, sifre);
-		System.out.println(kullanici.getIsimSoyisim() + new Date());
 		if (kayitliKullanici == null) {
 			response.setCharacterEncoding("UTF-8");
 			// JOptionPane panel = new JOptionPane();
@@ -150,7 +148,6 @@ public class HomeController {
 			response.addCookie(new Cookie("id", valueId));
 			response.addCookie(new Cookie("birim", URLEncoder.encode(valueBirim, "UTF-8")));
 
-			System.out.println("Giris Basarili.." + " " + new Date());
 			return new ModelAndView("redirect:/anasayfa");
 		}
 	}

@@ -51,20 +51,22 @@ public class GencCiftciServiceImpl implements GencCiftciService {
 
 	@Override
 	public List<GencCiftci> ilceListesi() {
-		// TODO Auto-generated method stub
 		return gencCiftciDAO.ilceListesi();
 	}
 
 	@Override
 	public List<GencCiftci> kategoriListesi() {
-		// TODO Auto-generated method stub
 		return gencCiftciDAO.kategoriListesi();
 	}
 
 	@Override
 	public JSONArray ilceyeGoreJSON(String ilce) {
-		// TODO Auto-generated method stub
 		return gencCiftciDAO.ilceyeGoreJSON(ilce);
+	}
+
+	@Override
+	public Long ilceyeVeYillaraGoreKayitSayisi(Integer yil, String ilce) {
+		return gencCiftciDAO.ilceyeVeYillaraGoreKayitSayisi(yil, ilce);
 	}
 
 }

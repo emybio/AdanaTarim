@@ -119,9 +119,7 @@ public class KullaniciController {
 			// file to upload");
 			return "KullaniciIslemleri/KullaniciDuzenle";
 		}
-		System.out.println("kullanici : " + kullanici);
 		if (Genel.kullaniciBean != null) {
-			System.out.println(Genel.kullaniciBean.getId());
 			kullanici.setId(Genel.kullaniciBean.getId());
 
 		} else {
@@ -155,7 +153,6 @@ public class KullaniciController {
 
 		kullanici.setPictureList(null);
 		// kullanici.setPic(img);
-		System.out.println("kullanici pic: " + kullanici.getPic() + " /// ");
 		kullaniciService.kullaniciEkle(kullanici);
 		Genel.kullaniciBean = null;
 		return "redirect:/anasayfa";
@@ -173,7 +170,6 @@ public class KullaniciController {
 	public String kullaniciVazgec(HttpServletRequest request) {
 		// if (Genel.kullaniciBean != null) {
 		String referrer = request.getHeader("referer");
-		System.out.println("kullaniciVazgeçe Basýldý..." + referrer);
 
 		Genel.kullaniciBean = null;
 		return "redirect:/kullanici-islemleri/kullanici";
@@ -228,11 +224,6 @@ public class KullaniciController {
 			ModelMap model) throws IOException {
 		Kullanici kullanici = kullaniciService.kullaniciGetirr(id);
 
-		if (id == 8) {
-
-			System.out.println("id 8 pic : " + kullanici.getPic());
-
-		}
 		FileInputStream fis = null;
 
 		// veritabanÄ±nda resim dosyasÄ±nÄ±n kayÄ±tlÄ± olduÄŸu dosya yolunu gÃ¶sterir
@@ -240,7 +231,6 @@ public class KullaniciController {
 		// if (kullanici.getUserPicURL() == null) {
 		fis = new FileInputStream(new File(
 				"C:/Users/Emrah Denizer/Web Projelerim/araziedindirmeIsyeri/WebContent/WEB-INF/assets/images/personelimage/avatar"));
-		System.out.println("avatar yüklendi....");
 		// } else {
 		// fis = new FileInputStream(new File(kullanici.getPic().toString()));
 		// }
@@ -291,7 +281,6 @@ public class KullaniciController {
 
 			// kullanici2.setUserPicURL(UPLOADED_FOLDER +
 			// kullanici2.getIsimSoyisim() + "_" + id);
-			System.out.println(kullanici2.getIsimSoyisim() + "_" + id);
 			kullaniciService.kullaniciEkle(kullanici2);
 			redirectAttributes.addFlashAttribute("message", "You successfully uploaded '" + file.getOriginalFilename()
 					+ "'" + "<br>" + "Dosya Yolu " + path.toString());

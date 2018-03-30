@@ -27,6 +27,8 @@ import forms.Kullanici;
 
 public class Genel {
 
+	public static String raporTuru = null;
+
 	public static String errorMessage = null;
 
 	public static Kullanici kullaniciBean = null;
@@ -602,6 +604,14 @@ public class Genel {
 	 */
 	public static void setKullaniciLoginInfo(Kullanici kullaniciLoginInfo) {
 		Genel.kullaniciLoginInfo = kullaniciLoginInfo;
+	}
+
+	public static String getRaporTuru() {
+		return raporTuru;
+	}
+
+	public static void setRaporTuru(String raporTuru) {
+		Genel.raporTuru = raporTuru;
 	}
 
 }

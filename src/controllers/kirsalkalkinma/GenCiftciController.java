@@ -445,21 +445,22 @@ public class GenCiftciController {
 			@RequestParam(value = "ilce", required = false) String ilce) throws UnsupportedEncodingException {
 		response.setContentType("application/vnd.ms-excel");
 		if (null != a) {
-
+			Genel.raporTuru = "kategori";
 			response.setHeader("Content-disposition",
 					"attachment; filename=" + a + "_Kategorisinde_" + "Yatirimlar_Listesi" + ".xlsx");
 		} else if (null != ilce) {
+			Genel.raporTuru = "ilce";
 			String fileName = URLEncoder.encode(ilce + "_Ýlcesi_" + "Yatirimlar_Listesi", "UTF-8");
 			response.setHeader("Content-disposition", "attachment; filename=" + fileName + ".xlsx");
 		}
 
 		else {
-
+			Genel.raporTuru = "tumListe";
 			response.setHeader("Content-disposition",
 					"attachment; filename=" + "Genc_Ciftci_Yatirimlar_Listesi" + ".xlsx");
 
 		}
-		return new ModelAndView("xlsxView", "gencciftci", yatirimListeleri(a, ilce));
+		return new ModelAndView("xlsxView", "gencCiftci", yatirimListeleri(a, ilce));
 	}
 
 	public List<GencCiftci> yatirimListeleri(@RequestParam(value = "kategori", required = false) Integer etapNo,

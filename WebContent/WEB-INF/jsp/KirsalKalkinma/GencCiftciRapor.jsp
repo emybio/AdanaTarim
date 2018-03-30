@@ -24,14 +24,22 @@ select {
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
-
+				<div class="pull-right">
+					<h3>
+						<a href=" ./gencCiftciXlsxExport" class="btn btn-default float-left"><img
+							alt="Excel Report" class="rounded" width="35px"
+							src="<c:url value='/assets/images/xlsx-3.png'/>"> TÜM
+							LİSTEYİ EXCEL'E AKTAR</a>
+					</h3>
+				</div>
 				<div class="page-header">&nbsp;</div>
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title">Genç Çiftçi Listesi</h3>
+						<h3 class="panel-title">İlçelere Göre Genç Çiftçi Listesi</h3>
 					</div>
 					<div class="panel-body">
 						<div style="overflow-x: auto;">
+
 							<c:forEach items="${ilceler}" var="ilce">
 								<script type="text/javascript">
 									//alert('${ilce}');
@@ -58,6 +66,9 @@ select {
 														array.push(tblRow); */
 														if (data[i].soyadi != null) {
 															soyisim = data[i].soyadi;
+														} else {
+
+															soyisim = "";
 														}
 
 														/* if (typeof data[i].kategori.tip.tip.isim !== "undefined") {
@@ -71,51 +82,46 @@ select {
 																	.log(kategori);
 
 														} else */
+														/* 
+														 if (typeof data[i].kategori.tip.isim !== "undefined") {
+														 kategori = data[i].kategori.isim
+														 + "<br>"
+														 + data[i].kategori.tip.isim
+														
+														 } else if (typeof data[i].kategori.tip.tip.isim != "undefined") {
 
-														if (typeof data[i].kategori.tip == "undefined") {
-															kategori = data[i].kategori.isim
-															console
-																	.log("tek kategori");
-															console
-																	.log(kategori);
+														 kategori = data[i].kategori.tip.tip.isim
+														 + "<br>"
+														 + data[i].kategori.tip.isim
+														 + "<br>"
+														 + data[i].kategori.isim
+														
 
-														} else if (typeof data[i].kategori.tip.tip.isim != "undefined") {
+														 } else if (typeof data[i].kategori.isim === null) {
 
-															kategori = data[i].kategori.tip.tip.isim
-																	+ "->"
-																	+ data[i].kategori.tip.isim
-																	+ "->"
-																	+ data[i].kategori.isim
-															console
-																	.log("çift kategori"
-																			+ data[i].mahalle);
-															console
-																	.log(kategori);
-
-														}
-															//kategori = data[i].kategori.isim
+														 kategori = data[i].kategori.tip.tip.isim
+														 + "<br>"
+														 + data[i].kategori.tip.isim
+														 } */
+														kategori = data[i].kategori.isim
 														tblRow = "<tr><td style ='word-break:break-all;'>"
-																+ i
-																+ "</td><td style ='word-break:break-all;'>"
+																+ data[i].mahalle
+																+ "</td><td style ='word-break:break-all;width:15em;'>"
 																+ kategori
 																+ "</td><td style ='word-break:break-all;'>"
+																+ data[i].yil
+																+ "</td><td style ='word-break:break-all;width:12em;'>"
 																+ data[i].adi
 																+ " "
 																+ soyisim
-																+ "</td><td style ='word-break:break-all;'>"
-																+ data[i].projeAdi
-																+ "</td><td style ='word-break:break-all;'>"
-																+ data[i].projeBedeli
 																+ "</td><td style ='word-break:break-all;'>"
 																+ data[i].hibeTutari
 																+ "</td><td style ='word-break:break-all;'>"
 																+ data[i].kapasite
 																+ " "
+																+ "<span style='text-transform:capitalize;'>"
 																+ data[i].kapasiteBirim
-																+ "</td><td style ='word-break:break-all;'>"
-																+ data[i].istihdam
-																+ "</td><td style ='word-break:break-all;'>"
-																+ data[i].durum
+																+ "</span>"
 																+ "</td></tr>";
 														jq(tblRow)
 																.appendTo(
@@ -138,6 +144,7 @@ select {
 											});
 								</script>
 								<div class="panel panel-default">
+
 									<div class="panel-heading">
 										<div class="container-fluid ">
 											<div class="col-sm-10">
@@ -148,8 +155,9 @@ select {
 												</button>
 											</div>
 											<div class="col-sm-2">
-												<a href=" ./gencCiftciXlsxExport?ilce=${ilce.isim}" class="float-left"><img
-													alt="Excel Report" class="rounded" width="35px"
+												<a href=" ./gencCiftciXlsxExport?ilce=${ilce.isim}"
+													class="float-left"><img alt="Excel Report"
+													class="rounded" width="35px"
 													src="<c:url value='/assets/images/xlsx-3.png'/>"></a>
 											</div>
 										</div>
@@ -164,13 +172,11 @@ select {
 													<%-- <td align="center"></td> --%>
 													<th align="center">MAHALLE</th>
 													<th align="center">YATIRIM KONUSU</th>
+													<th align="center">YIL</th>
 													<th align="center">YATIRIMCI ADI</th>
-													<th align="center">PROJE ADI</th>
-													<th align="center">PROJE BEDELİ</th>
 													<th align="center">HİBE TUTARI</th>
 													<th align="center">KAPASİTE</th>
-													<th align="center">İSTİHDAM</th>
-													<th align="center">DURUM</th>
+
 												</tr>
 											</table>
 										</div>

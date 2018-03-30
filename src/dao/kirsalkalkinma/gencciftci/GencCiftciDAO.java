@@ -26,4 +26,6 @@ public interface GencCiftciDAO {
 	public List<GencCiftci> kategoriListesi();
 
 	public JSONArray ilceyeGoreJSON(String ilce);
+	
+	public Long ilceyeVeYillaraGoreKayitSayisi(Integer yil,String ilce);
 }

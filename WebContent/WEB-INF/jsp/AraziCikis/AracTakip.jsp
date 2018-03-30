@@ -51,7 +51,7 @@ select {
 <c:if test="${!empty errorMessage }">
 
 	<script>
-		alert("Aynı göreveden zaten var...");
+	//	alert("Aynı göreveden zaten var...");
 	</script>
 
 </c:if>
@@ -327,7 +327,7 @@ select {
 		<c:if test="${empty errors}">
 			<div class="col-lg-12">
 				<h3>Görev Ekle</h3>
-				<div class="table-responsive">
+				<div class="table bg-info">
 					<table class="table table-striped bg-info"
 						style="text-align: center;">
 						<thead style="text-align: center; height: 300px;">

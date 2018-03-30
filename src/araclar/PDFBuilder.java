@@ -104,7 +104,6 @@ public class PDFBuilder extends AbstractITextPdfView {
 		}
 
 		doc.add(table);
-		System.out.println(" garip : " + "\u015f");
 	}
 
 	public String TurkceKarakter(String text) {

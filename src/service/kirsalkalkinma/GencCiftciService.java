@@ -7,6 +7,7 @@ import org.json.simple.JSONArray;
 import forms.kirsalkalkinma.gencciftci.GencCiftci;
 
 public interface GencCiftciService {
+	
 	public void save(GencCiftci gencCiftci);
 
 	public void delete(Long id);
@@ -24,5 +25,7 @@ public interface GencCiftciService {
 	public List<GencCiftci> kategoriListesi();
 
 	public JSONArray ilceyeGoreJSON(String ilce);
+	
+	public Long ilceyeVeYillaraGoreKayitSayisi(Integer yil,String ilce); 
 
 }
