@@ -97,6 +97,12 @@ public class AracController {
 
 			arac2 = new Arac();
 
+		} else {
+
+			System.out.println("arac kullanici : " + arac2.getKullaniciList().iterator());
+			model.put("kullanici", arac2.getKullaniciList());
+			model.put("secilenMahalleID", arac2.getMahalle().getId());
+			model.put("secilenMahalleIsim", arac2.getMahalle().getIsim());
 		}
 		if (dosyaDurumu != null) {
 
@@ -123,7 +129,6 @@ public class AracController {
 		dosyaDurumu = null;
 		if (id != null) {
 
-
 			if (kullanici.getRoles().getRollAdi().equals(araclar.RolesEnum.ROLE_SUPER_ADMIN.toString())
 					|| kullanici.getRoles().getRollAdi().equals(araclar.RolesEnum.ROLE_AUTHORIZED_USER.toString())
 					|| kullanici.getRoles().getRollAdi().equals(araclar.RolesEnum.ROLE_ADMIN.toString())) {
@@ -148,7 +153,6 @@ public class AracController {
 					if (gorevBulCikisListesi != null) {
 						model.put("aracCikisListesi", gorevBulCikisListesi);
 					} else {
-
 
 						// for (int i = 0; i <
 						// aracService.kullaniciyaGoreCikisListesi(id).size();
@@ -193,7 +197,6 @@ public class AracController {
 			kullaniciListesi.add(personel);
 
 		}
-
 		arac.setKullaniciList(kullaniciListesi);
 		Kullanici islemyapan = new Kullanici();
 		islemyapan.setId(id);
@@ -273,7 +276,9 @@ public class AracController {
 		arac2 = aracService.aracCikisGetir(id);
 		tusYazisi = "Güncelle";
 		for (int i = 0; i < arac2.getKullaniciList().size(); i++) {
-			System.out.println("AracController duzenle - " + arac2.getKullaniciList().get(i).getAdi());
+			System.out.println("AracController duzenle kullanici list- " + arac2.getKullaniciList().get(i).getAdi());
+			System.out.println("AracController duzenle gidilen ilce ve mahalle- " + arac2.getIlce() + " "
+					+ arac2.getMahalle().getIsim());
 		}
 		return "redirect:/arazi-cikislari/arac-islemleri";
 	}
@@ -298,7 +303,8 @@ public class AracController {
 		String ayrilanIsim = isimAyrac[0];
 		String ayrilanSoyIsim = isimAyrac[1];
 		String path = "D:\\evraklar\\";
-		String filename = ayrilanIsim.toUpperCase() + " " + ayrilanSoyIsim.toUpperCase() + ".docx"/* path to a file */;
+		String filename = ayrilanIsim.toUpperCase() + " " + ayrilanSoyIsim.toUpperCase()
+				+ ".docx"/* path to a file */;
 		String baslikIsmi = ayrilanIsim.toUpperCase() + " " + ayrilanSoyIsim.toUpperCase();
 
 		XWPFDocument document = new XWPFDocument();
@@ -463,7 +469,8 @@ public class AracController {
 		String[] isimAyrac = isim.split("\\.");
 		String ayrilanIsim = isimAyrac[0];
 		String ayrilanSoyIsim = isimAyrac[1];
-		String filename = ayrilanIsim.toUpperCase() + " " + ayrilanSoyIsim.toUpperCase() + ".docx"/* path to a file */;
+		String filename = ayrilanIsim.toUpperCase() + " " + ayrilanSoyIsim.toUpperCase()
+				+ ".docx"/* path to a file */;
 		String path = "D:\\evraklar\\";
 		File file = new File(path + filename);
 
@@ -540,7 +547,6 @@ public class AracController {
 			cikisListesi1 = donemeGoreAracCikislari;
 			model.put("kullanici", raporAlinanPersonelBilgileri = kullaniciService.kullaniciGetirr(kullaniciID));
 			model.put("aracCikisListesi", cikisListesi1);
-
 
 			donem = donemAy.toString();
 			model.put("arac", new Arac());

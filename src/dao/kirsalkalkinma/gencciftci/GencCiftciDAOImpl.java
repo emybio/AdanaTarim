@@ -77,10 +77,21 @@ public class GencCiftciDAOImpl implements GencCiftciDAO {
 	@Override
 	public List<GencCiftci> ilceListesi() {
 		Criteria gencCiftci = sessionFactory.getCurrentSession().createCriteria(GencCiftci.class);
-		// gencCiftci.createAlias("mahalle", "mahalle");
+		// gencCiftci.createAlias("mahalle", "mahalle"); 
 		gencCiftci.createAlias("mahalle", "mahalle");
 		gencCiftci.setProjection(Projections.distinct(Projections.property("mahalle.tip")));
 		gencCiftci.addOrder(Order.asc("mahalle.tip"));
+		return gencCiftci.list();
+	}
+	
+	
+	@Override
+	public List<GencCiftci> mahalleListesi() {
+		Criteria gencCiftci = sessionFactory.getCurrentSession().createCriteria(GencCiftci.class);
+		// gencCiftci.createAlias("mahalle", "mahalle");
+		gencCiftci.createAlias("mahalle", "mahalle");
+		gencCiftci.setProjection(Projections.distinct(Projections.property("mahalle")));
+		gencCiftci.addOrder(Order.asc("mahalle"));
 		return gencCiftci.list();
 	}
 
@@ -88,8 +99,8 @@ public class GencCiftciDAOImpl implements GencCiftciDAO {
 	public List<GencCiftci> kategoriListesi() {
 		Criteria gencCiftci = sessionFactory.getCurrentSession().createCriteria(GencCiftci.class);
 		gencCiftci.createAlias("kategori", "kategori");
-		gencCiftci.setProjection(Projections.distinct(Projections.property("kategori.isim")));
-		gencCiftci.addOrder(Order.asc("kategori.isim"));
+		gencCiftci.setProjection(Projections.distinct(Projections.property("kategori")));
+		gencCiftci.addOrder(Order.asc("kategori"));
 		return gencCiftci.list();
 	}
 
@@ -126,12 +137,46 @@ public class GencCiftciDAOImpl implements GencCiftciDAO {
 	}
 
 	@Override
-	public List<GencCiftci> ilceVeKategoriyeGoreListe(Integer kategori, String ilce) {
+	public List<GencCiftci> ilceVeKategoriyeGoreListe(String kategori, String ilce, Integer yil) {
+
 		Criteria gencCiftci = sessionFactory.getCurrentSession().createCriteria(GencCiftci.class);
 		gencCiftci.createAlias("kategori", "kategori");
-		gencCiftci.add(Restrictions.eq("kategori.id", kategori));
 		gencCiftci.createAlias("mahalle.tip", "mahalle");
-		gencCiftci.add(Restrictions.eq("mahalle.isim", ilce));
+
+		if (!ilce.isEmpty() && kategori.isEmpty() && yil == null) {
+			gencCiftci.add(Restrictions.eq("mahalle.isim", ilce));
+			System.out.println("1");
+		} else if (ilce.isEmpty() && kategori.isEmpty() && yil != null) {
+			gencCiftci.add(Restrictions.eq("yil", yil));
+			System.out.println("2");
+
+		} else if (ilce.isEmpty() && !kategori.isEmpty() && yil == null) {
+			gencCiftci.add(Restrictions.eq("kategori.isim", kategori));
+		} else if (!ilce.isEmpty() && yil != null && kategori.isEmpty()) {
+			System.out.println("3");
+			gencCiftci.add(Restrictions.eq("mahalle.isim", ilce));
+			gencCiftci.add(Restrictions.eq("yil", yil));
+
+		} else if (!ilce.isEmpty() && !kategori.isEmpty() && yil == null) {
+			System.out.println("4");
+			gencCiftci.add(Restrictions.eq("mahalle.isim", ilce));
+			gencCiftci.add(Restrictions.eq("kategori.isim", kategori));
+
+		} else if (ilce.isEmpty() && !kategori.isEmpty() && yil != null) {
+			System.out.println("5");
+			gencCiftci.add(Restrictions.eq("yil", yil));
+			gencCiftci.add(Restrictions.eq("kategori.isim", kategori));
+
+		} else if (!ilce.isEmpty() && !kategori.isEmpty() && yil != null) {
+			System.out.println("6");
+			gencCiftci.add(Restrictions.eq("yil", yil));
+			gencCiftci.add(Restrictions.eq("kategori.isim", kategori));
+			gencCiftci.add(Restrictions.eq("mahalle.isim", ilce));
+
+		} else if (ilce.isEmpty() && yil == null && kategori.isEmpty()) {
+			System.out.println("7");
+			return gencCiftci.list();
+		}
 		return gencCiftci.list();
 	}
 
@@ -144,7 +189,35 @@ public class GencCiftciDAOImpl implements GencCiftciDAO {
 		}
 		gencCiftci.createAlias("mahalle.tip", "mahalle");
 		gencCiftci.add(Restrictions.eq("mahalle.isim", ilce));
-		gencCiftci.add(Restrictions.eq("ilce", yil));
+		gencCiftci.add(Restrictions.eq("yil", yil));
+		gencCiftci.setProjection(Projections.rowCount());
+		return (Long) gencCiftci.uniqueResult();
+	}
+
+	@Override
+	public List<GencCiftci> yillaraGoreListe(Integer yil) {
+		Criteria gencCiftci = sessionFactory.getCurrentSession().createCriteria(GencCiftci.class);
+		if (yil != null)
+			gencCiftci.add(Restrictions.eq("yil", yil));
+
+		return gencCiftci.list();
+	}
+
+	@Override
+	public List<GencCiftci> yilListesi() {
+		Criteria gencCiftci = sessionFactory.getCurrentSession().createCriteria(GencCiftci.class);
+		gencCiftci.setProjection(Projections.distinct(Projections.property("yil")));
+		return gencCiftci.list();
+	}
+
+	@Override
+	public Long ilceyeVeKategoriyeGoreKayitSayisi(Long kategori, Long ilce) { 
+		Criteria gencCiftci = sessionFactory.getCurrentSession().createCriteria(GencCiftci.class);
+
+		gencCiftci.createAlias("mahalle", "mahalle");
+		gencCiftci.createAlias("kategori", "kategori");
+		gencCiftci.add(Restrictions.eq("mahalle.id", ilce));
+		gencCiftci.add(Restrictions.eq("kategori.id", kategori));
 		gencCiftci.setProjection(Projections.rowCount());
 		return (Long) gencCiftci.uniqueResult();
 	}

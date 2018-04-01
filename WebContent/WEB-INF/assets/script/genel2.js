@@ -21,9 +21,9 @@ function altTipleriGetir(ustTipId) {
 				var options = select.attr('options');
 			}
 			jq('option', select).remove();
-			
+
 			options[options.length] = new Option("Seçiniz", 0)
-			
+
 			;
 			jq.each(gelen, function(id, adi) {
 
@@ -218,7 +218,8 @@ function markaGetir(altTipId) {
 
 function markaGeti(altTipId) {
 
-	// alert("merkaGeti çalıştı..");
+	var mahalleID = xyz;
+	var mahalleIsim = qwerty;
 	jq.ajax({
 		type : "POST",
 		url : "../arazi-cikislari/markageti",
@@ -228,6 +229,7 @@ function markaGeti(altTipId) {
 			altTipId : altTipId
 		},
 		success : function(gelen) {
+
 			var select = jq('#slctMarka');
 			if (select.prop) {
 				var options = select.prop('options');
@@ -236,11 +238,18 @@ function markaGeti(altTipId) {
 				select.addClass("chosen-select");
 			}
 			jq('option', select).remove();
-			// options[options.length] = new Option("Seçiniz", 0);
+			// options[options.length] = new Option("", "");
+
 			jq.each(gelen, function(id, adi) {
 				options[options.length] = new Option(adi, id);
 
+				if (Number(mahalleID) == Number(id)) {
+					jq('#slctMarka').val(Number(mahalleID));
+				}
+				;
+
 			});
+
 		},
 		error : function(xhr, textStatus, errorThrown) {
 		}
@@ -432,3 +441,12 @@ function gencCiftciMahalleGetir(altTipId) {
 		}
 	});
 }
+
+var xyz = function requestScopeFunctionForId(id) {
+
+	return id;
+}();
+
+var qwerty = function requestScopeFunctionForIsim(isim) {
+	return isim;
+}();

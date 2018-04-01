@@ -42,7 +42,7 @@ public class JstlView extends InternalResourceView {
 		request.setAttribute("izinVerilenParselAlani", model.get("izinVerilenParselAlani"));
 		request.setAttribute("izinVerilmeyenParselSayisi", model.get("izinVerilmeyenParselSayisi"));
 		request.setAttribute("izinVerilmeyenParselAlani", model.get("izinVerilmeyenParselAlani"));
-
+ 
 		request.setAttribute("izinFormu", model.get("izinFormu"));
 
 		request.setAttribute("kullaniciListesi", model.get("kullaniciListesi"));
@@ -60,7 +60,11 @@ public class JstlView extends InternalResourceView {
 		request.setAttribute("saatler", model.get("saatler"));
 		request.setAttribute("aylar", model.get("aylar"));
 		request.setAttribute("yillar", model.get("yillar"));
-
+		request.setAttribute("secilenYil", model.get("secilenYil"));
+		request.setAttribute("secilenIlce", model.get("secilenIlce"));
+		request.setAttribute("secilenKategori", model.get("secilenKategori"));
+		request.setAttribute("secilenMahalleID", model.get("secilenMahalleID"));
+		request.setAttribute("secilenMahalleIsim", model.get("secilenMahalleIsim"));
 		request.setAttribute("arac", model.get("arac"));
 		request.setAttribute("aracTalep", model.get("aracTalep"));
 		request.setAttribute("kooperatif", model.get("kooperatif"));
@@ -95,11 +99,12 @@ public class JstlView extends InternalResourceView {
 
 		requestDispatcher.include(request, response);
 		/*
-		 * HttpSession session = request.getSession(false); if (!session.isNew() &&
-		 * session != null) {
+		 * HttpSession session = request.getSession(false); if (!session.isNew()
+		 * && session != null) {
 		 * 
 		 * requestDispatcher.include(request, response);
-		 * System.out.println("jstlview session iptal mi? : " + session.isNew()); }
+		 * System.out.println("jstlview session iptal mi? : " +
+		 * session.isNew()); }
 		 * 
 		 * 
 		 * request.getRequestDispatcher("redirect:./anasayfa");

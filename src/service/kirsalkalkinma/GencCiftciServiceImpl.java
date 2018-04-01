@@ -69,4 +69,29 @@ public class GencCiftciServiceImpl implements GencCiftciService {
 		return gencCiftciDAO.ilceyeVeYillaraGoreKayitSayisi(yil, ilce);
 	}
 
+	@Override
+	public List<GencCiftci> yillaraGoreListe(Integer yil) {
+		return gencCiftciDAO.yillaraGoreListe(yil);
+	}
+
+	@Override
+	public List<GencCiftci> yilListesi() {
+		return gencCiftciDAO.yilListesi();
+	}
+
+	@Override
+	public List<GencCiftci> ilceVeKategoriyeGoreListe(String kategori, String ilce, Integer yil) {
+		return gencCiftciDAO.ilceVeKategoriyeGoreListe(kategori, ilce, yil);
+	}
+
+	@Override
+	public Long ilceyeVeKategoriyeGoreKayitSayisi(Long kategori, Long ilce) {
+		return gencCiftciDAO.ilceyeVeKategoriyeGoreKayitSayisi(kategori, ilce);
+	}
+
+	@Override
+	public List<GencCiftci> mahalleListesi() {
+		return gencCiftciDAO.mahalleListesi(); 
+	}
+
 }

@@ -470,7 +470,7 @@ console.log("cookie ID2: " + '${cookie.id.value}');
 				onchange="islemTipineGöreTabloGetir(this.value);tipDegistir()">
 				<option value="0">Lütfen İşlem Tipini Seçiniz..---</option>
 				<option value="SATIŞ (5403)">SATIŞ (5403)</option>
-				<option value="VASIF">VASIF</option>
+				<option value="VASIF">VASIF DEĞİŞİKLİĞİ</option>
 				<option value="MİRAS">MİRAS</option>
 				<option value="3083">3083</option>
 				<option value="İFRAZ">İFRAZ</option>

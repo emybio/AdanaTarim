@@ -33,10 +33,8 @@ import com.google.gson.Gson;
 
 import araclar.Birimler;
 import araclar.Genel;
-import araclar.RolesEnum;
 import forms.Kullanici;
 import forms.Yerler;
-import forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirim;
 import forms.kirsalkalkinma.gencciftci.GencCiftci;
 import forms.kirsalkalkinma.gencciftci.GencCiftciKategori;
 import service.YerEklemeService;
@@ -45,7 +43,6 @@ import service.kirsalkalkinma.GencCiftciService;
 
 @Controller
 @RequestMapping(value = "/kirsal-kalkinma")
-@SuppressWarnings("unlikely-arg-type")
 public class GenCiftciController {
 
 	@Autowired
@@ -412,7 +409,9 @@ public class GenCiftciController {
 	@RequestMapping(value = "/genc-ciftci-liste")
 	public String gencCiftciListesi(ModelMap model) {
 		model.put("title", "Genç Çiftçi Listesi");
-
+		model.put("kategoriListesi", gencCiftciService.kategoriListesi());
+		model.put("yillar", gencCiftciService.yilListesi());
+		model.put("ilceListesi", ilceler.altTipGetir(2l, true));
 		model.put("gencCiftci", gencCiftciService.tumGencCiftciler());
 
 		return "KirsalKalkinma/GencCiftciListe";
@@ -460,11 +459,12 @@ public class GenCiftciController {
 					"attachment; filename=" + "Genc_Ciftci_Yatirimlar_Listesi" + ".xlsx");
 
 		}
-		return new ModelAndView("xlsxView", "gencCiftci", yatirimListeleri(a, ilce));
+		return new ModelAndView("xlsxView", "gencCiftci", yatirimListeleri(a, ilce, a));
 	}
 
 	public List<GencCiftci> yatirimListeleri(@RequestParam(value = "kategori", required = false) Integer etapNo,
-			@RequestParam(value = "ilce", required = false) String ilce) {
+			@RequestParam(value = "ilce", required = false) String ilce,
+			@RequestParam(value = "yil", required = false) Integer yil) {
 
 		if (etapNo != null) {
 
@@ -473,11 +473,42 @@ public class GenCiftciController {
 		} else if (ilce != null) {
 
 			return gencCiftciService.ilceyeGoreListe(ilce);
+		} else if (yil != null) {
+
+			return gencCiftciService.yillaraGoreListe(yil);
 		}
 
 		else {
 
 			return gencCiftciService.tumGencCiftciler();
 		}
+	}
+
+	@RequestMapping(value = "/filtreyeGoreGencCiftciListeGetir")
+	public String filtreyeGoreGencCiftciListeGetir(ModelMap model,
+			@RequestParam(value = "ilce", required = false) String ilce,
+			@RequestParam(value = "kategori", required = false) String kategori,
+			@RequestParam(value = "yil", required = false) Integer yil) {
+		model.put("title", "Filtre-Genc Ciftci");
+		model.put("yillar", gencCiftciService.yilListesi());
+		model.put("ilceListesi", ilceler.altTipGetir(2l, true));
+		model.put("kategoriListesi", gencCiftciService.kategoriListesi());
+		model.put("secilenYil", yil);
+		model.put("secilenIlce", ilce);
+		model.put("secilenKategori", kategori);
+		model.put("secilenMahalleID", gencCiftciService.mahalleListesi());
+		model.put("gencCiftci", gencCiftciService.ilceVeKategoriyeGoreListe(kategori, ilce, yil));
+		return "KirsalKalkinma/GencCiftciListe";
+
+	}
+
+	@RequestMapping(value = "/ilceyeVeKategoriyeGoreKayitSayisi")
+	public @ResponseBody Long ilceyeVeKategoriyeGoreKayitSayisi(ModelMap model,
+			@RequestParam(value = "ilce", required = false) Long ilce,
+			@RequestParam(value = "kategori", required = false) Long kategori) {
+		System.out.println("kayýt sayýlarý : " + gencCiftciService.ilceyeVeKategoriyeGoreKayitSayisi(kategori, ilce));
+		System.out.println("ilce : " + ilce + " kategori : " + kategori);
+		return gencCiftciService.ilceyeVeKategoriyeGoreKayitSayisi(kategori, ilce);
+
 	}
 }

@@ -172,8 +172,12 @@ select {
 		jq(".personelGoster").hide();
 
 	}); */
+	
+	
 
 	jq(document).ready(function() {
+		
+		
 		 jq('[data-toggle="tooltip"]').tooltip();   
 		//jq('table').css({"opacity":".0"}); 
 		jq("#aracListesi").css({
@@ -193,7 +197,12 @@ select {
 		var guncellenecekID = parseInt('${arac.id}');
 		var ilceID = parseInt('${arac.ilce.id}');
 		var mahalleID = parseInt('${arac.mahalle.id}');
-
+		var mahalleIsim ='${secilenMahalleIsim}';
+		qwerty=mahalleIsim;
+		xyz=mahalleID;
+	console.log("mahalleID: "+xyz);
+	console.log("mahalleIsim: "+qwerty);
+		
 		/*alert1(!isNaN(guncellenecekID))*/
 		if (!isNaN(guncellenecekID)) {
 			console.log("ilceID: " + ilceID);
@@ -219,6 +228,23 @@ select {
 		);
 	});
 </script>
+
+<c:if test="${arac.id ne 0 or arac.id ne null }">
+
+
+	<script>
+
+jq(document).ready(function() {
+	
+	ikisibiradamarkala('${arac.ilce.id}');
+
+		//jq("#slctMarka").val('${requestScope.secilenMahalle}').prop('selected',true);
+	//alert('${requestScope.secilenMahalle}');
+});
+
+
+</script>
+</c:if>
 <div class="container">
 	<c:if test="${empty errors}">
 		<button type="button" class="btn btn-info btn-sm"
@@ -262,7 +288,6 @@ select {
 				</h3>
 				<div class="table">
 					<table class="table table-striped bg-info">
-
 						<form:form action="donemeGoreGetir" method="get">
 							<thead>
 								<tr>
@@ -281,8 +306,6 @@ select {
 										</c:forEach>
 
 								</select></td>
-
-
 								<td><select data-placeholder="Ay Seç."
 									style="border: none;" name="donemAy" id="donemAy" class="donem">
 										<option value="" label="--- Seçiniz ---" />
@@ -301,16 +324,12 @@ select {
 
 											</c:forEach>
 										</c:if>
-
 										<c:if test="${!empty kullaniciListesi2}">
 											<c:forEach items="${kullaniciListesi2}" var="kullanici"
 												varStatus="sira">
 												<option value="${kullanici.id}">${kullanici.adi}</option>
-
 											</c:forEach>
 										</c:if>
-
-
 								</select></td>
 							</tr>
 							<tr>
@@ -323,229 +342,285 @@ select {
 			</div>
 		</div>
 	</c:if>
-	<div class="container">
-		<c:if test="${empty errors}">
-			<div class="col-lg-12">
-				<h3>Görev Ekle</h3>
-				<div class="table bg-info">
-					<table class="table table-striped bg-info"
-						style="text-align: center;">
-						<thead style="text-align: center; height: 300px;">
-							<tr>
-								<th rowspan="2">PERSONEL</th>
-								<th rowspan="2">ARAÇ PLAKASI</th>
-								<th rowspan="2">ÖZEL ARAÇ</th>
-								<th colspan="2" style="text-align: center;">GİDİLEN YER</th>
-								<th rowspan="2" style="text-align: center;">TARİH</th>
-								<th rowspan="2">ÇIKIŞ SAATİ</th>
-								<th rowspan="2">GİRİŞ SAATİ</th>
-								<th rowspan="2">İŞİN ÖZETİ</th>
-							</tr>
-							<tr>
-
-								<th style="text-align: center;">İLÇE</th>
-								<th style="text-align: center;">MAHALLE</th>
-
-
-							</tr>
-						</thead>
-						<form:form commandName="arac" method="post"
-							action="araziCikisEkle">
-							<form:hidden path="id" />
-
-							<tr>
-
-								<td style="width: 200px;"><div class="personel">
-										<form:select data-placeholder="Personel Seç." multiple="true"
-											path="kullaniciList" name="kullaniciList"
-											class="chosen-select chosen-ltr">
-											<form:options items="${girisYapanKullanici}" itemValue="id"
-												itemLabel="adi" />
-										</form:select>
-										<span class="uyariYazisi"></span>
-									</div></td>
-								<td><form:select path="resmiPlaka" id="resmiPlaka">
-										<form:option value="01R9533">01 R 9532</form:option>
-										<form:option value="01R9533">01 R 9533</form:option>
-										<form:option value="01EAY77">01 EAY 77</form:option>
-										<form:option value="01R9249">01 R 9249</form:option>
-										<form:option value="01R9404">01 R 9404</form:option>
-										<form:option value="01CAD12">01 CAD 12</form:option>3
-									<form:option value="01ASL28">01 ASL 28</form:option>
-										<form:option value="01ASL29">01 ASL 29</form:option>
-									</form:select></td>
-								<td><form:input path="ozelPlaka" type="text" id="ozelPlaka"
-										style="text-transform: uppercase;" onkeyup="buyukHarf();" /></td>
-								<!--ilce-->
-								<td>
-
-
-									<div class="ilce">
-										<form:select path="ilce.id" id="slctAltTip" class="ilceSec"
-											onChange="ikisibiradamarkala(this.value)">
-											<form:option value=""></form:option>
-											<form:options items="${ilceListesi}" itemValue="id"
-												itemLabel="isim" />
-
-										</form:select>
-									</div>
-
-
-								</td>
-								<td>
-
-									<div class="mahalle">
-										<form:select path="mahalle.id" id="slctMarka"
-											class="mahalleSec">
-
-											<form:options items="${markaListesi}" itemValue="id"
-												itemLabel="isim" />
-										</form:select>
-										<span class="uyariYazisi"></span>
-									</div>
-								</td>
-
-								<td><div class="tarih">
-
-										<form:input path="tarih" type="date" onkeydown="return false"
-											id="date" />
-										<span class="uyariYazisi"></span>
-									</div></td>
-								<td><form:select path="cikisSaati" items="${saatler}">
-
-									</form:select></td>
-								<td><form:select path="girisSaati" items="${saatler}">
-									</form:select></td>
-								<td><div class="aciklama">
-										<form:input path="aciklama" type="text" id="aciklama" />
-										<span class="uyariYazisi"></span>
-									</div></td>
-							</tr>
-
-							<tr>
-								<c:if test="${tusYazisi=='Kaydet' }">
-									<td colspan="9" align="right"><input type="button"
-										onclick="formControl();"
-										class="btn btn-primary pull-right btn-lg" value="${tusYazisi}" /></td>
-								</c:if>
-								<c:if test="${tusYazisi=='Güncelle' }">
-									<td colspan="5" align="right"><input type="button"
-										onclick="formControl();" class="btn btn-primary btn-block"
-										value="${tusYazisi}" /></td>
-									<td colspan="4"><input type="button"
-										class="btn btn-danger btn-block"
-										onclick="javascript:location.href='./vazgec' " value="Vazgeç"></td>
-
-								</c:if>
-							</tr>
-						</form:form>
-					</table>
-				</div>
-			</div>
-		</c:if>
-		<div class="col-sm-9 col-md-6 col-lg-12">
-			<c:if test="${!empty errors}">
-
-
-				<div class="alert alert-danger " role="alert">
-					<strong>${errors }</strong>
-				</div>
-
-
-
-			</c:if>
-			<h3 class="sub-header">Araç Çıkış Listesi</h3>
-			<div class="table-responsive">
-				<table class="table table-striped bg-info" id="aracListesi"
-					style="text-align: center">
-
-					<thead>
+	<c:if test="${empty errors}">
+		<div class="col-lg-12">
+			<h3>Görev Ekle</h3>
+			<div class="table bg-info">
+				<table class="table table-striped bg-info"
+					style="text-align: center;">
+					<thead style="text-align: center; height: 300px;">
 						<tr>
-							<th>Sil</th>
-							<th>Edit</th>
-							<th>#</th>
-							<th width="150px">Personel</th>
-							<th>Plaka</th>
-							<th>Gidilen Yer</th>
-							<th>Çıkış Tarihi</th>
-							<th>Çıkış Saati</th>
-							<th>Giriş Saati</th>
-							<th>İşin Özeti</th>
-							<th>Kaydeden</th>
-							<th>Kayıt Zamani</th>
-							<th>Görev Raporu</th>
+							<th rowspan="2">PERSONEL</th>
+							<th rowspan="2">ARAÇ PLAKASI</th>
+							<th rowspan="2">ÖZEL ARAÇ</th>
+							<th colspan="2" style="text-align: center;">GİDİLEN YER</th>
+							<th rowspan="2" style="text-align: center;">TARİH</th>
+							<th rowspan="2">ÇIKIŞ SAATİ</th>
+							<th rowspan="2">GİRİŞ SAATİ</th>
+							<th rowspan="2">İŞİN ÖZETİ</th>
+						</tr>
+						<tr>
+
+							<th style="text-align: center;">İLÇE</th>
+							<th style="text-align: center;">MAHALLE</th>
+
+
 						</tr>
 					</thead>
-					<tbody>
-						<c:forEach items="${aracCikisListesi}" var="cikis"
-							varStatus="sira">
+					<form:form commandName="arac" method="post" action="araziCikisEkle">
+						<form:hidden path="id" />
+						<form:hidden path="mahalle.id" />
+
+						<tr>
+							<td style=""><div class="personel">
+									<form:select data-placeholder="Personel Seç." multiple="true"
+										path="kullaniciList" name="kullaniciList"
+										class="chosen-select chosen-ltr ">
+										<c:set var="i" value=""></c:set>
+										<c:forEach items="${kullanici }" var="x" varStatus="j">
+
+											<c:set var="i" value="${j.index }"></c:set>
+										</c:forEach>
+										<c:forEach items="${girisYapanKullanici}" var="k" varStatus="">
+											<option value="${k.id}"
+												${kullanici[0].id == k.id ? 'selected' : ''}
+												${kullanici[1].id == k.id ? 'selected' : ''}
+												${kullanici[2].id == k.id ? 'selected' : ''}
+												${kullanici[3].id == k.id ? 'selected' : ''}
+												${kullanici[4].id == k.id ? 'selected' : ''}>
 
 
-
-							<c:if test="${!empty cikis.kullaniciList }">
-								<tr class="satirno${cikis.id}">
-
-									<td><img
-										src="<c:url value="/assets/images/Delete-32.png" />"
-										width="21px" onclick="tipsil(${cikis.id})"
-										title="Silmek İçin Tıklayın" /></td>
-									<td><a href="./duzenle/${cikis.id}"><img
-											src="<c:url value="/assets/images/duzenle.png" />"
-											width="21px" title="Değiştirmek İçin Tıklayın" /></a></td>
-									<td>${sira.count }</td>
-
-									<td width="150px"><span id="goster"><button
-												type="button" class="btn btn-info btn-xs"
-												data-toggle="modal" data-target="#myModal${cikis.id}">Personel
-												Listesi</button></span> <!-- Modal -->
-										<div class="modal fade" id="myModal${cikis.id}" role="dialog">
-											<div class="modal-dialog">
-
-												<!-- Modal content-->
-												<div class="modal-content">
-													<div class="modal-header">
-														<button type="button" class="close" data-dismiss="modal">&times;</button>
-														<h4 class="modal-title">${cikis.ilce.isim}-${cikis.mahalle.isim}&nbsp;${cikis.tarih}&nbsp;Tarihli
-															Görev Listesi</h4>
-													</div>
-													<div class="modal-body">
-														<c:forEach items="${cikis.kullaniciList}" var="kullanici"
-															varStatus="index">
-															<span class="personelGoster"></span>
-
-															<p>${index.count}-${kullanici.adi}</p>
-														</c:forEach>
-													</div>
-													<div class="modal-footer">
-														<button type="button" class="btn btn-default"
-															data-dismiss="modal">Kapat</button>
-													</div>
-												</div>
-
-											</div>
-										</div></td>
+												${k.adi}</option>
+										</c:forEach>
+									</form:select>
+									<span class="uyariYazisi"></span>
+								</div></td>
+							<td><form:select path="resmiPlaka" id="resmiPlaka">
+									<form:option value="01R9533">01 R 9532</form:option>
+									<form:option value="01R9533">01 R 9533</form:option>
+									<form:option value="01EAY77">01 EAY 77</form:option>
+									<form:option value="01R9249">01 R 9249</form:option>
+									<form:option value="01R9404">01 R 9404</form:option>
+									<form:option value="01CAD12">01 CAD 12</form:option>3
+									<form:option value="01ASL28">01 ASL 28</form:option>
+									<form:option value="01ASL29">01 ASL 29</form:option>
+								</form:select></td>
+							<td><form:input path="ozelPlaka" type="text" id="ozelPlaka"
+									style="text-transform: uppercase;" onkeyup="buyukHarf();" /></td>
+							<!--ilce-->
+							<td>
 
 
-									<c:if test="${!empty cikis.ozelPlaka}">
-										<td>Ö-${cikis.ozelPlaka }</td>
-									</c:if>
-									<c:if test="${!empty cikis.resmiPlaka }">
-										<td>R-${cikis.resmiPlaka }</td>
-									</c:if>
-									<td>${cikis.ilce.isim}-${cikis.mahalle.isim}</td>
-									<td>${cikis.tarih}</td>
-									<td>${cikis.cikisSaati}</td>
-									<td>${cikis.girisSaati}</td>
-									<td>${cikis.aciklama}</td>
-									<td>${cikis.islemyapan.adi}</td>
-									<td>${cikis.islemZamani}</td>
-									<td><a href="./gorevDonusRaporuYazdir?id=${cikis.id}">Rapor
-											Görüntüle</a></td>
-								</tr>
+								<div class="ilce">
+									<form:select path="ilce.id" id="slctAltTip" class=""
+										onChange="ikisibiradamarkala(this.value)">
+										<form:option value=""></form:option>
+										<form:options items="${ilceListesi}" itemValue="id"
+											itemLabel="isim" />
+
+									</form:select>
+								</div>
+
+
+							</td>
+							<td>
+
+								<div class="mahalle">
+									<form:select path="mahalle.id" id="slctMarka"
+										class="mahalleSec">
+										<c:forEach items="${markaListesi}" var="marka">
+											<option value="${marka.id }"
+												${arac.mahalle.id == marka.id ? 'selected' : ''}>${marka.isim }</option>
+										</c:forEach>
+									</form:select>
+
+									<span class="uyariYazisi"></span>
+								</div>
+							</td>
+
+							<td><div class="tarih">
+
+									<form:input path="tarih" type="date" onkeydown="return false"
+										id="date" />
+									<span class="uyariYazisi"></span>
+								</div></td>
+							<td><form:select path="cikisSaati" items="${saatler}">
+
+								</form:select></td>
+							<td><form:select path="girisSaati" items="${saatler}">
+								</form:select></td>
+							<td><div class="aciklama">
+									<form:input path="aciklama" type="text" id="aciklama" />
+									<span class="uyariYazisi"></span>
+								</div></td>
+						</tr>
+
+						<tr>
+							<c:if test="${tusYazisi=='Kaydet' }">
+								<td colspan="9" align="right"><input type="button"
+									onclick="formControl();"
+									class="btn btn-primary pull-right btn-lg" value="${tusYazisi}" /></td>
 							</c:if>
-						</c:forEach>
-					</tbody>
+							<c:if test="${tusYazisi=='Güncelle' }">
+								<td colspan="5" align="right"><input type="button"
+									onclick="formControl();" class="btn btn-primary btn-block"
+									value="${tusYazisi}" /></td>
+								<td colspan="4"><input type="button"
+									class="btn btn-danger btn-block"
+									onclick="javascript:location.href='./vazgec' " value="Vazgeç"></td>
+
+							</c:if>
+						</tr>
+					</form:form>
 				</table>
+			</div>
+		</div>
+	</c:if>
+	<div class="col-sm-9 col-md-6 col-lg-12">
+		<c:if test="${!empty errors}">
+
+
+			<div class="alert alert-danger " role="alert">
+				<strong>${errors }</strong>
+			</div>
+
+
+
+		</c:if>
+		<h3 class="sub-header">Araç Çıkış Listesi</h3>
+		<div class="">
+			<table class="table table-striped bg-info" id="aracListesi"
+				style="text-align: center">
+
+				<thead>
+					<tr>
+						<th>Sil</th>
+						<th>Edit</th>
+						<th>#</th>
+						<th width="150px">Personel</th>
+						<th>Plaka</th>
+						<th>Gidilen Yer</th>
+						<th>Çıkış Tarihi</th>
+						<th>Çıkış Saati</th>
+						<th>Giriş Saati</th>
+						<th>İşin Özeti</th>
+						<th>Kaydeden</th>
+						<th>Kayıt Zamani</th>
+						<th>Görev Raporu</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${aracCikisListesi}" var="cikis" varStatus="sira">
+
+
+
+						<c:if test="${!empty cikis.kullaniciList }">
+							<tr class="satirno${cikis.id}">
+
+								<td><img
+									src="<c:url value="/assets/images/Delete-32.png" />"
+									width="21px" onclick="tipsil(${cikis.id})"
+									title="Silmek İçin Tıklayın" /></td>
+								<td><a href="./duzenle/${cikis.id}"><img
+										src="<c:url value="/assets/images/duzenle.png" />"
+										width="21px" title="Değiştirmek İçin Tıklayın" /></a></td>
+								<td>${sira.count }</td>
+
+								<td width="150px"><span id="goster"><button
+											type="button" class="btn btn-info btn-xs" data-toggle="modal"
+											data-target="#myModal${cikis.id}">Personel Listesi</button></span> <!-- Modal -->
+									<div class="modal fade" id="myModal${cikis.id}" role="dialog">
+										<div class="modal-dialog">
+
+											<!-- Modal content-->
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+													<h4 class="modal-title">${cikis.ilce.isim}-${cikis.mahalle.isim}&nbsp;${cikis.tarih}&nbsp;Tarihli
+														Görev Listesi</h4>
+												</div>
+												<div class="modal-body">
+													<c:forEach items="${cikis.kullaniciList}" var="kullanici"
+														varStatus="index">
+														<span class="personelGoster"></span>
+
+														<p>${index.count}-${kullanici.adi}</p>
+													</c:forEach>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-default"
+														data-dismiss="modal">Kapat</button>
+												</div>
+											</div>
+
+										</div>
+									</div></td>
+
+
+								<c:if test="${!empty cikis.ozelPlaka}">
+									<td>Ö-${cikis.ozelPlaka }</td>
+								</c:if>
+								<c:if test="${!empty cikis.resmiPlaka }">
+									<td>R-${cikis.resmiPlaka }</td>
+								</c:if>
+								<td>${cikis.ilce.isim}-${cikis.mahalle.isim}</td>
+								<td>${cikis.tarih}</td>
+								<td>${cikis.cikisSaati}</td>
+								<td>${cikis.girisSaati}</td>
+								<td>${cikis.aciklama}</td>
+								<td>${cikis.islemyapan.adi}</td>
+								<td>${cikis.islemZamani}</td>
+								<td><a href="./gorevDonusRaporuYazdir?id=${cikis.id}">Rapor
+										Görüntüle</a></td>
+							</tr>
+						</c:if>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="page-header">&nbsp;</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">DENEME</h3>
+		</div>
+		<div class="panel-body">
+			<div style="overflow-x: auto;">
+				<c:set var="toplam" value="${0}"></c:set>
+				<table class="table table-hover table-border">
+					<tr>
+						<td></td>
+						<c:forEach items="${kategoriListesi}" var="kategori">
+							<td>${kategori.isim}</td>
+						</c:forEach>
+					</tr>
+
+					<c:forEach items="${ilceListesi}" var="ilce">
+
+						<tr>
+							<td>${ilce.isim}</td>
+							<c:forEach items="${kategoriListesi}" var="kategori"
+								varStatus="x">
+
+
+								<c:if test="${ilce.id eq mahalle.tip.id }">
+
+									<!-- <script type="text/javascript">
+													ilceyeVeKategoriyeGoreKayitSayisi('${mahalle.id}','${kategori.id}','${mahalle.tip.id}');
+													</script> -->
+									<c:set var="toplam" value="${toplam+1 }"></c:set>
+
+
+								</c:if>
+
+								<td><span>${x.last}-${toplam}</span></td>
+							</c:forEach>
+						</tr>
+					</c:forEach>
+
+
+				</table>
+
 			</div>
 		</div>
 	</div>

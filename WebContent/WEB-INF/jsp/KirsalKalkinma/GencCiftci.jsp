@@ -19,6 +19,7 @@ select {
 	text-overflow: '';
 }
 </style>
+
 </head>
 <body>
 	<div class="container">
@@ -26,8 +27,9 @@ select {
 
 			<div class="col-sm-8 col-sm-offset-2">
 				<h3>
-					<a href="./genc-ciftci-liste" class="btn btn-default pull-right">Genç
-						Çiftçi Listesi <span class="glyphicon glyphicon-list"></span>
+					<a href="./filtreyeGoreGencCiftciListeGetir?yil=&ilce=&kategori="
+						class="btn btn-default pull-right">Genç Çiftçi Listesi <span
+						class="glyphicon glyphicon-list"></span>
 					</a>
 				</h3>
 				<div class="page-header">&nbsp;</div>

@@ -1,16 +1,20 @@
 package forms;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -65,8 +69,9 @@ public class Arac implements java.io.Serializable {
 	@Column(name = "islemzamani")
 	private Date islemZamani;
 
-	@ManyToMany(fetch = FetchType.EAGER) // fetch = FetchType.EAGER, targetEntity = Kullanici.class
-	@Column(name = "personel")
+	@ManyToMany(fetch = FetchType.EAGER) // fetch = FetchType.EAGER,
+											// targetEntity = Kullanici.class
+	@JoinColumn(name = "personel")
 	private List<Kullanici> kullaniciList;
 
 	@Column(name = "donemyil")
@@ -210,6 +215,9 @@ public class Arac implements java.io.Serializable {
 	 * @return the kullaniciList
 	 */
 	public List<Kullanici> getKullaniciList() {
+		if (kullaniciList == null)
+			kullaniciList = new ArrayList<Kullanici>();
+
 		return kullaniciList;
 	}
 
@@ -221,20 +229,7 @@ public class Arac implements java.io.Serializable {
 		this.kullaniciList = kullaniciList;
 	}
 
-	/**
-	 * @param kullanici
-	 * @param islemyapan
-	 * @param tarih
-	 * @param resmiPlaka
-	 * @param ozelPlaka
-	 * @param ilce
-	 * @param mahalle
-	 * @param cikisSaati
-	 * @param girisSaati
-	 * @param aciklama
-	 * @param islemZamani
-	 * @param kullaniciList
-	 */
+	
 	public Arac(Kullanici islemyapan, String tarih, String resmiPlaka, String ozelPlaka, Yerler ilce, Yerler mahalle,
 			String cikisSaati, String girisSaati, String aciklama, Date islemZamani, List<Kullanici> kullaniciList) {
 		// this.kullanici = kullanici;
@@ -307,6 +302,4 @@ public class Arac implements java.io.Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	
-	
 }
