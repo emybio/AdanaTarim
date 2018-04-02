@@ -92,6 +92,8 @@ public class AracTalepController {
 		Kullanici islemyapan = new Kullanici();
 		islemyapan.setId(id);
 
+		System.out.println("ekleme başlangıç");
+		System.out.println("işlem yapan : " + islemyapan.getAdi());
 		arac.setIslemyapan(islemyapan);
 
 		if (result.hasErrors()) {
@@ -127,12 +129,15 @@ public class AracTalepController {
 			HttpServletRequest request) {
 
 		aracService.delete(id);
+		System.out.println("talep listesinden sildi");
 
 		return "{}";
 	}
 
 	@RequestMapping(value = "/vazgecTalep")
 	public String vazgec(@ModelAttribute("aracTalep") AracTalep arac) {
+		// System.out.println("aracVazgeÃ§ mahalle ID: " +
+		// arac.getMahalle().getId());
 		arac.setId(null);
 		arac.setMahalle(null);
 
@@ -160,8 +165,11 @@ public class AracTalepController {
 			String talepTarihi = aracTalepList.get(i).getTarih();
 			Date date = sdf.parse(talepTarihi);
 			Date now = new Date();
-			// (1000 * 60 * 60 * 24) tam 1 gün...
+
 			if (date.before(new Date(now.getTime() - (1000 * 60 * 60 * 24)))) {
+				System.out.println(i + " .talepTarihi : " + sdf.parse(talepTarihi));
+				System.out.println("bir gün önceki tarih : " + new Date(now.getTime() - (1000 * 60 * 60 * 24)));
+				System.out.println("new Date() : " + new Date());
 				aracTalep = aracService.aracCikisGetir(aracTalepList.get(i).getId());
 
 				aracTalep.setIsActive(false);

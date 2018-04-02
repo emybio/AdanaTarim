@@ -77,6 +77,9 @@ public class IzinIslemleriController {
 	@RequestMapping(value = "/izinEkle", method = RequestMethod.GET)
 	public String izinEkle(IzinIslemleri izinIslemleri, Kullanici kullanici) {
 
+		System.out.println(izinIslemleri.getDevirIzinGunSayisi());
+		System.out.println(izinIslemleri.getKalanIzinGunSayisi());
+		System.out.println(izinIslemleri.getTalepEdilenIzinGunSayisi());
 
 		izinIslemleri.setIslemZamani(new Date());
 
@@ -94,6 +97,7 @@ public class IzinIslemleriController {
 	@RequestMapping(value = "/izinGetir", method = RequestMethod.GET)
 	public @ResponseBody String izinGetir(@RequestParam(value = "id") Long id) {
 		Gson gson = new Gson();
+		System.out.println("bas�ld�");
 
 		JSONArray array = new JSONArray();
 
@@ -137,6 +141,9 @@ public class IzinIslemleriController {
 		Calendar islemZamani = Calendar.getInstance();
 		islemZamani.setTime(izin.getIslemZamani());
 		int sonIzinYili = islemZamani.get(Calendar.YEAR);
+		System.out.println(izin.getPersonelId().getIsimSoyisim() + " "
+				+ izin.getKalanIzinGunSayisi() + " xxxxx");
+		System.out.println(suAnkiYil - sonIzinYili);
 
 		if (suAnkiYil - sonIzinYili > 2)								//en son, en az 3 yıl önce izin kullanmışsa
 			if (izin.getPersonelId().getIzinHakki() == 2) {				//izin hakkı 20 gün ise

@@ -90,6 +90,7 @@ public class AracController {
 			kullanici = kullaniciService.kullaniciGetirr(id);
 		}
 		if (result.hasErrors() || id == null) {
+			System.out.println("arac sayfasınnda hata var...");
 			return "redirect:/anasayfa";
 
 		}
@@ -129,6 +130,11 @@ public class AracController {
 		dosyaDurumu = null;
 		if (id != null) {
 
+<<<<<<< HEAD
+=======
+			System.out.println("id kısmına girdi... : " + kullanici.getRoles().getRollAdi());
+
+>>>>>>> parent of 75583d4... GencCiftci jQuery to Excel
 			if (kullanici.getRoles().getRollAdi().equals(araclar.RolesEnum.ROLE_SUPER_ADMIN.toString())
 					|| kullanici.getRoles().getRollAdi().equals(araclar.RolesEnum.ROLE_AUTHORIZED_USER.toString())
 					|| kullanici.getRoles().getRollAdi().equals(araclar.RolesEnum.ROLE_ADMIN.toString())) {
@@ -144,6 +150,7 @@ public class AracController {
 
 			} else {
 				model.put("kullaniciListesi2", kullaniciService.kullanGetir(id));
+				System.out.println("harun doğru");
 				if (donem != "bos") {
 
 					model.put("aracCikisListesi", cikisListesi1);
@@ -154,6 +161,11 @@ public class AracController {
 						model.put("aracCikisListesi", gorevBulCikisListesi);
 					} else {
 
+<<<<<<< HEAD
+=======
+						System.out.println("kim giris yapti : " + aracService.kullaniciyaGoreCikisListesi(id));
+
+>>>>>>> parent of 75583d4... GencCiftci jQuery to Excel
 						// for (int i = 0; i <
 						// aracService.kullaniciyaGoreCikisListesi(id).size();
 						// i++)
@@ -179,6 +191,7 @@ public class AracController {
 			gorevBulCikisListesi = null;
 			return "AraziCikis/AracTakip";
 		} else {
+			System.out.println("/--*/- aracişlemleri ID si null...");
 			return "redirect:/anasayfa";
 
 		}
@@ -191,12 +204,20 @@ public class AracController {
 			@RequestParam(value = "kullaniciList") Long[] personelID) {
 		List<Kullanici> kullaniciListesi = new ArrayList<>();
 		Kullanici personel = new Kullanici();
+		System.out.println("personel: " + personel);
+		System.out.println("arac2: " + arac2);
 
 		for (int i = 0; i < personelID.length; i++) {
 			personel = kullaniciService.kullaniciGetirr(personelID[i]);
+			System.out.println("seçilen personel: " + personel.getAdi());
 			kullaniciListesi.add(personel);
 
 		}
+<<<<<<< HEAD
+=======
+
+		System.out.println("kullanıcı listesi: " + kullaniciListesi.iterator().next());
+>>>>>>> parent of 75583d4... GencCiftci jQuery to Excel
 		arac.setKullaniciList(kullaniciListesi);
 		Kullanici islemyapan = new Kullanici();
 		islemyapan.setId(id);
@@ -209,11 +230,14 @@ public class AracController {
 		}
 		arac.setDonemYil(Integer.valueOf(tarihtekiYil));
 		arac.setDonemAy(Integer.valueOf(tarihtekiAy));
+		System.out.println("ekleme başlangıç");
+		System.out.println("işlem yapan : " + islemyapan.getAdi());
 		arac.setIslemyapan(islemyapan);
 		arac.setIslemZamani(new Date());
 
 		try {
 
+			System.out.println("girilen bilgiler = " + arac);
 			if (arac.getId() == null && aracService.ayniGorevdenVarMi(arac.getMahalle().getId(), arac.getTarih(),
 					arac.getCikisSaati(), arac.getGirisSaati())) {
 				araclar.Genel.errorMessage = "hata";
@@ -302,6 +326,7 @@ public class AracController {
 		String[] isimAyrac = isim.split("\\.");
 		String ayrilanIsim = isimAyrac[0];
 		String ayrilanSoyIsim = isimAyrac[1];
+		System.out.println("çıkış listesi uzunluğu " + cikisListesi.size());
 		String path = "D:\\evraklar\\";
 		String filename = ayrilanIsim.toUpperCase() + " " + ayrilanSoyIsim.toUpperCase()
 				+ ".docx"/* path to a file */;
@@ -370,6 +395,8 @@ public class AracController {
 
 			tableRowTwo.getCell(5).setText(cikisListesi.get(i).getAciklama());
 
+			System.out.println(i + ". kayÄ±t girildi");
+			System.out.println(cikisListesi.get(i).getTarih());
 		}
 
 		for (int i = 0; i < 18 - cikisListesi.size(); i++) {
@@ -384,6 +411,7 @@ public class AracController {
 			tableRowTwo.getCell(4).setText("");
 			tableRowTwo.getCell(5).setText("");
 			tableRowTwo.setHeight(5);
+			System.out.println("boÅŸ satÄ±rlar eklendi...");
 		}
 		XWPFParagraph paragraph2 = document.createParagraph();
 		XWPFRun run2 = paragraph2.createRun();
@@ -423,14 +451,17 @@ public class AracController {
 		// tablo Ã§izgilerini siler
 		tableAlt.getCTTbl().getTblPr().unsetTblBorders();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		System.out.println(isim);
 		Date tarih = new Date();
+		System.out.println(sdf.format(tarih));
 		// path +
 		try {
 			FileOutputStream out = new FileOutputStream(filename);
 			document.write(out);
 			out.close();
-			dosyaDurumu = "Dosya Başarıyla Oluşturuldu...";
+			dosyaDurumu = "Dosya BaÅŸarÄ±yla OluÅŸturuldu...";
 			download = "DOLU";
+			System.out.println("dosya oluÅŸturuldu...");
 
 			// oluÅŸturulan dosyayÄ± indirme linki
 			File file = new File(filename);
@@ -548,6 +579,11 @@ public class AracController {
 			model.put("kullanici", raporAlinanPersonelBilgileri = kullaniciService.kullaniciGetirr(kullaniciID));
 			model.put("aracCikisListesi", cikisListesi1);
 
+<<<<<<< HEAD
+=======
+			System.out.println("cikislistesi1: " + cikisListesi1);
+
+>>>>>>> parent of 75583d4... GencCiftci jQuery to Excel
 			donem = donemAy.toString();
 			model.put("arac", new Arac());
 			// return "AraziCikis/AracTakip";
@@ -623,6 +659,7 @@ public class AracController {
 		aracService.delete(id);
 
 		response.setCharacterEncoding("UTF-8");
+		System.out.println("işlem yapılamadı.");
 		hitCounter++;
 
 		// create cookie and set it in response
@@ -632,6 +669,7 @@ public class AracController {
 
 	@RequestMapping(value = "/vazgec")
 	public String vazgec(@ModelAttribute("arac") Arac arac) {
+		// System.out.println("aracVazgeÃ§ mahalle ID: " +
 		// arac.getMahalle().getId());
 		arac.setId(0l);
 		arac.setMahalle(null);
@@ -670,14 +708,17 @@ public class AracController {
 
 		List<Arac> listBooks = aracService.kullaniciyaGoreCikisListesi(kullaniciID, donemAy, donemYil);
 
+		System.out.println(" 1 " + listBooks);
 		for (Arac a : listBooks) {
 
+			System.out.println(a.getAciklama());
 			donemeGoreAracCikislari.add(new Arac(a.getIslemyapan().getAdi(), a.getResmiPlaka(), a.getOzelPlaka(),
 					a.getIlce().getIsim(), a.getMahalle().getIsim(), a.getCikisSaati(), a.getGirisSaati(),
 					a.getAciklama(), a.getIslemZamani(), a.getDonemYil(), a.getDonemAy()));
 
 		}
 
+		System.out.println(" 2 " + donemeGoreAracCikislari);
 		return new ModelAndView("pdfView", "listBooks", listBooks);
 
 	}

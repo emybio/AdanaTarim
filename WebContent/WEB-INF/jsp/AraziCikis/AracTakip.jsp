@@ -51,7 +51,7 @@ select {
 <c:if test="${!empty errorMessage }">
 
 	<script>
-	//	alert("Aynı göreveden zaten var...");
+		alert("Aynı göreveden zaten var...");
 	</script>
 
 </c:if>
@@ -342,6 +342,7 @@ jq(document).ready(function() {
 			</div>
 		</div>
 	</c:if>
+<<<<<<< HEAD
 	<c:if test="${empty errors}">
 		<div class="col-lg-12">
 			<h3>Görev Ekle</h3>
@@ -360,6 +361,27 @@ jq(document).ready(function() {
 							<th rowspan="2">İŞİN ÖZETİ</th>
 						</tr>
 						<tr>
+=======
+	<div class="container">
+		<c:if test="${empty errors}">
+			<div class="col-lg-12">
+				<h3>Görev Ekle</h3>
+				<div class="table-responsive">
+					<table class="table table-striped bg-info"
+						style="text-align: center;">
+						<thead style="text-align: center; height: 300px;">
+							<tr>
+								<th rowspan="2">PERSONEL</th>
+								<th rowspan="2">ARAÇ PLAKASI</th>
+								<th rowspan="2">ÖZEL ARAÇ</th>
+								<th colspan="2" style="text-align: center;">GİDİLEN YER</th>
+								<th rowspan="2" style="text-align: center;">TARİH</th>
+								<th rowspan="2">ÇIKIŞ SAATİ</th>
+								<th rowspan="2">GİRİŞ SAATİ</th>
+								<th rowspan="2">İŞİN ÖZETİ</th>
+							</tr>
+							<tr>
+>>>>>>> parent of 75583d4... GencCiftci jQuery to Excel
 
 							<th style="text-align: center;">İLÇE</th>
 							<th style="text-align: center;">MAHALLE</th>
