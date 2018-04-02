@@ -89,6 +89,8 @@ public class AraziIslemHareketleriController {
 			return "SatisCesitleri/Satis";
 
 		} else {
+			System.out.println("/--*/- araziişlemleri ID si null...");
+			System.out.println("satiş çeşitlerinde hata ....");
 			return "redirect:/anasayfa";
 
 		}
@@ -102,6 +104,7 @@ public class AraziIslemHareketleriController {
 		Kullanici kullanici = new Kullanici();
 		kullanici.setId(id);
 
+		System.out.println(islemHareketleri.getTarih());
 		islemHareketleri.setKullanici(kullanici);
 		islemHareketleri.setIslemZamani(new Date());
 
@@ -134,6 +137,7 @@ public class AraziIslemHareketleriController {
 		islemHareketleri.setTarih("");
 		arazi = null;
 
+		System.out.println(arazi + "güncellendi");
 		modelAndView.addObject("araziIslem", arazi);
 		tusYazisi = "Kaydet";
 		modelAndView.addObject("tusYazisi", tusYazisi);
@@ -144,6 +148,7 @@ public class AraziIslemHareketleriController {
 	public String d�zenle(@PathVariable("id") Long id) {
 		arazi = araziService.araziIslemGetir(id);
 		tusYazisi = "G�ncelle";
+		System.out.println(arazi.getIlce());
 
 		return "redirect:/satis-cesitleri/satis";
 	}
@@ -159,6 +164,7 @@ public class AraziIslemHareketleriController {
 		// islemHareketleri.setIzinVerilmeyenParselSayisi((Integer) null);
 		islemHareketleri.setId(0);
 		arazi = islemHareketleri;
+		System.out.println(islemHareketleri.getIlce());
 
 		return "redirect:/satis-cesitleri/satis";
 	}
@@ -174,6 +180,7 @@ public class AraziIslemHareketleriController {
 
 	@RequestMapping(value = "/id", method = RequestMethod.GET)
 	public @ResponseBody Long sonIdNo() {
+		System.out.println("id calisti");
 
 		return araziService.sonIdGetir().longValue();
 	}

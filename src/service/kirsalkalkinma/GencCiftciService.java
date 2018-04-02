@@ -7,7 +7,10 @@ import org.json.simple.JSONArray;
 import forms.kirsalkalkinma.gencciftci.GencCiftci;
 
 public interface GencCiftciService {
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of 75583d4... GencCiftci jQuery to Excel
 	public void save(GencCiftci gencCiftci);
 
 	public void delete(Long id);
