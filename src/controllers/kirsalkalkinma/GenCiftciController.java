@@ -122,7 +122,7 @@ public class GenCiftciController {
 		model.put("title", "Genç Çiftçi");
 		model.put("tusYazisi", tusYazisi);
 		tusYazisi = "Ekle";
-
+		gencCiftci = null;
 		return "KirsalKalkinma/GencCiftci";
 	}
 
@@ -132,14 +132,14 @@ public class GenCiftciController {
 			@ModelAttribute("gencCiftci") GencCiftci gencCiftci1, BindingResult result, HttpSession session) {
 		System.out.println("slctTipler : " + slctTipler + "\n" + "slctAltTip : " + slctAltTip + "\n" + "kategori : "
 				+ gencCiftci1.getKategori().getId());
-
+		System.out.println("güncellerken kategori : " + gencCiftci1.getKategori().getIsim());
 		String birim = session.getAttribute("birim").toString();
 
-		if (birim == null || !birim.equals(Birimler.KIRSAL_KALKINMA)) {
-
-			return "redirect:/";
-
-		}
+		// if (birim == null || !birim.equals(Birimler.KIRSAL_KALKINMA)) {
+		//
+		// return "redirect:/";
+		//
+		// }
 		if (result.hasErrors()) {
 
 			System.err.println("genc ciftci : " + result.getFieldError());
@@ -166,7 +166,12 @@ public class GenCiftciController {
 			}
 		}
 
-		gencCiftciService.save(gencCiftci1);
+		try {
+			gencCiftciService.save(gencCiftci1);
+			System.out.println("genç çiftçi baþarýyla eklendi.. ");
+		} catch (Exception e) {
+			System.err.println("genç çiftçi eklemede hata : " + e.getMessage());
+		}
 		gencCiftci = null;
 		tusYazisi = "Ekle";
 		return "redirect:/kirsal-kalkinma/genc-ciftci";
@@ -506,6 +511,7 @@ public class GenCiftciController {
 	public @ResponseBody Long ilceyeVeKategoriyeGoreKayitSayisi(ModelMap model,
 			@RequestParam(value = "ilce", required = false) Long ilce,
 			@RequestParam(value = "kategori", required = false) Long kategori) {
+	
 		System.out.println("kayýt sayýlarý : " + gencCiftciService.ilceyeVeKategoriyeGoreKayitSayisi(kategori, ilce));
 		System.out.println("ilce : " + ilce + " kategori : " + kategori);
 		return gencCiftciService.ilceyeVeKategoriyeGoreKayitSayisi(kategori, ilce);

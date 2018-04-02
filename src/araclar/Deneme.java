@@ -30,6 +30,24 @@ public class Deneme {
 
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
+		
+			    int sum = 0;
+			    int nums[][] = new int[3][5];
+
+			    for (int i = 0; i < 3; i++)
+			      for (int j = 0; j < 5; j++)
+			        nums[i][j] = (i + 1) * (j + 1);
+
+			    for (int x[] : nums) {
+			      for (int y : x) {
+			        System.out.println("Value is: " + y);
+			        sum += y;
+			      }
+			    }
+			    System.out.println("Summation: " + sum);
+			  
+		
+
 
 		//EkonomikYatirimDurumu durum = new EkonomikYatirimDurumu("Başvuru Yapıldı");
 		//EkonomikYatirimDurumu durum1 = new EkonomikYatirimDurumu("Değerlendirme Aşamasında");
@@ -57,9 +75,9 @@ public class Deneme {
 		// Sistemleri", ustK1);
 
 		
-		SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg2.xml").buildSessionFactory();
+		//SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg2.xml").buildSessionFactory();
 
-		Session session = sessionFactory.openSession();
+	//	Session session = sessionFactory.openSession();
 		// EKONOMİK YATIRIM DURUM INSERT
 		// session.save(durum);
 		// session.save(durum1);
@@ -81,10 +99,10 @@ public class Deneme {
 		
 		
 		
-		session.beginTransaction();
-		System.out.println();
-		session.getTransaction().commit();
-		session.close();
+		//session.beginTransaction();
+		//System.out.println();
+		//session.getTransaction().commit();
+		//session.close();
 
 	}
 

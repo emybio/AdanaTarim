@@ -191,10 +191,12 @@ public class AracController {
 			@RequestParam(value = "kullaniciList") Long[] personelID) {
 		List<Kullanici> kullaniciListesi = new ArrayList<>();
 		Kullanici personel = new Kullanici();
-
+		System.out.println("personelID : " + personelID);
 		for (int i = 0; i < personelID.length; i++) {
 			personel = kullaniciService.kullaniciGetirr(personelID[i]);
 			kullaniciListesi.add(personel);
+
+			System.out.println("personelID[i] : " + personelID[i]);
 
 		}
 		arac.setKullaniciList(kullaniciListesi);

@@ -42,6 +42,8 @@ select {
 		}
 	})() 
 	function yillaraGoreGetir() {
+		
+		
 		jq.ajax({
 			type : "GET",
 			url : "./filtreyeGoreGencCiftciListeGetir",
@@ -85,19 +87,22 @@ select {
 		 {
 			 var asd= "#"+id+kategori;
 			console.log("id gosterimi : " + asd)
+			
 			jq.ajax({
 				type : "GET",
 				url : "./ilceyeVeKategoriyeGoreKayitSayisi",
 				dataType : "JSON",
 				contentType : "application/x-www-form-urlencoded;charset=UTF-8",
 				data : {
+					kategori : kategori,
 					ilce : ilce,
-				kategori : kategori,
 				},
+				 beforeSend:function() { 
+				//	 jq("#raporTable").html("<tr><td>İçerik Yükleniyor....</td></tr>");
+			     },
 				success : function(gelen) { 
 					console.log(gelen);
 					jq("#"+id+kategori).text(gelen);
-					
 				},
 				error : function(xhr, textStatus, errorThrown) {
 				//	alert(textStatus);
@@ -196,6 +201,19 @@ select {
 									<col style="background-color: yellow">
 								</colgroup> --%>
 						<thead valign="top">
+							<c:set var="t" value="0"></c:set>
+							<c:set var="x" value="0"></c:set>
+							<tr>
+								<td colspan="4"><b>${fn:length(gencCiftci)} </b>adet kayıt</td>
+								<td colspan="4"><c:forEach items="${gencCiftci}" var="genc"
+										varStatus="i">
+${genc.mahalle.tip.id==11 ? x:x+1}
+										<c:set var="t" value="${t+genc.hibeTutari }"></c:set>
+									</c:forEach> <fmt:setLocale value="tr_TR" /> <fmt:formatNumber
+										pattern="#,##0.00" type="currency" value="${t}" var="t"></fmt:formatNumber>
+
+									${t }&&&&${x }</td>
+							</tr>
 							<tr class="baslik">
 								<%-- <td align="center"></td> --%>
 								<th align="center">Yararlanıcı</th>
@@ -276,11 +294,11 @@ select {
 					<c:set var="toplam" value="${0}"></c:set>
 					<c:set var="string" value=""></c:set>
 
-					<table class="table table-hover table-border">
+					<table class="table table-hover table-border" id="raporTable">
 						<tr>
 							<td></td>
 							<c:forEach items="${kategoriListesi}" var="kategori">
-								<td>${kategori.tip.isim}&${kategori.isim}</td>
+								<td>${kategori.isim}</td>
 							</c:forEach>
 						</tr>
 
@@ -291,24 +309,30 @@ select {
 								<c:forEach items="${kategoriListesi}" var="kategori"
 									varStatus="x">
 
-									<c:forEach items="${gencCiftci}" var="genc" varStatus="i">
-										<c:if
-											test="${ilce.id eq genc.mahalle.tip.id and kategori.id eq genc.kategori.id }">
+									<c:forEach items="${gencCiftci}" var="genc" varStatus="g">
+										<c:set
+											value="${genc.mahalle.tip.id eq 11 and genc.kategori.id eq 1 }"
+											var="deger" />
 
-											<!-- <script type="text/javascript">
-													ilceyeVeKategoriyeGoreKayitSayisi('${mahalle.id}','${kategori.id}','${mahalle.tip.id}');
-													</script> -->
-											<c:set var="toplam" value="${toplam+1 }"></c:set>
+										<c:if test="${deger eq true}">
+
+
+											<c:set var="toplam" value="${toplam+1}"></c:set>
 
 											<c:set var="string" value="${kategori.isim}"></c:set>
+											<!-- <script type="text/javascript">
+													ilceyeVeKategoriyeGoreKayitSayisi('${ilce.id}','${kategori.id}','${toplam}');
+													</script> -->
+
 										</c:if>
 									</c:forEach>
 
-									<td><span>${string}--${x.last}-${toplam}</span></td>
+									<td><span id="${toplam}${kategori.id}"> <%-- ${string}--${x.last}-${toplam} --%>
+									</span></td>
 								</c:forEach>
 							</tr>
 						</c:forEach>
-
+						${toplam}
 
 					</table>
 
