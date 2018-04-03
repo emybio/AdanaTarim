@@ -31,7 +31,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 
-import araclar.Birimler;
 import araclar.Genel;
 import forms.Kullanici;
 import forms.Yerler;
@@ -122,7 +121,7 @@ public class GenCiftciController {
 		model.put("title", "Genç Çiftçi");
 		model.put("tusYazisi", tusYazisi);
 		tusYazisi = "Ekle";
-
+		gencCiftci = null;
 		return "KirsalKalkinma/GencCiftci";
 	}
 
@@ -132,14 +131,14 @@ public class GenCiftciController {
 			@ModelAttribute("gencCiftci") GencCiftci gencCiftci1, BindingResult result, HttpSession session) {
 		System.out.println("slctTipler : " + slctTipler + "\n" + "slctAltTip : " + slctAltTip + "\n" + "kategori : "
 				+ gencCiftci1.getKategori().getId());
-
+		System.out.println("güncellerken kategori : " + gencCiftci1.getKategori().getIsim());
 		String birim = session.getAttribute("birim").toString();
 
-		if (birim == null || !birim.equals(Birimler.KIRSAL_KALKINMA)) {
-
-			return "redirect:/";
-
-		}
+		// if (birim == null || !birim.equals(Birimler.KIRSAL_KALKINMA)) {
+		//
+		// return "redirect:/";
+		//
+		// }
 		if (result.hasErrors()) {
 
 			System.err.println("genc ciftci : " + result.getFieldError());
@@ -166,7 +165,12 @@ public class GenCiftciController {
 			}
 		}
 
-		gencCiftciService.save(gencCiftci1);
+		try {
+			gencCiftciService.save(gencCiftci1);
+			System.out.println("genç çiftçi baþarýyla eklendi.. ");
+		} catch (Exception e) {
+			System.err.println("genç çiftçi eklemede hata : " + e.getMessage());
+		}
 		gencCiftci = null;
 		tusYazisi = "Ekle";
 		return "redirect:/kirsal-kalkinma/genc-ciftci";
@@ -444,25 +448,22 @@ public class GenCiftciController {
 			@RequestParam(value = "ilce", required = false) String ilce) throws UnsupportedEncodingException {
 		response.setContentType("application/vnd.ms-excel");
 		if (null != a) {
-
+			Genel.raporTuru = "kategori";
 			response.setHeader("Content-disposition",
 					"attachment; filename=" + a + "_Kategorisinde_" + "Yatirimlar_Listesi" + ".xlsx");
 		} else if (null != ilce) {
+			Genel.raporTuru = "ilce";
 			String fileName = URLEncoder.encode(ilce + "_Ýlcesi_" + "Yatirimlar_Listesi", "UTF-8");
 			response.setHeader("Content-disposition", "attachment; filename=" + fileName + ".xlsx");
 		}
 
 		else {
-
+			Genel.raporTuru = "tumListe";
 			response.setHeader("Content-disposition",
 					"attachment; filename=" + "Genc_Ciftci_Yatirimlar_Listesi" + ".xlsx");
 
 		}
-<<<<<<< HEAD
 		return new ModelAndView("xlsxView", "gencCiftci", yatirimListeleri(a, ilce, a));
-=======
-		return new ModelAndView("xlsxView", "gencciftci", yatirimListeleri(a, ilce));
->>>>>>> parent of 75583d4... GencCiftci jQuery to Excel
 	}
 
 	public List<GencCiftci> yatirimListeleri(@RequestParam(value = "kategori", required = false) Integer etapNo,
@@ -489,9 +490,18 @@ public class GenCiftciController {
 
 	@RequestMapping(value = "/filtreyeGoreGencCiftciListeGetir")
 	public String filtreyeGoreGencCiftciListeGetir(ModelMap model,
+			@RequestParam(value = "sayfano", required = false) Integer sayfaNo,
 			@RequestParam(value = "ilce", required = false) String ilce,
 			@RequestParam(value = "kategori", required = false) String kategori,
 			@RequestParam(value = "yil", required = false) Integer yil) {
+		if (sayfaNo == null)
+			sayfaNo = 1;
+
+		model.put("sayfa", sayfaNo);
+		model.put("sayfalar",
+				araclar.Genel.sayfalar(sayfaNo, gencCiftciService.kayitSayisi(kategori, ilce, yil, sayfaNo),
+						"./filtreyeGoreGencCiftciListeGetir?ilce=" + ilce + "&kategori=" + kategori + "&yil="
+								+ (yil == null ? "" : yil)));
 		model.put("title", "Filtre-Genc Ciftci");
 		model.put("yillar", gencCiftciService.yilListesi());
 		model.put("ilceListesi", ilceler.altTipGetir(2l, true));
@@ -500,7 +510,7 @@ public class GenCiftciController {
 		model.put("secilenIlce", ilce);
 		model.put("secilenKategori", kategori);
 		model.put("secilenMahalleID", gencCiftciService.mahalleListesi());
-		model.put("gencCiftci", gencCiftciService.ilceVeKategoriyeGoreListe(kategori, ilce, yil));
+		model.put("gencCiftci", gencCiftciService.ilceVeKategoriyeGoreListe(kategori, ilce, yil, sayfaNo));
 		return "KirsalKalkinma/GencCiftciListe";
 
 	}
@@ -509,6 +519,7 @@ public class GenCiftciController {
 	public @ResponseBody Long ilceyeVeKategoriyeGoreKayitSayisi(ModelMap model,
 			@RequestParam(value = "ilce", required = false) Long ilce,
 			@RequestParam(value = "kategori", required = false) Long kategori) {
+
 		System.out.println("kayýt sayýlarý : " + gencCiftciService.ilceyeVeKategoriyeGoreKayitSayisi(kategori, ilce));
 		System.out.println("ilce : " + ilce + " kategori : " + kategori);
 		return gencCiftciService.ilceyeVeKategoriyeGoreKayitSayisi(kategori, ilce);

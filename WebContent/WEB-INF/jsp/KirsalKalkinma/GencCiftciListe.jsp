@@ -9,7 +9,8 @@
 <!DOCTYPE html >
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="content-type"
+	content="application/vnd.ms-excel; charset=UTF-8">
 <title>JQuery-validation demo | Bootstrap</title>
 <style type="text/css">
 select {
@@ -41,6 +42,8 @@ select {
 		}
 	})() 
 	function yillaraGoreGetir() {
+		
+		
 		jq.ajax({
 			type : "GET",
 			url : "./filtreyeGoreGencCiftciListeGetir",
@@ -65,15 +68,25 @@ select {
 	}
 	//select boxta seçilen değerin submittern sonra da seçili kalaması için script kodu;
 	jq(document).ready(
+			
+			
 			function() {
-				jq("#yi").val("${requestScope.yillar}").attr('selected',
-						'${requestScope.secilenYil}');
-				
+				var sayfaNumara= ('${fn:escapeXml(param.sayfano)}');
+			
+	if(sayfaNumara != ''){
+			jq("."+sayfaNumara).addClass("btn btn-success btn-lg bg-success").css("background-color","#FF8800");
+	}
+		
+		
 								
 				jq("#filtreText").click(function(){
-					var link="./filtreyeGoreGencCiftciListeGetir?yil=&ilce=&kategori=" ;
+					var link="./filtreyeGoreGencCiftciListeGetir?yil=&ilce=&kategori=&sayfano=" ;
 					window.location.href= ('page2','Title',link);
 				});
+				
+				
+				
+				
 				
 			});
 	
@@ -84,19 +97,22 @@ select {
 		 {
 			 var asd= "#"+id+kategori;
 			console.log("id gosterimi : " + asd)
+			
 			jq.ajax({
 				type : "GET",
 				url : "./ilceyeVeKategoriyeGoreKayitSayisi",
 				dataType : "JSON",
 				contentType : "application/x-www-form-urlencoded;charset=UTF-8",
 				data : {
+					kategori : kategori,
 					ilce : ilce,
-				kategori : kategori,
 				},
+				 beforeSend:function() { 
+				//	 jq("#raporTable").html("<tr><td>İçerik Yükleniyor....</td></tr>");
+			     },
 				success : function(gelen) { 
 					console.log(gelen);
 					jq("#"+id+kategori).text(gelen);
-					
 				},
 				error : function(xhr, textStatus, errorThrown) {
 				//	alert(textStatus);
@@ -112,19 +128,32 @@ select {
 
 </head>
 <body>
-<<<<<<< HEAD
 
-	<%-- <div class="row">
-			<div class="pull-right hidden">
-				<h3>
-					<input name="foo" value="${fn:escapeXml(param.yil)}">
-				</h3>
-			</div>
-			
-		</div> --%>
+	<div class="row">
+		<div class="container hidden">
+			<h3>
+				<input name="foo" value="${fn:escapeXml(param.sayfano)}">
+			</h3>
+		</div>
+
+	</div>
+	<input type="hidden" name="sayfano" id="sayfano" value="${sayfaNo}" />
+
 	<div class="col-sm-10 col-sm-offset-1">
+
 		<div class="page-header">&nbsp;</div>
 		<div class="panel panel-default">
+
+			<nav aria-label="Page navigation example">
+				<ul class="pagination justify-content-end">
+					<c:forEach items="${sayfalar}" var="link">
+
+						<li class="pagination-item ">${link}</li>
+
+					</c:forEach>
+				</ul>
+			</nav>
+
 			<div class="panel-heading">
 				<h3 class="panel-title">
 
@@ -196,6 +225,20 @@ select {
 									<col style="background-color: yellow">
 								</colgroup> --%>
 						<thead valign="top">
+							<c:set var="t" value="0"></c:set>
+							<c:set var="x" value="0"></c:set>
+							<tr>
+								<td colspan="4"><b>${fn:length(gencCiftci)} </b>adet
+									kayıt&nbsp; listeleniyor...</td>
+								<td colspan="4"><c:forEach items="${gencCiftci}" var="genc"
+										varStatus="i">
+
+										<c:set var="t" value="${t+genc.hibeTutari }"></c:set>
+									</c:forEach> <fmt:setLocale value="tr_TR" /> <fmt:formatNumber
+										pattern="#,##0.00" type="currency" value="${t}" var="t"></fmt:formatNumber>
+
+									${t }</td>
+							</tr>
 							<tr class="baslik">
 								<%-- <td align="center"></td> --%>
 								<th align="center">Yararlanıcı</th>
@@ -260,6 +303,17 @@ select {
 							</c:if>
 						</tbody>
 					</table>
+
+					<nav aria-label="Page navigation example">
+						<ul class="pagination justify-content-end">
+							<c:forEach items="${sayfalar}" var="link">
+
+								<li class="pagination-item ">${link}</li>
+
+							</c:forEach>
+						</ul>
+					</nav>
+
 				</div>
 			</div>
 		</div>
@@ -276,11 +330,11 @@ select {
 					<c:set var="toplam" value="${0}"></c:set>
 					<c:set var="string" value=""></c:set>
 
-					<table class="table table-hover table-border">
+					<table class="table table-hover table-border" id="raporTable">
 						<tr>
 							<td></td>
 							<c:forEach items="${kategoriListesi}" var="kategori">
-								<td>${kategori.tip.isim}&${kategori.isim}</td>
+								<td>${kategori.isim}</td>
 							</c:forEach>
 						</tr>
 
@@ -291,84 +345,26 @@ select {
 								<c:forEach items="${kategoriListesi}" var="kategori"
 									varStatus="x">
 
-									<c:forEach items="${gencCiftci}" var="genc" varStatus="i">
-										<c:if
-											test="${ilce.id eq genc.mahalle.tip.id and kategori.id eq genc.kategori.id }">
+									<c:forEach items="${gencCiftci}" var="genc" varStatus="g">
+										<c:set
+											value="${genc.mahalle.tip.id eq 11 and genc.kategori.id eq 1 }"
+											var="deger" />
 
-											<!-- <script type="text/javascript">
-													ilceyeVeKategoriyeGoreKayitSayisi('${mahalle.id}','${kategori.id}','${mahalle.tip.id}');
-													</script> -->
-											<c:set var="toplam" value="${toplam+1 }"></c:set>
+										<c:if test="${deger eq true}">
+
+
+											<c:set var="toplam" value="${toplam+1}"></c:set>
 
 											<c:set var="string" value="${kategori.isim}"></c:set>
+											<!-- <script type="text/javascript">
+													ilceyeVeKategoriyeGoreKayitSayisi('${ilce.id}','${kategori.id}','${toplam}');
+													</script> -->
+
 										</c:if>
 									</c:forEach>
-=======
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-8 col-sm-offset-2">
-				<div class="pull-right">
-					<h3>
-						<a href="./genc-ciftci" class="btn btn-success btn-md"> <span
-							class="glyphicon glyphicon-plus"></span> YENİ KAYIT
-						</a>
-					</h3>
-				</div>
-				<div class="page-header">&nbsp;</div>
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Genç Çiftçi Listesi</h3>
-					</div>
-					<div class="panel-body">
-						<div style="overflow-x: auto;">
-							<table
-								class="table table-sm table-bordered table-hover bg-default "
-								id="tr${ilce }">
-								<tr class="baslik">
-									<%-- <td align="center"></td> --%>
-									<th align="center">Yararlanıcı</th>
-									<th align="center">Proje Konusu</th>
-									<th align="center">Uygulama Yeri</th>
-									<th align="center">Kapasite</th>
-									<th align="center">Hibe Tutarı</th>
-									<th align="center">Yıl</th>
-									<th align="center">Durum</th>
-									<th align="center" colspan="2">Sil / Güncelle</th>
-								</tr>
-								<c:forEach items="${gencCiftci}" var="genc">
-									<tr>
-										<td>${genc.yararlaniciAdi }&nbsp;${genc.yararlaniciSoyadi }</td>
 
-										<c:if test="${empty genc.kategori.tip.tip.isim }">
-
-											<td>${genc.kategori.isim}</td>
-
-										</c:if>
-										<c:if test="${!empty genc.kategori.tip.tip.isim }">
-
-											<td>${genc.kategori.tip.tip.isim}-${genc.kategori.tip.isim}-${genc.kategori.isim}</td>
-
-										</c:if>
-
-										<td>${genc.mahalle.tip.tip.isim}-${genc.mahalle.tip.isim}-${genc.mahalle.isim}</td>
-										<td>${genc.kapasite}-<span class="text-capitalize">${genc.kapasiteBirim}</span>
-										</td>
-										<td>${genc.hibeTutari}</td>
-										<td>${genc.yil}</td>
-										<td>Devam</td>
-										<td><a
-											href="${pageContext.request.contextPath }/kirsal-kalkinma/gencCiftciSil?id=${genc.id}"
-											onclick="javascript:return confirm('${genc.yararlaniciAdi} ${ genc.yararlaniciSoyadi } isimli kaydı : \n Silmek İstediğinize Emin misiniz?');"
-											class="btn btn-danger btn-sm">Sil</a></td>
-										<td><a
-											href="${pageContext.request.contextPath }/kirsal-kalkinma/gencCiftciGuncelle/${genc.id}"
-											class="btn btn-primary btn-sm">Güncelle</a></td>
-								</c:forEach>
-
-							</table>
->>>>>>> parent of 75583d4... GencCiftci jQuery to Excel
-
-									<td><span>${string}--${x.last}-${toplam}</span></td>
+									<td><span id="${toplam}${kategori.id}"> <%-- ${string}--${x.last}-${toplam} --%>
+									</span></td>
 								</c:forEach>
 							</tr>
 						</c:forEach>

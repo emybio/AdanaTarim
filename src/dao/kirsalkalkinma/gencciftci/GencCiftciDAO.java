@@ -19,7 +19,7 @@ public interface GencCiftciDAO {
 
 	public List<GencCiftci> kategoriyeGoreListe(Integer kategori);
 
-	public List<GencCiftci> ilceVeKategoriyeGoreListe(String kategori, String ilce, Integer yil);
+	public List<GencCiftci> ilceVeKategoriyeGoreListe(String kategori, String ilce, Integer yil, Integer sayfano);
 
 	public List<GencCiftci> ilceListesi();
 
@@ -28,7 +28,6 @@ public interface GencCiftciDAO {
 	public List<GencCiftci> yilListesi();
 
 	public JSONArray ilceyeGoreJSON(String ilce);
-<<<<<<< HEAD
 
 	public Long ilceyeVeYillaraGoreKayitSayisi(Integer yil, String ilce);
 
@@ -37,6 +36,6 @@ public interface GencCiftciDAO {
 	public List<GencCiftci> yillaraGoreListe(Integer yil);
 
 	public List<GencCiftci> mahalleListesi();
-=======
->>>>>>> parent of 75583d4... GencCiftci jQuery to Excel
+
+	public Long kayitSayisi(String kategori, String ilce, Integer yil, Integer sayfano);
 }

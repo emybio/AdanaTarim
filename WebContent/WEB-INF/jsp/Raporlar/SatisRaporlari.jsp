@@ -523,32 +523,32 @@
 				<option value="2018" label="2018" />
 			</select> <select style="border: none;" name="birinciAy" id="birinciAy3">
 				<option value="" label="--- Seçiniz ---" />
-				<option value="2017-01-01" label="Ocak"></option>
-				<option value="2017-02-01" label="Şubat"></option>
-				<option value="2017-03-01" label="Mart"></option>
-				<option value="2017-04-01" label="Nisan"></option>
-				<option value="2017-05-01" label="Mayıs"></option>
-				<option value="2017-06-01" label="Haziran"></option>
-				<option value="2017-07-01" label="Temmuz"></option>
-				<option value="2017-08-01" label="Ağustos"></option>
-				<option value="2017-09-01" label="Eylül"></option>
-				<option value="2017-10-01" label="Ekim"></option>
-				<option value="2017-11-01" label="Kasım"></option>
-				<option value="2017-12-01" label="Aralık"></option>
+				<option value="2018-01-01" label="Ocak"></option>
+				<option value="2018-02-01" label="Şubat"></option>
+				<option value="2018-03-01" label="Mart"></option>
+				<option value="2018-04-01" label="Nisan"></option>
+				<option value="2018-05-01" label="Mayıs"></option>
+				<option value="2018-06-01" label="Haziran"></option>
+				<option value="2018-07-01" label="Temmuz"></option>
+				<option value="2018-08-01" label="Ağustos"></option>
+				<option value="2018-09-01" label="Eylül"></option>
+				<option value="2018-10-01" label="Ekim"></option>
+				<option value="2018-11-01" label="Kasım"></option>
+				<option value="2018-12-01" label="Aralık"></option>
 			</select> <select style="border: none;" name="ikinciAy" id="ikinciAy3">
 				<option value="" label="--- Seçiniz ---" />
-				<option value="2017-01-31" label="Ocak"></option>
-				<option value="2017-02-31" label="Şubat"></option>
-				<option value="2017-03-31" label="Mart"></option>
-				<option value="2017-04-31" label="Nisan"></option>
-				<option value="2017-05-31" label="Mayıs"></option>
-				<option value="2017-06-31" label="Haziran"></option>
-				<option value="2017-07-31" label="Temmuz"></option>
-				<option value="2017-08-31" label="Ağustos"></option>
-				<option value="2017-09-31" label="Eylül"></option>
-				<option value="2017-10-31" label="Ekim"></option>
-				<option value="2017-11-31" label="Kasım"></option>
-				<option value="2017-12-31" label="Aralık"></option>
+				<option value="2018-01-31" label="Ocak"></option>
+				<option value="2018-02-31" label="Şubat"></option>
+				<option value="2018-03-31" label="Mart"></option>
+				<option value="2018-04-31" label="Nisan"></option>
+				<option value="2018-05-31" label="Mayıs"></option>
+				<option value="2018-06-31" label="Haziran"></option>
+				<option value="2018-07-31" label="Temmuz"></option>
+				<option value="2018-08-31" label="Ağustos"></option>
+				<option value="2018-09-31" label="Eylül"></option>
+				<option value="2018-10-31" label="Ekim"></option>
+				<option value="2018-11-31" label="Kasım"></option>
+				<option value="2018-12-31" label="Aralık"></option>
 			</select> <select id="islemTipi3" style="border: none;" name="islemTipi">
 				<option value="0">Lütfen İşlem Tipini Seçiniz..---</option>
 				<option value="SATIŞ (5403)">SATIŞ (5403)</option>
@@ -557,6 +557,7 @@
 				<option value="3083">3083</option>
 				<option value="İFRAZ">İFRAZ</option>
 				<option value="KİRALAMA">KİRALAMA</option>
+				<option value="HAZİNE">HAZİNE</option>
 			</select> <input type="button" onclick="islemTipineGöreTabloGetir()"
 				value="Getir">
 		</form>
@@ -646,33 +647,33 @@
 				</select> <select style="border: none;" name="birinciAy" id="birinciAy"
 					onchange="ucAylikToplam()">
 					<option value="" label="--- Seçiniz ---" />
-					<option value="2017-01-01" label="Ocak"></option>
-					<option value="2017-02-01" label="Şubat"></option>
-					<option value="2017-03-01" label="Mart"></option>
-					<option value="2017-04-01" label="Nisan"></option>
-					<option value="2017-05-01" label="Mayıs"></option>
-					<option value="2017-06-01" label="Haziran"></option>
-					<option value="2017-07-01" label="Temmuz"></option>
-					<option value="2017-08-01" label="Ağustos"></option>
-					<option value="2017-09-01" label="Eylül"></option>
-					<option value="2017-10-01" label="Ekim"></option>
-					<option value="2017-11-01" label="Kasım"></option>
-					<option value="2017-12-01" label="Aralık"></option>
+					<option value="2018-01-01" label="Ocak"></option>
+					<option value="2018-02-01" label="Şubat"></option>
+					<option value="2018-03-01" label="Mart"></option>
+					<option value="2018-04-01" label="Nisan"></option>
+					<option value="2018-05-01" label="Mayıs"></option>
+					<option value="2018-06-01" label="Haziran"></option>
+					<option value="2018-07-01" label="Temmuz"></option>
+					<option value="2018-08-01" label="Ağustos"></option>
+					<option value="2018-09-01" label="Eylül"></option>
+					<option value="2018-10-01" label="Ekim"></option>
+					<option value="2018-11-01" label="Kasım"></option>
+					<option value="2018-12-01" label="Aralık"></option>
 				</select> <select style="border: none;" name="ikinciAy" id="ikinciAy"
 					onchange="ucAylikToplam()">
 					<option value="" label="--- Seçiniz ---" />
-					<option value="2017-01-31" label="Ocak"></option>
-					<option value="2017-02-31" label="Şubat"></option>
-					<option value="2017-03-31" label="Mart"></option>
-					<option value="2017-04-31" label="Nisan"></option>
-					<option value="2017-05-31" label="Mayıs"></option>
-					<option value="2017-06-31" label="Haziran"></option>
-					<option value="2017-07-31" label="Temmuz"></option>
-					<option value="2017-08-31" label="Ağustos"></option>
-					<option value="2017-09-31" label="Eylül"></option>
-					<option value="2017-10-31" label="Ekim"></option>
-					<option value="2017-11-31" label="Kasım"></option>
-					<option value="2017-12-31" label="Aralık"></option>
+					<option value="2018-01-31" label="Ocak"></option>
+					<option value="2018-02-31" label="Şubat"></option>
+					<option value="2018-03-31" label="Mart"></option>
+					<option value="2018-04-31" label="Nisan"></option>
+					<option value="2018-05-31" label="Mayıs"></option>
+					<option value="2018-06-31" label="Haziran"></option>
+					<option value="2018-07-31" label="Temmuz"></option>
+					<option value="2018-08-31" label="Ağustos"></option>
+					<option value="2018-09-31" label="Eylül"></option>
+					<option value="2018-10-31" label="Ekim"></option>
+					<option value="2018-11-31" label="Kasım"></option>
+					<option value="2018-12-31" label="Aralık"></option>
 				</select>
 
 			</form>
@@ -731,33 +732,33 @@
 				<select style="border: none;" name="ilceBirinciAy"
 					id="ilceBirinciAy" onchange="ilceyeGöreTabloGetir();">
 					<option value="" label="--- Seçiniz ---" />
-					<option value="2017-01-01" label="Ocak"></option>
-					<option value="2017-02-01" label="Şubat"></option>
-					<option value="2017-03-01" label="Mart"></option>
-					<option value="2017-04-01" label="Nisan"></option>
-					<option value="2017-05-01" label="Mayıs"></option>
-					<option value="2017-06-01" label="Haziran"></option>
-					<option value="2017-07-01" label="Temmuz"></option>
-					<option value="2017-08-01" label="Ağustos"></option>
-					<option value="2017-09-01" label="Eylül"></option>
-					<option value="2017-10-01" label="Ekim"></option>
-					<option value="2017-11-01" label="Kasım"></option>
-					<option value="2017-12-01" label="Aralık"></option>
+					<option value="2018-01-01" label="Ocak"></option>
+					<option value="2018-02-01" label="Şubat"></option>
+					<option value="2018-03-01" label="Mart"></option>
+					<option value="2018-04-01" label="Nisan"></option>
+					<option value="2018-05-01" label="Mayıs"></option>
+					<option value="2018-06-01" label="Haziran"></option>
+					<option value="2018-07-01" label="Temmuz"></option>
+					<option value="2018-08-01" label="Ağustos"></option>
+					<option value="2018-09-01" label="Eylül"></option>
+					<option value="2018-10-01" label="Ekim"></option>
+					<option value="2018-11-01" label="Kasım"></option>
+					<option value="2018-12-01" label="Aralık"></option>
 				</select> <select style="border: none;" name="ilceIkinciAy" id="ilceIkinciAy"
 					onchange="ilceyeGöreTabloGetir();">
 					<option value="" label="--- Seçiniz ---" />
-					<option value="2017-01-31" label="Ocak"></option>
-					<option value="2017-02-31" label="Şubat"></option>
-					<option value="2017-03-31" label="Mart"></option>
-					<option value="2017-04-31" label="Nisan"></option>
-					<option value="2017-05-31" label="Mayıs"></option>
-					<option value="2017-06-31" label="Haziran"></option>
-					<option value="2017-07-31" label="Temmuz"></option>
-					<option value="2017-08-31" label="Ağustos"></option>
-					<option value="2017-09-31" label="Eylül"></option>
-					<option value="2017-10-31" label="Ekim"></option>
-					<option value="2017-11-31" label="Kasım"></option>
-					<option value="2017-12-31" label="Aralık"></option>
+					<option value="2018-01-31" label="Ocak"></option>
+					<option value="2018-02-31" label="Şubat"></option>
+					<option value="2018-03-31" label="Mart"></option>
+					<option value="2018-04-31" label="Nisan"></option>
+					<option value="2018-05-31" label="Mayıs"></option>
+					<option value="2018-06-31" label="Haziran"></option>
+					<option value="2018-07-31" label="Temmuz"></option>
+					<option value="2018-08-31" label="Ağustos"></option>
+					<option value="2018-09-31" label="Eylül"></option>
+					<option value="2018-10-31" label="Ekim"></option>
+					<option value="2018-11-31" label="Kasım"></option>
+					<option value="2018-12-31" label="Aralık"></option>
 
 				</select>
 				<!-- <button type="button" onclick="ilceyeGöreTabloGetir();"

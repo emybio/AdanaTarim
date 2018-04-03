@@ -454,6 +454,14 @@ console.log("cookie ID2: " + '${cookie.id.value}');
 			jq("#nitelik").val("Kiralama");
 			jq("#chartContainer").show("fade");
 		}
+		
+		if (jq("#tipSelect").val() == "HAZİNE") {
+			jq("#tipLabelTxt").text("HAZİNE");
+			jq("#satisTipi").val("HAZİNE");
+			jq("#nitelik").val("Satış");
+			jq("#chartContainer").show("fade");
+		}
+		;
 	}
 
 	function kapat() {
@@ -475,6 +483,7 @@ console.log("cookie ID2: " + '${cookie.id.value}');
 				<option value="3083">3083</option>
 				<option value="İFRAZ">İFRAZ</option>
 				<option value="KİRALAMA">KİRALAMA</option>
+					<option value="HAZİNE">HAZİNE</option>
 			</select>
 
 

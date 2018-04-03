@@ -7,10 +7,7 @@ import org.json.simple.JSONArray;
 import forms.kirsalkalkinma.gencciftci.GencCiftci;
 
 public interface GencCiftciService {
-<<<<<<< HEAD
 
-=======
->>>>>>> parent of 75583d4... GencCiftci jQuery to Excel
 	public void save(GencCiftci gencCiftci);
 
 	public void delete(Long id);
@@ -35,9 +32,11 @@ public interface GencCiftciService {
 
 	public List<GencCiftci> yillaraGoreListe(Integer yil);
 
-	public List<GencCiftci> ilceVeKategoriyeGoreListe(String kategori, String ilce, Integer yil);
+	public List<GencCiftci> ilceVeKategoriyeGoreListe(String kategori, String ilce, Integer yil, Integer sayfaNo);
 
 	public Long ilceyeVeKategoriyeGoreKayitSayisi(Long kategori, Long ilce);
 
 	public List<GencCiftci> mahalleListesi();
+
+	public Long kayitSayisi(String kategori, String ilce, Integer yil, Integer sayfano);
 }

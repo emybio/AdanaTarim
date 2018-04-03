@@ -27,6 +27,8 @@ import forms.Kullanici;
 
 public class Genel {
 
+	public static String raporTuru = null;
+
 	public static String errorMessage = null;
 
 	public static Kullanici kullaniciBean = null;
@@ -35,7 +37,7 @@ public class Genel {
 
 	private static Integer a = 0;
 
-	private static Integer kayitSayisi = 15;
+	private static Integer kayitSayisi = 25;
 
 	public static Integer TamSayi(String sSayi, Integer sira) {
 		Integer sayi = 0;
@@ -455,9 +457,15 @@ public class Genel {
 
 	public static String sayfalar(Integer sayfa, Long kSayisi, String url) {
 		final int sayfalamaSayi = 10;
-		String stilClick = "cursor:pointer;border:solid 0.1em #89ACD6;float:left;width:1.3em;-moz-border-radius: 0.2em;-webkit-border-radius: 0.2em;border-radius: 0.2em;";
-		String stil = "background-color:gray;border:solid 0.1em #89ACD6;float:left;width:1.3em;-moz-border-radius: 0.2em;-webkit-border-radius: 0.2em;border-radius: 0.2em;";
-		String bosluk = "<div style='float:left;'>&nbsp;</div>";
+		String btn = "btn btn-success";
+		String btnClick = "";
+		String stilClick = "";// cursor:pointer;border:solid 0.1em
+								// #89ACD6;float:left;width:3.0em;height:3.0em;-moz-border-radius:
+								// 0.2em;-webkit-border-radius: 0.2em;border-radius: 0.2em;
+		String stil = "";// background-color:gray;border:solid 0.1em
+							// #89ACD6;float:left;width:3.0em;height:3.0em;-moz-border-radius:
+							// 0.2em;-webkit-border-radius: 0.2em;border-radius: 0.2em;
+		String bosluk = "";// <div style='float:left;'>&nbsp;</div>
 		int sayfaSayisi = (int) (Math.ceil((double) kSayisi / kayitSayisi));
 		// System.out.println("sayfa Sayisi "+sayfaSayisi
 		// +" kayi"+kayitSayisi+" ksayisi"+kSayisi);
@@ -472,24 +480,26 @@ public class Genel {
 			// href='"+url+"?sayfano="+(sayfa-1)+"'>'<img
 			// src='/uygulama/resources/resim/sola_trans.png'
 			// style='opacity:0.20;'/></a></div>";
-			if (1 != sayfa)
-				sonuc += bosluk + "<div style='" + stilClick + "'><a href='" + url + "?sayfano=1'>1</a> </div>";
-			else
-				sonuc += bosluk + "<div style='" + stil + "'>1 </div>";
+
+			if (1 != sayfa) {
+				sonuc += "<a class='1' href='" + url + "&sayfano=1'>1</a>";
+			} else
+				sonuc += "<a class='1' href='" + url + "&sayfano=1'>1</a>";
+
 			if (baslangicSayfa > 2)
-				sonuc += bosluk + "<div style='float:left;'>....</div>";
+				sonuc += bosluk + " <a class='page-link' href='#'>..</a>";
 			for (int i = baslangicSayfa; i <= baslangicSayfa + sayfalamaSayi && i <= sayfaSayisi; i++) {
 				if (i != sayfa)
-					sonuc += bosluk + "<div style='" + stilClick + "'> <a href='" + url + "?sayfano=" + i + "'>" + i
-							+ "</a> </div> ";
+					sonuc += " <a class='" + i + "' href='" + url + "&sayfano=" + i + "' >" + i + "</a>  ";
 				else
-					sonuc += bosluk + "<div style='" + stil + "'> " + i + " </div>";
+					sonuc += bosluk + " <a class='" + i + "' class='btn btn-success btn-lg bg-success' href='" + url
+							+ "&sayfano=" + i + "' >" + i + "</a>  ";
 			}
 			if (baslangicSayfa + sayfalamaSayi + 1 < sayfaSayisi)
-				sonuc += bosluk + "<div style='float:left;'>....</div>";
+				sonuc += bosluk + " <a class='page-link' href='#'>..</a>";
 			if (baslangicSayfa + sayfalamaSayi < sayfaSayisi)
-				sonuc += bosluk + " <div style='" + stilClick + "'> <a href='" + url + "?sayfano=" + sayfaSayisi + "'>"
-						+ sayfaSayisi + "</a> </div> ";
+				sonuc += " <a  class='" + sayfaSayisi + "'     href='" + url + "&sayfano=" + sayfaSayisi + "'>"
+						+ sayfaSayisi + "</a>  ";
 			// sonuc+=bosluk+"<div style='float:left;'><img
 			// src='/uygulama/resources/resim/saga_trans.png'"+((sayfa<sayfaSayisi)?"
 			// onclick='sayfadakiKayitlariGetir("+(sayfa+1)+")'
@@ -602,6 +612,14 @@ public class Genel {
 	 */
 	public static void setKullaniciLoginInfo(Kullanici kullaniciLoginInfo) {
 		Genel.kullaniciLoginInfo = kullaniciLoginInfo;
+	}
+
+	public static String getRaporTuru() {
+		return raporTuru;
+	}
+
+	public static void setRaporTuru(String raporTuru) {
+		Genel.raporTuru = raporTuru;
 	}
 
 }

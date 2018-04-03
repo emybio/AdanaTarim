@@ -16,7 +16,6 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirim;
 import forms.kirsalkalkinma.gencciftci.GencCiftci;
 
 @Transactional
@@ -78,15 +77,13 @@ public class GencCiftciDAOImpl implements GencCiftciDAO {
 	@Override
 	public List<GencCiftci> ilceListesi() {
 		Criteria gencCiftci = sessionFactory.getCurrentSession().createCriteria(GencCiftci.class);
-		// gencCiftci.createAlias("mahalle", "mahalle"); 
+		// gencCiftci.createAlias("mahalle", "mahalle");
 		gencCiftci.createAlias("mahalle", "mahalle");
 		gencCiftci.setProjection(Projections.distinct(Projections.property("mahalle.tip")));
 		gencCiftci.addOrder(Order.asc("mahalle.tip"));
-		System.out.println("ilce listesi : " + gencCiftci.list().iterator().next());
 		return gencCiftci.list();
 	}
-	
-	
+
 	@Override
 	public List<GencCiftci> mahalleListesi() {
 		Criteria gencCiftci = sessionFactory.getCurrentSession().createCriteria(GencCiftci.class);
@@ -109,7 +106,6 @@ public class GencCiftciDAOImpl implements GencCiftciDAO {
 	@Override
 	public JSONArray ilceyeGoreJSON(String ilce) {
 
-		System.out.println("JSON ÝLCE : " + ilce);
 		Criteria gencCiftci = sessionFactory.getCurrentSession().createCriteria(GencCiftci.class);
 		gencCiftci.createAlias("mahalle.tip", "mahalle");
 		// gencCiftci.createAlias("mahalle.tip.isim", "isim");
@@ -124,13 +120,14 @@ public class GencCiftciDAOImpl implements GencCiftciDAO {
 			JSONObject jsonObject = new JSONObject();
 			GencCiftci tip = iterator.next();
 			jsonObject.put("id", tip.getId());
-			jsonObject.put("hibeTutari", tip.getHibeTutari());
 			jsonObject.put("kapasite", tip.getKapasite());
 			jsonObject.put("kapasiteBirim", tip.getKapasiteBirim());
-			jsonObject.put("mahalle", tip.getMahalle().getIsim());
 			jsonObject.put("kategori", tip.getKategori());
+			jsonObject.put("hibeTutari", tip.getHibeTutari());
+			jsonObject.put("mahalle", tip.getMahalle().getIsim());
 			jsonObject.put("adi", tip.getYararlaniciAdi());
 			jsonObject.put("soyadi", tip.getYararlaniciSoyadi());
+			jsonObject.put("yil", tip.getYil());
 
 			donecek.add(jsonObject);
 		}
@@ -139,11 +136,14 @@ public class GencCiftciDAOImpl implements GencCiftciDAO {
 	}
 
 	@Override
-	public List<GencCiftci> ilceVeKategoriyeGoreListe(String kategori, String ilce, Integer yil) {
+	public List<GencCiftci> ilceVeKategoriyeGoreListe(String kategori, String ilce, Integer yil, Integer sayfano) {
 
 		Criteria gencCiftci = sessionFactory.getCurrentSession().createCriteria(GencCiftci.class);
 		gencCiftci.createAlias("kategori", "kategori");
 		gencCiftci.createAlias("mahalle.tip", "mahalle");
+
+		gencCiftci.setFirstResult((sayfano - 1) * araclar.Genel.getKayitSayisi());
+		gencCiftci.setMaxResults(araclar.Genel.getKayitSayisi());
 
 		if (!ilce.isEmpty() && kategori.isEmpty() && yil == null) {
 			gencCiftci.add(Restrictions.eq("mahalle.isim", ilce));
@@ -181,7 +181,6 @@ public class GencCiftciDAOImpl implements GencCiftciDAO {
 		}
 		return gencCiftci.list();
 	}
-<<<<<<< HEAD
 
 	@Override
 	public Long ilceyeVeYillaraGoreKayitSayisi(Integer yil, String ilce) {
@@ -214,16 +213,28 @@ public class GencCiftciDAOImpl implements GencCiftciDAO {
 	}
 
 	@Override
-	public Long ilceyeVeKategoriyeGoreKayitSayisi(Long kategori, Long ilce) { 
+	public Long ilceyeVeKategoriyeGoreKayitSayisi(Long kategori, Long ilce) {
 		Criteria gencCiftci = sessionFactory.getCurrentSession().createCriteria(GencCiftci.class);
 
-		gencCiftci.createAlias("mahalle", "mahalle");
+		gencCiftci.createAlias("mahalle", "mahalle.tip");
 		gencCiftci.createAlias("kategori", "kategori");
 		gencCiftci.add(Restrictions.eq("mahalle.id", ilce));
 		gencCiftci.add(Restrictions.eq("kategori.id", kategori));
 		gencCiftci.setProjection(Projections.rowCount());
 		return (Long) gencCiftci.uniqueResult();
 	}
-=======
->>>>>>> parent of 75583d4... GencCiftci jQuery to Excel
+
+	@Override
+	public Long kayitSayisi(String kategori, String ilce, Integer yil, Integer sayfano) {
+		Criteria gencCiftci = sessionFactory.getCurrentSession().createCriteria(GencCiftci.class);
+
+		gencCiftci.setProjection(Projections.rowCount());
+		@SuppressWarnings("rawtypes")
+		List kayitlar = gencCiftci.list();
+		Long kayitsayisi = 0L;
+		if (kayitlar != null) {
+			kayitsayisi = (Long) kayitlar.get(0);
+		}
+		return kayitsayisi;
+	}
 }

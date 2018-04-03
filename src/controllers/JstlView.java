@@ -42,9 +42,10 @@ public class JstlView extends InternalResourceView {
 		request.setAttribute("izinVerilenParselAlani", model.get("izinVerilenParselAlani"));
 		request.setAttribute("izinVerilmeyenParselSayisi", model.get("izinVerilmeyenParselSayisi"));
 		request.setAttribute("izinVerilmeyenParselAlani", model.get("izinVerilmeyenParselAlani"));
- 
-		request.setAttribute("izinFormu", model.get("izinFormu"));
 
+		request.setAttribute("izinFormu", model.get("izinFormu"));
+		request.setAttribute("sayfalar", model.get("sayfalar"));
+		request.setAttribute("sayfaNo", model.get("sayfaNo"));
 		request.setAttribute("kullaniciListesi", model.get("kullaniciListesi"));
 		request.setAttribute("kullaniciListesi2", model.get("kullaniciListesi2"));
 
@@ -99,12 +100,11 @@ public class JstlView extends InternalResourceView {
 
 		requestDispatcher.include(request, response);
 		/*
-		 * HttpSession session = request.getSession(false); if (!session.isNew()
-		 * && session != null) {
+		 * HttpSession session = request.getSession(false); if (!session.isNew() &&
+		 * session != null) {
 		 * 
 		 * requestDispatcher.include(request, response);
-		 * System.out.println("jstlview session iptal mi? : " +
-		 * session.isNew()); }
+		 * System.out.println("jstlview session iptal mi? : " + session.isNew()); }
 		 * 
 		 * 
 		 * request.getRequestDispatcher("redirect:./anasayfa");

@@ -51,23 +51,19 @@ public class GencCiftciServiceImpl implements GencCiftciService {
 
 	@Override
 	public List<GencCiftci> ilceListesi() {
-		// TODO Auto-generated method stub
 		return gencCiftciDAO.ilceListesi();
 	}
 
 	@Override
 	public List<GencCiftci> kategoriListesi() {
-		// TODO Auto-generated method stub
 		return gencCiftciDAO.kategoriListesi();
 	}
 
 	@Override
 	public JSONArray ilceyeGoreJSON(String ilce) {
-		// TODO Auto-generated method stub
 		return gencCiftciDAO.ilceyeGoreJSON(ilce);
 	}
 
-<<<<<<< HEAD
 	@Override
 	public Long ilceyeVeYillaraGoreKayitSayisi(Integer yil, String ilce) {
 		return gencCiftciDAO.ilceyeVeYillaraGoreKayitSayisi(yil, ilce);
@@ -84,8 +80,8 @@ public class GencCiftciServiceImpl implements GencCiftciService {
 	}
 
 	@Override
-	public List<GencCiftci> ilceVeKategoriyeGoreListe(String kategori, String ilce, Integer yil) {
-		return gencCiftciDAO.ilceVeKategoriyeGoreListe(kategori, ilce, yil);
+	public List<GencCiftci> ilceVeKategoriyeGoreListe(String kategori, String ilce, Integer yil, Integer sayfaNo) {
+		return gencCiftciDAO.ilceVeKategoriyeGoreListe(kategori, ilce, yil, sayfaNo);
 	}
 
 	@Override
@@ -95,9 +91,13 @@ public class GencCiftciServiceImpl implements GencCiftciService {
 
 	@Override
 	public List<GencCiftci> mahalleListesi() {
-		return gencCiftciDAO.mahalleListesi(); 
+		return gencCiftciDAO.mahalleListesi();
 	}
 
-=======
->>>>>>> parent of 75583d4... GencCiftci jQuery to Excel
+	@Override
+	public Long kayitSayisi(String kategori, String ilce, Integer yil, Integer sayfano) {
+
+		return gencCiftciDAO.kayitSayisi(kategori, ilce, yil, sayfano);
+	}
+
 }
