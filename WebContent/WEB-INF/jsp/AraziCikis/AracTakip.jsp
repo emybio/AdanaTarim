@@ -391,6 +391,7 @@ jq(document).ready(function() {
 					</thead>
 					<form:form commandName="arac" method="post" action="araziCikisEkle">
 						<form:hidden path="id" />
+						<form:hidden path="mahalle.id" />
 
 						<tr>
 							<td style=""><div class="personel">

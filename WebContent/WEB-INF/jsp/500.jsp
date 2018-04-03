@@ -13,7 +13,7 @@
 	content="application/vnd.ms-excel; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" href="<c:url value="/assets/gthbLogo.png"/>" />
-<title>500 Sayfa Bulunamadı</title>
+<title>404 Sayfa Bulunamadı</title>
 <!-- <link rel="stylesheet"
 	href="http://openlayers.org/en/v3.18.2/css/ol.css" type="text/css"> -->
 <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->

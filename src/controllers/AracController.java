@@ -205,18 +205,20 @@ public class AracController {
 		List<Kullanici> kullaniciListesi = new ArrayList<>();
 		Kullanici personel = new Kullanici();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		System.out.println("personelID : " + personelID);
 =======
 		System.out.println("personel: " + personel);
 		System.out.println("arac2: " + arac2);
 
 >>>>>>> origin/master
+=======
+
+>>>>>>> parent of 42bea4f... Düzeltildi
 		for (int i = 0; i < personelID.length; i++) {
 			personel = kullaniciService.kullaniciGetirr(personelID[i]);
 			System.out.println("seçilen personel: " + personel.getAdi());
 			kullaniciListesi.add(personel);
-
-			System.out.println("personelID[i] : " + personelID[i]);
 
 		}
 <<<<<<< HEAD

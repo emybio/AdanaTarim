@@ -217,7 +217,7 @@ public class GencCiftciDAOImpl implements GencCiftciDAO {
 	public Long ilceyeVeKategoriyeGoreKayitSayisi(Long kategori, Long ilce) { 
 		Criteria gencCiftci = sessionFactory.getCurrentSession().createCriteria(GencCiftci.class);
 
-		gencCiftci.createAlias("mahalle", "mahalle.tip");
+		gencCiftci.createAlias("mahalle", "mahalle");
 		gencCiftci.createAlias("kategori", "kategori");
 		gencCiftci.add(Restrictions.eq("mahalle.id", ilce));
 		gencCiftci.add(Restrictions.eq("kategori.id", kategori));
