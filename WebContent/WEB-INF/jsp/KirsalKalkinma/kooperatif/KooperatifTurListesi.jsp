@@ -25,7 +25,7 @@ td a:hover {
 				<div class="col-sm-8 col-sm-offset-2">
 					<hr>
 					<table class="table table-hover bg-info "
-					style="border-radius: 5em 5em 5em 5em">
+						style="border-radius: 5em 5em 5em 5em">
 
 						<thead style="background-color: rgba(255, 255, 255, .5)">
 							<tr>
@@ -41,7 +41,8 @@ td a:hover {
 								<c:set var="koop" value="${kooperatif}"></c:set>
 								<tr>
 									<td><a class="btn btn-info btn-sm"
-										href="./tureGoreKooperatifler?id=${kooperatif.id}">${kooperatif.turAdi}</a></td>
+										href="./tureVeIlceyeGoreKooperatifler?id=${kooperatif.id}&ilce_id=${ilceler }">${kooperatif.turAdi}
+											Kooperatifi</a></td>
 
 								</tr>
 

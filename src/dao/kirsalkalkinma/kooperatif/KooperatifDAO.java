@@ -22,6 +22,8 @@ public interface KooperatifDAO {
 
 	public List<Kooperatif> tureGoreKooperatifListesi(Long turID);
 
+	public List<Kooperatif> tureVeIlceyeGoreKooperatifListesi(Long turID,String ilce);
+
 	public List<Kooperatif> kooperatifKartiGetir(Long koopId);
 
 }

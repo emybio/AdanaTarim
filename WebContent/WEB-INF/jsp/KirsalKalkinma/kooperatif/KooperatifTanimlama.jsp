@@ -14,10 +14,26 @@
 <script src='<c:url value="../assets/script/jquery.mask.js"  ></c:url>'></script>
 <script
 	src='<c:url value="../assets/script/jquery.mask.min.js"  ></c:url>'></script>
+
+
 </head>
 <script type="text/javascript">
-	jq(".alert").alert();
+	jq(document)
+			.ready(
+					function() {
 
+						jq('#add')
+								.click(
+										function() {
+											alert();
+											jq('.block:last')
+													.after(
+															'<div class="block"><input type="text" /><span class="remove">Remove Option</span></div>');
+										});
+						jq('.optionBox').on('click', '.remove', function() {
+							jq(this).parent().remove();
+						});
+					});
 	//	jq(":input").inputmask();
 
 	/* jq("#telefon").inputmask({
@@ -56,6 +72,7 @@
 		});*/
 	});
 </script>
+
 <body>
 	<div class="container">
 		<div class="row">
@@ -111,6 +128,15 @@
 										required="true" path="kooperatifAdi" name="kooperatifAdi" />
 								</div>
 							</div>
+
+							<div class="form-group">
+								<label class="col-sm-4 control-label" for="kooperatifAdi">Kooperatif
+									Başkanı</label>
+								<div class="col-sm-5">
+									<form:input class="form-control " id="koopBask" required="true"
+										path="koopBask" name="koopBask" />
+								</div>
+							</div>
 							<div class="form-group">
 								<label class="col-sm-4 control-label" for="uygulamaProjesi">Uygulama
 									Projesi</label>
@@ -129,11 +155,11 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-4 control-label" for="fesihYili">Fesih
+								<label class="col-sm-4 control-label" for="intibakYili">İntibak
 									Yılı</label>
 								<div class="col-sm-5">
 									<form:input type="date" class="form-control tarih "
-										id="fesihYili" path="fesihYili" name="fesihYili" />
+										id="intibakYili" path="intibakYili" name="intibakYili" />
 								</div>
 							</div>
 							<div class="form-group">
@@ -188,12 +214,35 @@
 												path="yonetimKuruluList" name="yonetimKuruluList"
 												value="${liste1[0]},${liste1[1]},${liste1[2]},${liste1[3]},${liste1[4]}" />
 										</c:if>
+
+										<c:if test="${listSize1 gt 5 }">
+											<form:input class="form-control " id="yonetimKuruluList"
+												path="yonetimKuruluList" name="yonetimKuruluList"
+												value="${liste1[0]},${liste1[1]},${liste1[2]},${liste1[3]},${liste1[4]}" />
+										</c:if>
 									</c:if>
 									<c:if test="${kooperatif.id eq 0}">
 
 										<form:input class="form-control " id="yonetimKuruluList"
 											path="yonetimKuruluList" name="yonetimKuruluList" />
 									</c:if>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-5">
+									<div class="optionBox">
+										<div class="block">
+											<input type="text" /> <span class="remove">Remove
+												Option</span>
+										</div>
+										<div class="block">
+											<input type="text" /> <span class="remove">Remove
+												Option</span>
+										</div>
+										<div class="block">
+											<a id="add">Add Option</a>
+										</div>
+									</div>
 								</div>
 							</div>
 							<div class="form-group">

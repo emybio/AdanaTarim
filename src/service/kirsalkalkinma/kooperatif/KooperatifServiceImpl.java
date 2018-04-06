@@ -61,4 +61,10 @@ public class KooperatifServiceImpl implements KooperatifService {
 		return koopDAO.kooperatifKartiGetir(koopId);
 	}
 
+	@Override
+	public List<Kooperatif> tureVeIlceyeGoreKooperatifListesi(Long turID, String ilce) {
+		// TODO Auto-generated method stub
+		return koopDAO.tureVeIlceyeGoreKooperatifListesi(turID, ilce);
+	}
+
 }

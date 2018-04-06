@@ -58,37 +58,34 @@
 							<%-- <img src="<c:url value="/assets/images/personelimage/avatar"/>"
 								class="pic_ina " /> --%>
 							<div class="con_ina">
-
-
-								<b>Kuruluş Yılı: <fmt:parseDate
-										value="${kooperatif.kurulusYili } " pattern="yyyy-mm-dd"
+								<b>Kooperatif Bşk: <%-- <fmt:parseDate
+										value="${kooperatif.kurulusYili } " pattern="dd-mm-yyyy"
 										var="tarih" /> <fmt:formatDate value="${tarih}"
-										pattern="YYYY" dateStyle="short" />
-
+										pattern="YYYY" dateStyle="short" /> --%>
+									${kooperatif.koopBask}
+								</b> <br> <b>Kuruluş Yılı: <%-- <fmt:parseDate
+										value="${kooperatif.kurulusYili } " pattern="dd-mm-yyyy"
+										var="tarih" /> <fmt:formatDate value="${tarih}"
+										pattern="YYYY" dateStyle="short" /> --%>
+									${kooperatif.kurulusYili }
 								</b> <br> <b> Ortak Sayısı: ${kooperatif.ortakSayisi}</b> <br>
-								<h3>
-									<b> Proje: ${kooperatif.uygulamaProjesi } </b>
-								</h3>
-								<br>
+								<b> İntibak Yılı: ${kooperatif.intibakYili == '00.00.0000' ? 'Yok':kooperatif.intibakYili}</b>
+								<br> <b> Proje: ${kooperatif.uygulamaProjesi } </b> <br>
 								<c:if
-									test="${!empty kooperatif.fesihYili or kooperatif.fesihYili != '' } ">
-									<h3>
-										<b> Fesih Yılı: <fmt:parseDate
-												value="${kooperatif.fesihYili } " pattern="yyyy-mm-dd"
+									test="${!empty kooperatif.intibakYili or kooperatif.intibakYili != '' } ">
+									<b> intibak Yılı: <%-- <fmt:parseDate
+												value="${kooperatif.intibakYili } " pattern="dd-mm-yyyy"
 												var="tarih" /> <fmt:formatDate value="${tarih}"
-												pattern="dd.MM.YYYY" dateStyle="short" />
-										</b>
-									</h3>
+												pattern="dd.MM.YYYY" dateStyle="short" /> --%>${kooperatif.intibakYili }
+									</b>
 								</c:if>
-								<br>
-								<h3>
-									<b> Son Gn Krl Tar: <fmt:parseDate
+
+
+								<b> Son Gn Krl Tar: ${kooperatif.sonGenelKurulTarihi }<%--  <fmt:parseDate
 											value=" ${kooperatif.sonGenelKurulTarihi }"
 											pattern="yyyy-mm-dd" var="tarih" /> <fmt:formatDate
-											value="${tarih}" pattern="dd.MM.YYYY" dateStyle="short" />
-									</b>
-								</h3>
-								<br>
+											value="${tarih}" pattern="dd-mm-YYYY" dateStyle="short" /> --%>
+								</b> <br>
 							</div>
 						</div>
 
@@ -194,8 +191,8 @@
 							class="btn btn-default btn-xs btn_inr btn_inl_padl"
 							style="margin-right: 75px;"><span class="fa fa-reply">
 								Geri </span> </a><a href="./kooperatifDuzenle/${kooperatif.id}"
-							class="btn btn-warning btn-xs btn_inr "><span class="fa fa-edit">
-								Düzenle </span> </a> <a
+							class="btn btn-warning btn-xs btn_inr "><span
+							class="fa fa-edit"> Düzenle </span> </a> <a
 							onclick="return confirm('Silmek İstediğinize Emin misiniz?');"
 							href="./kooperatifSil?id=${kooperatif.id}"
 							class="btn btn-danger btn-xs btn_inr btn_inl_padl"><span

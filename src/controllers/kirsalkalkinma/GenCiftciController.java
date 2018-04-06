@@ -121,7 +121,7 @@ public class GenCiftciController {
 		model.put("title", "Genç Çiftçi");
 		model.put("tusYazisi", tusYazisi);
 		tusYazisi = "Ekle";
-		gencCiftci = null;
+
 		return "KirsalKalkinma/GencCiftci";
 	}
 
@@ -129,10 +129,12 @@ public class GenCiftciController {
 	public String gencCiftciEkle(@RequestParam("mahalle") Long mahalle, @RequestParam("slctTipler") Long slctTipler,
 			@RequestParam("slctAltTip") Long slctAltTip, ModelMap model,
 			@ModelAttribute("gencCiftci") GencCiftci gencCiftci1, BindingResult result, HttpSession session) {
+		
+		
 		System.out.println("slctTipler : " + slctTipler + "\n" + "slctAltTip : " + slctAltTip + "\n" + "kategori : "
 				+ gencCiftci1.getKategori().getId());
 		System.out.println("güncellerken kategori : " + gencCiftci1.getKategori().getIsim());
-		String birim = session.getAttribute("birim").toString();
+		// String birim = session.getAttribute("birim").toString();
 
 		// if (birim == null || !birim.equals(Birimler.KIRSAL_KALKINMA)) {
 		//
@@ -523,6 +525,15 @@ public class GenCiftciController {
 		System.out.println("kayýt sayýlarý : " + gencCiftciService.ilceyeVeKategoriyeGoreKayitSayisi(kategori, ilce));
 		System.out.println("ilce : " + ilce + " kategori : " + kategori);
 		return gencCiftciService.ilceyeVeKategoriyeGoreKayitSayisi(kategori, ilce);
+
+	}
+
+	@RequestMapping(value = "/yararlaniciyaGoreBul")
+	public String yaralaniciyaGoreBul(ModelMap model,
+			@RequestParam(value = "isim", required = false) String yaralaniciAdi) {
+
+		model.put("gencCiftci", gencCiftciService.yaralaniciyaGoreBul(yaralaniciAdi));
+		return "KirsalKalkinma/GencCiftciListe";
 
 	}
 }

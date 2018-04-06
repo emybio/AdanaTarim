@@ -8,6 +8,9 @@ import javax.transaction.Transactional;
 
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.LogicalExpression;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -236,5 +239,21 @@ public class GencCiftciDAOImpl implements GencCiftciDAO {
 			kayitsayisi = (Long) kayitlar.get(0);
 		}
 		return kayitsayisi;
+	}
+
+	@Override
+	public List<GencCiftci> yaralaniciyaGoreBul(String yararlaniciAdi) {
+		Criteria gencCiftci = sessionFactory.getCurrentSession().createCriteria(GencCiftci.class);
+		// Criterion kucukHarf = Restrictions.like("yararlaniciAdi", "%" + yaralaniciAdi
+		// + "%");
+		// Criterion buyukHarf = Restrictions.ilike("yararlaniciAdi", "%" +
+		// yaralaniciAdi + "%");
+		// LogicalExpression orExp = Restrictions.or(kucukHarf, buyukHarf);
+		// gencCiftci.add(orExp);
+
+		gencCiftci.add(Restrictions.ilike("yararlaniciAdi", "%" + yararlaniciAdi + "%"));
+		;
+		return gencCiftci.list();
+
 	}
 }

@@ -83,7 +83,7 @@ public class KooperatifController {
 			@ModelAttribute(value = "kooperatif") Kooperatif koop, ModelMap model) {
 		System.out.println("koop null or not : " + kooperatif);
 
-		if ( id == null) {
+		if (id == null) {
 			return "redirect:/anasayfa";
 		}
 		if (kooperatif == null) {
@@ -215,6 +215,20 @@ public class KooperatifController {
 		System.out.println("Koop ID guncelle: " + kooperatif.getId());
 
 		return "redirect:/kirsal-kalkinma/kooperatifTanimlama";
+
+	}
+
+	@RequestMapping(value = "/tureVeIlceyeGoreKooperatifler")
+	public String tureVeIlceyeGoreKooperatifler(@RequestParam(value = "id", required = false) Long id,
+			@RequestParam(value = "ilce_id", required = false) String ilce, ModelMap model) {
+
+		model.put("title", koopTitle);
+
+		
+
+		model.put("kooperatif", koopService.tureVeIlceyeGoreKooperatifListesi(id, ilce));
+
+		return "KirsalKalkinma/kooperatif/KooperatifListesi";
 
 	}
 }

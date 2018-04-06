@@ -100,4 +100,9 @@ public class GencCiftciServiceImpl implements GencCiftciService {
 		return gencCiftciDAO.kayitSayisi(kategori, ilce, yil, sayfano);
 	}
 
+	@Override
+	public List<GencCiftci> yaralaniciyaGoreBul(String yaralaniAdi) {
+		return gencCiftciDAO.yaralaniciyaGoreBul(yaralaniAdi);
+	}
+
 }

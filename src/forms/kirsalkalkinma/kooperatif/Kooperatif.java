@@ -44,8 +44,8 @@ public class Kooperatif implements java.io.Serializable {
 	@Column(name = "kurulus_yili")
 	public String kurulusYili;
 
-	@Column(name = "fesih_yili")
-	public String fesihYili;
+	@Column(name = "intibak_yili")
+	public String intibakYili;
 
 	@Column(name = "ortak_sayisi")
 	public Integer ortakSayisi;
@@ -95,8 +95,14 @@ public class Kooperatif implements java.io.Serializable {
 	@Column(name = "dagilmis")
 	public Boolean dagilmis;
 
+	@Column(name = "koop_bsk")
+	public String koopBask;
+
 	@Column(name = "vergi_no")
 	public String vergiNo;
+
+	@Column(name = "durum")
+	public String durum;
 
 	public long getId() {
 		return id;
@@ -120,14 +126,6 @@ public class Kooperatif implements java.io.Serializable {
 
 	public void setKurulusYili(String kurulusYili) {
 		this.kurulusYili = kurulusYili;
-	}
-
-	public String getFesihYili() {
-		return fesihYili;
-	}
-
-	public void setFesihYili(String fesihYili) {
-		this.fesihYili = fesihYili;
 	}
 
 	public Integer getOrtakSayisi() {
@@ -232,7 +230,7 @@ public class Kooperatif implements java.io.Serializable {
 	public Date getIslemZamani() {
 		return islemZamani;
 	}
- 
+
 	public void setIslemZamani(Date islemZamani) {
 		this.islemZamani = islemZamani;
 	}
@@ -259,6 +257,30 @@ public class Kooperatif implements java.io.Serializable {
 
 	public void setVergiNo(String vergiNo) {
 		this.vergiNo = vergiNo;
+	}
+
+	public String getDurum() {
+		return durum;
+	}
+
+	public void setDurum(String durum) {
+		this.durum = durum;
+	}
+
+	public String getIntibakYili() {
+		return intibakYili;
+	}
+
+	public void setIntibakYili(String intibakYili) {
+		this.intibakYili = intibakYili;
+	}
+
+	public String getKoopBask() {
+		return koopBask;
+	}
+
+	public void setKoopBask(String koopBask) {
+		this.koopBask = koopBask;
 	}
 
 }

@@ -25,11 +25,12 @@
 	width: 100%;
 }
  */
- #collapse1 {
+#collapse1 {
 	overflow-y: scroll;
 	height: 500px;
-	 width: 190%; 
-} 
+	width: 190%;
+}
+
 .baslik td {
 	text-decoration: bold;
 }
@@ -156,6 +157,11 @@
 								<form:option value="ton">Ton</form:option>
 								<form:option value="adet/yıl">Adet/Yıl</form:option>
 								<form:option value="kw/h">kw/h</form:option>
+								<form:option value="kg">kg</form:option>
+								<form:option value="kg/Yıl">kg/Yıl</form:option>
+								<form:option value="Ton/Yıl">Ton/Yıl</form:option>
+								<form:option value="m&sup2;">m&sup2;
+										</form:option>
 
 							</form:select></td>
 						<td><form:input path="istihdam" /></td>

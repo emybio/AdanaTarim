@@ -99,7 +99,7 @@
 								class="fa fa-try"></span> Ekonomik Yatırımlar</a></li>
 
 						<li><a
-							href="${pageContext.request.contextPath}/kirsal-kalkinma/genc-ciftci">
+							href="${pageContext.request.contextPath}/kirsal-kalkinma/genc-ciftci-liste">
 								<span class="fa fa-female"></span> Genç Çiftçi <span
 								class="fa fa-male"></span>
 						</a></li>

@@ -155,6 +155,7 @@ select {
 			</nav>
 
 			<div class="panel-heading">
+
 				<h3 class="panel-title">
 
 					Genç Çiftçi Listesi <a href="./genc-ciftci" class="pull-right">
@@ -162,6 +163,12 @@ select {
 					</a>
 
 				</h3>
+				<form action="yararlaniciyaGoreBul" method="get">
+					<input name="isim" autocomplete="name" autofocus="autofocus"
+						value="${param.isim }" placeholder="aranacak isim giriniz..."
+						class="form-control">
+					<!-- pattern=".{3,}" title="EN AZ 3 KARAKTER" -->
+				</form>
 			</div>
 			<div class="panel-body">
 				<div style="overflow-x: auto;">

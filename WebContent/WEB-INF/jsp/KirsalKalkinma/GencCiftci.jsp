@@ -43,7 +43,7 @@ select {
 
 						<form:form id="signupForm1" method="post" class="form-horizontal"
 							action="gencCiftciEkle" role="form" commandName="gencCiftci">
-
+							<form:hidden path="id" />
 							<div class="form-group">
 								<label class="col-sm-4 control-label" for="slctTipler">Kategori
 									1</label>

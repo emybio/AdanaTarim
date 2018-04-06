@@ -38,4 +38,6 @@ public interface GencCiftciDAO {
 	public List<GencCiftci> mahalleListesi();
 
 	public Long kayitSayisi(String kategori, String ilce, Integer yil, Integer sayfano);
+	
+	public List<GencCiftci> yaralaniciyaGoreBul(String yaralaniAdi);
 }

@@ -22,5 +22,5 @@ public interface KooperatifService {
 	public List<Kooperatif> tureGoreKooperatifListesi(Long turID);
 
 	public List<Kooperatif> kooperatifKartiGetir(Long koopId);
-
+	public List<Kooperatif> tureVeIlceyeGoreKooperatifListesi(Long turID,String ilce);
 }

@@ -91,4 +91,16 @@ public class KooperatifDAOImpl implements KooperatifDAO {
 		return criteriaKoop.list();
 	}
 
+	@Override
+	public List<Kooperatif> tureVeIlceyeGoreKooperatifListesi(Long turID, String ilce) { 
+		Criteria criteriaKoop = sessionFactory.getCurrentSession().createCriteria(Kooperatif.class);
+		criteriaKoop.createAlias("kooperatifIlceID", "kooperatifIlceID");
+
+		criteriaKoop.add(Restrictions.eq("kooperatifIlceID.isim", ilce));
+		criteriaKoop.add(Restrictions.eq("kooperatifTurID.id", turID));
+
+		criteriaKoop.addOrder(Order.asc("kooperatifTurID"));
+		return criteriaKoop.list();
+	}
+
 }
