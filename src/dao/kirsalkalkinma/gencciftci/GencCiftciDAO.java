@@ -19,8 +19,6 @@ public interface GencCiftciDAO {
 
 	public List<GencCiftci> kategoriyeGoreListe(Integer kategori);
 
-	public List<GencCiftci> ilceVeKategoriyeGoreListe(String kategori, String ilce, Integer yil, Integer sayfano);
-
 	public List<GencCiftci> ilceListesi();
 
 	public List<GencCiftci> kategoriListesi();
@@ -31,13 +29,15 @@ public interface GencCiftciDAO {
 
 	public Long ilceyeVeYillaraGoreKayitSayisi(Integer yil, String ilce);
 
-	public Long ilceyeVeKategoriyeGoreKayitSayisi(Long kategori, Long ilce);
-
 	public List<GencCiftci> yillaraGoreListe(Integer yil);
 
 	public List<GencCiftci> mahalleListesi();
 
-	public Long kayitSayisi(String kategori, String ilce, Integer yil, Integer sayfano);
-	
+	public Long kayitSayisi(Long kategori, String ilce, Integer yil, Integer sayfano);
+
+	public List<GencCiftci> ilceVeKategoriyeGoreListe(Long kategori, String ilce, Integer yil, Integer sayfano);
+
+	public Long ilceyeVeKategoriyeGoreKayitSayisi(Long kategori, String ilce);
+
 	public List<GencCiftci> yaralaniciyaGoreBul(String yaralaniAdi);
 }

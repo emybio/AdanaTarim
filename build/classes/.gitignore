@@ -3,5 +3,7 @@
 /controllers/
 /dao/
 /forms/
+/hibernate.cfg2.xml
 /service/
 /validator/
+/views.properties
