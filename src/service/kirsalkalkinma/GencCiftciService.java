@@ -32,12 +32,13 @@ public interface GencCiftciService {
 
 	public List<GencCiftci> yillaraGoreListe(Integer yil);
 
-	public List<GencCiftci> ilceVeKategoriyeGoreListe(String kategori, String ilce, Integer yil, Integer sayfaNo);
+	public List<GencCiftci> ilceVeKategoriyeGoreListe(Long kategori, String ilce, Integer yil, Integer sayfaNo);
 
-	public Long ilceyeVeKategoriyeGoreKayitSayisi(Long kategori, Long ilce);
+	public Long ilceyeVeKategoriyeGoreKayitSayisi(Long kategori, String ilce);
 
 	public List<GencCiftci> mahalleListesi();
 
-	public Long kayitSayisi(String kategori, String ilce, Integer yil, Integer sayfano);
+	public Long kayitSayisi(Long kategori, String ilce, Integer yil, Integer sayfano);
+
 	public List<GencCiftci> yaralaniciyaGoreBul(String yaralaniAdi);
 }

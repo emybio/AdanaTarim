@@ -129,8 +129,7 @@ public class GenCiftciController {
 	public String gencCiftciEkle(@RequestParam("mahalle") Long mahalle, @RequestParam("slctTipler") Long slctTipler,
 			@RequestParam("slctAltTip") Long slctAltTip, ModelMap model,
 			@ModelAttribute("gencCiftci") GencCiftci gencCiftci1, BindingResult result, HttpSession session) {
-		
-		
+
 		System.out.println("slctTipler : " + slctTipler + "\n" + "slctAltTip : " + slctAltTip + "\n" + "kategori : "
 				+ gencCiftci1.getKategori().getId());
 		System.out.println("güncellerken kategori : " + gencCiftci1.getKategori().getIsim());
@@ -428,7 +427,8 @@ public class GenCiftciController {
 		model.put("title", "Genç Çiftçi Raporlar");
 
 		model.put("ilceler", gencCiftciService.ilceListesi());
-
+		model.put("ilceListesi", ilceler.altTipGetir(2l, true));
+		model.put("kategoriListesi", gencCiftciService.kategoriListesi());
 		return "KirsalKalkinma/GencCiftciRapor";
 	}
 
@@ -494,7 +494,7 @@ public class GenCiftciController {
 	public String filtreyeGoreGencCiftciListeGetir(ModelMap model,
 			@RequestParam(value = "sayfano", required = false) Integer sayfaNo,
 			@RequestParam(value = "ilce", required = false) String ilce,
-			@RequestParam(value = "kategori", required = false) String kategori,
+			@RequestParam(value = "kategori", required = false) Long kategori,
 			@RequestParam(value = "yil", required = false) Integer yil) {
 		if (sayfaNo == null)
 			sayfaNo = 1;
@@ -502,8 +502,8 @@ public class GenCiftciController {
 		model.put("sayfa", sayfaNo);
 		model.put("sayfalar",
 				araclar.Genel.sayfalar(sayfaNo, gencCiftciService.kayitSayisi(kategori, ilce, yil, sayfaNo),
-						"./filtreyeGoreGencCiftciListeGetir?ilce=" + ilce + "&kategori=" + kategori + "&yil="
-								+ (yil == null ? "" : yil)));
+						"./filtreyeGoreGencCiftciListeGetir?ilce=" + ilce + "&kategori="
+								+ (kategori == null ? "" : kategori) + "&yil=" + (yil == null ? "" : yil)));
 		model.put("title", "Filtre-Genc Ciftci");
 		model.put("yillar", gencCiftciService.yilListesi());
 		model.put("ilceListesi", ilceler.altTipGetir(2l, true));
@@ -519,11 +519,9 @@ public class GenCiftciController {
 
 	@RequestMapping(value = "/ilceyeVeKategoriyeGoreKayitSayisi")
 	public @ResponseBody Long ilceyeVeKategoriyeGoreKayitSayisi(ModelMap model,
-			@RequestParam(value = "ilce", required = false) Long ilce,
+			@RequestParam(value = "ilce", required = false) String ilce,
 			@RequestParam(value = "kategori", required = false) Long kategori) {
 
-		System.out.println("kayýt sayýlarý : " + gencCiftciService.ilceyeVeKategoriyeGoreKayitSayisi(kategori, ilce));
-		System.out.println("ilce : " + ilce + " kategori : " + kategori);
 		return gencCiftciService.ilceyeVeKategoriyeGoreKayitSayisi(kategori, ilce);
 
 	}

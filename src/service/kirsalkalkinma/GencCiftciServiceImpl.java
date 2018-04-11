@@ -80,12 +80,12 @@ public class GencCiftciServiceImpl implements GencCiftciService {
 	}
 
 	@Override
-	public List<GencCiftci> ilceVeKategoriyeGoreListe(String kategori, String ilce, Integer yil, Integer sayfaNo) {
+	public List<GencCiftci> ilceVeKategoriyeGoreListe(Long kategori, String ilce, Integer yil, Integer sayfaNo) {
 		return gencCiftciDAO.ilceVeKategoriyeGoreListe(kategori, ilce, yil, sayfaNo);
 	}
 
 	@Override
-	public Long ilceyeVeKategoriyeGoreKayitSayisi(Long kategori, Long ilce) {
+	public Long ilceyeVeKategoriyeGoreKayitSayisi(Long kategori, String ilce) {
 		return gencCiftciDAO.ilceyeVeKategoriyeGoreKayitSayisi(kategori, ilce);
 	}
 
@@ -95,7 +95,7 @@ public class GencCiftciServiceImpl implements GencCiftciService {
 	}
 
 	@Override
-	public Long kayitSayisi(String kategori, String ilce, Integer yil, Integer sayfano) {
+	public Long kayitSayisi(Long kategori, String ilce, Integer yil, Integer sayfano) {
 
 		return gencCiftciDAO.kayitSayisi(kategori, ilce, yil, sayfano);
 	}

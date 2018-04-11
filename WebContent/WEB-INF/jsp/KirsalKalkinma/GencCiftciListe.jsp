@@ -55,13 +55,15 @@ select {
 			success : function(gelen) {
 				//console.log(gelen);
 				var link="./filtreyeGoreGencCiftciListeGetir?yil="
-					+ jq("#yil").val() + "&ilce=" + jq("#ilce").val()
-					+ "&kategori=" + jq("#kategori").val();
+					+ jq("#yil").val() + "&ilce=" + jq("#ilce").val()  
+					+ "&kategori=" + (jq("#kategori").val())+"&sayfano=";  
 				window.location.href= ('page2','Title',link);
 
 			},
 			error : function(xhr, textStatus, errorThrown) {
-				alert(textStatus);
+				console.log(xhr);
+				console.log("filtreyeGoreGencCiftciListeGetir : "+textStatus +" -"+xhr+"- "+errorThrown);
+			//	alert("filtreyeGoreGencCiftciListeGetir : "+textStatus +" -"+xhr+"- "+errorThrown);
 			}
 		});
 
@@ -76,8 +78,6 @@ select {
 	if(sayfaNumara != ''){
 			jq("."+sayfaNumara).addClass("btn btn-success btn-lg bg-success").css("background-color","#FF8800");
 	}
-		
-		
 								
 				jq("#filtreText").click(function(){
 					var link="./filtreyeGoreGencCiftciListeGetir?yil=&ilce=&kategori=&sayfano=" ;
@@ -93,35 +93,7 @@ select {
 	
 	
 	
-	function ilceyeVeKategoriyeGoreKayitSayisi(ilce,kategori,id) {
-		 {
-			 var asd= "#"+id+kategori;
-			console.log("id gosterimi : " + asd)
-			
-			jq.ajax({
-				type : "GET",
-				url : "./ilceyeVeKategoriyeGoreKayitSayisi",
-				dataType : "JSON",
-				contentType : "application/x-www-form-urlencoded;charset=UTF-8",
-				data : {
-					kategori : kategori,
-					ilce : ilce,
-				},
-				 beforeSend:function() { 
-				//	 jq("#raporTable").html("<tr><td>İçerik Yükleniyor....</td></tr>");
-			     },
-				success : function(gelen) { 
-					console.log(gelen);
-					jq("#"+id+kategori).text(gelen);
-				},
-				error : function(xhr, textStatus, errorThrown) {
-				//	alert(textStatus);
-				}
-			});
-		}
-	}
-
-
+	
 </script>
 
 
@@ -193,8 +165,8 @@ select {
 								id="kategori" onchange="yillaraGoreGetir();">
 									<option value="">Kategoriye Göre Filtrele</option>
 									<c:forEach items="${kategoriListesi}" var="kategori">
-										<option value="${kategori.isim}"
-											${requestScope.secilenKategori == kategori.isim? 'selected' : ''}>${kategori.isim }</option>
+										<option value="${kategori.id}"
+											${requestScope.secilenKategori == kategori.id? 'selected' : ''}>${kategori.isim }</option>
 									</c:forEach>
 							</select></td>
 							<td colspan="1"><select class="form-control" name="yil"
@@ -327,61 +299,6 @@ select {
 
 
 
-		<div class="page-header">&nbsp;</div>
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">DENEME</h3>
-			</div>
-			<div class="panel-body">
-				<div style="overflow-x: auto;">
-					<c:set var="toplam" value="${0}"></c:set>
-					<c:set var="string" value=""></c:set>
-
-					<table class="table table-hover table-border" id="raporTable">
-						<tr>
-							<td></td>
-							<c:forEach items="${kategoriListesi}" var="kategori">
-								<td>${kategori.isim}</td>
-							</c:forEach>
-						</tr>
-
-						<c:forEach items="${ilceListesi}" var="ilce">
-
-							<tr>
-								<td>${ilce.isim}</td>
-								<c:forEach items="${kategoriListesi}" var="kategori"
-									varStatus="x">
-
-									<c:forEach items="${gencCiftci}" var="genc" varStatus="g">
-										<c:set
-											value="${genc.mahalle.tip.id eq 11 and genc.kategori.id eq 1 }"
-											var="deger" />
-
-										<c:if test="${deger eq true}">
-
-
-											<c:set var="toplam" value="${toplam+1}"></c:set>
-
-											<c:set var="string" value="${kategori.isim}"></c:set>
-											<!-- <script type="text/javascript">
-													ilceyeVeKategoriyeGoreKayitSayisi('${ilce.id}','${kategori.id}','${toplam}');
-													</script> -->
-
-										</c:if>
-									</c:forEach>
-
-									<td><span id="${toplam}${kategori.id}"> <%-- ${string}--${x.last}-${toplam} --%>
-									</span></td>
-								</c:forEach>
-							</tr>
-						</c:forEach>
-
-
-					</table>
-
-				</div>
-			</div>
-		</div>
 	</div>
 </body>
 </html>
