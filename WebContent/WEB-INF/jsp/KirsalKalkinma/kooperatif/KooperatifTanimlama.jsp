@@ -25,10 +25,9 @@
 						jq('#add')
 								.click(
 										function() {
-											alert();
 											jq('.block:last')
 													.after(
-															'<div class="block"><input type="text" /><span class="remove">Remove Option</span></div>');
+															'<div class="" style=""><input type="text" class="form-control col-sm-2" /><span class="remove col-sm-2">Remove Option</span></div>');
 										});
 						jq('.optionBox').on('click', '.remove', function() {
 							jq(this).parent().remove();
@@ -229,16 +228,11 @@
 								</div>
 							</div>
 							<div class="form-group">
+								<label class="col-sm-4 control-label" for="denetimKuruluList">Denetim
+									Kurulu</label>
 								<div class="col-sm-5">
 									<div class="optionBox">
-										<div class="block">
-											<input type="text" /> <span class="remove">Remove
-												Option</span>
-										</div>
-										<div class="block">
-											<input type="text" /> <span class="remove">Remove
-												Option</span>
-										</div>
+
 										<div class="block">
 											<a id="add">Add Option</a>
 										</div>

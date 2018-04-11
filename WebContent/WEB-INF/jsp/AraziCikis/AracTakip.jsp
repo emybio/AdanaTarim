@@ -360,16 +360,12 @@ jq(document).ready(function() {
 							<th rowspan="2">İŞİN ÖZETİ</th>
 						</tr>
 						<tr>
-
 							<th style="text-align: center;">İLÇE</th>
 							<th style="text-align: center;">MAHALLE</th>
-
-
 						</tr>
 					</thead>
 					<form:form commandName="arac" method="post" action="araziCikisEkle">
 						<form:hidden path="id" />
-
 						<tr>
 							<td style=""><div class="personel">
 									<form:select data-placeholder="Personel Seç." multiple="true"
@@ -387,8 +383,6 @@ jq(document).ready(function() {
 												${kullanici[2].id == k.id ? 'selected' : ''}
 												${kullanici[3].id == k.id ? 'selected' : ''}
 												${kullanici[4].id == k.id ? 'selected' : ''}>
-
-
 												${k.adi}</option>
 										</c:forEach>
 									</form:select>
@@ -400,16 +394,15 @@ jq(document).ready(function() {
 									<form:option value="01EAY77">01 EAY 77</form:option>
 									<form:option value="01R9249">01 R 9249</form:option>
 									<form:option value="01R9404">01 R 9404</form:option>
-									<form:option value="01CAD12">01 CAD 12</form:option>3
+									<form:option value="01CAD12">01 CAD 12</form:option>
 									<form:option value="01ASL28">01 ASL 28</form:option>
 									<form:option value="01ASL29">01 ASL 29</form:option>
+									<form:option value="01AZJ18">01 AZJ 18</form:option>
 								</form:select></td>
 							<td><form:input path="ozelPlaka" type="text" id="ozelPlaka"
 									style="text-transform: uppercase;" onkeyup="buyukHarf();" /></td>
 							<!--ilce-->
 							<td>
-
-
 								<div class="ilce">
 									<form:select path="ilce.id" id="slctAltTip" class=""
 										onChange="ikisibiradamarkala(this.value)">
