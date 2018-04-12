@@ -45,6 +45,8 @@ public class EkonomikYatirimController {
 	private YerEklemeService yerEklemeService;
 	private EkonomikYatirim yatirim;
 	private String tusYazisi = "Kaydet";
+	
+	private List<EkonomikYatirim> etapNoListesi;
 
 	@RequestMapping(value = "/ekonomik-yatirimlar")
 	public String ekonomikYatirimlar(@CookieValue(value = "id", required = false) Long id, ModelMap model,
@@ -94,22 +96,7 @@ public class EkonomikYatirimController {
 		ekonomikYatirim.setIslemYapan(kullanici);
 		ekonomikYatirim.setIslemZamani(new Date());
 		try {
-
-			if (!ekonomikYatirimService.kayitVarmi(ekonomikYatirim.getEtapNo(), ekonomikYatirim.getYatirimciAdi())) {
-
-				ekonomikYatirimService.save(ekonomikYatirim);
-			} else {
-
-				model.put("title", "Kýrsal Kalkýnma");
-				model.put("ilceListesi", yerEklemeService.altTipGetir(2l, true));
-				model.put("kategoriListesi", ekonomikYatirimKategoriService.tumEkonomikYatirimKategoriListesi());
-				model.put("durumListesi", ekonomikDurumService.tumDurumListesi());
-				model.put("tusYazisi", tusYazisi);
-				tusYazisi = "Kaydet";
-
-				model.put("errorMessage", "Mükerrer kayit....");
-				return "KirsalKalkinma/EkonomikYatirimlar";
-			}
+			ekonomikYatirimService.save(ekonomikYatirim);
 
 		} catch (Exception e) {
 
@@ -158,7 +145,7 @@ public class EkonomikYatirimController {
 	public ModelAndView xlsxViewExport(HttpServletResponse response,
 			@RequestParam(value = "etapNo", required = false) Integer a,
 			@RequestParam(value = "ilce", required = false) String ilce) throws UnsupportedEncodingException {
-		response.setContentType("application/vnd.ms-excel");
+		 response.setContentType("application/vnd.ms-excel");
 		if (null != a) {
 
 			response.setHeader("Content-disposition",
@@ -206,9 +193,9 @@ public class EkonomikYatirimController {
 		return gson.toJson(ekonomikYatirimService.ilceyeGoreJSON(ilce));
 
 	}
-
-	@RequestMapping(value = "/etapNoyaGoreGetir")
-	public String etapNoyaGoreListesle(@RequestParam(value = "etapNo") Integer etapNo, ModelMap model) {
+	
+	@RequestMapping(value="/etapNoyaGoreGetir")
+	public String etapNoyaGoreListesle(@RequestParam(value="etapNo") Integer etapNo,ModelMap model) {
 		if (yatirim == null) {
 
 			yatirim = new EkonomikYatirim();
@@ -221,7 +208,7 @@ public class EkonomikYatirimController {
 			model.put("errors", e.getMessage());
 			return "error";
 		}
-
+		
 		model.put("title", "Kýrsal Kalkýnma");
 		model.put("tumEkonomikYatirimListesi", ekonomikYatirimService.etapNoyaGoreGetir(etapNo));
 		model.put("ilceListesi", yerEklemeService.altTipGetir(2l, true));

@@ -37,63 +37,36 @@ select {
 						},
 						success : function(gelen) {
 							jq("#" + id).text(Number(gelen));
-							//console.log(id + "-" + gelen);
 
-						},
+							var sum = 0;
 
-						complete : function() {
+							jq("." + ilce).each(function() {
 
-							jq(document)
-									.ready(
-											function() {
+								var value = jq(this).text();
+								if (!isNaN(value) && value.length != 0) {
+									sum += parseFloat(value);
+								}
+								
+							})
 
-												var rowTotal = 0;
+							jq("#" + "toplam" + ilce).text(sum);
+							
+							
+							
+							
+							
+							var sum2 = 0;
 
-												jq("." + ilce)
-														.each(
-																function() {
+							jq("." + kategori).each(function() {
 
-																	var value = jq(
-																			this)
-																			.text();
-																	if (!isNaN(value)) {
-																		rowTotal += parseFloat(value);
-																	}
+								var value = jq(this).text();
+								if (!isNaN(value) && value.length != 0) {
+									sum2 += parseFloat(value);
+								}
+								
+							})
 
-																});
-
-												jq("#toplam" + ilce).text(
-														rowTotal);
-
-												var columnTotal = 0;
-
-												jq("." + kategori)
-														.each(
-																function() {
-
-																	var value = jq(
-																			this)
-																			.text();
-																	if (!isNaN(value)) {
-																		columnTotal += parseFloat(value);
-																	}
-
-																});
-
-												jq("#toplam" + kategori).text(
-														columnTotal);
-												console
-														.log(jq("#toplam"
-																+ kategori)
-																+ " : "
-																+ jq(
-																		"#toplam"
-																				+ kategori)
-																		.text(
-																				columnTotal));
-
-											});
-
+							jq("#" + "toplam" + kategori).text(sum2);
 						},
 						error : function(xhr, textStatus, errorThrown) {
 							//	alert(textStatus);
@@ -105,26 +78,6 @@ select {
 		}
 
 	}
-
-	var tableToExcel = (function() {
-		var uri = 'data:application/vnd.ms-excel;base64,', template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8"><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>', base64 = function(
-				s) {
-			return window.btoa(unescape(encodeURIComponent(s)))
-		}, format = function(s, c) {
-			return s.replace(/{(\w+)}/g, function(m, p) {
-				return c[p];
-			})
-		}
-		return function(table, name) {
-			if (!table.nodeType)
-				table = document.getElementById(table)
-			var ctx = {
-				worksheet : name || 'Worksheet',
-				table : table.innerHTML
-			}
-			window.location.href = uri + base64(format(template, ctx))
-		}
-	})()
 </script>
 </head>
 <body>
@@ -299,12 +252,7 @@ select {
 		<div class="page-header">&nbsp;</div>
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h3 class="panel-title">
-					GENÇ ÇİFÇTİ 2016-2017 İSTATİSTİK <a href="#"
-						onclick="tableToExcel('raporTable', 'Kategori ve İlçete Göre Rapor')" class="float-left"><img
-						alt="Excel Report" class="rounded" width="35px"
-						src="<c:url value='/assets/images/xlsx-3.png'/>"></a>
-				</h3>
+				<h3 class="panel-title">DENEME</h3>
 			</div>
 			<div class="panel-body">
 				<div style="overflow-x: auto;" id="raporDiv">
@@ -344,7 +292,6 @@ select {
 							<c:forEach items="${kategoriListesi}" var="kategori">
 								<td><span id="toplam${kategori.id}"></span></td>
 							</c:forEach>
-							<td><b>${fn:length(gencCiftci)}</b></td>
 						</tr>
 					</table>
 
@@ -352,5 +299,7 @@ select {
 			</div>
 		</div>
 	</div>
+
+
 </body>
 </html>

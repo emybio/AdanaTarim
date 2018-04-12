@@ -25,5 +25,4 @@ public interface EkonomikYatirimDAO {
 
 	public List<EkonomikYatirim> etapNoyaGoreGetir(Integer etapNo);
 
-	public boolean kayitVarmi(int kategori,String isim);
 }

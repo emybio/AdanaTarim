@@ -144,6 +144,7 @@ select {
 			</div>
 			<div class="panel-body">
 				<div style="overflow-x: auto;">
+
 					<table class="table table-hover table-border">
 						<tr>
 							<td colspan="8"><input class="form-control" id="filtreText"

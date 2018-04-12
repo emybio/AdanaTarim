@@ -16,7 +16,6 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import forms.Arac;
 import forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirim;
 
 @Transactional
@@ -126,16 +125,5 @@ public class EkonomikYatirimDAOImpl implements EkonomikYatirimDAO {
 		ekonomikYatirimList.add(Restrictions.eq("etapNo", etapNo));
 		ekonomikYatirimList.addOrder(Order.asc("ilce.isim"));
 		return ekonomikYatirimList.list();
-	}
-
-	@Override
-	public boolean kayitVarmi(int kategori, String isim) {
-		Criteria criteriaArac = sessionFactory.getCurrentSession().createCriteria(EkonomikYatirim.class);
-
-		criteriaArac.add(
-				Restrictions.and(Restrictions.eq("etapNo", kategori)).add(Restrictions.eq("yatirimciAdi", isim)));
-
-		List<EkonomikYatirim> sonucList = criteriaArac.list();
-		return (sonucList != null && sonucList.size() > 0);
 	}
 }

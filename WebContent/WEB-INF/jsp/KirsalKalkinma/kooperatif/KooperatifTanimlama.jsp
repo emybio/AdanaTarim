@@ -27,7 +27,7 @@
 										function() {
 											jq('.block:last')
 													.after(
-															'<div class="" style=""><input type="text" class="col-sm-10" /><span class="remove col-sm-2 glyphicon glyphicon-remove "></span></div>');
+															'<div class="" style=""><input type="text" class="form-control col-sm-2" /><span class="remove col-sm-2">Remove Option</span></div>');
 										});
 						jq('.optionBox').on('click', '.remove', function() {
 							jq(this).parent().remove();
@@ -234,8 +234,7 @@
 									<div class="optionBox">
 
 										<div class="block">
-											<a id="add"><span class="glyphicon glyphicon-plus"></span></a>
-
+											<a id="add">Add Option</a>
 										</div>
 									</div>
 								</div>
@@ -316,6 +315,12 @@
 										onclick="javascript:history.back()">
 										<span class="fa fa-reply"> Bir Önceki Sayfa </span>
 									</button>
+
+
+
+
+
+
 									<a type="button" href="./ilce-listesi"
 										class="btn btn-primary pull-left ">İlce Listesine Git </a>
 								</div>

@@ -24,6 +24,4 @@ public interface EkonomikYatirimService {
 	public JSONArray ilceyeGoreJSON(String ilce);
 
 	public List<EkonomikYatirim> etapNoyaGoreGetir(Integer etapNo);
-
-	public boolean kayitVarmi(int kategori, String isim);
 }

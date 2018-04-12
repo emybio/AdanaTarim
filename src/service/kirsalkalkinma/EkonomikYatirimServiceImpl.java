@@ -64,10 +64,4 @@ public class EkonomikYatirimServiceImpl implements EkonomikYatirimService {
 		// TODO Auto-generated method stub
 		return ekonomikYatirimDAO.etapNoyaGoreGetir(etapNo);
 	}
-
-	@Override
-	public boolean kayitVarmi(int kategori, String isim) {
-		// TODO Auto-generated method stub
-		return ekonomikYatirimDAO.kayitVarmi(kategori, isim);
-	}
 }
