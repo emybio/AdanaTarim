@@ -429,6 +429,7 @@ public class GenCiftciController {
 		model.put("ilceler", gencCiftciService.ilceListesi());
 		model.put("ilceListesi", ilceler.altTipGetir(2l, true));
 		model.put("kategoriListesi", gencCiftciService.kategoriListesi());
+		model.put("gencCiftci", gencCiftciService.tumGencCiftciler());
 		return "KirsalKalkinma/GencCiftciRapor";
 	}
 
