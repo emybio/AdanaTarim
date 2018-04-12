@@ -41,13 +41,19 @@
 	function etapNoDegistir(etapNo) {
 		console.log("etapNO: " + etapNo)
 
-		window.location.href = "./etapNoyaGoreGetir?etapNo=" + etapNo;
+		if (etapNo != "") {
+			window.location.href = "./etapNoyaGoreGetir?etapNo=" + etapNo;
+		} else {
+
+			window.location.href = "./ekonomik-yatirimlar";
+		}
 	};
 </script>
 </head>
 <body>
 	<div class="container-fluid">
 		<div id="container" class="col-sm-6">
+
 			<h3>Ekonomik Yatırımlar</h3>
 
 			<form:form action="ekle" method="post" commandName="ekonomikYatirim">
@@ -184,52 +190,65 @@
 						</c:if>
 					</tr>
 				</table>
+				<c:if test="${empty errorMessage }">
+					<div>
+						<select name="etapNo" onchange="etapNoDegistir(this.value);">
+							<option value="">Seç</option>
+							<option value="2" ${param.etapNo==2 ? 'selected':''}>2.
+								Etap</option>
+							<option value="3" ${param.etapNo==3 ? 'selected':''}>3.
+								Etap</option>
+							<option value="4" ${param.etapNo==4 ? 'selected':''}>4.
+								Etap</option>
+							<option value="5" ${param.etapNo==5 ? 'selected':''}>5.
+								Etap</option>
+							<option value="6" ${param.etapNo==6 ? 'selected':''}>6.
+								Etap</option>
+							<option value="7" ${param.etapNo==7 ? 'selected':''}>7.
+								Etap</option>
+							<option value="8" ${param.etapNo==8 ? 'selected':''}>8.
+								Etap</option>
+							<option value="9" ${param.etapNo==9 ? 'selected':''}>9.
+								Etap</option>
+							<option value="10" ${param.etapNo==10 ? 'selected':''}>10.
+								Etap</option>
+							<option value="11" ${param.etapNo==11 ? 'selected':''}>11.
+								Etap</option>
+							<option value="12" ${param.etapNo==12 ? 'selected':''}>12.
+								Etap</option>
 
-				<div>
-					<select name="etapNo" onchange="etapNoDegistir(this.value);">
-						<option value="">Seç</option>
-						<option value="2">2. Etap</option>
-						<option value="3">3. Etap</option>
-						<option value="4">4. Etap</option>
-						<option value="5">5. Etap</option>
-						<option value="6">6. Etap</option>
-						<option value="7">7. Etap</option>
-						<option value="8">8. Etap</option>
-						<option value="9">9. Etap</option>
-						<option value="10">10. Etap</option>
-						<option value="11">11. Etap</option>
-						<option value="12">12. Etap</option>
+						</select>
 
-					</select>
+					</div>
 
-				</div>
-				<div id="collapse1" class="panel-collapse ">
-					<table class="table table-sm table-striped bg-info table-fixed "
-						style="text-align: center; width: 100%;">
-						<c:set var="list" value="${tumEkonomikYatirimListesi}" />
-						<c:set var="listSize" value="${fn:length(list)}" />
+					<div id="collapse1" class="panel-collapse ">
+						<table class="table table-sm table-striped bg-info table-fixed "
+							style="text-align: center; width: 100%;">
+							<c:set var="list" value="${tumEkonomikYatirimListesi}" />
+							<c:set var="listSize" value="${fn:length(list)}" />
 
-						<tr>
-							<td colspan="12" align="left"><b>${listSize}&nbsp;adet&nbsp;kayıt</b></td>
-						</tr>
+							<tr>
+								<td colspan="12" align="left"><b>${listSize}&nbsp;adet&nbsp;kayıt</b>
+								</td>
+							</tr>
 
-						<tr class="baslik">
+							<tr class="baslik">
 
-							<td align="center">İLÇE</td>
-							<td align="center">YATIRIM KONUSU</td>
-							<td align="center">ETAP NO</td>
-							<td align="center">YATIRIMCI ADI</td>
-							<td align="center">PROJE ADI</td>
-							<td align="center">PROJE BEDELİ</td>
-							<td align="center">HİBE TUTARI</td>
-							<td align="center">KAPASİTE</td>
-							<td align="center">İSTİHDAM</td>
-							<td align="center">DURUM</td>
-						</tr>
-						<tbody class="govde">
-							<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim"
-								varStatus="sira">
-								<!-- 	<script type="text/javascript">
+								<td align="center">İLÇE</td>
+								<td align="center">YATIRIM KONUSU</td>
+								<td align="center">ETAP NO</td>
+								<td align="center">YATIRIMCI ADI</td>
+								<td align="center">PROJE ADI</td>
+								<td align="center">PROJE BEDELİ</td>
+								<td align="center">HİBE TUTARI</td>
+								<td align="center">KAPASİTE</td>
+								<td align="center">İSTİHDAM</td>
+								<td align="center">DURUM</td>
+							</tr>
+							<tbody class="govde">
+								<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim"
+									varStatus="sira">
+									<!-- 	<script type="text/javascript">
 									jq(document)
 											.ready(
 													function() {
@@ -268,60 +287,77 @@
 													});
 								</script> -->
 
-								<!--style='word-break: break-all; width: 20em;'  -->
-								<tr id="siraNo${sira.count }">
-									<td align="center">${yatirim.ilce.isim}</td>
-									<td align="center">${yatirim.kategori.kategoriAdi}</td>
-									<td align="center">${yatirim.etapNo}</td>
-									<td align="center" id="${yatirim.id }">${yatirim.yatirimciAdi}</td>
-									<td align="center">${yatirim.projeAdi}</td>
-									<td align="center"><fmt:formatNumber pattern="#,##0.00"
-											type="currency" value="${yatirim.projeBedeli}"
+									<!--style='word-break: break-all; width: 20em;'  -->
+									<tr id="siraNo${sira.count }">
+										<td align="center">${yatirim.ilce.isim}</td>
+										<td align="center">${yatirim.kategori.kategoriAdi}</td>
+										<td align="center">${yatirim.etapNo}</td>
+										<td align="center" id="${yatirim.id }">${yatirim.yatirimciAdi}</td>
+										<td align="center">${yatirim.projeAdi}</td>
+										<td align="center"><fmt:formatNumber pattern="#,##0.00"
+												type="currency" value="${yatirim.projeBedeli}"
+												var="projeBedeli"></fmt:formatNumber>${projeBedeli }</td>
+										<td align="center"><fmt:formatNumber pattern="#,##0.00"
+												type="currency" value="${yatirim.hibeTutari}"
+												var="projeBedeli"></fmt:formatNumber>${projeBedeli }</td>
+										<td align="center">${yatirim.kapasite}&nbsp;${yatirim.kapasiteBirim}</td>
+										<td align="center">${yatirim.istihdam}</td>
+										<td align="center">${yatirim.durum.durumAdi}</td>
+										<td><a
+											href="${pageContext.request.contextPath }/kirsal-kalkinma/ekonomikYatirimSil?id=${yatirim.id}"
+											onclick="javascript:return confirm('${yatirim.etapNo}. etap ${yatirim.yatirimciAdi} isimli kaydı : \n Silmek İstediğinize Emin misiniz?');"
+											class="btn btn-danger btn-sm">Sil</a></td>
+										<td><a
+											href="${pageContext.request.contextPath }/kirsal-kalkinma/ekonomikYatirimGuncelle/${yatirim.id}"
+											class="btn btn-primary btn-sm">Güncelle</a></td>
+									</tr>
+
+
+								</c:forEach>
+
+
+
+								<tr>
+									<td colspan="5" align="right">GENEL TOPLAM:</td>
+
+									<td><fmt:formatNumber pattern="#,##0.00" type="currency"
+											value="${tumEkonomikYatirimListesi.stream().map(yatirim -> yatirim.projeBedeli).sum()}"
 											var="projeBedeli"></fmt:formatNumber>${projeBedeli }</td>
-									<td align="center"><fmt:formatNumber pattern="#,##0.00"
-											type="currency" value="${yatirim.hibeTutari}"
-											var="projeBedeli"></fmt:formatNumber>${projeBedeli }</td>
-									<td align="center">${yatirim.kapasite}&nbsp;${yatirim.kapasiteBirim}</td>
-									<td align="center">${yatirim.istihdam}</td>
-									<td align="center">${yatirim.durum.durumAdi}</td>
-									<td><a
-										href="${pageContext.request.contextPath }/kirsal-kalkinma/ekonomikYatirimSil?id=${yatirim.id}"
-										onclick="javascript:return confirm('${yatirim.etapNo}. etap ${yatirim.yatirimciAdi} isimli kaydı : \n Silmek İstediğinize Emin misiniz?');"
-										class="btn btn-danger btn-sm">Sil</a></td>
-									<td><a
-										href="${pageContext.request.contextPath }/kirsal-kalkinma/ekonomikYatirimGuncelle/${yatirim.id}"
-										class="btn btn-primary btn-sm">Güncelle</a></td>
+									<td><fmt:formatNumber pattern="#,##0.00 TL"
+											type="currency"
+											value="${tumEkonomikYatirimListesi.stream().map(yatirim -> yatirim.hibeTutari).sum()}"
+											var="hibeTutari"></fmt:formatNumber>${hibeTutari }</td>
+									<td><fmt:formatNumber pattern="#,##0" type="number"
+											value="${tumEkonomikYatirimListesi.stream().map(yatirim -> yatirim.kapasite).sum()}"
+											var="kapasite"></fmt:formatNumber>${kapasite }</td>
+									<td><fmt:formatNumber pattern="#,##0" type="number"
+											value="${tumEkonomikYatirimListesi.stream().map(yatirim -> yatirim.istihdam).sum()}"
+											var="istihdam"></fmt:formatNumber>${istihdam }</td>
+
+									<td colspan="3"></td>
 								</tr>
 
-
-							</c:forEach>
-
-
-
-							<tr>
-								<td colspan="5" align="right">GENEL TOPLAM:</td>
-
-								<td><fmt:formatNumber pattern="#,##0.00" type="currency"
-										value="${tumEkonomikYatirimListesi.stream().map(yatirim -> yatirim.projeBedeli).sum()}"
-										var="projeBedeli"></fmt:formatNumber>${projeBedeli }</td>
-								<td><fmt:formatNumber pattern="#,##0.00 TL" type="currency"
-										value="${tumEkonomikYatirimListesi.stream().map(yatirim -> yatirim.hibeTutari).sum()}"
-										var="hibeTutari"></fmt:formatNumber>${hibeTutari }</td>
-								<td><fmt:formatNumber pattern="#,##0" type="number"
-										value="${tumEkonomikYatirimListesi.stream().map(yatirim -> yatirim.kapasite).sum()}"
-										var="kapasite"></fmt:formatNumber>${kapasite }</td>
-								<td><fmt:formatNumber pattern="#,##0" type="number"
-										value="${tumEkonomikYatirimListesi.stream().map(yatirim -> yatirim.istihdam).sum()}"
-										var="istihdam"></fmt:formatNumber>${istihdam }</td>
-
-								<td colspan="3"></td>
-							</tr>
-
-						</tbody>
-					</table>
-				</div>
+							</tbody>
+						</table>
+					</div>
+				</c:if>
 			</form:form>
+
 		</div>
+
+		<c:if test="${!empty errorMessage }">
+			<div class="col-sm-11">
+
+
+				<div class="alert alert-warning ">
+					<h3>${requestScope.ekonomikYatirim.etapNo}.Etap'ta
+						${requestScope.ekonomikYatirim.yatirimciAdi} isimli kayıt zaten
+						mevcut.<br>Bilgileri kontrol ederek tekrar girmeyi deneyiniz!
+					</h3>
+				</div>
+			</div>
+		</c:if>
+
 	</div>
 </body>
 </html>
