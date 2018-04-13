@@ -226,13 +226,15 @@ select {
 		</div>
 	</div>
 	<div class="col-md-12  ">
+
+		<div>
+			<a href="#"
+				onclick="tableToExcel('altTable', 'Kategori ve İlçeye Göre Rapor')"
+				class="float-left"><img alt="Excel Report" class="rounded"
+				width="35px" src="<c:url value='/assets/images/xlsx-3.png'/>"></a>
+		</div>
 		<table class="table table-bordered bg-primary " id="altTable">
-			<tr>
-				<td><a href="#"
-					onclick="tableToExcel('altTable', 'Kategori ve İlçeye Göre Rapor')"
-					class="float-left"><img alt="Excel Report" class="rounded"
-						width="35px" src="<c:url value='/assets/images/xlsx-3.png'/>"></a></td>
-			</tr>
+
 			<tr>
 				<td>İLÇE</td>
 				<td>Kooperatif Türü</td>
@@ -258,6 +260,7 @@ select {
 															test="${koop.kooperatifTurID.turAdi eq kategori.turAdi  }">
 															<tr>
 																<td align="left">${ koop.kooperatifAdi}</td>
+																<td align="left">${ koop.ortakSayisi}</td>
 															</tr>
 														</c:if>
 													</c:if>
