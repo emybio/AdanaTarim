@@ -119,6 +119,11 @@
 								<li><a
 									href="${pageContext.request.contextPath}/kirsal-kalkinma/gencCiftciRapor">
 										Genç Çiftçi Rapor </a></li>
+
+
+								<li><a
+									href="${pageContext.request.contextPath}/kirsal-kalkinma/kooperatifRapor">
+										Kooperatif Rapor </a></li>
 							</ul></li>
 					</ul></li>
 

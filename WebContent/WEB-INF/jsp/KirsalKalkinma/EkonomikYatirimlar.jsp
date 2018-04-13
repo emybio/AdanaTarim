@@ -52,6 +52,18 @@
 </head>
 <body>
 	<div class="container-fluid">
+		<c:if test="${!empty errorMessage }">
+			<div class="col-sm-11">
+
+
+				<div class="alert alert-warning ">
+					<h4>${requestScope.ekonomikYatirim.etapNo}.Etap'ta
+						${requestScope.ekonomikYatirim.yatirimciAdi} isimli kayıt zaten
+						mevcut.<br>Bilgileri kontrol ederek tekrar girmeyi deneyiniz!
+					</h4>
+				</div>
+			</div>
+		</c:if>
 		<div id="container" class="col-sm-6">
 
 			<h3>Ekonomik Yatırımlar</h3>
@@ -311,12 +323,7 @@
 											href="${pageContext.request.contextPath }/kirsal-kalkinma/ekonomikYatirimGuncelle/${yatirim.id}"
 											class="btn btn-primary btn-sm">Güncelle</a></td>
 									</tr>
-
-
 								</c:forEach>
-
-
-
 								<tr>
 									<td colspan="5" align="right">GENEL TOPLAM:</td>
 
@@ -336,28 +343,12 @@
 
 									<td colspan="3"></td>
 								</tr>
-
 							</tbody>
 						</table>
 					</div>
 				</c:if>
 			</form:form>
-
 		</div>
-
-		<c:if test="${!empty errorMessage }">
-			<div class="col-sm-11">
-
-
-				<div class="alert alert-warning ">
-					<h3>${requestScope.ekonomikYatirim.etapNo}.Etap'ta
-						${requestScope.ekonomikYatirim.yatirimciAdi} isimli kayıt zaten
-						mevcut.<br>Bilgileri kontrol ederek tekrar girmeyi deneyiniz!
-					</h3>
-				</div>
-			</div>
-		</c:if>
-
 	</div>
 </body>
 </html>

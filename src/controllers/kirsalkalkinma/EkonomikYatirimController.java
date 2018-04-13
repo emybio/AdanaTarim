@@ -84,6 +84,7 @@ public class EkonomikYatirimController {
 	public String ekonomikYatirimKaydet(@CookieValue(value = "id", required = true) Long id,
 			@ModelAttribute("ekonomikYatirim") EkonomikYatirim ekonomikYatirim, BindingResult result, ModelMap model) {
 		System.out.println("ekonomik yatýrým ekle : " + ekonomikYatirim);
+
 		if (result.hasErrors()) {
 
 			System.out.println("Hatalar : " + result.getAllErrors());
@@ -95,10 +96,8 @@ public class EkonomikYatirimController {
 		ekonomikYatirim.setIslemZamani(new Date());
 		try {
 
-			if (!ekonomikYatirimService.kayitVarmi(ekonomikYatirim.getEtapNo(), ekonomikYatirim.getYatirimciAdi())) {
-
-				ekonomikYatirimService.save(ekonomikYatirim);
-			} else {
+			if (Long.valueOf(ekonomikYatirim.getId()) == 0 && ekonomikYatirimService
+					.kayitVarmi(ekonomikYatirim.getEtapNo(), ekonomikYatirim.getYatirimciAdi())) {
 
 				model.put("title", "Kýrsal Kalkýnma");
 				model.put("ilceListesi", yerEklemeService.altTipGetir(2l, true));
@@ -109,6 +108,8 @@ public class EkonomikYatirimController {
 
 				model.put("errorMessage", "Mükerrer kayit....");
 				return "KirsalKalkinma/EkonomikYatirimlar";
+			} else {
+				ekonomikYatirimService.save(ekonomikYatirim);
 			}
 
 		} catch (Exception e) {
@@ -117,7 +118,6 @@ public class EkonomikYatirimController {
 			System.out.println("girilen deðerler : " + ekonomikYatirim.toString());
 			return "error";
 		}
-
 		return "redirect:/kirsal-kalkinma/ekonomik-yatirimlar";
 	}
 

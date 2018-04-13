@@ -483,7 +483,7 @@ console.log("cookie ID2: " + '${cookie.id.value}');
 				<option value="3083">3083</option>
 				<option value="İFRAZ">İFRAZ</option>
 				<option value="KİRALAMA">KİRALAMA</option>
-					<option value="HAZİNE">HAZİNE</option>
+				<option value="HAZİNE">HAZİNE</option>
 			</select>
 
 

@@ -2,6 +2,8 @@ package service.kirsalkalkinma.kooperatif;
 
 import java.util.List;
 
+import org.json.simple.JSONArray;
+
 import forms.kirsalkalkinma.kooperatif.Kooperatif;
 
 public interface KooperatifService {
@@ -22,5 +24,10 @@ public interface KooperatifService {
 	public List<Kooperatif> tureGoreKooperatifListesi(Long turID);
 
 	public List<Kooperatif> kooperatifKartiGetir(Long koopId);
-	public List<Kooperatif> tureVeIlceyeGoreKooperatifListesi(Long turID,String ilce);
+
+	public List<Kooperatif> tureVeIlceyeGoreKooperatifListesi(Long turID, String ilce);
+
+	public Long ilceyeVeTureGoreKayitSayisi(Long tur, String ilce);
+
+	public JSONArray tureVeIlceyeGoreKooperatiflerJSON(Long turID, String ilce);
 }

@@ -20,92 +20,6 @@ select {
 }
 </style>
 <script type="text/javascript">
-	function ilceyeVeKategoriyeGoreKayitSayisi(ilce, kategori, id) {
-		{
-			jq
-					.ajax({
-						type : "GET",
-						url : "./ilceyeVeKategoriyeGoreKayitSayisi",
-						dataType : "JSON",
-						contentType : "application/x-www-form-urlencoded;charset=UTF-8",
-						data : {
-							ilce : ilce,
-							kategori : kategori,
-						},
-						beforeSend : function() {
-							// jq('span').text("İçerik Yükleniyor....");
-						},
-						success : function(gelen) {
-							jq("#" + id).text(Number(gelen));
-							//console.log(id + "-" + gelen);
-
-						},
-
-						complete : function() {
-
-							jq(document)
-									.ready(
-											function() {
-
-												var rowTotal = 0;
-
-												jq("." + ilce)
-														.each(
-																function() {
-
-																	var value = jq(
-																			this)
-																			.text();
-																	if (!isNaN(value)) {
-																		rowTotal += parseFloat(value);
-																	}
-
-																});
-
-												jq("#toplam" + ilce).text(
-														rowTotal);
-
-												var columnTotal = 0;
-
-												jq("." + kategori)
-														.each(
-																function() {
-
-																	var value = jq(
-																			this)
-																			.text();
-																	if (!isNaN(value)) {
-																		columnTotal += parseFloat(value);
-																	}
-
-																});
-
-												jq("#toplam" + kategori).text(
-														columnTotal);
-												console
-														.log(jq("#toplam"
-																+ kategori)
-																+ " : "
-																+ jq(
-																		"#toplam"
-																				+ kategori)
-																		.text(
-																				columnTotal));
-
-											});
-
-						},
-						error : function(xhr, textStatus, errorThrown) {
-							//	alert(textStatus);
-						}
-					})
-
-			;
-
-		}
-
-	}
-
 	var tableToExcel = (function() {
 		var uri = 'data:application/vnd.ms-excel;base64,', template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8"><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>', base64 = function(
 				s) {
@@ -124,7 +38,74 @@ select {
 			}
 			window.location.href = uri + base64(format(template, ctx))
 		}
-	})()
+	})();
+
+	function ilceyeVeKategoriyeGoreKayitSayisi(ilce, kategori, id) {
+		{
+			jq
+					.ajax({
+						type : "GET",
+						url : "./ilceyeVeKategoriyeGoreKayitSayisi",
+						dataType : "JSON",
+						contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+						data : {
+							ilce : ilce,
+							kategori : kategori,
+						},
+						beforeSend : function() {
+							// jq('span').text("İçerik Yükleniyor....");
+						},
+						success : function(gelen) {
+							jq("#" + id).text(Number(gelen));
+							//console.log(id + "-" + gelen);
+						},
+						complete : function() {
+							jq(document)
+									.ready(
+											function() {
+												var rowTotal = 0;
+												jq("." + ilce)
+														.each(
+																function() {
+																	var value = jq(
+																			this)
+																			.text();
+																	if (!isNaN(value)) {
+																		rowTotal += parseFloat(value);
+																	}
+																});
+												jq("#toplam" + ilce).text(
+														rowTotal);
+												var columnTotal = 0;
+												jq("." + kategori)
+														.each(
+																function() {
+																	var value = jq(
+																			this)
+																			.text();
+																	if (!isNaN(value)) {
+																		columnTotal += parseFloat(value);
+																	}
+																});
+												jq("#toplam" + kategori).text(
+														columnTotal);
+												console
+														.log(jq("#toplam"
+																+ kategori)
+																+ " : "
+																+ jq(
+																		"#toplam"
+																				+ kategori)
+																		.text(
+																				columnTotal));
+											});
+						},
+						error : function(xhr, textStatus, errorThrown) {
+							//	alert(textStatus);
+						}
+					});
+		}
+	}
 </script>
 </head>
 <body>
@@ -249,11 +230,9 @@ select {
 									});
 						</script>
 						<div class="panel panel-default">
-
 							<div class="panel-heading">
 								<div class="container-fluid ">
 									<div class="col-sm-10">
-
 										<button type="button"
 											class="btn btn-info btn-sm float-left pull-left"
 											data-toggle="collapse" data-target="#${ilce.isim}">${ilce.isim}
@@ -281,17 +260,13 @@ select {
 											<th align="center">YATIRIMCI ADI</th>
 											<th align="center">HİBE TUTARI</th>
 											<th align="center">KAPASİTE</th>
-
 										</tr>
 									</table>
 								</div>
 							</div>
 						</div>
 					</c:forEach>
-
 				</div>
-
-
 			</div>
 		</div>
 	</div>
@@ -301,9 +276,9 @@ select {
 			<div class="panel-heading">
 				<h3 class="panel-title">
 					GENÇ ÇİFÇTİ 2016-2017 İSTATİSTİK <a href="#"
-						onclick="tableToExcel('raporTable', 'Kategori ve İlçete Göre Rapor')" class="float-left"><img
-						alt="Excel Report" class="rounded" width="35px"
-						src="<c:url value='/assets/images/xlsx-3.png'/>"></a>
+						onclick="tableToExcel('raporTable', 'Kategori ve İlçeye Göre Rapor')"
+						class="float-left"><img alt="Excel Report" class="rounded"
+						width="35px" src="<c:url value='/assets/images/xlsx-3.png'/>"></a>
 				</h3>
 			</div>
 			<div class="panel-body">

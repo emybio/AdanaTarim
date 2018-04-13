@@ -408,6 +408,7 @@ public class GenCiftciController {
 	@RequestMapping(value = "/gencCiftciVazgec")
 	public String ekonomikYatirimVazgec() {
 		gencCiftci = null;
+		tusYazisi = "Ekle";
 		return "redirect:/kirsal-kalkinma/genc-ciftci-liste";
 	}
 

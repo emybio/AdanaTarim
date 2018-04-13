@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
 
 import forms.Kullanici;
 import forms.Yerler;
@@ -31,6 +34,8 @@ public class KooperatifController {
 	YerEklemeService yerEklemeService;
 	@Autowired
 	KooperatifTurService koopTurService;
+	@Autowired
+	YerEklemeService ilceler;
 
 	@Autowired
 	KooperatifService koopService;
@@ -224,11 +229,43 @@ public class KooperatifController {
 
 		model.put("title", koopTitle);
 
-		
-
 		model.put("kooperatif", koopService.tureVeIlceyeGoreKooperatifListesi(id, ilce));
 
 		return "KirsalKalkinma/kooperatif/KooperatifListesi";
+
+	}
+
+	@RequestMapping(value = "/kooperatifRapor")
+	public String kooperatifRapor(@RequestParam(value = "id", required = false) Long id,
+			@RequestParam(value = "ilce_id", required = false) String ilce, ModelMap model) {
+
+		model.put("title", koopTitle);
+
+		model.put("ilceListesi", ilceler.altTipGetir(2l, true));
+		model.put("kategoriListesi", koopService.turListesi());
+
+		model.put("kooperatif", koopService.tumKooperatiflerler());
+
+		return "KirsalKalkinma/kooperatif/KooperatifRapor";
+
+	}
+
+	@RequestMapping(value = "/ilceyeVeTureGoreKayitSayisi")
+	public @ResponseBody Long ilceyeVeKategoriyeGoreKayitSayisi(ModelMap model,
+			@RequestParam(value = "ilce", required = false) String ilce,
+			@RequestParam(value = "tur", required = false) Long tur) {
+
+		return koopService.ilceyeVeTureGoreKayitSayisi(tur, ilce);
+
+	}
+
+	@RequestMapping(value = "/JSONtureVeIlceyeGoreKooperatifler")
+	public @ResponseBody String JSONtureVeIlceyeGoreKooperatifler(@RequestParam(value = "id", required = false) Long id,
+			@RequestParam(value = "ilce_id", required = false) String ilce, ModelMap model) {
+
+		Gson gson = new Gson();
+
+		return gson.toJson(koopService.tureVeIlceyeGoreKooperatiflerJSON(id, ilce));
 
 	}
 }

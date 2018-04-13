@@ -646,7 +646,7 @@ public class AracController {
 
 		Kullanici kullanici = kullaniciService.kullaniciGetirr(kullaniciId);
 
-		if (kullanici.getRoles().getRollAdi().equals(RolesEnum.ROLE_SUPER_ADMIN)) {
+		if (kullanici.getRoles().getRollAdi().equals(RolesEnum.ROLE_SUPER_ADMIN.toString())) {
 
 			gorevBulCikisListesi = aracService.gorevBul(plaka, tarih);
 

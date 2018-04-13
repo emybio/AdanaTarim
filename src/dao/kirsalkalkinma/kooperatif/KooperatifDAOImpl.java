@@ -1,5 +1,7 @@
 package dao.kirsalkalkinma.kooperatif;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -9,6 +11,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -92,7 +96,7 @@ public class KooperatifDAOImpl implements KooperatifDAO {
 	}
 
 	@Override
-	public List<Kooperatif> tureVeIlceyeGoreKooperatifListesi(Long turID, String ilce) { 
+	public List<Kooperatif> tureVeIlceyeGoreKooperatifListesi(Long turID, String ilce) {
 		Criteria criteriaKoop = sessionFactory.getCurrentSession().createCriteria(Kooperatif.class);
 		criteriaKoop.createAlias("kooperatifIlceID", "kooperatifIlceID");
 
@@ -101,6 +105,44 @@ public class KooperatifDAOImpl implements KooperatifDAO {
 
 		criteriaKoop.addOrder(Order.asc("kooperatifTurID"));
 		return criteriaKoop.list();
+	}
+
+	@Override
+	public Long ilceyeVeTureGoreKayitSayisi(Long tur, String ilce) {
+		Criteria criteriaKoop = sessionFactory.getCurrentSession().createCriteria(Kooperatif.class);
+
+		criteriaKoop.createAlias("kooperatifIlceID", "tip");
+		// criteriaKoop.createAlias("tip.tip", "tip2");
+		criteriaKoop.createAlias("kooperatifTurID", "kategori");
+		criteriaKoop.add(Restrictions.and(Restrictions.eq("tip.isim", ilce)).add(Restrictions.eq("kategori.id", tur)));
+		criteriaKoop.setProjection(Projections.rowCount());
+		return (Long) criteriaKoop.uniqueResult();
+	}
+
+	@Override
+	public JSONArray tureVeIlceyeGoreKooperatiflerJSON(Long turID, String ilce) {
+
+		Criteria criteriaKoop = sessionFactory.getCurrentSession().createCriteria(Kooperatif.class);
+		criteriaKoop.createAlias("kooperatifIlceID", "kooperatifIlceID");
+
+		criteriaKoop.add(Restrictions.eq("kooperatifIlceID.isim", ilce));
+		criteriaKoop.add(Restrictions.eq("kooperatifTurID.id", turID));
+
+		criteriaKoop.addOrder(Order.asc("kooperatifTurID"));
+		JSONArray donecek = new JSONArray();
+		List<Kooperatif> IslemListesi = new ArrayList<Kooperatif>();
+		IslemListesi = criteriaKoop.list();
+		Iterator<Kooperatif> iterator = IslemListesi.iterator();
+		while (iterator.hasNext()) {
+			JSONObject jsonObject = new JSONObject();
+			Kooperatif tip = iterator.next();
+			jsonObject.put("id", tip.getId());
+			jsonObject.put("kooperatifAdi", tip.getKooperatifAdi());
+
+			donecek.add(jsonObject);
+		}
+
+		return (donecek);
 	}
 
 }

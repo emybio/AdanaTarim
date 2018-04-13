@@ -2,6 +2,7 @@ package service.kirsalkalkinma.kooperatif;
 
 import java.util.List;
 
+import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -65,6 +66,18 @@ public class KooperatifServiceImpl implements KooperatifService {
 	public List<Kooperatif> tureVeIlceyeGoreKooperatifListesi(Long turID, String ilce) {
 		// TODO Auto-generated method stub
 		return koopDAO.tureVeIlceyeGoreKooperatifListesi(turID, ilce);
+	}
+
+	@Override
+	public Long ilceyeVeTureGoreKayitSayisi(Long tur, String ilce) {
+		// TODO Auto-generated method stub
+		return koopDAO.ilceyeVeTureGoreKayitSayisi(tur, ilce);
+	}
+
+	@Override
+	public JSONArray tureVeIlceyeGoreKooperatiflerJSON(Long turID, String ilce) {
+		// TODO Auto-generated method stub
+		return koopDAO.tureVeIlceyeGoreKooperatiflerJSON(turID, ilce);
 	}
 
 }
