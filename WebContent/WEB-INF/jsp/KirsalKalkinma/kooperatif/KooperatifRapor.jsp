@@ -226,50 +226,49 @@ select {
 		</div>
 	</div>
 	<div class="col-md-12  ">
-		<table class="table table-bordered bg-primary " id="altTable">
-			<tr>
-				<td><a href="#"
+		<div class="panel-heading">
+			<h3 class="panel-title">
+				<a href="#"
 					onclick="tableToExcel('altTable', 'Kategori ve İlçeye Göre Rapor')"
 					class="float-left"><img alt="Excel Report" class="rounded"
-						width="35px" src="<c:url value='/assets/images/xlsx-3.png'/>"></a></td>
-			</tr>
+					width="35px" src="<c:url value='/assets/images/xlsx-3.png'/>"></a>
+			</h3>
+		</div>
+		<table class="table table-bordered bg-primary " id="altTable">
 			<tr>
 				<td>İLÇE</td>
-				<td>Kooperatif Türü</td>
-				<c:forEach items="${ilceListesi}" var="ilce">
-					<tr>
-						<td
-							style="text-align: center; line-height: 200px; height: 200px; border-spacing: 0;">${ilce.isim}</td>
-						<td>
-							<table border="1"
-								style="width: 100%; height: 100%; margin: 0; padding: 0">
-								<c:forEach items="${kategoriListesi}" var="kategori"
-									varStatus="x">
-									<tr>
-										<td height="5em"
-											style="text-align: center; border-spacing: 0;">${kategori.turAdi }
-										</td>
-										<td align="center">
-											<table style="border-collapse: collapse; border-spacing: 0;">
-
-												<c:forEach items="${ kooperatif}" var="koop" varStatus="i">
-													<c:if test="${koop.kooperatifIlceID.isim eq ilce.isim }">
-														<c:if
-															test="${koop.kooperatifTurID.turAdi eq kategori.turAdi  }">
-															<tr>
-																<td align="left">${ koop.kooperatifAdi}</td>
-															</tr>
-														</c:if>
-													</c:if>
-												</c:forEach>
-											</table>
-										</td>
-									</tr>
-								</c:forEach>
-							</table>
-						</td>
-					</tr>
-				</c:forEach>
+				<td>KOOPERTATİF TÜRÜ</td>
+				<td>KOOPERATİF ADI</td>
+				<td>ORTAK SAYISI</td>
+			</tr>
+			<c:set var="koopSayisi" value="0">
+			</c:set>
+			<c:set var="ilceSayisi" value="0">
+			</c:set>
+			<%-- 	<c:forEach items="${kategoriListesi}" var="kategori" varStatus="x">
+				<c:forEach items="${ilceListesi}" var="ilce" varStatus="y"> --%>
+			<c:forEach items="${ kooperatif}" var="koop" varStatus="i">
+				<%-- <c:if test="${koop.kooperatifIlceID.isim eq ilce.isim }">
+							<c:set var="ilceSayisi" value="${ilceSayisi+1 }">
+							</c:set>
+							<c:if test="${koop.kooperatifTurID.turAdi eq kategori.turAdi  }">
+								<c:set var="koopSayisi" value="${koopSayisi+1 }">
+								</c:set> --%>
+				<tr>
+					<td align="left">${koop.kooperatifIlceID.isim}</td>
+					<td align="left" class="">${koop.kooperatifTurID.turAdi }
+						<span></span>
+					</td>
+					<td align="left">${ koop.kooperatifAdi}</td>
+					<td align="left">${ koop.ortakSayisi}</td>
+				</tr>
+				<%-- </c:if>
+						</c:if> --%>
+			</c:forEach>
+			<%-- </c:forEach>
+			</c:forEach> --%>
+			<c:out value="${koopSayisi }"></c:out>
+			<c:out value="${ilceSayisi }"></c:out>
 		</table>
 		<br> <br> <br>
 	</div>

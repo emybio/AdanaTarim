@@ -150,7 +150,8 @@ public class EkonomikYatirimController {
 		model.addAttribute("title", "Ekonomik Rapor");
 		model.put("tumEkonomikYatirimListesi", ekonomikYatirimService.tumYatirimListesi());
 		model.put("ilceler", ekonomikYatirimService.ilceListesi());
-
+		model.put("kategoriListesi", ekonomikYatirimService.kategoriLisetsi());
+		model.put("etapNoListesi", ekonomikYatirimService.etapNoLisetsi());
 		return "KirsalKalkinma/EkonomikYatirimRapor";
 	}
 

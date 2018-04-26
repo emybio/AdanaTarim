@@ -132,10 +132,37 @@ public class EkonomikYatirimDAOImpl implements EkonomikYatirimDAO {
 	public boolean kayitVarmi(int kategori, String isim) {
 		Criteria criteriaArac = sessionFactory.getCurrentSession().createCriteria(EkonomikYatirim.class);
 
-		criteriaArac.add(
-				Restrictions.and(Restrictions.eq("etapNo", kategori)).add(Restrictions.eq("yatirimciAdi", isim)));
+		criteriaArac
+				.add(Restrictions.and(Restrictions.eq("etapNo", kategori)).add(Restrictions.eq("yatirimciAdi", isim)));
 
 		List<EkonomikYatirim> sonucList = criteriaArac.list();
 		return (sonucList != null && sonucList.size() > 0);
+	}
+
+	@Override
+	public List<EkonomikYatirim> ilceVeKategoriyeGoreListe(int etapNo, Long kategori) {
+		Criteria ekonomikYatirimList = sessionFactory.getCurrentSession().createCriteria(EkonomikYatirim.class);
+		ekonomikYatirimList.createAlias("ilce", "ilce");
+		ekonomikYatirimList.createAlias("kategori", "kategori");
+		ekonomikYatirimList
+				.add(Restrictions.and(Restrictions.eq("etapNo", etapNo)).add(Restrictions.eq("kategori.id", kategori)));
+		ekonomikYatirimList.addOrder(Order.asc("ilce.isim"));
+		return ekonomikYatirimList.list();
+	}
+
+	@Override
+	public List<EkonomikYatirim> etapNoLisetsi() {
+		Criteria ekonomikYatirimList = sessionFactory.getCurrentSession().createCriteria(EkonomikYatirim.class);
+		ekonomikYatirimList.setProjection(Projections.distinct(Projections.property("etapNo")));
+		ekonomikYatirimList.addOrder(Order.desc("etapNo"));
+		return ekonomikYatirimList.list();
+	}
+
+	@Override
+	public List<EkonomikYatirim> kategoriLisetsi() {
+		Criteria ekonomikYatirimList = sessionFactory.getCurrentSession().createCriteria(EkonomikYatirim.class);
+		ekonomikYatirimList.createAlias("kategori", "kategori");
+		ekonomikYatirimList.setProjection(Projections.distinct(Projections.property("kategori.kategoriAdi")));
+		return ekonomikYatirimList.list();
 	}
 }

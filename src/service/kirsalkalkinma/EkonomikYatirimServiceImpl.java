@@ -70,4 +70,22 @@ public class EkonomikYatirimServiceImpl implements EkonomikYatirimService {
 		// TODO Auto-generated method stub
 		return ekonomikYatirimDAO.kayitVarmi(kategori, isim);
 	}
+
+	@Override
+	public List<EkonomikYatirim> ilceVeKategoriyeGoreListe(int etapNo, Long kategori) {
+		// TODO Auto-generated method stub
+		return ekonomikYatirimDAO.ilceVeKategoriyeGoreListe(etapNo, kategori);
+	}
+
+	@Override
+	public List<EkonomikYatirim> etapNoLisetsi() {
+		// TODO Auto-generated method stub
+		return ekonomikYatirimDAO.etapNoLisetsi();
+	}
+
+	@Override
+	public List<EkonomikYatirim> kategoriLisetsi() {
+		// TODO Auto-generated method stub
+		return ekonomikYatirimDAO.kategoriLisetsi();
+	}
 }

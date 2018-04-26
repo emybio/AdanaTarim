@@ -547,12 +547,9 @@
 							<c:set var="kapasite11" value="0" />
 							<c:set var="istihdam11" value="0" />
 							<c:set var="etapAdeti11" value="0" />
-
 							<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim"
 								varStatus="sira">
 								<c:if test="${yatirim.etapNo == 12 }">
-
-
 									<c:set value="${yatirim.etapNo}" var="etapNo12" />
 									<c:set var="projeBedeli11"
 										value="${projeBedeli11 + yatirim.projeBedeli}" />
@@ -563,41 +560,31 @@
 									<c:set var="istihdam11"
 										value="${istihdam11 + yatirim.istihdam}" />
 									<c:set var="etapAdedi11" value="${etapAdedi11+1}" />
-
 								</c:if>
 							</c:forEach>
-							<c:if test="${etapNo12}">
-								<tr>
-									<td>12</td>
-									<td>${etapAdedi11}</td>
-
-									<td><fmt:formatNumber pattern="#,##0.00" type="currency"
-											value="${projeBedeli11}" var="projeBedeli11"></fmt:formatNumber>${projeBedeli11}</td>
-									<td><fmt:formatNumber pattern="#,##0.00 TL"
-											type="currency" value="${hibeTutari11}" var="hibeTutari11"></fmt:formatNumber>${hibeTutari11}</td>
-									<td><fmt:formatNumber pattern="#,##0" type="number"
-											value="${kapasite11}" var="kapasite11"></fmt:formatNumber>${kapasite11}</td>
-									<td><fmt:formatNumber pattern="#,##0" type="number"
-											value="${istihdam11}" var="istihdam11"></fmt:formatNumber>${istihdam11}</td>
-								</tr>
-							</c:if>
-
-
-
-
-
+							<tr>
+								<td><a href=" ./xlsxExport?etapNo=12"
+									class="btn btn-primary btn-xs">12. Etap Excel'e Aktar</a></td>
+								<td>${etapNo12 }</td>
+								<td>${etapAdedi11}</td>
+								<td><fmt:formatNumber pattern="#,##0.00" type="currency"
+										value="${projeBedeli11}" var="projeBedeli11"></fmt:formatNumber>${projeBedeli11}</td>
+								<td><fmt:formatNumber pattern="#,##0.00 TL" type="currency"
+										value="${hibeTutari11}" var="hibeTutari11"></fmt:formatNumber>${hibeTutari11}</td>
+								<td><fmt:formatNumber pattern="#,##0" type="number"
+										value="${kapasite11}" var="kapasite11"></fmt:formatNumber>${kapasite11}</td>
+								<td><fmt:formatNumber pattern="#,##0" type="number"
+										value="${istihdam11}" var="istihdam11"></fmt:formatNumber>${istihdam11}</td>
+							</tr>
 							<!--------------ETAP NO 13---------------------  -->
 							<c:set var="projeBedeli12" value="0" />
 							<c:set var="hibeTutari12" value="0" />
 							<c:set var="kapasite12" value="0" />
 							<c:set var="istihdam12" value="0" />
 							<c:set var="etapAdeti12" value="0" />
-
 							<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim"
 								varStatus="sira">
 								<c:if test="${yatirim.etapNo == 13 }">
-
-
 									<c:set value="${yatirim.etapNo}" var="etapNo13" />
 									<c:set var="projeBedeli12"
 										value="${projeBedeli12 + yatirim.projeBedeli}" />
@@ -608,14 +595,12 @@
 									<c:set var="istihdam12"
 										value="${istihdam12 + yatirim.istihdam}" />
 									<c:set var="etapAdedi12" value="${etapAdedi12+1}" />
-
 								</c:if>
 							</c:forEach>
 							<c:if test="${etapNo13}">
 								<tr>
 									<td>${etapNo13}</td>
 									<td>${etapAdedi12}</td>
-
 									<td><fmt:formatNumber pattern="#,##0.00" type="currency"
 											value="${projeBedeli12}" var="projeBedeli12"></fmt:formatNumber>${projeBedeli12}</td>
 									<td><fmt:formatNumber pattern="#,##0.00 TL"
@@ -626,16 +611,11 @@
 											value="${istihdam12}" var="istihdam12"></fmt:formatNumber>${istihdam12}</td>
 								</tr>
 							</c:if>
-
-
-
-
 							<tr id="sonSatir">
 								<td><a href=" ./xlsxExport" class="btn btn-primary btn-xs">Tüm
 										Listeyi Excel'e Aktar</a></td>
 								<td>GENEL TOPLAM:</td>
 								<td>${listSize }</td>
-
 								<td><fmt:formatNumber pattern="#,##0.00" type="currency"
 										value="${tumEkonomikYatirimListesi.stream().map(yatirim -> yatirim.projeBedeli).sum()}"
 										var="projeBedeli"></fmt:formatNumber>${projeBedeli }</td>
@@ -649,7 +629,6 @@
 										value="${tumEkonomikYatirimListesi.stream().map(yatirim -> yatirim.istihdam).sum()}"
 										var="istihdam"></fmt:formatNumber>${istihdam }</td>
 							</tr>
-
 						</tbody>
 					</table>
 					<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim"
@@ -658,11 +637,66 @@
 							<c:set var="etapNo" value="${yatirim.etapNo}"></c:set>
 						</c:if>
 					</c:forEach>
-
-
 				</div>
 			</div>
 		</div>
 	</div>
+	<div class="container-fluid">
+		<div class="container col-sm-5">
+			<button type="button" class="btn btn-info" data-toggle="collapse"
+				data-target="#ilc">ETAP VE KATEGORİYE GÖRE RAPOR</button>
+			<hr />
+			<div id="ilc" class="collapse">
+				<c:forEach items="${etapNoListesi}" var="etapNo">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<div class="container-fluid ">
+								<div class="col-sm-10">
+									<button type="button"
+										class="btn btn-info btn-sm float-left pull-left"
+										data-toggle="collapse" data-target="#${etapNo}">${etapNo}.
+										ETAP</button>
+								</div>
+								<div class="col-sm-2">
+									<a href=" ./xlsxExport?ilce=${etapNo}" class="float-left"><img
+										alt="Excel Report" class="rounded" width="35px"
+										src="<c:url value='/assets/images/xlsx-3.png'/>"></a>
+								</div>
+							</div>
+						</div>
+						<div class="panel-body">
+							<div id="${etapNo}"
+								class="collapse  table-responsive text-centered  ${etapNo}">
+								<table
+									class="table table-sm table-bordered table-hover bg-default "
+									id="tr${etapNo}">
+									<tr class="baslik">
+										<th align="center">PROJE ADI</th>
+										<th align="center">PROJE ADETİ</th>
+									</tr>
+									<c:set var="i" value="0"></c:set>
+									<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim">
+										<c:if test="${yatirim.etapNo == etapNo }">
+											<c:if test="${fn:contains(yatirim.projeAdi,'PERVANE') }">
+												<c:set var="i" value="${i+1}">
+												</c:set>
+											</c:if>
+										</c:if>
+									</c:forEach>
+									<c:if test="${i ne 0 }">
+										<tr>
+											<td>PERVANE</td>
+											<td>${i}</td>
+										</tr>
+									</c:if>
+								</table>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+		</div>
+	</div>
+
 </body>
 </html>
