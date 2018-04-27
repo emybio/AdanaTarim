@@ -30,7 +30,8 @@ public class Deneme {
 
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
-		
+		for(int x=1; x<= 4; x++)
+			System.out.println("44"+x+ "44");
 			  
 		
 
@@ -61,7 +62,7 @@ public class Deneme {
 		// Sistemleri", ustK1);
 
 		
-		SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg2.xml").buildSessionFactory();
+	//	SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg2.xml").buildSessionFactory();
 
 	//	Session session = sessionFactory.openSession();
 		// EKONOMİK YATIRIM DURUM INSERT

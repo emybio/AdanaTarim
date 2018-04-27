@@ -5,6 +5,22 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<link rel="stylesheet"
+	href="<c:url value="/assets/css/dataTables.css"/>" type="text/css">
+
+<script src="<c:url value="/assets/script/dataTables.js"/>"
+	type="text/javascript"></script>
+	
+	<script src="<c:url value="/assets/script/datatables.min.js"/>"
+	type="text/javascript"></script>
+	
+	
+	<script src="<c:url value="/assets/script/pdfmake.min.js"/>"
+	type="text/javascript"></script>
+	
+	
+	<script src="<c:url value="/assets/script/vfs_fonts.js"/>"
+	type="text/javascript"></script>
 <style>
 input {
 	width: 100px;
@@ -35,12 +51,12 @@ select {
 	float: left;
 }
 
-.con_ina {
+/* .con_ina {
 	height: 100px;
 	width: 67%;
 	margin-left: 3%;
 	float: left;
-}
+} */
 
 .btn_inr {
 	float: right;
@@ -65,6 +81,10 @@ select {
 </c:if>
 
 <script type="text/javascript">
+
+jq(document).ready( function () {
+    jq('#aracListesi').DataTable();
+} );
 	var today = new Date();
 	var dd = today.getDate();
 	var mm = today.getMonth() + 1; //January is 0!
@@ -503,19 +523,22 @@ jq(document).ready(function() {
 				</thead>
 				<tbody>
 					<c:forEach items="${aracCikisListesi}" var="cikis" varStatus="sira">
-
-
-
 						<c:if test="${!empty cikis.kullaniciList }">
 							<tr class="satirno${cikis.id}">
 
-								<td><img
+								<td><a onclick="tipsil(${cikis.id})"
+									class="btn btn-danger btn-xs"> Sil</a> <%-- <img
 									src="<c:url value="/assets/images/Delete-32.png" />"
 									width="21px" onclick="tipsil(${cikis.id})"
-									title="Silmek İçin Tıklayın" /></td>
-								<td><a href="./duzenle/${cikis.id}"><img
+									title="Silmek İçin Tıklayın" /> --%></td>
+
+
+
+								<td><a href="./duzenle/${cikis.id}"
+									class="btn btn-success btn-xs"> Düzenle</a> <%-- <img
 										src="<c:url value="/assets/images/duzenle.png" />"
-										width="21px" title="Değiştirmek İçin Tıklayın" /></a></td>
+										width="21px" title="Değiştirmek İçin Tıklayın" />
+										 --%></td>
 								<td>${sira.count }</td>
 
 								<td width="150px"><span id="goster"><button
@@ -562,8 +585,8 @@ jq(document).ready(function() {
 								<td>${cikis.aciklama}</td>
 								<td>${cikis.islemyapan.adi}</td>
 								<td>${cikis.islemZamani}</td>
-								<td><a href="./gorevDonusRaporuYazdir?id=${cikis.id}">Rapor
-										Görüntüle</a></td>
+								<td><a href="./gorevDonusRaporuYazdir?id=${cikis.id}"
+									class="btn btn-xs btn-primary">Rapor Görüntüle</a></td>
 							</tr>
 						</c:if>
 					</c:forEach>
@@ -571,7 +594,7 @@ jq(document).ready(function() {
 			</table>
 		</div>
 	</div>
-	<div class="page-header">&nbsp;</div>
+	<%-- <div class="page-header">&nbsp;</div>
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h3 class="panel-title">DENEME</h3>
@@ -615,6 +638,6 @@ jq(document).ready(function() {
 
 			</div>
 		</div>
-	</div>
+	</div> --%>
 </div>
 

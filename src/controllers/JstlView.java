@@ -91,6 +91,7 @@ public class JstlView extends InternalResourceView {
 		request.setAttribute("dataPoints", model.get("dataPoints"));
 		request.setAttribute("dataPoints1", model.get("dataPoints1"));
 		request.setAttribute("birim", model.get("birim"));
+		request.setAttribute("etapNoListesi", model.get("etapNoListesi"));
 
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
