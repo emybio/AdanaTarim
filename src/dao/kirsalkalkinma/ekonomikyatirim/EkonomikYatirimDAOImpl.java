@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.json.simple.JSONArray;
@@ -16,7 +17,6 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import forms.Arac;
 import forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirim;
 
 @Transactional
@@ -154,7 +154,7 @@ public class EkonomikYatirimDAOImpl implements EkonomikYatirimDAO {
 	public List<EkonomikYatirim> etapNoLisetsi() {
 		Criteria ekonomikYatirimList = sessionFactory.getCurrentSession().createCriteria(EkonomikYatirim.class);
 		ekonomikYatirimList.setProjection(Projections.distinct(Projections.property("etapNo")));
-		ekonomikYatirimList.addOrder(Order.desc("etapNo"));
+		ekonomikYatirimList.addOrder(Order.asc("etapNo"));
 		return ekonomikYatirimList.list();
 	}
 
@@ -163,6 +163,20 @@ public class EkonomikYatirimDAOImpl implements EkonomikYatirimDAO {
 		Criteria ekonomikYatirimList = sessionFactory.getCurrentSession().createCriteria(EkonomikYatirim.class);
 		ekonomikYatirimList.createAlias("kategori", "kategori");
 		ekonomikYatirimList.setProjection(Projections.distinct(Projections.property("kategori.kategoriAdi")));
+		return ekonomikYatirimList.list();
+	}
+
+	@Override
+	public List<EkonomikYatirim> projeAdListesi() {
+		Criteria ekonomikYatirimList = sessionFactory.getCurrentSession().createCriteria(EkonomikYatirim.class);
+
+//		ProjectionList projeList = Projections.projectionList();
+//		projeList.add(Projections.property("projeAdi"));
+//		
+//		ekonomikYatirimList.setProjection(projeList);
+		ekonomikYatirimList.addOrder(Order.asc("projeAdi"));
+		ekonomikYatirimList.setProjection(Projections.distinct(Projections.property("projeAdi")));
+		ekonomikYatirimList.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		return ekonomikYatirimList.list();
 	}
 }

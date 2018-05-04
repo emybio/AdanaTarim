@@ -32,4 +32,6 @@ public interface EkonomikYatirimService {
 	public List<EkonomikYatirim> etapNoLisetsi();
 
 	public List<EkonomikYatirim> kategoriLisetsi();
+
+	public List<EkonomikYatirim> projeAdListesi();
 }

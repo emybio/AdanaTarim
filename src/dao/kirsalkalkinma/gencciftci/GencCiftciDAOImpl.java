@@ -278,8 +278,9 @@ public class GencCiftciDAOImpl implements GencCiftciDAO {
 		// LogicalExpression orExp = Restrictions.or(kucukHarf, buyukHarf);
 		// gencCiftci.add(orExp);
 
-		gencCiftci.add(Restrictions.ilike("yararlaniciAdi", "%" + yararlaniciAdi + "%"));
-		;
+		gencCiftci.add(Restrictions.or(Restrictions.ilike("yararlaniciAdi", "%" + yararlaniciAdi + "%"))
+				.add(Restrictions.ilike("yararlaniciSoyadi", "%" + yararlaniciAdi + "%")));
+
 		return gencCiftci.list();
 
 	}

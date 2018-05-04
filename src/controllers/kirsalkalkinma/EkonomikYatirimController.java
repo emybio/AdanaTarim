@@ -152,6 +152,7 @@ public class EkonomikYatirimController {
 		model.put("ilceler", ekonomikYatirimService.ilceListesi());
 		model.put("kategoriListesi", ekonomikYatirimService.kategoriLisetsi());
 		model.put("etapNoListesi", ekonomikYatirimService.etapNoLisetsi());
+		model.put("projeAdListesi", ekonomikYatirimService.projeAdListesi());
 		return "KirsalKalkinma/EkonomikYatirimRapor";
 	}
 

@@ -88,4 +88,10 @@ public class EkonomikYatirimServiceImpl implements EkonomikYatirimService {
 		// TODO Auto-generated method stub
 		return ekonomikYatirimDAO.kategoriLisetsi();
 	}
+
+	@Override
+	public List<EkonomikYatirim> projeAdListesi() {
+		// TODO Auto-generated method stub
+		return ekonomikYatirimDAO.projeAdListesi();
+	}
 }

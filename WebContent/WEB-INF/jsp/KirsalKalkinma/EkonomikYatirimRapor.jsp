@@ -696,6 +696,76 @@
 				</c:forEach>
 			</div>
 		</div>
+
+		<div class="container col-sm-5">
+			<button type="button" class="btn btn-info" data-toggle="collapse"
+				data-target="#ilcetap">İLÇE , KATEGORİ VE ETAPA GÖRE RAPOR</button>
+			<hr />
+			<div id="ilcetap" class="collapse">
+				<table class="table bg-info table-bordered table-hover">
+					<tr>
+						<td>TÜR</td>
+						<td>ETAP NO</td>
+						<c:forEach items="${ etapNoListesi}" var="no">
+							<td>${no}</td>
+						</c:forEach>
+						<td>TOPLAM</td>
+					</tr>
+					<c:forEach items="${projeAdListesi   }" var="proje">
+						<tr>
+							<td>${proje }</td>
+							<td><c:forEach items="${ilceler}" var="ilce">
+									<table class="">
+										<tr></tr>
+										<tr>
+											<td style="font-size: 15px;">${ilce}</td>
+										</tr>
+									</table>
+								</c:forEach></td>
+							<c:forEach items="${etapNoListesi}" var="no">
+								<td><c:forEach items="${ilceler}" var="ilce">
+										<table class="">
+											<tr></tr>
+											<tr>
+												<c:set var="j" value="0"></c:set>
+												<c:forEach items="${tumEkonomikYatirimListesi }"
+													var="yatirim">
+													<c:if test="${yatirim.projeAdi eq proje  }">
+														<c:if test="${yatirim.etapNo eq no }">
+
+															<c:if test="${yatirim.ilce.isim eq ilce  }">
+																<c:set var="j" value="${j+1}">
+																</c:set>
+															</c:if>
+														</c:if>
+													</c:if>
+												</c:forEach>
+												<td style="font-size: 15px;">${j}</td>
+											</tr>
+										</table>
+									</c:forEach></td>
+							</c:forEach>
+							<td></td>
+						</tr>
+						<tr>
+							<td colspan="2">TOPLAM</td>
+
+							<c:forEach items="${ilceler}" var="ilce">
+								<td></td>
+							</c:forEach>
+
+							<td></td>
+						</tr>
+					</c:forEach>
+
+					<tr>
+						<td colspan="2">TOPLAM</td>
+						<td></td>
+					</tr>
+				</table>
+				<br>
+			</div>
+		</div>
 	</div>
 
 </body>
