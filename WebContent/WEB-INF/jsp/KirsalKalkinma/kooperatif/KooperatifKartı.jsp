@@ -85,6 +85,10 @@
 											value=" ${kooperatif.sonGenelKurulTarihi }"
 											pattern="yyyy-mm-dd" var="tarih" /> <fmt:formatDate
 											value="${tarih}" pattern="dd-mm-YYYY" dateStyle="short" /> --%>
+								</b><br> <b> Koop Durumu: ${kooperatif.durum}<%--  <fmt:parseDate
+											value=" ${kooperatif.sonGenelKurulTarihi }"
+											pattern="yyyy-mm-dd" var="tarih" /> <fmt:formatDate
+											value="${tarih}" pattern="dd-mm-YYYY" dateStyle="short" /> --%>
 								</b> <br>
 							</div>
 						</div>

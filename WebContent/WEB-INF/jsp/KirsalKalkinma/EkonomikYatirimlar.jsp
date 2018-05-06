@@ -37,7 +37,26 @@
 </style>
 <script type="text/javascript">
 	var jq = jQuery.noConflict();
+	var tableToExcel = (function() {
 
+		var uri = 'data:application/vnd.ms-excel;base64,', template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8"><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>', base64 = function(
+				s) {
+			return window.btoa(unescape(encodeURIComponent(s)))
+		}, format = function(s, c) {
+			return s.replace(/{(\w+)}/g, function(m, p) {
+				return c[p];
+			})
+		}
+		return function(table, name) {
+			if (!table.nodeType)
+				table = document.getElementById(table)
+			var ctx = {
+				worksheet : name || 'Worksheet',
+				table : table.innerHTML
+			}
+			window.location.href = uri + base64(format(template, ctx))
+		}
+	})();
 	function etapNoDegistir(etapNo) {
 		console.log("etapNO: " + etapNo)
 
@@ -240,24 +259,33 @@
 							<c:set var="listSize" value="${fn:length(list)}" />
 
 							<tr>
-								<td colspan="12" align="left"><b>${listSize}&nbsp;adet&nbsp;kayıt</b>
-								</td>
+								<td align="left"><b>${listSize}&nbsp;adet&nbsp;kayıt</b></td>
+								<td align="left" colspan="11"><a href="#" class="float-left btn"
+									id="dlink"
+									onclick="tableToExcel('xxx', 'Kategori ve İlçeye Göre Rapor')"><img
+										alt="Excel Report" class="rounded" width="15px"
+										src="<c:url value='/assets/images/copy-file.png'/>">
+										${empty param.etapNo   ? 'Tüm Tabloyu':param.etapNo += '.Etabı' } Excel'e
+										Aktarmak İçin Tıklayınız..</a></td>
 							</tr>
+							<tbody class="govde" id="xxx">
+								<tr class="baslik">
 
-							<tr class="baslik">
+									<td align="center">İLÇE</td>
+									<td align="center">YATIRIM KONUSU</td>
+									<td align="center">ETAP NO</td>
+									<td align="center">YATIRIMCI ADI</td>
+									<td align="center">PROJE ADI</td>
+									<td align="center">PROJE BEDELİ</td>
+									<td align="center">HİBE TUTARI</td>
+									<td align="center">KAPASİTE</td>
+									<td align="center">İSTİHDAM</td>
+									<td align="center">DURUM</td>
+									<td></td>
+									<td></td>
 
-								<td align="center">İLÇE</td>
-								<td align="center">YATIRIM KONUSU</td>
-								<td align="center">ETAP NO</td>
-								<td align="center">YATIRIMCI ADI</td>
-								<td align="center">PROJE ADI</td>
-								<td align="center">PROJE BEDELİ</td>
-								<td align="center">HİBE TUTARI</td>
-								<td align="center">KAPASİTE</td>
-								<td align="center">İSTİHDAM</td>
-								<td align="center">DURUM</td>
-							</tr>
-							<tbody class="govde">
+								</tr>
+
 								<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim"
 									varStatus="sira">
 									<!-- 	<script type="text/javascript">

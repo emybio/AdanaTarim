@@ -89,6 +89,11 @@ public class EkonomikYatirimController {
 
 			System.out.println("Hatalar : " + result.getAllErrors());
 		}
+
+		if (ekonomikYatirim.getIstihdam() == null) {
+
+			ekonomikYatirim.setIstihdam(0);
+		}
 		Kullanici kullanici = new Kullanici();
 
 		kullanici.setId(id);

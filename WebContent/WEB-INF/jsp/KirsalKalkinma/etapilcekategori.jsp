@@ -30,7 +30,8 @@
 	border: 5px groove #fff;
 	position: fixed;
 	-webkit-transform: translate(-50%, -50%);
-	opacity: .888;
+	opacity: .5;
+	filter: alpha(opacity = 90);
 }
 
 #sonSatir>td {
@@ -60,11 +61,6 @@ jq(document).ready(function(){
 			}
 			
 		});
-		
-		if(rowTotal != 0)
-		{
-			jq("#" + proje + ilce).css("color","red");
-		}
 		jq("#" + proje + ilce).text(rowTotal);
 		
 	};
@@ -77,11 +73,6 @@ jq(document).ready(function(){
 				columnTotal += parseFloat(value);
 			}
 		})
-		
-		if(columnTotal != 0)
-		{
-			jq("#" + proje + etapNo).css("color","red");
-		}
 		jq("#" + proje + etapNo).text(columnTotal);
 	};
 	
@@ -838,45 +829,61 @@ jq(document).ready(function(){
 							<c:forEach items="${projeAdListesi }" var="proje">
 								<tr>
 									<td
-										style="padding: 110px 0px; text-align: center; font-size: 15px;">${proje }</td>
-									<td><c:forEach items="${ilceler}" var="ilce">
-											<table class="">
+										style="padding: 1% 0%; text-align: center; font-size: 15px;">${proje }</td>
+									<td><c:forEach items="${tumEkonomikYatirimListesi }"
+											var="yatirim">
+											<c:if test="${yatirim.projeAdi eq proje  }">
+												<table>
+													<c:if test="${!empty yatirim.projeAdi  }">
+														<tr>
+															<td style="font-size: 15px;">${yatirim.ilce.isim}</td>
+														</tr>
+													</c:if>
+												</table>
 
-												<tr>
-													<td style="font-size: 15px;">${ilce}</td>
-												</tr>
-											</table>
+											</c:if>
+
 										</c:forEach></td>
 									<c:forEach items="${etapNoListesi}" var="no">
 										<td><c:forEach items="${ilceler}" var="ilce">
-												<table class="">
-													<tr>
-														<c:set var="j" value="0"></c:set>
-														<c:forEach items="${tumEkonomikYatirimListesi }"
-															var="yatirim">
-															<c:if test="${yatirim.projeAdi eq proje  }">
-																<c:if test="${yatirim.etapNo eq no }">
-																	<c:if test="${yatirim.ilce.isim eq ilce  }">
-																		<c:set var="j" value="${j+1}">
-																		</c:set>
-																	</c:if>
-																</c:if>
-															</c:if>
-														</c:forEach>
-														<td style="font-size: 15px; ${j eq 0 ? '':'color:red;'}"><span
-															class="${fn:replace(proje,' ', '')}${fn:replace(ilce,' ', '')} ${fn:replace(proje,' ', '')}${no}">${j}</span></td>
+												<c:forEach items="${tumEkonomikYatirimListesi }"
+													var="yatirim">
+													<c:if test="${yatirim.projeAdi eq proje  }">
+														<c:if test="${yatirim.ilce.isim eq ilce  }">
+															<table class="">
+																<tr>
+																	<c:set var="j" value="0"></c:set>
+																	<c:forEach items="${tumEkonomikYatirimListesi }"
+																		var="yatirim">
+																		<c:if test="${yatirim.projeAdi eq proje  }">
+																			<c:if test="${yatirim.etapNo eq no }">
+																				<c:if test="${yatirim.ilce.isim eq ilce  }">
+																					<c:set var="j" value="${j+1}">
+																					</c:set>
+																				</c:if>
+																			</c:if>
+																		</c:if>
+																	</c:forEach>
+																	<td style="font-size: 15px;"><span
+																		class="${fn:replace(proje,' ', '')}${fn:replace(ilce,' ', '')} ${fn:replace(proje,' ', '')}${no}">${j}</span></td>
 
-													</tr>
-												</table>
-
+																</tr>
+															</table>
+														</c:if>
+													</c:if>
+												</c:forEach>
 											</c:forEach></td>
 									</c:forEach>
 									<td><c:forEach items="${ilceler}" var="ilce">
-											<table class="">
-												<tr>
-													<td style="font-size: 15px;"><span
-														id="${fn:replace(proje,' ', '')}${fn:replace(ilce,' ', '')}"></span>
-														<script type="text/javascript">
+											<c:forEach items="${tumEkonomikYatirimListesi }"
+												var="yatirim">
+												<c:if test="${yatirim.projeAdi eq proje  }">
+													<c:if test="${yatirim.ilce.isim eq ilce  }">
+														<table class="">
+															<tr>
+																<td style="font-size: 15px;"><span
+																	id="${fn:replace(proje,' ', '')}${fn:replace(ilce,' ', '')}"></span>
+																	<script type="text/javascript">
 															jq(document)
 																	.ready(
 																			function() {
@@ -884,12 +891,15 @@ jq(document).ready(function(){
 																						'${fn:replace(proje,' ', '')}',
 																						'${fn:replace(ilce,' ', '')}'
 																						);
+
 																			});
 														</script></td>
 
-												</tr>
-											</table>
-
+															</tr>
+														</table>
+													</c:if>
+												</c:if>
+											</c:forEach>
 										</c:forEach></td>
 								</tr>
 								<tr>
@@ -905,9 +915,8 @@ jq(document).ready(function(){
 																						'${fn:replace(proje,' ', '')}','${no}');});
 														</script></td>
 									</c:forEach>
-									<td style="font-size: 15px; color: red;"><c:set var="k"
-											value="0"></c:set> <c:forEach
-											items="${tumEkonomikYatirimListesi }" var="yatirim">
+									<td style="font-size: 15px;"><c:set var="k" value="0"></c:set>
+										<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim">
 											<c:if test="${yatirim.projeAdi eq proje  }">
 												<c:set var="k" value="${k+1}">
 												</c:set>
