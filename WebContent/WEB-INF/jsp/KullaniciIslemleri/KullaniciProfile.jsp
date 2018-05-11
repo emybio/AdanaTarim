@@ -48,9 +48,7 @@
 </script>
 
 <div class="container">
-	<div class="row">
-		<h6></h6>
-	</div>
+	<br>
 	<div class="row">
 		<div class="container">
 			<c:forEach items="${kullaniciListesi}" var="kullanici"

@@ -161,15 +161,91 @@ select {
 		}
 
 	};
+
+	function durumDegistir(durum) {
+
+		if (durum != "") {
+			var res = encodeURI("./durumaGoreListele?durum=" + durum);
+			window.location.href = decodeURI(res);
+		} else {
+
+			window.location.href = "./kooperatifRapor";
+		}
+	};
 </script>
 </head>
 <body>
+<br>
+	<div class="col-md-12  ">
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					AKTİF/DAĞILMIŞ DURUMA GÖRE KOOPERATİF ORTAK SAYILARI <a href="#" style="align:right;"
+						onclick="tableToExcel('altTable', 'Kategori ve İlçeye Göre Rapor')"
+						class="btn float-left" ><img alt="Excel Report" class="rounded"
+						width="20px" src="<c:url value='/assets/images/xlsx-3.png'/>">
+
+						${empty param.durum  ? 'Tüm Tabloyu Aktar' : param.durum +=' Durumda Olanları Aktar'}
+					</a>
+
+				</h3>
+
+
+			</div>
+			<table class="table table-hover table-border " id="altTable">
+				<tr>
+					<td>İLÇE</td>
+					<td>KOOPERTATİF TÜRÜ</td>
+					<td>KOOPERATİF ADI</td>
+					<td>ORTAK SAYISI</td>
+					<td>DURUMU <select class="form-control" name="durum"
+						onchange="durumDegistir(this.value);">
+							<option value="">SEÇ...</option>
+							<c:forEach items="${durumListesi }" var="durum">
+								<option ${param.durum eq durum ? 'selected' : ''  }>${durum }</option>
+							</c:forEach>
+
+					</select></td>
+				</tr>
+				<c:set var="koopSayisi" value="0">
+				</c:set>
+				<c:set var="ilceSayisi" value="0">
+				</c:set>
+				<%-- 	<c:forEach items="${kategoriListesi}" var="kategori" varStatus="x">
+				<c:forEach items="${ilceListesi}" var="ilce" varStatus="y"> --%>
+				<c:forEach items="${ kooperatif}" var="koop" varStatus="i">
+					<%-- <c:if test="${koop.kooperatifIlceID.isim eq ilce.isim }">
+							<c:set var="ilceSayisi" value="${ilceSayisi+1 }">
+							</c:set>
+							<c:if test="${koop.kooperatifTurID.turAdi eq kategori.turAdi  }">
+								<c:set var="koopSayisi" value="${koopSayisi+1 }">
+								</c:set> --%>
+					<tr>
+						<td align="left">${koop.kooperatifIlceID.isim}</td>
+						<td align="left" class="">${koop.kooperatifTurID.turAdi }<span></span>
+						</td>
+						<td align="left">${ koop.kooperatifAdi}</td>
+						<td align="left">${ koop.ortakSayisi}</td>
+						<td align="left">${ koop.durum}</td>
+					</tr>
+					<%-- </c:if>
+						</c:if> --%>
+				</c:forEach>
+				<%-- </c:forEach>
+			</c:forEach> --%>
+
+
+			</table>
+			<br> <br> <br>
+		</div>
+	</div>
 	<div class="col-sm-12 ">
 		<br>
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">
-					KOOPERATİF İSTATİSTİKLERİ <a href="#"
+					İLÇELERE GÖRE KOOPERATİF SAYILARI <a href="#"
 						onclick="tableToExcel('raporTable', 'Kategori ve İlçeye Göre Rapor')"
 						class="float-left"><img alt="Excel Report" class="rounded"
 						width="35px" src="<c:url value='/assets/images/xlsx-3.png'/>"></a>
@@ -218,55 +294,6 @@ select {
 					</table>
 				</div>
 			</div>
-		</div>
-	</div>
-	<div class="col-md-12  ">
-
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">
-					KOOPERATİF ORTAK SAYILARI <a href="#"
-						onclick="tableToExcel('altTable', 'Kategori ve İlçeye Göre Rapor')"
-						class="float-left"><img alt="Excel Report" class="rounded"
-						width="35px" src="<c:url value='/assets/images/xlsx-3.png'/>"></a>
-				</h3>
-			</div>
-			<table class="table table-hover table-border " id="altTable">
-				<tr>
-					<td>İLÇE</td>
-					<td>KOOPERTATİF TÜRÜ</td>
-					<td>KOOPERATİF ADI</td>
-					<td>ORTAK SAYISI</td>
-				</tr>
-				<c:set var="koopSayisi" value="0">
-				</c:set>
-				<c:set var="ilceSayisi" value="0">
-				</c:set>
-				<%-- 	<c:forEach items="${kategoriListesi}" var="kategori" varStatus="x">
-				<c:forEach items="${ilceListesi}" var="ilce" varStatus="y"> --%>
-				<c:forEach items="${ kooperatif}" var="koop" varStatus="i">
-					<%-- <c:if test="${koop.kooperatifIlceID.isim eq ilce.isim }">
-							<c:set var="ilceSayisi" value="${ilceSayisi+1 }">
-							</c:set>
-							<c:if test="${koop.kooperatifTurID.turAdi eq kategori.turAdi  }">
-								<c:set var="koopSayisi" value="${koopSayisi+1 }">
-								</c:set> --%>
-					<tr>
-						<td align="left">${koop.kooperatifIlceID.isim}</td>
-						<td align="left" class="">${koop.kooperatifTurID.turAdi }<span></span>
-						</td>
-						<td align="left">${ koop.kooperatifAdi}</td>
-						<td align="left">${ koop.ortakSayisi}</td>
-					</tr>
-					<%-- </c:if>
-						</c:if> --%>
-				</c:forEach>
-				<%-- </c:forEach>
-			</c:forEach> --%>
-
-
-			</table>
-			<br> <br> <br>
 		</div>
 	</div>
 </body>

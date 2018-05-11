@@ -83,24 +83,10 @@ select {
 					var link="./filtreyeGoreGencCiftciListeGetir?yil=&ilce=&kategori=&sayfano=" ;
 					window.location.href= ('page2','Title',link);
 				});
-				
-				
-				
-				
-				
 			});
-	
-	
-	
-	
-	
 </script>
-
-
-
 </head>
 <body>
-
 	<div class="row">
 		<div class="container hidden">
 			<h3>

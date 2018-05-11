@@ -30,4 +30,10 @@ public interface KooperatifService {
 	public Long ilceyeVeTureGoreKayitSayisi(Long tur, String ilce);
 
 	public JSONArray tureVeIlceyeGoreKooperatiflerJSON(Long turID, String ilce);
+
+	public List<Kooperatif> durumListesi();
+
+	public List<Kooperatif> durumaGoreGetir(String durum);
+	
+	public List<Kooperatif> koopBul(String koopAdi);
 }

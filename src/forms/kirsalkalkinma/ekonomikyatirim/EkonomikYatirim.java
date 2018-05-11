@@ -58,6 +58,9 @@ public class EkonomikYatirim implements java.io.Serializable {
 
 	@Column(name = "proje_adi")
 	private String projeAdi;
+	
+	@Column(name = "proje_konusu")
+	private String projeKonusu;
 
 	@Column(name = "kapasite_birim")
 	private String kapasiteBirim;
@@ -224,6 +227,14 @@ public class EkonomikYatirim implements java.io.Serializable {
 				+ kapasite + ", istihdam=" + istihdam + ", etapNo=" + etapNo + ", yatirimciAdi=" + yatirimciAdi
 				+ ", projeAdi=" + projeAdi + ", kapasiteBirim=" + kapasiteBirim + ", durum=" + durum + ", islemYapan="
 				+ islemYapan + ", islemZamani=" + islemZamani + "]";
+	}
+
+	public String getProjeKonusu() {
+		return projeKonusu;
+	}
+
+	public void setProjeKonusu(String projeKonusu) {
+		this.projeKonusu = projeKonusu;
 	}
 
 }

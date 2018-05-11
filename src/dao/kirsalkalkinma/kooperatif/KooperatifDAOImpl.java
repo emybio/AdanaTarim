@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -143,6 +144,36 @@ public class KooperatifDAOImpl implements KooperatifDAO {
 		}
 
 		return (donecek);
+	}
+
+	@Override
+	public List<Kooperatif> durumListesi() {
+		Criteria criteriaKoop = sessionFactory.getCurrentSession().createCriteria(Kooperatif.class);
+		criteriaKoop.addOrder(Order.asc("durum"));
+		criteriaKoop.setProjection(Projections.distinct(Projections.property("durum")));
+		criteriaKoop.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		return criteriaKoop.list();
+	}
+
+	@Override
+	public List<Kooperatif> durumaGoreGetir(String durum) {
+		Criteria criteriaKoop = sessionFactory.getCurrentSession().createCriteria(Kooperatif.class);
+		criteriaKoop.add(Restrictions.eq("durum", durum));
+		return criteriaKoop.list();
+	}
+
+	@Override
+	public List<Kooperatif> koopBul(String koopAdi) {
+		Criteria criteriaKoopBul = sessionFactory.getCurrentSession().createCriteria(Kooperatif.class);
+
+		criteriaKoopBul.add((Restrictions.disjunction()
+				.add(Restrictions.or(Restrictions.ilike("kooperatifAdi", "%" + koopAdi + "%"))
+						.add(Restrictions.like("kooperatifAdi", "%" + koopAdi + "%"))
+
+		)));
+
+		return criteriaKoopBul.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY).list();
+
 	}
 
 }

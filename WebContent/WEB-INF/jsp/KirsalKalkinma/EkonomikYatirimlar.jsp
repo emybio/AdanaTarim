@@ -93,14 +93,15 @@
 					class="table table-xs table-striped bg-danger  table-responsive "
 					style="text-align: center; width: 50%;">
 					<tr align="center" style="text-align: center">
-						<td colspan="11">EKONOMİK YATIRIMLAR</td>
+						<td colspan="12">EKONOMİK YATIRIMLAR</td>
 					</tr>
 					<tr>
 						<td>İLÇE</td>
-						<td>YATIRIM KONUSU</td>
+						<td>YATIRIM NİTELİĞİ</td>
 						<td>ETAP NO</td>
 						<td>YATIRIMCI ADI</td>
 						<td>PROJE ADI</td>
+						<td>PROJE KONUSU</td>
 						<td>PROJE BEDELİ</td>
 						<td>HİBE TUTARI</td>
 						<td>KAPASİTE</td>
@@ -182,6 +183,7 @@
 								<form:option value="20">20</form:option>
 							</form:select> --%></td>
 						<td><form:input path="projeAdi" /></td>
+						<td><form:input path="projeKonusu" /></td>
 						<td><form:input path="projeBedeli" class="money" /></td>
 						<td><form:input path="hibeTutari" class="money" /></td>
 						<td><form:input path="kapasite" /></td>
@@ -255,27 +257,28 @@
 					<div id="collapse1" class="panel-collapse ">
 						<table class="table table-sm table-striped bg-info table-fixed "
 							style="text-align: center; width: 100%;">
-							<c:set var="list" value="${tumEkonomikYatirimListesi}" />
+							<c:set var="list" value="${tumListe}" />
 							<c:set var="listSize" value="${fn:length(list)}" />
 
 							<tr>
 								<td align="left"><b>${listSize}&nbsp;adet&nbsp;kayıt</b></td>
-								<td align="left" colspan="11"><a href="#" class="float-left btn"
-									id="dlink"
+								<td align="left" colspan="12"><a href="#"
+									class="float-left btn" id="dlink"
 									onclick="tableToExcel('xxx', 'Kategori ve İlçeye Göre Rapor')"><img
 										alt="Excel Report" class="rounded" width="15px"
 										src="<c:url value='/assets/images/copy-file.png'/>">
-										${empty param.etapNo   ? 'Tüm Tabloyu':param.etapNo += '.Etabı' } Excel'e
-										Aktarmak İçin Tıklayınız..</a></td>
+										${empty param.etapNo   ? 'Tüm Tabloyu':param.etapNo += '.Etabı' }
+										Excel'e Aktarmak İçin Tıklayınız..</a></td>
 							</tr>
 							<tbody class="govde" id="xxx">
 								<tr class="baslik">
 
 									<td align="center">İLÇE</td>
-									<td align="center">YATIRIM KONUSU</td>
+									<td align="center">YATIRIM NİTELİĞİ</td>
 									<td align="center">ETAP NO</td>
 									<td align="center">YATIRIMCI ADI</td>
 									<td align="center">PROJE ADI</td>
+									<td align="center">PROJE KONUSU</td>
 									<td align="center">PROJE BEDELİ</td>
 									<td align="center">HİBE TUTARI</td>
 									<td align="center">KAPASİTE</td>
@@ -286,54 +289,15 @@
 
 								</tr>
 
-								<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim"
+								<c:forEach items="${tumListe }" var="yatirim"
 									varStatus="sira">
-									<!-- 	<script type="text/javascript">
-									jq(document)
-											.ready(
-													function() {
-
-														var lengthText = 20;
-														var text = jq(
-																'#${yatirim.id}')
-																.text();
-														var shortText = jq
-																.trim(text)
-																.substring(0,
-																		lengthText)
-																.split(" ")
-																.slice(0, -1)
-																.join(" ")
-																+ "...";
-														jq('#${yatirim.id}')
-																.text(shortText);
-
-														jq('#${yatirim.id}')
-																.hover(
-																		function() {
-
-																			jq(
-																					this)
-																					.text(
-																							text);
-																		},
-																		function() {
-																			jq(
-																					this)
-																					.text(
-																							shortText);
-																		});
-
-													});
-								</script> -->
-
-									<!--style='word-break: break-all; width: 20em;'  -->
 									<tr id="siraNo${sira.count }">
 										<td align="center">${yatirim.ilce.isim}</td>
 										<td align="center">${yatirim.kategori.kategoriAdi}</td>
 										<td align="center">${yatirim.etapNo}</td>
 										<td align="center" id="${yatirim.id }">${yatirim.yatirimciAdi}</td>
 										<td align="center">${yatirim.projeAdi}</td>
+											<td align="center">${yatirim.projeKonusu}</td>
 										<td align="center"><fmt:formatNumber pattern="#,##0.00"
 												type="currency" value="${yatirim.projeBedeli}"
 												var="projeBedeli"></fmt:formatNumber>${projeBedeli }</td>
@@ -349,24 +313,24 @@
 											class="btn btn-danger btn-sm">Sil</a></td>
 										<td><a
 											href="${pageContext.request.contextPath }/kirsal-kalkinma/ekonomikYatirimGuncelle/${yatirim.id}"
-											class="btn btn-primary btn-sm">Güncelle</a></td>
+											class="btn btn-success btn-sm">Güncelle</a></td>
 									</tr>
 								</c:forEach>
 								<tr>
 									<td colspan="5" align="right">GENEL TOPLAM:</td>
 
 									<td><fmt:formatNumber pattern="#,##0.00" type="currency"
-											value="${tumEkonomikYatirimListesi.stream().map(yatirim -> yatirim.projeBedeli).sum()}"
+											value="${tumListe.stream().map(yatirim -> yatirim.projeBedeli).sum()}"
 											var="projeBedeli"></fmt:formatNumber>${projeBedeli }</td>
 									<td><fmt:formatNumber pattern="#,##0.00 TL"
 											type="currency"
-											value="${tumEkonomikYatirimListesi.stream().map(yatirim -> yatirim.hibeTutari).sum()}"
+											value="${tumListe.stream().map(yatirim -> yatirim.hibeTutari).sum()}"
 											var="hibeTutari"></fmt:formatNumber>${hibeTutari }</td>
 									<td><fmt:formatNumber pattern="#,##0" type="number"
-											value="${tumEkonomikYatirimListesi.stream().map(yatirim -> yatirim.kapasite).sum()}"
+											value="${tumListe.stream().map(yatirim -> yatirim.kapasite).sum()}"
 											var="kapasite"></fmt:formatNumber>${kapasite }</td>
 									<td><fmt:formatNumber pattern="#,##0" type="number"
-											value="${tumEkonomikYatirimListesi.stream().map(yatirim -> yatirim.istihdam).sum()}"
+											value="${tumListe.stream().map(yatirim -> yatirim.istihdam).sum()}"
 											var="istihdam"></fmt:formatNumber>${istihdam }</td>
 
 									<td colspan="3"></td>

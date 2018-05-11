@@ -58,26 +58,37 @@ public class KooperatifServiceImpl implements KooperatifService {
 
 	@Override
 	public List<Kooperatif> kooperatifKartiGetir(Long koopId) {
-		// TODO Auto-generated method stub
 		return koopDAO.kooperatifKartiGetir(koopId);
 	}
 
 	@Override
 	public List<Kooperatif> tureVeIlceyeGoreKooperatifListesi(Long turID, String ilce) {
-		// TODO Auto-generated method stub
 		return koopDAO.tureVeIlceyeGoreKooperatifListesi(turID, ilce);
 	}
 
 	@Override
 	public Long ilceyeVeTureGoreKayitSayisi(Long tur, String ilce) {
-		// TODO Auto-generated method stub
 		return koopDAO.ilceyeVeTureGoreKayitSayisi(tur, ilce);
 	}
 
 	@Override
 	public JSONArray tureVeIlceyeGoreKooperatiflerJSON(Long turID, String ilce) {
-		// TODO Auto-generated method stub
 		return koopDAO.tureVeIlceyeGoreKooperatiflerJSON(turID, ilce);
+	}
+
+	@Override
+	public List<Kooperatif> durumListesi() {
+		return koopDAO.durumListesi();
+	}
+
+	@Override
+	public List<Kooperatif> durumaGoreGetir(String durum) {
+		return koopDAO.durumaGoreGetir(durum);
+	}
+
+	@Override
+	public List<Kooperatif> koopBul(String koopAdi) {
+		return koopDAO.koopBul(koopAdi);
 	}
 
 }

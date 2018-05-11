@@ -71,7 +71,11 @@ public class AracDAOImpl implements AracDAO {
 		Criteria criteriaArac = sessionFactory.getCurrentSession().createCriteria(Arac.class);
 		criteriaArac.createAlias("kullaniciList", "kullanici");
 		criteriaArac.add(Restrictions.eq("kullanici.id", kullaniciID));
-		criteriaArac.add(Restrictions.eq("donemAy", donemAy));
+		System.out.println("donemAy  : " + donemAy);
+		if (donemAy != null) {
+			criteriaArac.add(Restrictions.eq("donemAy", donemAy));
+		}
+
 		criteriaArac.add(Restrictions.eq("donemYil", donemYil));
 		criteriaArac.addOrder(Order.asc("tarih"));
 		List<Arac> aracCikisListesi = criteriaArac.list();

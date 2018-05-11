@@ -68,7 +68,7 @@ public class EkonomikYatirimController {
 			return "error";
 		}
 		model.put("title", "Kýrsal Kalkýnma");
-		model.put("tumEkonomikYatirimListesi", ekonomikYatirimService.tumYatirimListesi());
+		model.put("tumListe", ekonomikYatirimService.tumYatirimListesi());
 		model.put("ilceListesi", yerEklemeService.altTipGetir(2l, true));
 		model.put("kategoriListesi", ekonomikYatirimKategoriService.tumEkonomikYatirimKategoriListesi());
 		model.put("durumListesi", ekonomikDurumService.tumDurumListesi());
@@ -153,7 +153,7 @@ public class EkonomikYatirimController {
 	public String ekonomikYatirimRapor(ModelMap model) {
 
 		model.addAttribute("title", "Ekonomik Rapor");
-		model.put("tumEkonomikYatirimListesi", ekonomikYatirimService.tumYatirimListesi());
+		model.put("tumListe", ekonomikYatirimService.tumYatirimListesi());
 		model.put("ilceler", ekonomikYatirimService.ilceListesi());
 		model.put("kategoriListesi", ekonomikYatirimService.kategoriLisetsi());
 		model.put("etapNoListesi", ekonomikYatirimService.etapNoLisetsi());
@@ -230,7 +230,7 @@ public class EkonomikYatirimController {
 		}
 
 		model.put("title", "Kýrsal Kalkýnma");
-		model.put("tumEkonomikYatirimListesi", ekonomikYatirimService.etapNoyaGoreGetir(etapNo));
+		model.put("tumListe", ekonomikYatirimService.etapNoyaGoreGetir(etapNo));
 		model.put("ilceListesi", yerEklemeService.altTipGetir(2l, true));
 		model.put("kategoriListesi", ekonomikYatirimKategoriService.tumEkonomikYatirimKategoriListesi());
 		model.put("durumListesi", ekonomikDurumService.tumDurumListesi());

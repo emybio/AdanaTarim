@@ -137,6 +137,13 @@
 								</div>
 							</div>
 							<div class="form-group">
+								<label class="col-sm-4 control-label" for="durum">Durum</label>
+								<div class="col-sm-5">
+									<form:input type="text" required="true" class="form-control "
+										id="durum" path="durum" name="durum" />
+								</div>
+							</div>
+							<div class="form-group">
 								<label class="col-sm-4 control-label" for="uygulamaProjesi">Uygulama
 									Projesi</label>
 								<div class="col-sm-5">

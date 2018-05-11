@@ -50,14 +50,14 @@ public class JstlView extends InternalResourceView {
 		request.setAttribute("kullaniciListesi2", model.get("kullaniciListesi2"));
 
 		request.setAttribute("izinListesi", model.get("izinListesi"));
-		request.setAttribute("tumEkonomikYatirimListesi", model.get("tumEkonomikYatirimListesi"));
+		request.setAttribute("tumListe", model.get("tumListe"));
 		request.setAttribute("kategoriListesi", model.get("kategoriListesi"));
 		request.setAttribute("tips", model.get("tips"));
 		request.setAttribute("tipListesi", model.get("tipListesi"));
 		request.setAttribute("altTipListesi", model.get("altTipListesi"));
 		request.setAttribute("markaListesi", model.get("markaListesi"));
 		request.setAttribute("modelListesi", model.get("modelListesi"));
-
+		request.setAttribute("durumListesi", model.get("durumListesi"));
 		request.setAttribute("saatler", model.get("saatler"));
 		request.setAttribute("aylar", model.get("aylar"));
 		request.setAttribute("yillar", model.get("yillar"));
@@ -69,6 +69,7 @@ public class JstlView extends InternalResourceView {
 		request.setAttribute("arac", model.get("arac"));
 		request.setAttribute("aracTalep", model.get("aracTalep"));
 		request.setAttribute("kooperatif", model.get("kooperatif"));
+		request.setAttribute("aricilik", model.get("aricilik"));
 
 		request.setAttribute("resim", model.get("resim"));
 
@@ -101,16 +102,7 @@ public class JstlView extends InternalResourceView {
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/jsp/template.jsp");
 
 		requestDispatcher.include(request, response);
-		/*
-		 * HttpSession session = request.getSession(false); if (!session.isNew() &&
-		 * session != null) {
-		 * 
-		 * requestDispatcher.include(request, response);
-		 * System.out.println("jstlview session iptal mi? : " + session.isNew()); }
-		 * 
-		 * 
-		 * request.getRequestDispatcher("redirect:./anasayfa");
-		 */
+		
 
 	}
 

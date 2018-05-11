@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <style type="text/css">
 td a:link {
 	display: block;
@@ -24,8 +24,7 @@ td a:hover {
 			<div class="row">
 				<div class="col-sm-8 col-sm-offset-2">
 					<hr>
-					<table class="table table-hover bg-info "
-						style="border-radius: 5em 5em 5em 5em">
+					<table class=" bg-default " style="border-radius: 5em 5em 5em 5em">
 
 						<thead style="background-color: rgba(255, 255, 255, .5)">
 							<tr>
@@ -40,7 +39,7 @@ td a:hover {
 								varStatus="sira">
 								<c:set var="koop" value="${kooperatif}"></c:set>
 								<tr>
-									<td><a class="btn btn-info btn-sm"
+									<td><a class="btn btn-info btn-lg "
 										href="./tureVeIlceyeGoreKooperatifler?id=${kooperatif.id}&ilce_id=${ilceler }">${kooperatif.turAdi}
 											Kooperatifi</a></td>
 

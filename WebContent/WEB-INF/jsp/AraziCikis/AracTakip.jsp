@@ -10,16 +10,16 @@
 
 <script src="<c:url value="/assets/script/dataTables.js"/>"
 	type="text/javascript"></script>
-	
-	<script src="<c:url value="/assets/script/datatables.min.js"/>"
+
+<script src="<c:url value="/assets/script/datatables.min.js"/>"
 	type="text/javascript"></script>
-	
-	
-	<script src="<c:url value="/assets/script/pdfmake.min.js"/>"
+
+
+<script src="<c:url value="/assets/script/pdfmake.min.js"/>"
 	type="text/javascript"></script>
-	
-	
-	<script src="<c:url value="/assets/script/vfs_fonts.js"/>"
+
+
+<script src="<c:url value="/assets/script/vfs_fonts.js"/>"
 	type="text/javascript"></script>
 <style>
 input {
@@ -57,7 +57,6 @@ select {
 	margin-left: 3%;
 	float: left;
 } */
-
 .btn_inr {
 	float: right;
 	margine-top: 25px;
@@ -250,10 +249,7 @@ jq(document).ready( function () {
 </script>
 
 <c:if test="${arac.id ne 0 or arac.id ne null }">
-
-
 	<script>
-
 jq(document).ready(function() {
 	
 	ikisibiradamarkala('${arac.ilce.id}');
@@ -301,7 +297,6 @@ jq(document).ready(function() {
 					</table>
 				</div>
 			</div>
-
 			<div class="col-xs-7">
 				<h3 class="sub-header">
 					Rapor Alma &nbsp; <span class="fa fa-file-o"></span>
@@ -324,7 +319,6 @@ jq(document).ready(function() {
 										<c:forEach items="${yillar }" var="yil">
 											<option value="${yil}" label="">${yil }</option>
 										</c:forEach>
-
 								</select></td>
 								<td><select data-placeholder="Ay Seç."
 									style="border: none;" name="donemAy" id="donemAy" class="donem">
@@ -333,7 +327,6 @@ jq(document).ready(function() {
 											<option value="${ay}" label="">${ay}.&nbsp;Ay</option>
 										</c:forEach>
 								</select></td>
-
 								<td><select data-placeholder="Personel Seç." name="id"
 									class="chosen-select">
 										<option value=""></option>
@@ -341,7 +334,6 @@ jq(document).ready(function() {
 											<c:forEach items="${kullaniciListesi}" var="kullanici"
 												varStatus="sira">
 												<option value="${kullanici[0]}">${kullanici[1]}</option>
-
 											</c:forEach>
 										</c:if>
 										<c:if test="${!empty kullaniciListesi2}">

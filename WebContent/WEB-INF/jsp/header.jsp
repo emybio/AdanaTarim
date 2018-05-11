@@ -52,11 +52,13 @@
 			</div>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
-
+			<c:set var="req" value="${pageContext.request}" />
 			<ul class="nav navbar-nav navbar-right">
 				<li>
-					<form class="navbar-form navbar-right" action="./getir">
-						<input type="text" class="form-control" placeholder="Search...">
+					<form class="navbar-form navbar-right"
+						action="${req.requestURI }/koopBul">
+						<input type="text" class="form-control" placeholder="" value=""
+							name="koopAdi">
 					</form>
 				</li>
 				<!--GEREKLİ GÖRÜLDÜĞÜNDE EKLEMEK İÇİN REMLENDİ  -->
@@ -108,6 +110,17 @@
 								class="fa fa-th" aria-hidden="true"> </span>&nbsp;Kooperatif /
 								Birlik</a></li>
 
+						<li><a
+							href="${pageContext.request.contextPath}/kirsal-kalkinma/aricilik"><img
+								src="<c:url value="/assets/images/bee.png"/>" class="user-image"
+								width="20" height="20" /> &nbsp;Arıcılık</a></li>
+
+						<li><a
+							href="${pageContext.request.contextPath}/kirsal-kalkinma/proje-koyun"><img
+								src="<c:url value="/assets/images/sheep.png"/>"
+								class="user-image" width="20" height="20" /> &nbsp;300 Koyun
+								Projesi </a></li>
+
 						<li class="dropdown"><a href="#" data-toggle="dropdown"
 							class="dropdown-toggle"> <i class="fa fa-file-pdf-o"
 								aria-hidden="true"></i>&nbsp;<span>Raporlar</span><span
@@ -119,11 +132,12 @@
 								<li><a
 									href="${pageContext.request.contextPath}/kirsal-kalkinma/gencCiftciRapor">
 										Genç Çiftçi Rapor </a></li>
-
-
 								<li><a
 									href="${pageContext.request.contextPath}/kirsal-kalkinma/kooperatifRapor">
 										Kooperatif Rapor </a></li>
+								<li><a
+									href="${pageContext.request.contextPath}/kirsal-kalkinma/aricilik-liste">
+										Arıcılık</a></li>
 							</ul></li>
 					</ul></li>
 
@@ -156,11 +170,6 @@
 							aria-hidden="true"></i>&nbsp;<span>${cookie.isim.value }</span><span
 							class="caret"></span></a> <c:if test="${cookie.id.value eq 1 }">
 							<ul class="dropdown-menu">
-
-
-
-
-
 								<li><a
 									href="${pageContext.request.contextPath}/kullanici-islemleri/kullanici">Kullanıcı
 										Bilgileri</a></li>
@@ -186,8 +195,6 @@
 											href="${pageContext.request.contextPath}/yonetim/rol-yonetimi">Kullanici
 												Yetki Belirleme</a></li>
 									</ul></li>
-
-
 
 							</ul>
 						</c:if></li>

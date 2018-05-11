@@ -279,7 +279,9 @@ public class GencCiftciDAOImpl implements GencCiftciDAO {
 		// gencCiftci.add(orExp);
 
 		gencCiftci.add(Restrictions.or(Restrictions.ilike("yararlaniciAdi", "%" + yararlaniciAdi + "%"))
-				.add(Restrictions.ilike("yararlaniciSoyadi", "%" + yararlaniciAdi + "%")));
+				.add(Restrictions.ilike("yararlaniciSoyadi", "%" + yararlaniciAdi + "%"))
+				.add(Restrictions.like("yararlaniciSoyadi", "%" + yararlaniciAdi + "%"))
+				.add(Restrictions.like("yararlaniciAdi", "%" + yararlaniciAdi + "%")));
 
 		return gencCiftci.list();
 

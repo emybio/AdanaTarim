@@ -305,8 +305,7 @@ public class AracController {
 		String ayrilanIsim = isimAyrac[0];
 		String ayrilanSoyIsim = isimAyrac[1];
 		String path = "D:\\evraklar\\";
-		String filename = ayrilanIsim.toUpperCase() + " " + ayrilanSoyIsim.toUpperCase()
-				+ ".docx"/* path to a file */;
+		String filename = ayrilanIsim.toUpperCase() + " " + ayrilanSoyIsim.toUpperCase() + ".docx"/* path to a file */;
 		String baslikIsmi = ayrilanIsim.toUpperCase() + " " + ayrilanSoyIsim.toUpperCase();
 
 		XWPFDocument document = new XWPFDocument();
@@ -471,8 +470,7 @@ public class AracController {
 		String[] isimAyrac = isim.split("\\.");
 		String ayrilanIsim = isimAyrac[0];
 		String ayrilanSoyIsim = isimAyrac[1];
-		String filename = ayrilanIsim.toUpperCase() + " " + ayrilanSoyIsim.toUpperCase()
-				+ ".docx"/* path to a file */;
+		String filename = ayrilanIsim.toUpperCase() + " " + ayrilanSoyIsim.toUpperCase() + ".docx"/* path to a file */;
 		String path = "D:\\evraklar\\";
 		File file = new File(path + filename);
 
@@ -549,8 +547,9 @@ public class AracController {
 			cikisListesi1 = donemeGoreAracCikislari;
 			model.put("kullanici", raporAlinanPersonelBilgileri = kullaniciService.kullaniciGetirr(kullaniciID));
 			model.put("aracCikisListesi", cikisListesi1);
-
-			donem = donemAy.toString();
+			if (donemAy != null) {
+				donem = donemAy.toString();
+			}
 			model.put("arac", new Arac());
 			// return "AraziCikis/AracTakip";
 			return "redirect:/arazi-cikislari/araziCikislari";
@@ -749,5 +748,47 @@ public class AracController {
 		listBooks.add(new Arac(kullanici, "12", "dfg", "asd", ilce));
 
 		return listBooks;
+	}
+
+	@RequestMapping(value = "/donemeGorePersonelGetir", method = RequestMethod.GET)
+	public String donemeGorePersonelGetir(@CookieValue(value = "id") Long id, ModelMap model,
+			@RequestParam(value = "id") Long kullaniciID, @RequestParam(value = "donemAy") Integer donemAy,
+			@RequestParam(value = "donemYil") Integer donemYil) {
+
+		List<Arac> donemeGoreAracCikislari = aracService.kullaniciyaGoreCikisListesi(kullaniciID, donemAy, donemYil);
+		if (!donemeGoreAracCikislari.isEmpty()) {
+
+			cikisListesi1 = donemeGoreAracCikislari;
+			model.put("kullanici", raporAlinanPersonelBilgileri = kullaniciService.kullaniciGetirr(kullaniciID));
+			model.put("aracCikisListesi", cikisListesi1);
+
+			donem = donemAy.toString();
+			model.put("arac", new Arac());
+			// return "AraziCikis/AracTakip";
+			return "redirect:/arazi-cikislari/araziCikislari";
+		} else {
+
+			if (id == 1 || id == 7 || id == 9) {
+				// model.put("girisYapanKullanici",
+				// kullaniciService.aktifKullaniciListesi('1'));
+				// model.put("kullaniciListesi",
+				// aracService.cikisYapanPersonelListesi());
+			} else {
+
+				model.put("kullaniciListesi", kullaniciService.kullanGetir(id));
+				model.put("girisYapanKullanici", kullaniciService.kullanGetir(id));
+
+			}
+			model.put("tusYazisi", tusYazisi);
+			model.put("title", "Hata");
+			model.put("arac", new Arac());
+			model.put("aylar", aracService.donemAyGetir());
+			model.put("yillar", aracService.donemYilGetir());
+			// model.put("girisYapanKullanici",
+			// kullaniciService.aktifKullaniciListesi(donem, '1'));
+			araclar.Genel.errorMessage = "hata";
+			model.put("errorMessage2", araclar.Genel.errorMessage);
+			return "AraziCikis/AracTakip";
+		}
 	}
 }

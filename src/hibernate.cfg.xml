@@ -29,6 +29,7 @@
 		<mapping class="forms.kirsalkalkinma.gencciftci.GencCiftciKategori" />
 		<mapping class="forms.kirsalkalkinma.kooperatif.Kooperatif" />
 		<mapping class="forms.kirsalkalkinma.kooperatif.KooperatifTuru" />
+		<mapping class="forms.kirsalkalkinma.Aricilik" />
 
 		<!--KIRSAL KALKINMA SON -->
 

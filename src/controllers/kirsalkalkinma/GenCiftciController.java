@@ -435,7 +435,6 @@ public class GenCiftciController {
 	}
 
 	@RequestMapping(value = "/ilcelereGoreGencCiftciListele", method = RequestMethod.GET)
-
 	public @ResponseBody String doView(ModelMap model, Map<String, Object> map,
 			@RequestParam(value = "ilce", required = true) String ilce, HttpServletRequest request,
 			HttpServletResponse response) {

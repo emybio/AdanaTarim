@@ -245,6 +245,7 @@ public class KooperatifController {
 		model.put("kategoriListesi", koopService.turListesi());
 
 		model.put("kooperatif", koopService.tumKooperatiflerler());
+		model.put("durumListesi", koopService.durumListesi());
 
 		return "KirsalKalkinma/kooperatif/KooperatifRapor";
 
@@ -268,4 +269,31 @@ public class KooperatifController {
 		return gson.toJson(koopService.tureVeIlceyeGoreKooperatiflerJSON(id, ilce));
 
 	}
+
+	@RequestMapping(value = "/durumaGoreListele", method = RequestMethod.GET)
+	public String durumaGoreGetir(@RequestParam(value = "durum") String durum, ModelMap model) {
+		model.put("title", koopTitle);
+
+		model.put("ilceListesi", ilceler.altTipGetir(2l, true));
+		model.put("kategoriListesi", koopService.turListesi());
+
+		model.put("kooperatif", koopService.durumaGoreGetir(durum));
+		model.put("durumListesi", koopService.durumListesi());
+		// return "redirect:kirsal-kalkinma/kooperatifRapor";
+
+		return "KirsalKalkinma/kooperatif/KooperatifRapor";
+	}
+	
+	@RequestMapping(value="/koopBul")
+	public String koopBul(@RequestParam(value="koopAdi")String koopAdi,ModelMap model){
+		
+		
+		
+		model.put("title", koopTitle);
+
+		model.put("kooperatif", koopService.koopBul(koopAdi));
+
+		return "KirsalKalkinma/kooperatif/KooperatifListesi";
+	}
+	
 }

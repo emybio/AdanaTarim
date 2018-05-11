@@ -44,13 +44,11 @@
 </style>
 
 <script type="text/javascript">
-jq(document).ready(function(){
-	 jq("#loader").fadeOut(1000);
-	 jq(".ekonomikRapor").fadeIn(2000);
-});
-
+	jq(document).ready(function() {
+		jq("#loader").fadeOut(1000);
+		jq(".ekonomikRapor").fadeIn(2000);
+	});
 	function satirToplam(proje, ilce) {
-		
 		var rowTotal = 0;
 		var clazz = proje + ilce;
 		jq("." + clazz).each(function() {
@@ -58,15 +56,13 @@ jq(document).ready(function(){
 			if (!isNaN(value)) {
 				rowTotal += parseFloat(value);
 			}
-			
 		});
-		
-		if(rowTotal != 0)
-		{
-			jq("#" + proje + ilce).css("color","red");
+
+		if (rowTotal != 0) {
+			jq("#" + proje + ilce).css("color", "red");
 		}
 		jq("#" + proje + ilce).text(rowTotal);
-		
+
 	};
 	function sutunToplam(proje, etapNo) {
 		var columnTotal = 0;
@@ -77,14 +73,12 @@ jq(document).ready(function(){
 				columnTotal += parseFloat(value);
 			}
 		})
-		
-		if(columnTotal != 0)
-		{
-			jq("#" + proje + etapNo).css("color","red");
+
+		if (columnTotal != 0) {
+			jq("#" + proje + etapNo).css("color", "red");
 		}
 		jq("#" + proje + etapNo).text(columnTotal);
 	};
-	
 	function selectElementContents(el) {
 		var body = document.body, range, sel;
 		if (document.createRange && window.getSelection) {
@@ -271,7 +265,7 @@ jq(document).ready(function(){
 				<div id="etapNo" class="collapse">
 					<table class="table table-sm table-striped bg-info table-fixed "
 						style="text-align: center; width: 100%;">
-						<c:set var="list" value="${tumEkonomikYatirimListesi}" />
+						<c:set var="list" value="${tumListe}" />
 						<c:set var="listSize" value="${fn:length(list)}" />
 						<thead>
 							<tr>
@@ -300,8 +294,7 @@ jq(document).ready(function(){
 							<c:set var="kapasite" value="0" />
 							<c:set var="istihdam" value="0" />
 							<c:set var="etapAdeti" value="0" />
-							<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim"
-								varStatus="sira">
+							<c:forEach items="${tumListe }" var="yatirim" varStatus="sira">
 								<c:if test="${yatirim.etapNo == 2 }">
 									<c:set var="projeBedeli"
 										value="${projeBedeli + yatirim.projeBedeli}" />
@@ -333,8 +326,7 @@ jq(document).ready(function(){
 							<c:set var="kapasite2" value="0" />
 							<c:set var="istihdam2" value="0" />
 							<c:set var="etapAdeti2" value="0" />
-							<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim"
-								varStatus="sira">
+							<c:forEach items="${tumListe }" var="yatirim" varStatus="sira">
 								<c:if test="${yatirim.etapNo == 3 }">
 									<c:set var="projeBedeli2"
 										value="${projeBedeli2 + yatirim.projeBedeli}" />
@@ -365,8 +357,7 @@ jq(document).ready(function(){
 							<c:set var="kapasite3" value="0" />
 							<c:set var="istihdam3" value="0" />
 							<c:set var="etapAdeti3" value="0" />
-							<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim"
-								varStatus="sira">
+							<c:forEach items="${tumListe }" var="yatirim" varStatus="sira">
 								<c:if test="${yatirim.etapNo == 4 }">
 									<c:set var="projeBedeli3"
 										value="${projeBedeli3 + yatirim.projeBedeli}" />
@@ -397,8 +388,7 @@ jq(document).ready(function(){
 							<c:set var="kapasite4" value="0" />
 							<c:set var="istihdam4" value="0" />
 							<c:set var="etapAdeti4" value="0" />
-							<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim"
-								varStatus="sira">
+							<c:forEach items="${tumListe }" var="yatirim" varStatus="sira">
 								<c:if test="${yatirim.etapNo == 5 }">
 									<c:set var="projeBedeli4"
 										value="${projeBedeli4 + yatirim.projeBedeli}" />
@@ -431,8 +421,7 @@ jq(document).ready(function(){
 							<c:set var="kapasite5" value="0" />
 							<c:set var="istihdam5" value="0" />
 							<c:set var="etapAdeti5" value="0" />
-							<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim"
-								varStatus="sira">
+							<c:forEach items="${tumListe }" var="yatirim" varStatus="sira">
 								<c:if test="${yatirim.etapNo == 6 }">
 									<c:set var="projeBedeli5"
 										value="${projeBedeli5 + yatirim.projeBedeli}" />
@@ -466,8 +455,7 @@ jq(document).ready(function(){
 							<c:set var="kapasite6" value="0" />
 							<c:set var="istihdam6" value="0" />
 							<c:set var="etapAdeti6" value="0" />
-							<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim"
-								varStatus="sira">
+							<c:forEach items="${tumListe }" var="yatirim" varStatus="sira">
 								<c:if test="${yatirim.etapNo == 7 }">
 									<c:set var="projeBedeli6"
 										value="${projeBedeli6 + yatirim.projeBedeli}" />
@@ -501,8 +489,7 @@ jq(document).ready(function(){
 							<c:set var="istihdam7" value="0" />
 							<c:set var="etapAdeti7" value="0" />
 
-							<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim"
-								varStatus="sira">
+							<c:forEach items="${tumListe }" var="yatirim" varStatus="sira">
 								<c:if test="${yatirim.etapNo == 8 }">
 									<c:set var="projeBedeli7"
 										value="${projeBedeli7 + yatirim.projeBedeli}" />
@@ -539,8 +526,7 @@ jq(document).ready(function(){
 							<c:set var="istihdam8" value="0" />
 							<c:set var="etapAdeti8" value="0" />
 
-							<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim"
-								varStatus="sira">
+							<c:forEach items="${tumListe }" var="yatirim" varStatus="sira">
 								<c:if test="${yatirim.etapNo == 9 }">
 									<c:set var="projeBedeli8"
 										value="${projeBedeli8 + yatirim.projeBedeli}" />
@@ -577,8 +563,7 @@ jq(document).ready(function(){
 							<c:set var="istihdam9" value="0" />
 							<c:set var="etapAdeti9" value="0" />
 
-							<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim"
-								varStatus="sira">
+							<c:forEach items="${tumListe }" var="yatirim" varStatus="sira">
 								<c:if test="${yatirim.etapNo == 10 }">
 									<c:set var="projeBedeli9"
 										value="${projeBedeli9 + yatirim.projeBedeli}" />
@@ -614,8 +599,7 @@ jq(document).ready(function(){
 							<c:set var="istihdam10" value="0" />
 							<c:set var="etapAdeti10" value="0" />
 
-							<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim"
-								varStatus="sira">
+							<c:forEach items="${tumListe }" var="yatirim" varStatus="sira">
 								<c:if test="${yatirim.etapNo == 11 }">
 									<c:set value="${yatirim.etapNo}" var="etapNo11" />
 									<c:set var="projeBedeli10"
@@ -654,8 +638,7 @@ jq(document).ready(function(){
 							<c:set var="kapasite11" value="0" />
 							<c:set var="istihdam11" value="0" />
 							<c:set var="etapAdeti11" value="0" />
-							<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim"
-								varStatus="sira">
+							<c:forEach items="${tumListe }" var="yatirim" varStatus="sira">
 								<c:if test="${yatirim.etapNo == 12 }">
 									<c:set value="${yatirim.etapNo}" var="etapNo12" />
 									<c:set var="projeBedeli11"
@@ -689,8 +672,7 @@ jq(document).ready(function(){
 							<c:set var="kapasite12" value="0" />
 							<c:set var="istihdam12" value="0" />
 							<c:set var="etapAdeti12" value="0" />
-							<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim"
-								varStatus="sira">
+							<c:forEach items="${tumListe }" var="yatirim" varStatus="sira">
 								<c:if test="${yatirim.etapNo == 13 }">
 									<c:set value="${yatirim.etapNo}" var="etapNo13" />
 									<c:set var="projeBedeli12"
@@ -724,22 +706,21 @@ jq(document).ready(function(){
 								<td>GENEL TOPLAM:</td>
 								<td>${listSize }</td>
 								<td><fmt:formatNumber pattern="#,##0.00" type="currency"
-										value="${tumEkonomikYatirimListesi.stream().map(yatirim -> yatirim.projeBedeli).sum()}"
+										value="${tumListe.stream().map(yatirim -> yatirim.projeBedeli).sum()}"
 										var="projeBedeli"></fmt:formatNumber>${projeBedeli }</td>
 								<td><fmt:formatNumber pattern="#,##0.00" type="currency"
-										value="${tumEkonomikYatirimListesi.stream().map(yatirim -> yatirim.hibeTutari).sum()}"
+										value="${tumListe.stream().map(yatirim -> yatirim.hibeTutari).sum()}"
 										var="hibeTutari"></fmt:formatNumber>${hibeTutari }</td>
 								<td><fmt:formatNumber pattern="#,##0" type="number"
-										value="${tumEkonomikYatirimListesi.stream().map(yatirim -> yatirim.kapasite).sum()}"
+										value="${tumListe.stream().map(yatirim -> yatirim.kapasite).sum()}"
 										var="kapasite"></fmt:formatNumber>${kapasite }</td>
 								<td><fmt:formatNumber pattern="#,##0" type="number"
-										value="${tumEkonomikYatirimListesi.stream().map(yatirim -> yatirim.istihdam).sum()}"
+										value="${tumListe.stream().map(yatirim -> yatirim.istihdam).sum()}"
 										var="istihdam"></fmt:formatNumber>${istihdam }</td>
 							</tr>
 						</tbody>
 					</table>
-					<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim"
-						varStatus="sira">
+					<c:forEach items="${tumListe }" var="yatirim" varStatus="sira">
 						<c:if test="${yatirim.etapNo eq 2 }">
 							<c:set var="etapNo" value="${yatirim.etapNo}"></c:set>
 						</c:if>
@@ -747,64 +728,6 @@ jq(document).ready(function(){
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="container-fluid ekonomikRapor">
-		<div class="container col-sm-5">
-			<button type="button" class="btn btn-info" data-toggle="collapse"
-				data-target="#ilc">ETAP VE KATEGORİYE GÖRE RAPOR</button>
-			<hr />
-			<div id="ilc" class="collapse">
-				<c:forEach items="${etapNoListesi}" var="etapNo">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<div class="container-fluid ">
-								<div class="col-sm-10">
-									<button type="button"
-										class="btn btn-info btn-sm float-left pull-left"
-										data-toggle="collapse" data-target="#${etapNo}">${etapNo}.
-										ETAP</button>
-								</div>
-								<div class="col-sm-2">
-									<a href=" ./xlsxExport?ilce=${etapNo}" class="float-left"><img
-										alt="Excel Report" class="rounded" width="35px"
-										src="<c:url value='/assets/images/xlsx-3.png'/>"></a>
-								</div>
-							</div>
-						</div>
-						<div class="panel-body">
-							<div id="${etapNo}"
-								class="collapse  table-responsive text-centered  ${etapNo}">
-								<table
-									class="table table-sm table-bordered table-hover bg-default "
-									id="tr${etapNo}">
-									<tr class="baslik">
-										<th align="center">PROJE ADI</th>
-										<th align="center">PROJE ADETİ</th>
-									</tr>
-									<c:set var="i" value="0"></c:set>
-									<c:forEach items="${tumEkonomikYatirimListesi }" var="yatirim">
-										<c:if test="${yatirim.etapNo == etapNo }">
-											<c:if test="${fn:contains(yatirim.projeAdi,'PERVANE') }">
-												<c:set var="i" value="${i+1}">
-												</c:set>
-											</c:if>
-										</c:if>
-									</c:forEach>
-									<c:if test="${i ne 0 }">
-										<tr>
-											<td>PERVANE</td>
-											<td>${i}</td>
-										</tr>
-									</c:if>
-								</table>
-							</div>
-						</div>
-					</div>
-				</c:forEach>
-			</div>
-		</div>
-
-
 	</div>
 	<div class="container-fluid ekonomikRapor">
 		<div class="container col-sm-12">
@@ -841,7 +764,6 @@ jq(document).ready(function(){
 										style="padding: 110px 0px; text-align: center; font-size: 15px;">${proje }</td>
 									<td><c:forEach items="${ilceler}" var="ilce">
 											<table class="">
-
 												<tr>
 													<td style="font-size: 15px;">${ilce}</td>
 												</tr>
@@ -852,8 +774,7 @@ jq(document).ready(function(){
 												<table class="">
 													<tr>
 														<c:set var="j" value="0"></c:set>
-														<c:forEach items="${tumEkonomikYatirimListesi }"
-															var="yatirim">
+														<c:forEach items="${tumListe }" var="yatirim">
 															<c:if test="${yatirim.projeAdi eq proje  }">
 																<c:if test="${yatirim.etapNo eq no }">
 																	<c:if test="${yatirim.ilce.isim eq ilce  }">
@@ -865,10 +786,8 @@ jq(document).ready(function(){
 														</c:forEach>
 														<td style="font-size: 15px; ${j eq 0 ? '':'color:red;'}"><span
 															class="${fn:replace(proje,' ', '')}${fn:replace(ilce,' ', '')} ${fn:replace(proje,' ', '')}${no}">${j}</span></td>
-
 													</tr>
 												</table>
-
 											</c:forEach></td>
 									</c:forEach>
 									<td><c:forEach items="${ilceler}" var="ilce">
@@ -881,15 +800,12 @@ jq(document).ready(function(){
 																	.ready(
 																			function() {
 																				satirToplam(
-																						'${fn:replace(proje,' ', '')}',
-																						'${fn:replace(ilce,' ', '')}'
-																						);
+																						"${fn:replace(proje,' ', '')}",
+																						"${fn:replace(ilce,' ', '')}");
 																			});
 														</script></td>
-
 												</tr>
 											</table>
-
 										</c:forEach></td>
 								</tr>
 								<tr>
@@ -898,16 +814,18 @@ jq(document).ready(function(){
 										<td style="font-size: 15px;"><span
 											id="${fn:replace(proje,' ', '')}${no}"></span> <script
 												type="text/javascript">
-															jq(document)
-																	.ready(
-																			function() {
-																				sutunToplam(
-																						'${fn:replace(proje,' ', '')}','${no}');});
-														</script></td>
+												jq(document)
+														.ready(
+																function() {
+																	sutunToplam(
+																			"${fn:replace(proje,' ', '')}",
+																			"${no}");
+																});
+											</script></td>
 									</c:forEach>
 									<td style="font-size: 15px; color: red;"><c:set var="k"
-											value="0"></c:set> <c:forEach
-											items="${tumEkonomikYatirimListesi }" var="yatirim">
+											value="0"></c:set> <c:forEach items="${tumListe }"
+											var="yatirim">
 											<c:if test="${yatirim.projeAdi eq proje  }">
 												<c:set var="k" value="${k+1}">
 												</c:set>
