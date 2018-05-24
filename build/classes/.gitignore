@@ -1,4 +1,8 @@
+/araclar/
 /controllers/
+/.gitignore
+/chat/
 /dao/
 /forms/
 /service/
+/validator/

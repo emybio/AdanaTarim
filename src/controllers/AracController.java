@@ -127,12 +127,12 @@ public class AracController {
 
 		download = "";
 		dosyaDurumu = null;
-		if (id != null) {
+		if (id != null) {// giriş yapılmışsa
 
 			if (kullanici.getRoles().getRollAdi().equals(araclar.RolesEnum.ROLE_SUPER_ADMIN.toString())
 					|| kullanici.getRoles().getRollAdi().equals(araclar.RolesEnum.ROLE_AUTHORIZED_USER.toString())
 					|| kullanici.getRoles().getRollAdi().equals(araclar.RolesEnum.ROLE_ADMIN.toString())) {
-
+				// kullanici yetkili biriyse
 				if (gorevBulCikisListesi != null) {
 					model.put("aracCikisListesi", gorevBulCikisListesi);
 
@@ -142,7 +142,10 @@ public class AracController {
 
 				model.put("kullaniciListesi", aracService.cikisYapanPersonelListesi());
 
-			} else {
+			} else
+			// kullanici yetkili değilse
+			{
+				System.out.println("arac control  yetkili değil");
 				model.put("kullaniciListesi2", kullaniciService.kullanGetir(id));
 				if (donem != "bos") {
 
@@ -154,20 +157,6 @@ public class AracController {
 						model.put("aracCikisListesi", gorevBulCikisListesi);
 					} else {
 
-						// for (int i = 0; i <
-						// aracService.kullaniciyaGoreCikisListesi(id).size();
-						// i++)
-						// {
-						//
-						// for (int j = 0; j <
-						// aracService.kullaniciyaGoreCikisListesi(id).get(i).getKullaniciList()
-						// .size(); j++) {
-						// System.out.println("*****************************************");
-						// System.out.println(aracService.kullaniciyaGoreCikisListesi(id).get(i).getKullaniciList()
-						// .get(j).getAdi());
-						// System.out.println("*****************************************");
-						// }
-						// }
 						model.put("aracCikisListesi", aracService.kullaniciyaGoreCikisListesi(id));
 					}
 
@@ -549,10 +538,17 @@ public class AracController {
 			model.put("aracCikisListesi", cikisListesi1);
 			if (donemAy != null) {
 				donem = donemAy.toString();
+				model.put("arac", new Arac());
+				// return "AraziCikis/AracTakip";
+				return "redirect:/arazi-cikislari/araziCikislari";
+			} else {
+				model.put("aylar", aracService.donemAyGetir());
+				model.put("yillar", aracService.donemYilGetir());
+				model.put("aracCikisListesi", cikisListesi1);
+				model.put("title", "Toplam Çıkış");
+				return "Raporlar/ToplamAraziCikis";
 			}
-			model.put("arac", new Arac());
-			// return "AraziCikis/AracTakip";
-			return "redirect:/arazi-cikislari/araziCikislari";
+
 		} else {
 
 			if (id == 1 || id == 7 || id == 9) {

@@ -166,24 +166,6 @@ public class Genel {
 		return kanGruplari;
 	}
 
-	@SuppressWarnings("rawtypes")
-	public static Map aylar() {
-		Map<String, String> aylar = new HashMap<String, String>();
-		aylar.put("11", "KasÄ±m");
-		aylar.put("01", "Ocak");
-		aylar.put("02", "Å�ubat");
-		aylar.put("03", "Mart");
-		aylar.put("04", "Nisan");
-		aylar.put("05", "MayÄ±s");
-		aylar.put("06", "Haziran");
-		aylar.put("07", "Temmuz");
-		aylar.put("08", "AÄŸustos");
-		aylar.put("09", "EylÃ¼l");
-		aylar.put("10", "Ekim");
-		aylar.put("12", "AralÄ±k");
-		return aylar;
-	}
-
 	public static <K, V> void printMap(Map<K, V> map) {
 		for (Map.Entry<K, V> entry : map.entrySet()) {
 			System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue());
@@ -533,6 +515,27 @@ public class Genel {
 		// System.err.println(treeMap);
 		return treeMap;
 
+	}
+
+	@SuppressWarnings("rawtypes")
+	public static Map aylar() {
+		Map<Integer, String> aylar = new LinkedHashMap<Integer, String>();
+
+		aylar.put(1, "Ocak");
+		aylar.put(2, "Şubat");
+		aylar.put(3, "Mart");
+		aylar.put(4, "Nisan");
+		aylar.put(5, "Mayıs");
+		aylar.put(6, "Haziran");
+		aylar.put(7, "Temmuz");
+		aylar.put(8, "Ağustos");
+		aylar.put(9, "Eylül");
+		aylar.put(10, "Ekim");
+		aylar.put(11, "Kasım");
+		aylar.put(12, "Aralık");
+
+		Map<Integer, String> treeMap = new TreeMap<Integer, String>(aylar);
+		return treeMap;
 	}
 
 	@SuppressWarnings("rawtypes")

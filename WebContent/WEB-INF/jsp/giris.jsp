@@ -53,7 +53,7 @@
 	<c:if test="${empty cookie.id.value }">
 		<div class="text-center">
 			<div class="container">
-				<hr>
+				<hr width="500px;">
 				<form class="form-signin"
 					action="${pageContext.request.contextPath }/login" method="post"
 					autocomplete="off">
@@ -74,7 +74,7 @@
 			</div> -->
 					<button class="btn btn-lg btn-primary btn-block" type="submit">Giriş</button>
 				</form>
-				<hr width="500px;">
+				<hr>
 			</div>
 		</div>
 		<!-- /container -->

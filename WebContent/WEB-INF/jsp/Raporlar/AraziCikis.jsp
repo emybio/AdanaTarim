@@ -54,9 +54,7 @@ table tbody tr td {
 			<div class="container-fluid">
 
 				<div id="container">
-					<c:if test="${!empty page.donemAy }">
-
-
+			
 						<table>
 							<thead>
 								<tr>
@@ -208,55 +206,11 @@ table tbody tr td {
 								</tr>
 							</tfoot>
 						</table>
-					</c:if>
-
-					<c:if test="${empty page.donemAy }">
-
-						<c:set var="comment_value" value="${aracCikisListesi}"></c:set>
-						<table class="table">
-							<tbody>
-								<tr>
-									<td colspan="3">Arazi Gün Sayısı <b>
-											${fn:length(comment_value)}</b> gün
-									</td>
-
-								</tr>
-								<tr>
-									<th>Gün</th>
-									<th>Gidilen yer</th>
-									<th>Gidiş Saati</th>
-									<th>Geliş Saati</th>
-									<th>Araç Plakası</th>
-									<th>Yapılan İşin Özeti</th>
-								</tr>
-								<c:forEach items="${aracCikisListesi}" var="cikis">
-									<c:set var="string1" value="${cikis.tarih}" />
-									<c:set var="string2" value="${fn:split(string1, '-')}" />
-									<c:set var="lastString"
-										value="${string2[fn:length(string2)-1]}" />
-									<tr>
-										<td><c:out value="${cikis.tarih }"></c:out></td>
-										<td>${cikis.ilce.isim}-${cikis.mahalle.isim}</td>
-										<td>${cikis.cikisSaati}</td>
-										<td>${cikis.girisSaati}</td>
-										<c:if test="${empty cikis.resmiPlaka}">
-											<td>${cikis.ozelPlaka}</td>
-										</c:if>
-
-										<c:if test="${!empty cikis.resmiPlaka }">
-											<td>${cikis.resmiPlaka}</td>
-										</c:if>
-										<td>${cikis.aciklama}</td>
-									<tr>
-								</c:forEach>
-
-
-							</tbody>
-						</table>
+				
 						<br>
 						<br>
 						<br>
-					</c:if>
+				
 
 
 

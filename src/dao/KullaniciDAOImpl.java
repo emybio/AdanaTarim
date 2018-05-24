@@ -72,7 +72,7 @@ public class KullaniciDAOImpl implements KullaniciDAO {
 		// projList.add(Projections.property("ePosta"));
 		// critKullanici.setProjection(Projections.distinct(projList));
 
-		System.out.println("DAOImpl kullaniciGetir: " + critKullanici.list().get(0));
+		System.out.println("Kullanici DAOImpl kullaniciGetir: " + critKullanici.list().get(0));
 		return critKullanici.list();
 	}
 
