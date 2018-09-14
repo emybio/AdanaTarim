@@ -16,6 +16,10 @@ import forms.kirsalkalkinma.gencciftci.GencCiftci;
 
 @SuppressWarnings("unchecked")
 public class ExcelBuilder extends AbstractXlsxView {
+	@SuppressWarnings("unused")
+
+	String[] kapasiteBirim = { "lt", "da", "buyukbas", "kucukbas", "ton", "adet/yýl", "kw/h", "kg", "kg/Yýl", "Ton/Yýl",
+			"m&sup2;" };
 
 	@Override
 	protected void buildExcelDocument(Map<String, Object> model, Workbook workbook, HttpServletRequest request,
@@ -39,6 +43,8 @@ public class ExcelBuilder extends AbstractXlsxView {
 			header.createCell(9).setCellValue("Ýstihdam");
 			header.createCell(10).setCellValue("Durum");
 
+			int lt = 0, da = 0, buyukbas = 0, kucukbas = 0, ton = 0, adetYýl = 0, kwh, kg, kgYýl, TonYýl = 0, m;
+
 			int rowNum = 1;
 			for (EkonomikYatirim yatirim : yatirimList) {
 				Row row = sheet.createRow(rowNum++);
@@ -50,12 +56,28 @@ public class ExcelBuilder extends AbstractXlsxView {
 				row.createCell(4).setCellValue(yatirim.getProjeAdi());
 				row.createCell(5).setCellValue(yatirim.getProjeBedeli());
 				row.createCell(6).setCellValue(yatirim.getHibeTutari());
+
+				for (String birim : kapasiteBirim)
+					if (yatirim.getKapasiteBirim().equals(birim)) {
+
+						TonYýl += yatirim.getKapasite();
+					}
 				row.createCell(7).setCellValue(yatirim.getKapasite());
+
 				row.createCell(8).setCellValue(yatirim.getKapasiteBirim());
 				row.createCell(9).setCellValue(yatirim.getIstihdam());
 				row.createCell(10).setCellValue(yatirim.getDurum().getDurumAdi());
+
 			}
 
+			Row row = sheet.createRow(rowNum);
+			row.createCell(0).setCellValue("Toplam Proje Sayýsý : " + --rowNum);
+
+			for (int i = 0; i < kapasiteBirim.length; i++) {
+
+				row.createCell(0).setCellValue("Toplam " + kapasiteBirim[i] + --rowNum);
+				row = sheet.createRow(++i);
+			}
 		}
 
 		if (gencCiftciList != null) {

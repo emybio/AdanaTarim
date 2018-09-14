@@ -199,11 +199,11 @@ jq(document).ready( function () {
 		
 		 jq('[data-toggle="tooltip"]').tooltip();   
 		//jq('table').css({"opacity":".0"}); 
-		jq("#aracListesi").css({
+	/*	jq("#aracListesi").css({
 			"height" : "307px",//find("tr:gt(6)")
 			"overflow-y" : "auto",
 			"display" : "block"
-		});
+		});*/
 		
 		jq(' .personelGoster').click(function() {
 			jq(this).toggle(1000);
