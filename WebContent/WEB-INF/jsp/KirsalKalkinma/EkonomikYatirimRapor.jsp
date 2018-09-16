@@ -218,14 +218,14 @@
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<div class="container-fluid ">
-								<div class="col-sm-10">
+								<div class="col-md-5">
 
 									<button type="button"
 										class="btn btn-info btn-sm float-left pull-left"
 										data-toggle="collapse" data-target="#${ilce}">${ilce}
 									</button>
 								</div>
-								<div class="col-sm-2">
+								<div class="col-md-2">
 									<a href=" ./xlsxExport?ilce=${ilce}" class="float-left"><img
 										alt="Excel Report" class="rounded" width="35px"
 										src="<c:url value='/assets/images/xlsx-3.png'/>"></a>

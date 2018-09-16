@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 
+import araclar.Genel;
 import forms.Kullanici;
 import forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirim;
 import service.YerEklemeService;
@@ -167,7 +168,7 @@ public class EkonomikYatirimController {
 			@RequestParam(value = "ilce", required = false) String ilce) throws UnsupportedEncodingException {
 		response.setContentType("application/vnd.ms-excel");
 		if (null != a) {
-
+			Genel.raporTuru = "etapNo'ya Göre Rapor";
 			response.setHeader("Content-disposition",
 					"attachment; filename=" + a + ".Etap_" + "Yatirimlar_Listesi" + ".xlsx");
 		} else if (null != ilce) {
