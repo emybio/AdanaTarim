@@ -8,6 +8,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -151,7 +153,17 @@ public class EkonomikYatirimController {
 	}
 
 	@RequestMapping(value = "/ekonomikYatirimRapor")
-	public String ekonomikYatirimRapor(ModelMap model) {
+	public String ekonomikYatirimRapor(@CookieValue(value = "id", required = false) Long id, ModelMap model) {
+
+		if (id == null) {
+
+			// JOptionPane.showMessageDialog(null, "Mesaj");
+			// JOptionPane optionPane = new JOptionPane("Lütfen giriþ yapýnýz...");
+			// JDialog dialog = optionPane.createDialog("Uyarý");
+			// dialog.setAlwaysOnTop(true); //
+			// dialog.setVisible(true);
+			return "redirect:/anasayfa";
+		}
 
 		model.addAttribute("title", "Ekonomik Rapor");
 		model.put("tumListe", ekonomikYatirimService.tumYatirimListesi());

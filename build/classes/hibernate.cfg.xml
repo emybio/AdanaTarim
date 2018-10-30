@@ -16,7 +16,7 @@
 		<mapping class="forms.UserRoles" />
 		<mapping class="forms.AracTalep" />
 		<mapping class="forms.TumTablolar" />
-
+		<mapping class="forms.FileUpload" />
 
 		<!--KIRSAL KALKINMA BAŞLANGIÇ -->
 		<mapping class="forms.kirsalkalkinma.ekonomikyatirim.EkonomikYatirim" />

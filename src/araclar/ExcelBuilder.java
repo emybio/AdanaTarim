@@ -23,13 +23,12 @@ public class ExcelBuilder extends AbstractXlsxView {
 	@Override
 	protected void buildExcelDocument(Map<String, Object> model, Workbook workbook, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-	
-		
+
 		System.out.println("rapor turu : " + Genel.raporTuru);
 		List<EkonomikYatirim> yatirimList = (List<EkonomikYatirim>) model.get("yatirimlar");
 		List<GencCiftci> gencCiftciList = (List<GencCiftci>) model.get("gencCiftci");
 		int rowNum = 1, lt = 0, da = 0, buyukbas = 0, kucukbas = 0, ton = 0, adetYýl = 0, kwh = 0, kg = 0, kgYýl = 0,
-				TonYýl = 0, m = 0, bilinmeyen = 0, istihdam = 0;
+				TonYýl = 0, m = 0, bilinmeyen = 0, istihdam = 0, yatirimTutari = 0, hibeTutari = 0;
 
 		if (yatirimList != null) {
 			Sheet sheet = workbook.createSheet("Ekonomik Yatýrýmlar");
@@ -61,6 +60,8 @@ public class ExcelBuilder extends AbstractXlsxView {
 				row.createCell(9).setCellValue(yatirim.getIstihdam());
 				row.createCell(10).setCellValue(yatirim.getDurum().getDurumAdi());
 				istihdam += yatirim.getIstihdam();
+				hibeTutari += yatirim.getHibeTutari();
+				yatirimTutari += yatirim.getProjeBedeli();
 				switch (yatirim.getKapasiteBirim()) {
 				case "lt":
 					lt += yatirim.getKapasite();
@@ -106,6 +107,8 @@ public class ExcelBuilder extends AbstractXlsxView {
 			System.out.println("rowNum : " + rowNum);
 			row.createCell(0).setCellValue("Toplam Proje Sayýsý : " + --rowNum);
 			System.out.println("rowNum : " + rowNum);
+			Row rowYatirimTutari = sheet.createRow(rowNum);
+			Row rowHibeTutari = sheet.createRow(rowNum);
 			rowNum += 2;
 
 			Row rowIstihdam = sheet.createRow(rowNum);
@@ -121,7 +124,11 @@ public class ExcelBuilder extends AbstractXlsxView {
 			Row rowTonYýl = sheet.createRow(++rowNum);
 			Row rowm = sheet.createRow(++rowNum);
 			Row rowbilinmeyen = sheet.createRow(++rowNum);
+			
 
+			row.createCell(5)
+					.setCellValue(String.format("%,8d%n", yatirimTutari));
+			row.createCell(6).setCellValue(String.format("%,8d%n", hibeTutari));
 			rowIstihdam.createCell(0).setCellValue("Toplam Ýstihdam : " + istihdam);
 			rowlt.createCell(0).setCellValue("Toplam Litre : " + String.format("%,8d%n", lt));
 			rowda.createCell(0).setCellValue("Toplam Dekar : " + String.format("%,8d%n", da));
