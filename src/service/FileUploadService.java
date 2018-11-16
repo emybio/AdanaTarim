@@ -10,4 +10,6 @@ public interface FileUploadService {
 	public List<FileUpload> getAllList();
 
 	public FileUpload getFileById(Long id);
+
+	public void delete(Long id);
 }

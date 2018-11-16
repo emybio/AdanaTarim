@@ -1,19 +1,39 @@
 var jq = jQuery.noConflict();
 
 jq( document ).ready( () => {
+	 jq("#btnHideFiles").hide();
+	 
+	 
+if(	 jq("#listFiles").html("")){
+	
+	 jq("#btnGetFiles").show("2000");
+	 jq("#btnHideFiles").hide("2000");
+	
+};
+	 
+	 
+	jq("#btnHideFiles").click( (event) => {
+		 event.preventDefault();
+		 jq("#listFiles").fadeOut("slow").html("");
+		 jq("#btnGetFiles").show("2000");
+		 jq("#btnHideFiles").hide("2000");
+	});
+
 	
 	// var url= "${pageContext.request.contextPath}"
 	// var url = window.location;
 	// var contextPath='<%=request.getContextPath()%>';
 	
+	
 	// GET REQUEST
-	jq("#btnGetFiles").click( (event) => {
-		event.preventDefault();
+		jq("#btnGetFiles").click( (event) => {
+	 event.preventDefault();
 		ajaxGet();
 	});
 	
 	// DO GET
 	function ajaxGet(){
+		
 		jq.ajax({
 			type : "GET",
 			dataType: "json",	
@@ -25,14 +45,14 @@ jq( document ).ready( () => {
 				/*
 				 * render list of files
 				 */
-				jq("#listFiles").append('<ul style="background-color:blue;">');
 				jq.each(data, (index, file) => {
-					
-					jq("#listFiles").append('<li><a style="text-decoration:none;font-size:20px;" href=' +url +'/api/file/' + file.id	 +'>' + file.dosyaAdi + '    &nbsp;&nbsp; <i class="fa fa-download" aria-hidden="true"></i></a></li>');
-				});
-				jq("#listFiles").append('</ul>');
 				
-				jq("#btnGetFiles").text("Listeyi Kaldır");
+					jq("#listFiles").hide().append('<tr id="'+file.id+'"><td><a style="text-decoration:none;font-size:20px;" href=' +url +'/api/file/' + file.id +'>' + file.dosyaAdi + ' &nbsp;&nbsp; <i class="fa fa-download" aria-hidden="true"></i></a></td><td><a  style="text-decoration:none;font-size:20px;" href=javascript:ajaxDelete('  + file.id +')>SİL</td></tr>').fadeIn("easing");
+				});
+				// jq("#listFiles").append('</table>');
+				
+				jq("#btnGetFiles").hide("2000");
+				 jq("#btnHideFiles").show("2000");
 			},
 			error : (err) => {
 				
@@ -40,4 +60,17 @@ jq( document ).ready( () => {
 			}
 		});	
 	}  
+	
+		// "<tr id='satirNo'"+file.id+"><td><a
+		// style='text-decoration:none;font-size:20px;' href=" +url
+		// +"/api/file/" + file.id +">" + file.dosyaAdi + " &nbsp;&nbsp; <i
+		// class='fa fa-download' aria-hidden='true'></i></a></td></tr>"
+	
+ 
+	
+	
+	
+	
+	
+	
 })        

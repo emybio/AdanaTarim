@@ -26,12 +26,12 @@ public class FileUploadController {
 	@Autowired
 	FileUploadDAO fileRepository;
 
-	@RequestMapping("/welcomepage")
+	@RequestMapping("/dosyayukle")
 	public String welcomepage(ModelMap model) {
 
 		model.put("title", "Adana Ýl Tarým");
 
-		return "welcomepage";
+		return "dosyaYukle";
 	}
 
 	@RequestMapping("/upload")
@@ -54,7 +54,9 @@ public class FileUploadController {
 				filemode = new FileUpload(file.getOriginalFilename(), file.getContentType(), file.getBytes());
 			if (file.getContentType().equals("application/pdf") || file.getContentType().equals("application/msword")
 					|| file.getContentType()
-							.equals("application/vnd.openxmlformats-officedocument.wordprocessingml.document"))
+							.equals("application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+					|| file.getContentType()
+							.equals("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))
 
 			{
 				fileRepository.upload(filemode);
@@ -103,4 +105,11 @@ public class FileUploadController {
 		return "dosya indiriliyor :" + id;
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "/api/file/delete/{id}", method = RequestMethod.POST)
+	public void delete(@PathVariable Long id) {
+
+		fileRepository.delete(id);
+
+	}
 }

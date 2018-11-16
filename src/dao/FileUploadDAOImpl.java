@@ -38,4 +38,11 @@ public class FileUploadDAOImpl implements FileUploadDAO {
 		return file;
 	}
 
+	@Override
+	@Transactional
+	public void delete(Long id) {
+		sessionFactory.getCurrentSession().delete(getFileById(id));
+
+	}
+
 }

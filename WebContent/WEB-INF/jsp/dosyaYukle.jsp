@@ -11,33 +11,76 @@
 <script type="text/javascript">
 	var url = "${pageContext.request.contextPath}"
 
-	console.log(url);
+	
+	
+	// DO DELETE
+	function ajaxDelete(id){
+		if (confirm(jq("#"+id+" a").first().text()+"silinsin mi ? " )) {
+		jq.ajax({
+			type : "POST",
+			contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+			data : {
+				id : id
+			},
+			url : "./api/file/delete/"+id,
+			success: (data) => {
+				jq("#"+id).fadeOut("slow");
+				
+				if(	 jq("#listFiles").html("")){
+					
+					 jq("#btnGetFiles").show("2000");
+					 jq("#btnHideFiles").hide("2000");
+					
+					
+				};
+				
+				
+			},
+			error : (err) => {
+				
+				jq("#listFiles").html(err.responseText);
+			}
+		});	}
+	} 
 </script>
+
 </head>
 
 <body>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 	<br>
 
 	<div class="container col-sm-offset-4">
 		<div class="row ">
 			<div class="col-sm-6">
-				<h2>Upload MultipartFile to PostgreSQL</h2>
+				<h2>SİSTEME DOSYA YÜKLE</h2>
 				<form method="POST" enctype="multipart/form-data"
 					id="fileUploadForm">
 					<div class="form-group">
-						<label class="control-label" for="uploadfile">Upload File:</label>
-						<input type="file" class="form-control" id="uploadfile"
+						<label class="control-label" for="uploadfile">Yüklenecek
+							Dosya:</label> <input type="file" class="form-control" id="uploadfile"
 							name="uploadfile"></input>
 					</div>
 
 					<button type="submit" class="btn btn-success" id="btnSubmit">Yükle</button>
 					<button type="button" class="btn btn-warning" id="btnGetFiles">Dosyaları
 						Listele</button>
+					<button type="button" class="btn btn-warning" id="btnHideFiles">Listeyi
+						Kaldır</button>
 				</form>
 				<hr />
-				<div id="listFiles"></div>
+
 			</div>
 		</div>
+		<div class="container-fluid col-md-6">
+			<table id="listFiles" class="table table-striped">
+			</table>
+		</div>
+
 	</div>
 
 

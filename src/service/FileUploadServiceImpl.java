@@ -32,4 +32,10 @@ public class FileUploadServiceImpl implements FileUploadService {
 		return fileDAO.getFileById(id);
 	}
 
+	@Override
+	public void delete(Long id) {
+		fileDAO.delete(id);
+
+	}
+
 }
