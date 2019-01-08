@@ -52,20 +52,28 @@ public class FileUploadController {
 			if (file != null)
 				// save file to PostgreSQL
 				filemode = new FileUpload(file.getOriginalFilename(), file.getContentType(), file.getBytes());
-			if (file.getContentType().equals("application/pdf") || file.getContentType().equals("application/msword")
-					|| file.getContentType()
-							.equals("application/vnd.openxmlformats-officedocument.wordprocessingml.document")
-					|| file.getContentType()
-							.equals("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))
 
-			{
-				fileRepository.upload(filemode);
-				// file = null;
-				return "Dosya yükleme basarili! -> dosya adi = " + file.getOriginalFilename();
-			} else
-				return "pdf,word,exel,ppt,txt Formati Disinda Yükleme Yapamazsiniz.Yükleme Yapilan Format : "
-						+ file.getContentType();
-
+			/*
+			 * if (file.getContentType().equals("application/pdf") ||
+			 * file.getContentType().equals("application/msword") || file.getContentType()
+			 * .equals(
+			 * "application/vnd.openxmlformats-officedocument.wordprocessingml.document") ||
+			 * file.getContentType().equals(
+			 * "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") ||
+			 * file.getContentType() .equals(
+			 * "application/vnd.openxmlformats-officedocument.presentationml.presentation"))
+			 * 
+			 * // application/vnd.openxmlformats-officedocument.presentationml.presentation
+			 * {
+			 */
+			fileRepository.upload(filemode);
+			// file = null;
+			return "Dosya yükleme basarili! -> dosya adi = " + file.getOriginalFilename();
+			/*
+			 * } else return
+			 * "pdf,word,exel,ppt,txt Formati Disinda Yükleme Yapamazsiniz.Yükleme Yapilan Format : "
+			 * + file.getContentType();
+			 */
 		} catch (Exception e) {
 			return "FAIL! Maybe You had uploaded the file before or the file's size > 500KB";
 		}

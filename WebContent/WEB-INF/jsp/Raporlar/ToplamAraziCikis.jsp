@@ -48,6 +48,16 @@ table tbody tr td {
 </head>
 
 <body>
+	<script type="text/javascript">
+		var jq = jQuery.noConflict();
+
+		jq(document).ready(function() {
+
+			
+			
+			
+		})
+	</script>
 	<c:set var="list" value="${aracCikisListesi}"></c:set>
 	<c:set var="i" value="0"></c:set>
 	<c:set var="listSize" value="0"></c:set>
@@ -56,8 +66,6 @@ table tbody tr td {
 		<div class="container col-md-offset-4">
 			<div class="container-fluid">
 				<div id="container">
-
-
 					<c:choose>
 						<c:when test="${cookie.id.value ne 1}">
 							<c:if test="${param.id eq cookie.id.value }">
@@ -66,14 +74,10 @@ table tbody tr td {
 										<tr>
 											<td>AYLAR</td>
 											<td>GÜN SAYISI</td>
-
 										</tr>
-
 										<c:forEach items="${aylar }" varStatus="sira" var="a">
-
 											<tr>
 												<td>${a}.Ay</td>
-
 												<c:forEach items="${aracCikisListesi }" varStatus="sira"
 													var="l">
 													<c:if test="${a eq l.donemAy }">
@@ -81,7 +85,8 @@ table tbody tr td {
 														<c:set var="listSize" value="${listSize+1 }"></c:set>
 													</c:if>
 												</c:forEach>
-												<td>${i }</td>
+												<td class="ilkUcAy">${i }</td>
+
 											</tr>
 											<c:set var="i" value="0"></c:set>
 										</c:forEach>
@@ -92,21 +97,18 @@ table tbody tr td {
 								</table>
 							</c:if>
 						</c:when>
-
 						<c:when test="${cookie.id.value eq 1}">
 							<table class="table table-bordered table-hover bg-danger">
 								<tbody>
 									<tr>
 										<td>AYLAR</td>
 										<td>GÜN SAYISI</td>
-
+										<td>3 AYLIK</td>
+										<td>6 AYLIK</td>
 									</tr>
-
 									<c:forEach items="${aylar }" varStatus="sira" var="a">
-
 										<tr>
 											<td>${a}.Ay</td>
-
 											<c:forEach items="${aracCikisListesi }" varStatus="sira"
 												var="l">
 												<c:if test="${a eq l.donemAy }">
@@ -114,7 +116,7 @@ table tbody tr td {
 													<c:set var="listSize" value="${listSize+1 }"></c:set>
 												</c:if>
 											</c:forEach>
-											<td>${i }</td>
+											<td class="ucAylik">${i }</td>
 										</tr>
 										<c:set var="i" value="0"></c:set>
 									</c:forEach>
@@ -125,7 +127,6 @@ table tbody tr td {
 							</table>
 						</c:when>
 					</c:choose>
-
 				</div>
 			</div>
 		</div>
