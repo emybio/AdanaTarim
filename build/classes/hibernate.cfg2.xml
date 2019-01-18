@@ -24,7 +24,8 @@
 		<mapping class="forms.Arac" />
 		<mapping class="forms.UserRoles" />
 		<mapping class="forms.AracTalep" />
-		<mapping class="forms.TumTablolar" />
+		<!-- <mapping class="forms.TumTablolar" /> -->
+		<mapping class="forms.FileUpload" />
 
 
 		<!--KIRSAL KALKINMA BAŞLANGIÇ -->

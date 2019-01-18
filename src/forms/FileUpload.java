@@ -2,9 +2,13 @@ package forms;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -22,10 +26,14 @@ public class FileUpload {
 
 	@Column(name = "dosya_tanimi")
 	private String dosyaTanimi;
-	
+
 	@Lob
 	@Column(name = "file_data")
 	private byte[] fileData;
+
+//	@OneToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "kullanici_id")
+//	public Kullanici kullanici;
 
 	public Long getId() {
 		return id;
@@ -59,11 +67,15 @@ public class FileUpload {
 		this.fileData = fileData;
 	}
 
+	
+
 	public FileUpload(String dosyaAdi, String dosyaTanimi, byte[] fileData) {
 		this.dosyaAdi = dosyaAdi;
 		this.dosyaTanimi = dosyaTanimi;
 		this.fileData = fileData;
 	}
-	
-public FileUpload() {}	
+
+	public FileUpload() {
+	}
+
 }

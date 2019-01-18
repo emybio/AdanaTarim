@@ -14,8 +14,8 @@ if(	 jq("#listFiles").html("")){
 	 
 	jq("#btnHideFiles").click( (event) => {
 		 event.preventDefault();
-		 jq("#listFiles").fadeOut("slow").html("");
-		 jq("#btnGetFiles").show("2000");
+		 jq("#listFile").fadeOut("slow").html("");
+		 jq("#btnGetFiles").removeClass("disabled").text("Dosyaları Listele").show("2000");
 		 jq("#btnHideFiles").hide("2000");
 	});
 
@@ -28,30 +28,34 @@ if(	 jq("#listFiles").html("")){
 	// GET REQUEST
 		jq("#btnGetFiles").click( (event) => {
 	 event.preventDefault();
+	
+	 jq("#btnGetFiles").text("Dosyalar listeleniyor, bekleyiniz...").addClass("disabled");
+	
 		ajaxGet();
 	});
 	
 	// DO GET
 	function ajaxGet(){
-		
+		alert("get request..");
 		jq.ajax({
 			type : "GET",
 			dataType: "json",	
 			url : "./api/file/all",
 			success: (data) => {
 				// clear old data
-			jq("#listFiles").html("");
-				
+			jq("#listFile").html("");
+			
 				/*
 				 * render list of files
 				 */
 				jq.each(data, (index, file) => {
 				
-					jq("#listFiles").hide().append('<tr id="'+file.id+'"><td><a style="text-decoration:none;font-size:20px;" href=' +url +'/api/file/' + file.id +'>' + file.dosyaAdi + ' &nbsp;&nbsp; <i class="fa fa-download" aria-hidden="true"></i></a></td><td><a  style="text-decoration:none;font-size:20px;" href=javascript:ajaxDelete('  + file.id +')>SİL</td></tr>').fadeIn("easing");
+					jq("#listFile").append('<tr id="'+file.id+'"><td><a  href=' +url +'/api/file/' + file.id +'>' + file.dosyaAdi + ' &nbsp;&nbsp; <i class="fa fa-download" aria-hidden="true"></i></a></td><td><a   href=javascript:ajaxDelete('  + file.id +')>SİL</td></tr>').fadeIn("easing");
 				});
-				// jq("#listFiles").append('</table>');
 				
-				jq("#btnGetFiles").hide("2000");
+				jq("#listFile").addClass("table table-striped")
+				
+				 jq("#btnGetFiles").hide("2000");
 				 jq("#btnHideFiles").show("2000");
 			},
 			error : (err) => {

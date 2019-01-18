@@ -79,6 +79,7 @@ public class AracController {
 	public List<Arac> gorevBulCikisListesi = null;
 	public String donem = "bos";
 	private String tusYazisi = "Kaydet";
+	private int formdaYazilacakDonemAy = 0;
 
 	@SuppressWarnings("unused")
 	@RequestMapping(value = "/arac-islemleri", method = RequestMethod.GET)
@@ -477,31 +478,31 @@ public class AracController {
 	@RequestMapping(value = "/araziCikislari")
 	public String raporAlmaSayasi(ModelMap model) {
 		switch (donem) {
-		case "1":
+		case "01":
 			model.put("aylar", "Ocak");
 			break;
-		case "2":
+		case "02":
 			model.put("aylar", "Şubat");
 			break;
-		case "3":
+		case "03":
 			model.put("aylar", "Mart");
 			break;
-		case "4":
+		case "04":
 			model.put("aylar", "Nisan");
 			break;
-		case "5":
+		case "05":
 			model.put("aylar", "Mayıs");
 			break;
-		case "6":
+		case "06":
 			model.put("aylar", "Haziran");
 			break;
-		case "7":
+		case "07":
 			model.put("aylar", "Temmuz");
 			break;
-		case "8":
+		case "08":
 			model.put("aylar", "Ağustos");
 			break;
-		case "9":
+		case "09":
 			model.put("aylar", "Eylül");
 			break;
 		case "10":
@@ -519,9 +520,12 @@ public class AracController {
 
 			break;
 		}
+
+		model.put("donemAy", formdaYazilacakDonemAy);
 		model.put("title", "Arazi Çıkışları");
 		model.put("aracCikisListesi", cikisListesi1);
 		model.put("kullanici", raporAlinanPersonelBilgileri);
+
 		return "Raporlar/AraziCikis";
 	}
 
@@ -539,6 +543,8 @@ public class AracController {
 			if (donemAy != null) {
 				donem = donemAy.toString();
 				model.put("arac", new Arac());
+				formdaYazilacakDonemAy = donemAy;
+
 				// return "AraziCikis/AracTakip";
 				return "redirect:/arazi-cikislari/araziCikislari";
 			} else {

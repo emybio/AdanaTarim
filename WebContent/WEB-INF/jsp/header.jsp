@@ -46,7 +46,7 @@
 				<a class="navbar-brand"
 					href="${pageContext.request.contextPath}/anasayfa"
 					style="background-color: rgba(255, 255, 255, 0.0)"> <img
-					src="<c:url value='/assets/gthbLogo.png'/>" class="user-image"
+					src="<c:url value='/assets/yeni_logo.png'/>" class="user-image"
 					width="20" height="20" />
 				</a>
 			</div>

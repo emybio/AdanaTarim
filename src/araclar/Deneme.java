@@ -30,18 +30,17 @@ public class Deneme {
 
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
-		for(int x=1; x<= 4; x++)
-			System.out.println("44"+x+ "44");
-			  
-		
+		for (int x = 1; x <= 4; x++)
+			System.out.println("44" + x + "44");
 
-
-		//EkonomikYatirimDurumu durum = new EkonomikYatirimDurumu("Başvuru Yapıldı");
-		//EkonomikYatirimDurumu durum1 = new EkonomikYatirimDurumu("Değerlendirme Aşamasında");
-		//EkonomikYatirimDurumu durum2 = new EkonomikYatirimDurumu("Kabul Edildi");
-		//EkonomikYatirimDurumu durum3 = new EkonomikYatirimDurumu("Sözleşme İmzalandı");
-		//EkonomikYatirimDurumu durum4 = new EkonomikYatirimDurumu("Proje Tamamlandı");
-
+		// EkonomikYatirimDurumu durum = new EkonomikYatirimDurumu("Başvuru Yapıldı");
+		// EkonomikYatirimDurumu durum1 = new EkonomikYatirimDurumu("Değerlendirme
+		// Aşamasında");
+		// EkonomikYatirimDurumu durum2 = new EkonomikYatirimDurumu("Kabul Edildi");
+		// EkonomikYatirimDurumu durum3 = new EkonomikYatirimDurumu("Sözleşme
+		// İmzalandı");
+		// EkonomikYatirimDurumu durum4 = new EkonomikYatirimDurumu("Proje Tamamlandı");
+	
 		// EkonomikYatirim_Ust_Kategori ustK = new
 		// EkonomikYatirim_Ust_Kategori("Ekonomik Yatırımlar");
 		// EkonomikYatirim_Ust_Kategori ustK1 = new
@@ -61,10 +60,9 @@ public class Deneme {
 		// EkonomikYatirim_Kategori kat6 = new EkonomikYatirim_Kategori("Bilişim
 		// Sistemleri", ustK1);
 
-		
-	//	SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg2.xml").buildSessionFactory();
+		SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg2.xml").buildSessionFactory();
 
-	//	Session session = sessionFactory.openSession();
+		Session session = sessionFactory.openSession();
 		// EKONOMİK YATIRIM DURUM INSERT
 		// session.save(durum);
 		// session.save(durum1);
@@ -81,15 +79,11 @@ public class Deneme {
 		// session.save(kat4);
 		// session.save(kat5);
 		// session.save(kat6);
-		
-		
-		
-		
-		
-		//session.beginTransaction();
-		//System.out.println();
-		//session.getTransaction().commit();
-		//session.close();
+
+		session.beginTransaction();
+		System.out.println();
+		session.getTransaction().commit();
+		session.close();
 
 	}
 

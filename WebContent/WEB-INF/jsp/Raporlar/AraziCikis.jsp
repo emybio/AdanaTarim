@@ -69,7 +69,7 @@ table thead {
 <body>
 
 
-	<div class="container" style="width: 99%; background-color: white;">
+	<div class="container" style="width: 99%; background-color: white; ">
 
 
 		<div class="row"
@@ -127,9 +127,8 @@ table thead {
 					<%-- <td colspan="6"><b>ADI
 							SOYDI&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b>
 						&nbsp;${kullanici.adi }<br> <b>ÜNVANI&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
-					</b>&nbsp;${kullanici.unvan }<br> <b>ŞUBE
 							ADI&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b>
-						&nbsp;${kullanici.birim}<br> <b>TARİH(AY/YIL)&nbsp;: </b>&nbsp;.../2019</td> --%>
+			  			&nbsp;${kullanici.birim}<br> <b>TARİH(AY/YIL)&nbsp;: </b>&nbsp;.../2019</td> --%>
 
 					<td colspan="6"
 						style="padding-left: 20px; font-weight: bold; font-family: 'Times New Roman', Times, serif; font-size: 12px;">
@@ -139,7 +138,7 @@ table thead {
 					</b>&nbsp;${kullanici.unvan }<br> <b>ŞUBE
 							ADI&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b>
 						&nbsp;${kullanici.birim}<br> <b>TARİH(AY/YIL)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
-					</b>&nbsp;.../2019
+					</b>&nbsp;0${donemAy}/2019
 					</td>
 				</tr>
 				<tbody style="text-align: center;">
@@ -260,5 +259,5 @@ table thead {
 			</table>
 		</div>
 	</div>
-<div>assdsdsa</div>
+
 </body>

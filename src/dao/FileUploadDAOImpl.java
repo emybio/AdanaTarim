@@ -27,6 +27,7 @@ public class FileUploadDAOImpl implements FileUploadDAO {
 	@Transactional
 	public List<FileUpload> getAllList() {
 		Criteria getAll = sessionFactory.getCurrentSession().createCriteria(FileUpload.class);
+		
 		return getAll.list();
 	}
 

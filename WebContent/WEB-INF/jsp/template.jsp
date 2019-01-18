@@ -10,7 +10,7 @@
 <meta http-equiv="Content-Type"
 	content="application/vnd.ms-excel; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="shortcut icon" href="<c:url value="/assets/gthbLogo.png"/>" />
+<link rel="shortcut icon" href="<c:url value="/assets/yeni_logo.png"/>" />
 <title>${title}&nbsp;|&nbsp;Adana&nbsp;İl&nbsp;Tarım&nbsp;Müdürlüğü</title>
 
 <!-- <link rel="stylesheet"

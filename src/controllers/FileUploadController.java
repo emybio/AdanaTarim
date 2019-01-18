@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import dao.FileUploadDAO;
 import forms.FileUpload;
+import forms.Kullanici;
 
 @Controller
 public class FileUploadController {
@@ -42,7 +44,7 @@ public class FileUploadController {
 
 	@ResponseBody
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public String upload(@RequestParam("uploadfile") MultipartFile file, HttpServletRequest request,
+	public String upload(@CookieValue(value = "id", required = false) Long id,@RequestParam("uploadfile") MultipartFile file, HttpServletRequest request,
 			HttpServletResponse response) throws UnsupportedEncodingException {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
@@ -53,6 +55,7 @@ public class FileUploadController {
 				// save file to PostgreSQL
 				filemode = new FileUpload(file.getOriginalFilename(), file.getContentType(), file.getBytes());
 
+			
 			/*
 			 * if (file.getContentType().equals("application/pdf") ||
 			 * file.getContentType().equals("application/msword") || file.getContentType()
@@ -82,6 +85,8 @@ public class FileUploadController {
 	@ResponseBody
 	@RequestMapping(value = "/api/file/all", method = RequestMethod.GET)
 	public List<FileUpload> getListFiles() {
+		System.out.println("get request...");
+		
 		return fileRepository.getAllList();
 	}
 

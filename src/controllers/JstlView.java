@@ -36,6 +36,7 @@ public class JstlView extends InternalResourceView {
 		request.setAttribute("islemTipineGöreListe", model.get("islemTipineGöreListe"));
 		request.setAttribute("raporlarListesi", model.get("raporlarListesi"));
 		request.setAttribute("id", model.get("id"));
+		request.setAttribute("donemAy", model.get("donemAy"));
 		request.setAttribute("devriIstenenParselSayisi", model.get("devriIstenenParselSayisi"));
 		request.setAttribute("devriIstenenParselAlani", model.get("devriIstenenParselAlani"));
 		request.setAttribute("izinVerilenParselSayisi", model.get("izinVerilenParselSayisi"));

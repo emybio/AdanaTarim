@@ -26,13 +26,13 @@
 			success: (data) => {
 				jq("#"+id).fadeOut("slow");
 				
-				if(	 jq("#listFiles").html("")){
+			/*	if(	 jq("#listFiles").html("")){
 					
 					 jq("#btnGetFiles").show("2000");
 					 jq("#btnHideFiles").hide("2000");
 					
 					
-				};
+				};*/
 				
 				
 			},
@@ -69,17 +69,39 @@
 					<button type="submit" class="btn btn-success" id="btnSubmit">Yükle</button>
 					<button type="button" class="btn btn-warning" id="btnGetFiles">Dosyaları
 						Listele</button>
-					<button type="button" class="btn btn-warning" id="btnHideFiles">Listeyi
+					<button type="button" class="btn btn-warning" id="btnHideFiles" style="display: none;">Listeyi
 						Kaldır</button>
 				</form>
 				<hr />
 
 			</div>
 		</div>
-		<div class="container-fluid col-md-6">
-			<table id="listFiles" class="table table-striped">
-			</table>
+		<div class="row ">
+			<div class="container-fluid col-sm-6">
+				<table >
+
+				</table>
+			</div>
 		</div>
+
+		<table class="table" id="listFile">
+			<tr>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+			</tr>
+
+		</table>
 
 	</div>
 
