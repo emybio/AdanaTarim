@@ -69,8 +69,8 @@
 					<button type="submit" class="btn btn-success" id="btnSubmit">Yükle</button>
 					<button type="button" class="btn btn-warning" id="btnGetFiles">Dosyaları
 						Listele</button>
-					<button type="button" class="btn btn-warning" id="btnHideFiles" style="display: none;">Listeyi
-						Kaldır</button>
+					<button type="button" class="btn btn-warning" id="btnHideFiles"
+						style="display: none;">Listeyi Kaldır</button>
 				</form>
 				<hr />
 
@@ -78,7 +78,7 @@
 		</div>
 		<div class="row ">
 			<div class="container-fluid col-sm-6">
-				<table >
+				<table>
 
 				</table>
 			</div>

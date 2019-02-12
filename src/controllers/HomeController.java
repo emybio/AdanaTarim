@@ -33,6 +33,8 @@ public class HomeController {
 	private Kullanici kullanici;
 	public String giris = "0";
 
+	int x=0,y=0;
+	
 	@RequestMapping(value = "/")
 	public ModelAndView home(ModelMap model, HttpServletResponse response, HttpServletRequest request,
 			HttpSession session) throws UnsupportedEncodingException {
@@ -40,7 +42,10 @@ public class HomeController {
 			kullanici = new Kullanici();
 
 		}
-
+		
+		
+		
+  System.out.println(x-=y+=9);
 		Cookie cookie1 = new Cookie("id", "");
 		Cookie cookie2 = new Cookie("isim", "");
 		Cookie cookie3 = new Cookie("birim", "");
