@@ -114,9 +114,11 @@
 		<p>
 		<h4>
 			Bir önceki sayfaya dönmek için <a href="#"
-				onclick="javascript:window.history.back();"> <span class="glyphicon glyphicon-plus"></span> </a> yapınız...
+				onclick="javascript:window.location.href='../anasayfa';"> <span
+				class="glyphicon glyphicon-arrow-left"></span>
+			</a> yapınız...
 		</h4>
-		</p>
+
 		<!-- /row -->
 		<!-- footer -->
 		<jsp:include page="footer.jsp" />

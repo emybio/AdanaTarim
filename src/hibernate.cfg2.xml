@@ -6,7 +6,7 @@
 
 	<session-factory>
 		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-		<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/arazi_edindirme2?charSet=UTF-8</property>
+		<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/arazi_edindirme?charSet=UTF-8</property>
 		<property name="hibernate.connection.username">postgres</property>
 		<property name="hibernate.connection.password">1234</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
@@ -24,6 +24,8 @@
 		<mapping class="forms.Arac" />
 		<mapping class="forms.UserRoles" />
 		<mapping class="forms.AracTalep" />
+		<mapping class="forms.hayvansagligi.AsiCesitleri" />
+		<mapping class="forms.hayvansagligi.AsiKarti" />
 		<!-- <mapping class="forms.TumTablolar" /> -->
 		<mapping class="forms.FileUpload" />
 

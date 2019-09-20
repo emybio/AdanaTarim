@@ -67,7 +67,7 @@ table tbody tr td {
 					<c:when test="${cookie.id.value ne 1}">
 						<c:if test="${param.id eq cookie.id.value }">
 							<table class="table table-bordered table-hover bg-danger "
-								style="font-size: 50px;">
+								style="font-size: 15px;">
 								<tbody>
 									<tr>
 										<td>AYLAR</td>
@@ -83,7 +83,7 @@ table tbody tr td {
 													<c:set var="listSize" value="${listSize+1 }"></c:set>
 												</c:if>
 											</c:forEach>
-											<td class="ilkUcAy">${i }</td>
+											<td class="ilkUcAy">${i}</td>
 
 										</tr>
 										<c:set var="i" value="0"></c:set>

@@ -95,7 +95,11 @@ public class JstlView extends InternalResourceView {
 		request.setAttribute("dataPoints1", model.get("dataPoints1"));
 		request.setAttribute("birim", model.get("birim"));
 		request.setAttribute("etapNoListesi", model.get("etapNoListesi"));
+		request.setAttribute("asiKarti", model.get("asiKarti"));
+		request.setAttribute("tumAsiKartListesi", model.get("tumAsiKartListesi"));
+		request.setAttribute("tumAsiCesitleri", model.get("tumAsiCesitleri"));
 
+		request.setAttribute("toplam", model.get("toplam"));
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 
@@ -103,7 +107,6 @@ public class JstlView extends InternalResourceView {
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/jsp/template.jsp");
 
 		requestDispatcher.include(request, response);
-		
 
 	}
 

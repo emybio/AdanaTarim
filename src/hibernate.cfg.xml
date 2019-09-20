@@ -32,7 +32,8 @@
 		<mapping class="forms.kirsalkalkinma.Aricilik" />
 
 		<!--KIRSAL KALKINMA SON -->
-
+		<mapping class="forms.hayvansagligi.AsiKarti" />
+		<mapping class="forms.hayvansagligi.AsiCesitleri" />
 	</session-factory>
 
 </hibernate-configuration>

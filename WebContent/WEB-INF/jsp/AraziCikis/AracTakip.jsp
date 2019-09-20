@@ -217,14 +217,11 @@ jq(document).ready( function () {
 		var ilceID = parseInt('${arac.ilce.id}');
 		var mahalleID = parseInt('${arac.mahalle.id}');
 		var mahalleIsim ='${secilenMahalleIsim}';
-		qwerty=mahalleIsim;
-		xyz=mahalleID;
-	console.log("mahalleID: "+xyz);
-	console.log("mahalleIsim: "+qwerty);
+		
 		
 		/*alert1(!isNaN(guncellenecekID))*/
 		if (!isNaN(guncellenecekID)) {
-			console.log("ilceID: " + ilceID);
+			
 			/* ikisibiradamarkala(ilceID); */
 
 			jq("#slctMarka").attr("itemValue", mahalleID);
@@ -245,7 +242,26 @@ jq(document).ready( function () {
 		}
 
 		);
+	
+		jq("#btnRaporAl").attr("disabled", true);	
+		
+		
+		
+		jq('#btnRaporAl').tooltip({
+			  trigger: 'click',
+			  placement: 'bottom'
+			});
 	});
+	
+	
+	function buttonActivate() {
+		
+		if (jq("#personelIsim").has('option').length > 0  && jq("#donemYil").has('option').length > 0){
+			
+			jq("#btnRaporAl").attr("disabled", false);
+		};
+		
+	}
 </script>
 
 <c:if test="${arac.id ne 0 or arac.id ne null }">
@@ -318,7 +334,7 @@ jq(document).ready(function() {
 										<td><select data-placeholder="Yıl Seç."
 											style="border: none;" name="donemYil" id="donemYil"
 											class="donem">
-												<option value="" label="--- Seçiniz ---" />
+
 												<c:forEach items="${yillar }" var="yil">
 													<option value="${yil}" label="">${yil }</option>
 												</c:forEach>
@@ -332,7 +348,8 @@ jq(document).ready(function() {
 												</c:forEach>
 										</select></td>
 										<td><select data-placeholder="Personel Seç." name="id"
-											class="chosen-select">
+											id="personelIsim" class="chosen-select"
+											onchange="buttonActivate();">
 												<option value=""></option>
 												<c:if test="${!empty kullaniciListesi}">
 													<c:forEach items="${kullaniciListesi}" var="kullanici"
@@ -350,7 +367,7 @@ jq(document).ready(function() {
 									</tr>
 									<tr>
 										<td colspan="3"><input type="submit" value="Rapor Al"
-											class="btn btn-info btn-block btn-md "></td>
+											id="btnRaporAl" class="btn btn-info btn-block btn-md "></td>
 									</tr>
 								</form:form>
 							</table>
@@ -444,11 +461,11 @@ jq(document).ready(function() {
 											class="mahalleSec">
 											<c:forEach items="${markaListesi}" var="marka">
 												<option value="${marka.id }"
-													${arac.mahalle.id == marka.id ? 'selected' : ''}>${marka.isim }</option>
+													${marka.id ==  secilenMahalleID? 'selected' : ''}>${marka.isim }</option>
 											</c:forEach>
 										</form:select>
 
-										<span class="uyariYazisi"></span>
+										<span class="uyariYazisi">{arac.mahalle.isim}</span>
 									</div>
 								</td>
 
